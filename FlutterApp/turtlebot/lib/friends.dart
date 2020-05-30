@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'navigation.dart';
+
 class Friends extends StatelessWidget {
   const Friends({Key key}) : super(key: key);
 
@@ -9,6 +11,7 @@ class Friends extends StatelessWidget {
       appBar: AppBar(
         title: Text("Robo Friends"),
       ),
+      body: Center(child: Text('Robo Friends')),
     );
   }
 }

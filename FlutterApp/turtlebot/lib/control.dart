@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'navigation.dart';
+
 class Control extends StatelessWidget {
   const Control({Key key}) : super(key: key);
 
