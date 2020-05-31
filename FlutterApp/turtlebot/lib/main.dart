@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/routing.dart';
-import 'package:turtlebot/robos.dart';
-import 'package:turtlebot/rooms.dart';
-
-import 'control.dart';
-import 'friends.dart';
-import 'messages.dart';
 import 'navigation.dart';
 
 void main() => runApp(MyApp());
@@ -36,7 +30,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Turtlebot Control App"),
+        title: Center(child: Text("Turtlebot Control App")),
         backgroundColor: Colors.grey,
       ),
       body: AppNavBarController(),

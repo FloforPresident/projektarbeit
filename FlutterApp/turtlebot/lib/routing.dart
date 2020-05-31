@@ -4,6 +4,7 @@ import 'package:turtlebot/rooms.dart';
 
 import 'control.dart';
 import 'friends.dart';
+import 'login.dart';
 import 'main.dart';
 import 'messages.dart';
 
@@ -22,6 +23,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Messages());
       case '/control':
         return MaterialPageRoute(builder: (_) => Control());
+      case '/login':
+        return MaterialPageRoute(builder: (_) => Login());
       default:
         throw Exception('Invalid route: ${settings.name}');
     }

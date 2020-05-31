@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'navigation.dart';
-
 class Robos extends StatefulWidget {
   Robos({Key key}) : super(key: key);
 
@@ -17,6 +15,7 @@ class _RobosState extends State<Robos> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Connected Robos"),
+        backgroundColor: Colors.blue,
       ),
       body: Center(child: Text('Robo Control')),
     );
