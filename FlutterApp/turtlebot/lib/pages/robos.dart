@@ -15,7 +15,7 @@ class _RobosState extends State<Robos> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Connected Robos"),
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.blue,
       ),
       body: Center(child: Text('Robo Control')),
     );

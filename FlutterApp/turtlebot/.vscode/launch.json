@@ -7,7 +7,8 @@
         {
             "name": "Flutter mobile app",
             "type": "dart",
-            "request": "launch"
+            "request": "launch",
+            "program": "lib/main.dart"
         }
     ]
 }
