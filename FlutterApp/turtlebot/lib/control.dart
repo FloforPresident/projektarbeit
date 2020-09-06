@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'navigation.dart';
-
 class Control extends StatelessWidget {
   const Control({Key key}) : super(key: key);
 
@@ -10,6 +8,7 @@ class Control extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Robo Control"),
+        backgroundColor: Colors.purple,
       ),
     );
   }

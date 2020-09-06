@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'navigation.dart';
-
 class Messages extends StatelessWidget {
   const Messages({Key key}) : super(key: key);
 
@@ -10,6 +8,7 @@ class Messages extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Send Message"),
+        backgroundColor: Colors.orange,
       ),
     );
   }

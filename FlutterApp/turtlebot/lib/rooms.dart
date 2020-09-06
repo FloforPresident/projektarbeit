@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'navigation.dart';
-
 class Rooms extends StatelessWidget {
   const Rooms({Key key}) : super(key: key);
 
@@ -10,6 +8,7 @@ class Rooms extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Room Register"),
+        backgroundColor: Colors.green,
       ),
     );
   }
