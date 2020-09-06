@@ -10,6 +10,11 @@ class Messages extends StatelessWidget {
         title: Text("Send Message"),
         backgroundColor: Colors.orange,
       ),
+      body: Column(
+        children: <Widget>[
+
+        ],
+      )
     );
   }
 }
