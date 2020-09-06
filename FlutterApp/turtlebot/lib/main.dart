@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:turtlebot/routing.dart';
-import 'navigation.dart';
+import 'package:turtlebot/services/routing.dart';
+import 'package:turtlebot/services/navigation.dart';
 
 void main() => runApp(MyApp());
 

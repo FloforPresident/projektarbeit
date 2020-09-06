@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:turtlebot/robos.dart';
-import 'package:turtlebot/rooms.dart';
-
-import 'control.dart';
-import 'friends.dart';
-import 'main.dart';
-import 'messages.dart';
+import 'package:turtlebot/pages/robos.dart';
+import 'package:turtlebot/pages/rooms.dart';
+import 'package:turtlebot/pages/control.dart';
+import 'package:turtlebot/pages/friends.dart';
+import 'package:turtlebot/main.dart';
+import 'package:turtlebot/pages/messages.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
