@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turtlebot/services/routing.dart';
 
 class AppNavBarController extends StatefulWidget {
   @override
@@ -67,7 +68,7 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                 height: 100,
                 child: RaisedButton.icon(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/control');
+                    Navigator.pushNamed(context, RouteGenerator.RouteRoboStatus);
                   },
                   icon: Icon(Icons.videogame_asset),
                   label: Text('Control'),
