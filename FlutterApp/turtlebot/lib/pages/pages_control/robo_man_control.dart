@@ -27,9 +27,12 @@ class _RoboManControlState extends State<RoboManControl>
               widget._titleText
           ),
           backgroundColor: Colors.purple,
-
-        )
-
+        ),
+      body: Column(
+        children: <Widget>[FloatingActionButton(
+        onPressed: () {},
+    )],
+    ),
     );
   }
 }
