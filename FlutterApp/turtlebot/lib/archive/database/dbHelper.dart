@@ -28,7 +28,7 @@ class DBHelper
   }
 
   _onCreate(Database db, int version) async{
-    await db.execute("CREATE TABLE USER  (ID INTEGER PRIMARY KEY, PROFILNAME TEXT)");
+    await db.execute("CREATE TABLE R  (ID INTEGER PRIMARY KEY, PROFILNAME TEXT)");
   }
 
 //  Future<Employee> save ( Employee employee) async

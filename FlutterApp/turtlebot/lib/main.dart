@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/services/navigation.dart';
-import 'package:turtlebot/database/dbHelper.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DBHelper().db;
     return MaterialApp(
       title: 'TurtleBot',
       theme: ThemeData(primarySwatch: Colors.orange),
