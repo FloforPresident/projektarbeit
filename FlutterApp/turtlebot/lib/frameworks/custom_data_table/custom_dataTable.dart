@@ -79,7 +79,7 @@ class CustomColumnText extends StatelessWidget
 
 }
 
-///Use this as instead of Datacells
+///Use this as instead of DataCells
 ///Will produce a Container Widget taken up full space
 class CustomColourText extends StatelessWidget {
 
