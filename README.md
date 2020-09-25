@@ -8,6 +8,8 @@ git add {FOLDER_FILE_ETC_NAME}
 
 git commit -m "Push beschreibung" {FOLDER_FILE_ETC_NAME}
 
-git status
+
+git status #aktuelle Änderungen, commits etc
+
 
 git push -u origin master
