@@ -1,0 +1,8 @@
+prefix=/home/basti/catkin_ws/devel
+
+Name: huang_tutorial
+Description: Description of huang_tutorial
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy nav_msgs
