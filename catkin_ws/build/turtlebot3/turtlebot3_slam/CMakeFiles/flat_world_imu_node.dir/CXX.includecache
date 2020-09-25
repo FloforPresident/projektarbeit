@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/basti/catkin_ws/src/turtlebot3/turtlebot3_slam/include/turtlebot3_slam/flat_world_imu_node.h
+/home/basti/git_repository/projektarbeit/catkin_ws/src/turtlebot3/turtlebot3_slam/include/turtlebot3_slam/flat_world_imu_node.h
 ros/ros.h
 -
 sensor_msgs/Imu.h
 -
 
-/home/basti/catkin_ws/src/turtlebot3/turtlebot3_slam/src/flat_world_imu_node.cpp
+/home/basti/git_repository/projektarbeit/catkin_ws/src/turtlebot3/turtlebot3_slam/src/flat_world_imu_node.cpp
 turtlebot3_slam/flat_world_imu_node.h
 -
 

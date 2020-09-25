@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/turtlebot3_msgs_generate_messages_cpp"
-  "/home/basti/catkin_ws/devel/include/turtlebot3_msgs/VersionInfo.h"
-  "/home/basti/catkin_ws/devel/include/turtlebot3_msgs/Sound.h"
-  "/home/basti/catkin_ws/devel/include/turtlebot3_msgs/SensorState.h"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/include/turtlebot3_msgs/VersionInfo.h"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/include/turtlebot3_msgs/SensorState.h"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/include/turtlebot3_msgs/Sound.h"
 )
 
 # Per-language clean rules from dependency scanning.

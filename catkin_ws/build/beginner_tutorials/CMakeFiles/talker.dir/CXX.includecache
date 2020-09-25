@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/basti/catkin_ws/src/beginner_tutorials/src/talker.cpp
+/home/basti/git_repository/projektarbeit/catkin_ws/src/beginner_tutorials/src/talker.cpp
 ros/ros.h
-/home/basti/catkin_ws/src/beginner_tutorials/src/ros/ros.h
+/home/basti/git_repository/projektarbeit/catkin_ws/src/beginner_tutorials/src/ros/ros.h
 std_msgs/String.h
-/home/basti/catkin_ws/src/beginner_tutorials/src/std_msgs/String.h
+/home/basti/git_repository/projektarbeit/catkin_ws/src/beginner_tutorials/src/std_msgs/String.h
 sstream
 -
 

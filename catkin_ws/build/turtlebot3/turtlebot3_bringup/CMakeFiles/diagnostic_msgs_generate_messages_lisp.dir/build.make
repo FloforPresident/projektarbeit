@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/basti/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/basti/git_repository/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/basti/catkin_ws/build
+CMAKE_BINARY_DIR = /home/basti/git_repository/projektarbeit/catkin_ws/build
 
 # Utility rule file for diagnostic_msgs_generate_messages_lisp.
 
@@ -63,10 +63,10 @@ turtlebot3/turtlebot3_bringup/CMakeFiles/diagnostic_msgs_generate_messages_lisp.
 .PHONY : turtlebot3/turtlebot3_bringup/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build
 
 turtlebot3/turtlebot3_bringup/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/clean:
-	cd /home/basti/catkin_ws/build/turtlebot3/turtlebot3_bringup && $(CMAKE_COMMAND) -P CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/cmake_clean.cmake
+	cd /home/basti/git_repository/projektarbeit/catkin_ws/build/turtlebot3/turtlebot3_bringup && $(CMAKE_COMMAND) -P CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/cmake_clean.cmake
 .PHONY : turtlebot3/turtlebot3_bringup/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/clean
 
 turtlebot3/turtlebot3_bringup/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/depend:
-	cd /home/basti/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/catkin_ws/src /home/basti/catkin_ws/src/turtlebot3/turtlebot3_bringup /home/basti/catkin_ws/build /home/basti/catkin_ws/build/turtlebot3/turtlebot3_bringup /home/basti/catkin_ws/build/turtlebot3/turtlebot3_bringup/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/basti/git_repository/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/git_repository/projektarbeit/catkin_ws/src /home/basti/git_repository/projektarbeit/catkin_ws/src/turtlebot3/turtlebot3_bringup /home/basti/git_repository/projektarbeit/catkin_ws/build /home/basti/git_repository/projektarbeit/catkin_ws/build/turtlebot3/turtlebot3_bringup /home/basti/git_repository/projektarbeit/catkin_ws/build/turtlebot3/turtlebot3_bringup/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : turtlebot3/turtlebot3_bringup/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/depend
 

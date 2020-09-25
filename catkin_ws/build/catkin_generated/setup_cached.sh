@@ -7,4 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export PWD="/home/basti/catkin_ws/build"
+export CMAKE_PREFIX_PATH="/home/basti/git_repository/projektarbeit/catkin_ws/devel:$CMAKE_PREFIX_PATH"
+export PWD="/home/basti/git_repository/projektarbeit/catkin_ws/build"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/basti/git_repository/projektarbeit/catkin_ws/devel/share/common-lisp"
+export ROS_PACKAGE_PATH="/home/basti/git_repository/projektarbeit/catkin_ws/src:$ROS_PACKAGE_PATH"

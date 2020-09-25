@@ -1,13 +1,13 @@
 file(REMOVE_RECURSE
   "CMakeFiles/turtlebot3_example_generate_messages_eus"
-  "/home/basti/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3ActionResult.l"
-  "/home/basti/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3Feedback.l"
-  "/home/basti/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3ActionFeedback.l"
-  "/home/basti/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3ActionGoal.l"
-  "/home/basti/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3Result.l"
-  "/home/basti/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3Action.l"
-  "/home/basti/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3Goal.l"
-  "/home/basti/catkin_ws/devel/share/roseus/ros/turtlebot3_example/manifest.l"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3ActionGoal.l"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3Action.l"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3ActionFeedback.l"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3Result.l"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3Feedback.l"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3Goal.l"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3ActionResult.l"
+  "/home/basti/git_repository/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/manifest.l"
 )
 
 # Per-language clean rules from dependency scanning.

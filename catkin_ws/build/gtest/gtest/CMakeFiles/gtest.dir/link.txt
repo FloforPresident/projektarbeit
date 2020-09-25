@@ -1,1 +1,1 @@
-/usr/bin/c++  -fPIC   -shared -Wl,-soname,libgtest.so -o libgtest.so CMakeFiles/gtest.dir/src/gtest-all.cc.o  -L/home/basti/catkin_ws/build/gtest/gtest/src -lpthread -Wl,-rpath,/home/basti/catkin_ws/build/gtest/gtest/src 
+/usr/bin/c++  -fPIC   -shared -Wl,-soname,libgtest.so -o libgtest.so CMakeFiles/gtest.dir/src/gtest-all.cc.o  -L/home/basti/git_repository/projektarbeit/catkin_ws/build/gtest/gtest/src -lpthread -Wl,-rpath,/home/basti/git_repository/projektarbeit/catkin_ws/build/gtest/gtest/src 

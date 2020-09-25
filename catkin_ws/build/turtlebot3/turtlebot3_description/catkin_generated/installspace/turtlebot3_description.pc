@@ -1,4 +1,4 @@
-prefix=/home/basti/catkin_ws/install
+prefix=/home/basti/git_repository/projektarbeit/catkin_ws/install
 
 Name: turtlebot3_description
 Description: Description of turtlebot3_description

@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/basti/catkin_ws/src/turtlebot3_msgs
-# Build directory: /home/basti/catkin_ws/build/turtlebot3_msgs
+# Source directory: /home/basti/git_repository/projektarbeit/catkin_ws/src/turtlebot3_msgs
+# Build directory: /home/basti/git_repository/projektarbeit/catkin_ws/build/turtlebot3_msgs
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

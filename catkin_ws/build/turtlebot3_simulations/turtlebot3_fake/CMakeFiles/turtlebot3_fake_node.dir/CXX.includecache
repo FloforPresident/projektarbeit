@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/basti/catkin_ws/devel/include/turtlebot3_msgs/SensorState.h
+/home/basti/git_repository/projektarbeit/catkin_ws/devel/include/turtlebot3_msgs/SensorState.h
 string
 -
 vector
@@ -24,7 +24,7 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 
-/home/basti/catkin_ws/src/turtlebot3_simulations/turtlebot3_fake/include/turtlebot3_fake/turtlebot3_fake.h
+/home/basti/git_repository/projektarbeit/catkin_ws/src/turtlebot3_simulations/turtlebot3_fake/include/turtlebot3_fake/turtlebot3_fake.h
 math.h
 -
 ros/ros.h
@@ -50,9 +50,9 @@ nav_msgs/Odometry.h
 turtlebot3_msgs/SensorState.h
 -
 turtlebot3_fake.h
-/home/basti/catkin_ws/src/turtlebot3_simulations/turtlebot3_fake/include/turtlebot3_fake/turtlebot3_fake.h
+/home/basti/git_repository/projektarbeit/catkin_ws/src/turtlebot3_simulations/turtlebot3_fake/include/turtlebot3_fake/turtlebot3_fake.h
 
-/home/basti/catkin_ws/src/turtlebot3_simulations/turtlebot3_fake/src/turtlebot3_fake.cpp
+/home/basti/git_repository/projektarbeit/catkin_ws/src/turtlebot3_simulations/turtlebot3_fake/src/turtlebot3_fake.cpp
 turtlebot3_fake/turtlebot3_fake.h
 -
 

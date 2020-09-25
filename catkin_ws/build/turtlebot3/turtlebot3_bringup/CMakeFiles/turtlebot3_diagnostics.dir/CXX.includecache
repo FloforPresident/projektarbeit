@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/basti/catkin_ws/devel/include/turtlebot3_msgs/SensorState.h
+/home/basti/git_repository/projektarbeit/catkin_ws/devel/include/turtlebot3_msgs/SensorState.h
 string
 -
 vector
@@ -24,7 +24,7 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 
-/home/basti/catkin_ws/devel/include/turtlebot3_msgs/VersionInfo.h
+/home/basti/git_repository/projektarbeit/catkin_ws/devel/include/turtlebot3_msgs/VersionInfo.h
 string
 -
 vector
@@ -40,7 +40,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/basti/catkin_ws/src/turtlebot3/turtlebot3_bringup/src/turtlebot3_diagnostics.cpp
+/home/basti/git_repository/projektarbeit/catkin_ws/src/turtlebot3/turtlebot3_bringup/src/turtlebot3_diagnostics.cpp
 ros/ros.h
 -
 sensor_msgs/BatteryState.h

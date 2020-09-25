@@ -1,4 +1,4 @@
-prefix=/home/basti/catkin_ws/devel
+prefix=/home/basti/git_repository/projektarbeit/catkin_ws/devel
 
 Name: location_monitor
 Description: Description of location_monitor
