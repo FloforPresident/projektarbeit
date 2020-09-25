@@ -15,6 +15,8 @@ class RouteGenerator {
   static const String RouteRoboStatus = '/roboStatus';
   static const String RouteRoboCommands = '/roboCommands';
   static const String RouteManualControl = '/manControl';
+  static const String RouteHome = '/';
+
 
 
 
@@ -39,6 +41,11 @@ class RouteGenerator {
       default:
         throw Exception('Invalid route: ${settings.name}');
     }
+  }
+
+  static onTapToHome(BuildContext context)
+  {
+    Navigator.pushNamed(context,RouteGenerator.RouteHome);
   }
 
   static onTapToRoboStatus(BuildContext context)
