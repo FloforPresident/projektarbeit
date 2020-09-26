@@ -1,4 +1,4 @@
-int64 num
-string vorname
-string nachname
-uint8 alter
+uint64 num
+string name
+uint8 x
+uint8 y

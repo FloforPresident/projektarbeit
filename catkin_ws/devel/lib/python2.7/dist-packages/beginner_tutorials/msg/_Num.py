@@ -8,16 +8,16 @@ import struct
 
 
 class Num(genpy.Message):
-  _md5sum = "d59150134dddd4be2143129962b51a21"
+  _md5sum = "e5336c7b8fc157b9c248a040c4f2aebf"
   _type = "beginner_tutorials/Num"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """int64 num
-string vorname
-string nachname
-uint8 alter
+  _full_text = """uint64 num
+string name
+uint8 x
+uint8 y
 """
-  __slots__ = ['num','vorname','nachname','alter']
-  _slot_types = ['int64','string','string','uint8']
+  __slots__ = ['num','name','x','y']
+  _slot_types = ['uint64','string','uint8','uint8']
 
   def __init__(self, *args, **kwds):
     """
@@ -27,7 +27,7 @@ uint8 alter
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       num,vorname,nachname,alter
+       num,name,x,y
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -38,17 +38,17 @@ uint8 alter
       # message fields cannot be None, assign default values for those that are
       if self.num is None:
         self.num = 0
-      if self.vorname is None:
-        self.vorname = ''
-      if self.nachname is None:
-        self.nachname = ''
-      if self.alter is None:
-        self.alter = 0
+      if self.name is None:
+        self.name = ''
+      if self.x is None:
+        self.x = 0
+      if self.y is None:
+        self.y = 0
     else:
       self.num = 0
-      self.vorname = ''
-      self.nachname = ''
-      self.alter = 0
+      self.name = ''
+      self.x = 0
+      self.y = 0
 
   def _get_types(self):
     """
@@ -63,21 +63,15 @@ uint8 alter
     """
     try:
       _x = self.num
-      buff.write(_get_struct_q().pack(_x))
-      _x = self.vorname
+      buff.write(_get_struct_Q().pack(_x))
+      _x = self.name
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
-      _x = self.nachname
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
-      _x = self.alter
-      buff.write(_get_struct_B().pack(_x))
+      _x = self
+      buff.write(_get_struct_2B().pack(_x.x, _x.y))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -91,28 +85,20 @@ uint8 alter
       end = 0
       start = end
       end += 8
-      (self.num,) = _get_struct_q().unpack(str[start:end])
+      (self.num,) = _get_struct_Q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.vorname = str[start:end].decode('utf-8', 'rosmsg')
+        self.name = str[start:end].decode('utf-8', 'rosmsg')
       else:
-        self.vorname = str[start:end]
+        self.name = str[start:end]
+      _x = self
       start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.nachname = str[start:end].decode('utf-8', 'rosmsg')
-      else:
-        self.nachname = str[start:end]
-      start = end
-      end += 1
-      (self.alter,) = _get_struct_B().unpack(str[start:end])
+      end += 2
+      (_x.x, _x.y,) = _get_struct_2B().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -126,21 +112,15 @@ uint8 alter
     """
     try:
       _x = self.num
-      buff.write(_get_struct_q().pack(_x))
-      _x = self.vorname
+      buff.write(_get_struct_Q().pack(_x))
+      _x = self.name
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
-      _x = self.nachname
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
-      _x = self.alter
-      buff.write(_get_struct_B().pack(_x))
+      _x = self
+      buff.write(_get_struct_2B().pack(_x.x, _x.y))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -155,28 +135,20 @@ uint8 alter
       end = 0
       start = end
       end += 8
-      (self.num,) = _get_struct_q().unpack(str[start:end])
+      (self.num,) = _get_struct_Q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.vorname = str[start:end].decode('utf-8', 'rosmsg')
+        self.name = str[start:end].decode('utf-8', 'rosmsg')
       else:
-        self.vorname = str[start:end]
+        self.name = str[start:end]
+      _x = self
       start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.nachname = str[start:end].decode('utf-8', 'rosmsg')
-      else:
-        self.nachname = str[start:end]
-      start = end
-      end += 1
-      (self.alter,) = _get_struct_B().unpack(str[start:end])
+      end += 2
+      (_x.x, _x.y,) = _get_struct_2B().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -185,15 +157,15 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_B = None
-def _get_struct_B():
-    global _struct_B
-    if _struct_B is None:
-        _struct_B = struct.Struct("<B")
-    return _struct_B
-_struct_q = None
-def _get_struct_q():
-    global _struct_q
-    if _struct_q is None:
-        _struct_q = struct.Struct("<q")
-    return _struct_q
+_struct_2B = None
+def _get_struct_2B():
+    global _struct_2B
+    if _struct_2B is None:
+        _struct_2B = struct.Struct("<2B")
+    return _struct_2B
+_struct_Q = None
+def _get_struct_Q():
+    global _struct_Q
+    if _struct_Q is None:
+        _struct_Q = struct.Struct("<Q")
+    return _struct_Q

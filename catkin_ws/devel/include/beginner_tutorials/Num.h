@@ -25,31 +25,31 @@ struct Num_
 
   Num_()
     : num(0)
-    , vorname()
-    , nachname()
-    , alter(0)  {
+    , name()
+    , x(0)
+    , y(0)  {
     }
   Num_(const ContainerAllocator& _alloc)
     : num(0)
-    , vorname(_alloc)
-    , nachname(_alloc)
-    , alter(0)  {
+    , name(_alloc)
+    , x(0)
+    , y(0)  {
   (void)_alloc;
     }
 
 
 
-   typedef int64_t _num_type;
+   typedef uint64_t _num_type;
   _num_type num;
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _vorname_type;
-  _vorname_type vorname;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _name_type;
+  _name_type name;
 
-   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _nachname_type;
-  _nachname_type nachname;
+   typedef uint8_t _x_type;
+  _x_type x;
 
-   typedef uint8_t _alter_type;
-  _alter_type alter;
+   typedef uint8_t _y_type;
+  _y_type y;
 
 
 
@@ -129,12 +129,12 @@ struct MD5Sum< ::beginner_tutorials::Num_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "d59150134dddd4be2143129962b51a21";
+    return "e5336c7b8fc157b9c248a040c4f2aebf";
   }
 
   static const char* value(const ::beginner_tutorials::Num_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xd59150134dddd4beULL;
-  static const uint64_t static_value2 = 0x2143129962b51a21ULL;
+  static const uint64_t static_value1 = 0xe5336c7b8fc157b9ULL;
+  static const uint64_t static_value2 = 0xc248a040c4f2aebfULL;
 };
 
 template<class ContainerAllocator>
@@ -153,10 +153,10 @@ struct Definition< ::beginner_tutorials::Num_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int64 num\n\
-string vorname\n\
-string nachname\n\
-uint8 alter\n\
+    return "uint64 num\n\
+string name\n\
+uint8 x\n\
+uint8 y\n\
 ";
   }
 
@@ -176,9 +176,9 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.num);
-      stream.next(m.vorname);
-      stream.next(m.nachname);
-      stream.next(m.alter);
+      stream.next(m.name);
+      stream.next(m.x);
+      stream.next(m.y);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -198,13 +198,13 @@ struct Printer< ::beginner_tutorials::Num_<ContainerAllocator> >
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::beginner_tutorials::Num_<ContainerAllocator>& v)
   {
     s << indent << "num: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.num);
-    s << indent << "vorname: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.vorname);
-    s << indent << "nachname: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.nachname);
-    s << indent << "alter: ";
-    Printer<uint8_t>::stream(s, indent + "  ", v.alter);
+    Printer<uint64_t>::stream(s, indent + "  ", v.num);
+    s << indent << "name: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.name);
+    s << indent << "x: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.x);
+    s << indent << "y: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.y);
   }
 };
 

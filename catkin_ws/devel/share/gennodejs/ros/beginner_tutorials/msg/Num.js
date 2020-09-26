@@ -19,9 +19,9 @@ class Num {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.num = null;
-      this.vorname = null;
-      this.nachname = null;
-      this.alter = null;
+      this.name = null;
+      this.x = null;
+      this.y = null;
     }
     else {
       if (initObj.hasOwnProperty('num')) {
@@ -30,23 +30,23 @@ class Num {
       else {
         this.num = 0;
       }
-      if (initObj.hasOwnProperty('vorname')) {
-        this.vorname = initObj.vorname
+      if (initObj.hasOwnProperty('name')) {
+        this.name = initObj.name
       }
       else {
-        this.vorname = '';
+        this.name = '';
       }
-      if (initObj.hasOwnProperty('nachname')) {
-        this.nachname = initObj.nachname
-      }
-      else {
-        this.nachname = '';
-      }
-      if (initObj.hasOwnProperty('alter')) {
-        this.alter = initObj.alter
+      if (initObj.hasOwnProperty('x')) {
+        this.x = initObj.x
       }
       else {
-        this.alter = 0;
+        this.x = 0;
+      }
+      if (initObj.hasOwnProperty('y')) {
+        this.y = initObj.y
+      }
+      else {
+        this.y = 0;
       }
     }
   }
@@ -54,13 +54,13 @@ class Num {
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type Num
     // Serialize message field [num]
-    bufferOffset = _serializer.int64(obj.num, buffer, bufferOffset);
-    // Serialize message field [vorname]
-    bufferOffset = _serializer.string(obj.vorname, buffer, bufferOffset);
-    // Serialize message field [nachname]
-    bufferOffset = _serializer.string(obj.nachname, buffer, bufferOffset);
-    // Serialize message field [alter]
-    bufferOffset = _serializer.uint8(obj.alter, buffer, bufferOffset);
+    bufferOffset = _serializer.uint64(obj.num, buffer, bufferOffset);
+    // Serialize message field [name]
+    bufferOffset = _serializer.string(obj.name, buffer, bufferOffset);
+    // Serialize message field [x]
+    bufferOffset = _serializer.uint8(obj.x, buffer, bufferOffset);
+    // Serialize message field [y]
+    bufferOffset = _serializer.uint8(obj.y, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -69,21 +69,20 @@ class Num {
     let len;
     let data = new Num(null);
     // Deserialize message field [num]
-    data.num = _deserializer.int64(buffer, bufferOffset);
-    // Deserialize message field [vorname]
-    data.vorname = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [nachname]
-    data.nachname = _deserializer.string(buffer, bufferOffset);
-    // Deserialize message field [alter]
-    data.alter = _deserializer.uint8(buffer, bufferOffset);
+    data.num = _deserializer.uint64(buffer, bufferOffset);
+    // Deserialize message field [name]
+    data.name = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [x]
+    data.x = _deserializer.uint8(buffer, bufferOffset);
+    // Deserialize message field [y]
+    data.y = _deserializer.uint8(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
-    length += object.vorname.length;
-    length += object.nachname.length;
-    return length + 17;
+    length += object.name.length;
+    return length + 14;
   }
 
   static datatype() {
@@ -93,16 +92,16 @@ class Num {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'd59150134dddd4be2143129962b51a21';
+    return 'e5336c7b8fc157b9c248a040c4f2aebf';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    int64 num
-    string vorname
-    string nachname
-    uint8 alter
+    uint64 num
+    string name
+    uint8 x
+    uint8 y
     
     `;
   }
@@ -120,25 +119,25 @@ class Num {
       resolved.num = 0
     }
 
-    if (msg.vorname !== undefined) {
-      resolved.vorname = msg.vorname;
+    if (msg.name !== undefined) {
+      resolved.name = msg.name;
     }
     else {
-      resolved.vorname = ''
+      resolved.name = ''
     }
 
-    if (msg.nachname !== undefined) {
-      resolved.nachname = msg.nachname;
+    if (msg.x !== undefined) {
+      resolved.x = msg.x;
     }
     else {
-      resolved.nachname = ''
+      resolved.x = 0
     }
 
-    if (msg.alter !== undefined) {
-      resolved.alter = msg.alter;
+    if (msg.y !== undefined) {
+      resolved.y = msg.y;
     }
     else {
-      resolved.alter = 0
+      resolved.y = 0
     }
 
     return resolved;
