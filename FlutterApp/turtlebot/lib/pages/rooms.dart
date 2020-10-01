@@ -1,37 +1,74 @@
 import 'package:flutter/material.dart';
 
 class Rooms extends StatelessWidget {
-  Rooms({Key key}) : super(key: key);
+  _ControllerRooms controller;
+
+
+
+  Rooms({Key key}) : super(key: key)
+  {
+    this.controller = _ControllerRooms(Colors.green);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Room Register"),
-        backgroundColor: Colors.green,
+        backgroundColor: controller.colorTheme,
       ),
       body: AnimatedList(
-        key: _key,
-        initialItemCount: _items.length,
+        key: controller.key,
+        initialItemCount: controller.items.length,
         itemBuilder: (context, index, animation) {
-          return _buildItem(_items[index], animation, index);
+          return controller._buildItem(controller.items[index], animation, index);
         },
       ),
     );
   }
 
+
+}
+
+class _ControllerRooms
+{
   final GlobalKey<AnimatedListState> _key = GlobalKey();
-  Color _colorTheme = Colors.orange;
+  final Color _colorTheme;
+  List<List> _items;
 
-  List _items = [
-    "Living-Room",
-    "Dining-Room",
-    "Office",
-    "Studyroom",
-  ];
+  _ControllerRooms(this._colorTheme)
+  {
+    _items = _getData();
+  }
+
+  List<List> _getData()
+  {
+    return
+    [
+      ["Living-Room"],
+      ["Dining-Room"],
+      ["Office"],
+      ["Studyroom"],
+    ];
+  }
+
+  get colorTheme
+  {
+    return Color(_colorTheme.value);
+  }
+
+  get items
+  {
+    return _items;
+  }
+
+  get key
+  {
+    return _key;
+  }
 
 
-  Widget _buildItem(String item, Animation animation, int index) {
+  Widget _buildItem(List item, Animation animation, int index) {
     Icon _selected =
     (true) ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank);
 
@@ -46,7 +83,7 @@ class Rooms extends StatelessWidget {
                 flex: 4,
                 child: Row(
                   children: <Widget>[
-                    Text(item),
+                    Text(item[0]),
                   ],
                 ),
               ),
@@ -87,7 +124,7 @@ class Rooms extends StatelessWidget {
 
 
   void _removeItem(int index) {
-    String removeItem = _items.removeAt(index);
+    List removeItem = _items.removeAt(index);
     AnimatedListRemovedItemBuilder build = (context, animation) {
       return _buildItem(removeItem, animation, index);
     };
@@ -138,4 +175,5 @@ class Rooms extends StatelessWidget {
       ),
     );
   }
+
 }

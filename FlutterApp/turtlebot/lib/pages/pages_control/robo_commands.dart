@@ -32,6 +32,19 @@ class _RoboCommandsState extends State<RoboCommands> {
         ], widget._titleText),
         backgroundColor: Colors.purple,
       ),
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[RaisedButton(
+            child: Text("Scan Room"),
+          ),
+            RaisedButton(
+              child: Text("Bla bla"),
+            )],
+        ),
+      )
+
     );
   }
 }

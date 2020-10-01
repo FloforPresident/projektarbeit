@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Robos extends StatefulWidget {
-
-
-  Color _colorTheme;
   _RobosController controller;
-  List<List> _items;
-  GlobalKey<AnimatedListState> _key;
 
 
 
   Robos({Key key}) : super(key: key)
   {
-    this.controller = _RobosController();
-    this._items = controller.items;
-    this._key = controller._key;
-    this._colorTheme = controller._colorTheme;
+    this.controller = _RobosController(Colors.blue);
   }
 
 
@@ -32,13 +24,13 @@ class _RobosState extends State<Robos> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Connected Robos"),
-        backgroundColor: widget._colorTheme,
+        backgroundColor: widget.controller.colorTheme,
       ),
       body:AnimatedList(
-        key: widget._key,
-        initialItemCount: widget._items.length,
+        key: widget.controller._key,
+        initialItemCount: widget.controller.items.length,
         itemBuilder: (context, index, animation) {
-          return widget.controller.buildItem(widget._items[index], animation, index);
+          return widget.controller.buildItem(widget.controller.items[index], animation, index);
         },
       ),
     );
@@ -53,10 +45,10 @@ class _RobosState extends State<Robos> {
 class _RobosController
 {
   final GlobalKey<AnimatedListState> _key = GlobalKey();
-  final Color _colorTheme = Colors.red;
+  final Color _colorTheme;
   List<List> _items;
 
-  _RobosController()
+  _RobosController(this._colorTheme)
   {
     this._items = _getData();
   }
@@ -79,7 +71,7 @@ class _RobosController
 
   get items
   {
-    return _getData();
+    return _items;
   }
 
   get key
@@ -100,7 +92,6 @@ class _RobosController
                 child: Row(
                   children: <Widget>[
                     Text(_item[0] + " "),
-
                   ],
                 ),
               ),

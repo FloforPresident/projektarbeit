@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Friends extends StatelessWidget {
-
-
-   Color _colorTheme;
   _ControllerFriends controller;
-  List<List> _items;
-  GlobalKey<AnimatedListState> _key;
 
-
-
-  Friends({Key key}) : super(key: key)
-  {
-    this.controller = _ControllerFriends();
-    this._items = controller.items;
-    this._key = controller._key;
-    this._colorTheme = controller._colorTheme;
+  Friends({Key key}) : super(key: key) {
+    this.controller = _ControllerFriends(Colors.red);
   }
 
   @override
@@ -23,65 +12,59 @@ class Friends extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Robo Friends"),
-        backgroundColor: _colorTheme,
+        backgroundColor: controller.colorTheme,
       ),
       body: AnimatedList(
-        key: _key,
-        initialItemCount: _items.length,
+        key: controller.key,
+        initialItemCount: controller.items.length,
         itemBuilder: (context, index, animation) {
-          return controller.buildItem(_items[index],animation, index);
+          return controller.buildItem(
+              controller.items[index], animation, index);
         },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         foregroundColor: Colors.white,
-        backgroundColor: _colorTheme,
+        backgroundColor: controller.colorTheme,
         onPressed: () {
-         controller.addItem(context);
+          controller.addItem(context);
         },
       ),
     );
   }
-
 }
 
-class _ControllerFriends
-{
+class _ControllerFriends {
   final GlobalKey<AnimatedListState> _key = GlobalKey();
-  final Color _colorTheme = Colors.red;
+  final Color _colorTheme;
   List<List> _items;
 
-  _ControllerFriends()
-  {
+  _ControllerFriends(this._colorTheme) {
     this._items = _getData();
   }
 
-  List<List> _getData()
-  {
+  List<List> _getData() {
     return [
-      ["Sabrina", "Wiena", true],
-      ["Sebastian", "Schwarzer", false],
-      ["Elisabeth", "Schneider", true],
-      ["Mark", "Aurelius", false]
+      [1, "Sabrina", "1.floor", "living-room"],
+      [2, "Sebastian", "2.floor", "Sebastians-room"],
+      [3, "Elisabeth", "1.floor", "kitchen"],
+      [4, "Mark", "Basement", "Storage"]
     ];
   }
 
-  get colorTheme
-  {
+  get colorTheme {
     return Color(_colorTheme.value);
   }
 
-  get items
-  {
-    return _getData();
+  get items {
+    return _items;
   }
 
-  get key
-  {
+  get key {
     return _key;
   }
 
-  Widget buildItem(List _item,Animation animation, int index) {
+  Widget buildItem(List _item, Animation animation, int index) {
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -93,7 +76,6 @@ class _ControllerFriends
                 flex: 4,
                 child: Row(
                   children: <Widget>[
-                    Text(_item[0] + " "),
                     Text(_item[1] + " "),
                   ],
                 ),
@@ -118,6 +100,14 @@ class _ControllerFriends
               ),
             ],
           ),
+          subtitle: Container(
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: Row(
+                  children: <Widget>[Text(_item[2] + " - ", style: TextStyle(
+                    color: Colors.indigo,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  )), Text(_item[3])])),
         ),
       ),
     );
