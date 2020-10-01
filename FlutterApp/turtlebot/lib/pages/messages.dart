@@ -26,7 +26,51 @@ class _MessagesState extends State<Messages> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              widget.controller.createRecipientDropdownMenu(this, <User>[User(1,"Hans",1), User(2,"Verena",2)]),
+              widget.controller.createDropdownMenu(
+                  state: this,
+                  data: <User>[User(1, "Hans", 1), User(2, "Verena", 2)],
+                  label: "Recipient"),
+              widget.controller.createDropdownMenu(
+                  state: this,
+                  data: <Room>[Room(1, "First Floor"), Room(2, "Second Floor")],
+                  label: "Rooms"),
+              widget.controller.createDropdownMenu(
+                  state: this,
+                  data: <LocationID>[
+                    LocationID(1, 1, 1, "Kitchen"),
+                    LocationID(2, 2, 2, "Bath"),
+                  ],
+                  label: "Location"),
+              widget.controller.createDropdownMenu(
+                  state: this,
+                  data: <Robo>[
+                    Robo("Robob", "192.168.2.14", 1),
+                    Robo("Volley", "192.168.2.15", 2)
+                  ],
+                  label: "Robots"),
+              Container(
+                margin: EdgeInsets.fromLTRB(widget.controller.leftStart,15,20,0),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 5,
+                      child: Container(
+                          child: Text(
+                        "Subject:",
+                        style: TextStyle(fontSize: widget.controller.fontsize),
+                      )),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: TextFormField(
+                        textAlignVertical: TextAlignVertical.bottom,
+                        decoration: InputDecoration(),
+                      ),
+                    ),
+                    Spacer(flex: 2,)
+                  ],
+                ),
+              )
             ],
           ),
         ));
@@ -38,12 +82,21 @@ class _MessagesState extends State<Messages> {
 }
 
 class ControllerMessages {
-
   int _activeUser;
   int _activeLocation;
   int _activeRoom;
   int _activeRobo;
+  double _fontsize = 18;
+  double _leftStart = 40;
 
+  get fontsize {
+    return _fontsize;
+  }
+
+  get leftStart
+  {
+    return _leftStart;
+  }
 
   void set activeUser(int value) {
     this._activeUser = value;
@@ -77,12 +130,13 @@ class ControllerMessages {
     return _activeRobo;
   }
 
-  createRecipientDropdownMenu <T extends DatabaseObject> (_MessagesState state, List<T> data ) {
-
+  createDropdownMenu<T extends DatabaseObject>(
+      {@required _MessagesState state,
+      @required List<T> data,
+      @required String label}) {
     int value;
 
-    switch(T)
-    {
+    switch (T) {
       case User:
         value = activeUser;
         break;
@@ -97,38 +151,45 @@ class ControllerMessages {
         break;
     }
 
-
     return Container(
       margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
       child: Row(
         children: [
-          Container(
-            child: Text("Recipient: ", style: TextStyle(fontSize: 18)),
-            margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+          Expanded(
+            flex: 5,
+            child: Container(
+              child: Text(label + ":", style: TextStyle(fontSize: _fontsize)),
+              margin: EdgeInsets.fromLTRB(leftStart, 0, 20, 0),
+            ),
           ),
-          DropdownButton(
-            value: value,
-            hint: Text("Recipient"),
-            items: createDropdownMenuItem(data)
-            ,
-            onChanged: (value) {
-              switch(T)
-              {
-                case User:
-                  activeUser = value;
-                  break;
-                case Room:
-                  activeRoom = value;
-                  break;
-                case LocationID:
-                  activeLocation = value;
-                  break;
-                case Robo:
-                  activeRobo = value;
-                  break;
-              }
-              state.refreshState();
-            },
+          Expanded(
+            flex: 3,
+            child: DropdownButton(
+              isExpanded: true,
+              value: value,
+              hint: Text(label),
+              items: _createDropdownMenuItem(data),
+              onChanged: (value) {
+                switch (T) {
+                  case User:
+                    activeUser = value;
+                    break;
+                  case Room:
+                    activeRoom = value;
+                    break;
+                  case LocationID:
+                    activeLocation = value;
+                    break;
+                  case Robo:
+                    activeRobo = value;
+                    break;
+                }
+                state.refreshState();
+              },
+            ),
+          ),
+          Spacer(
+            flex: 2,
           ),
         ],
         mainAxisAlignment: MainAxisAlignment.center,
@@ -136,11 +197,9 @@ class ControllerMessages {
     );
   }
 
-  List<DropdownMenuItem> createDropdownMenuItem(List<DatabaseObject> objects)
-  {
-   return objects.map((row)
-    {
-     return DropdownMenuItem(
+  List<DropdownMenuItem> _createDropdownMenuItem(List<DatabaseObject> objects) {
+    return objects.map((row) {
+      return DropdownMenuItem(
         value: row.id,
         child: Text(row.name),
       );

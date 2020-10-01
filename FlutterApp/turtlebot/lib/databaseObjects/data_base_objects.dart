@@ -34,11 +34,13 @@ class Robo implements DatabaseObject {
 
 class Room implements DatabaseObject
 {
+
+
   int _id;
   String _name;
-  List<Robo> _whoHasThisMap;
+//  List<Robo> _whoHasThisMap; //
 
-  Room(this._id, this._name,this._whoHasThisMap);
+  Room(this._id, this._name);
 
   @override
   // TODO: implement iD
@@ -46,22 +48,22 @@ class Room implements DatabaseObject
 
   get name => _name;
 
-  get whoHasThisMap
-  {
-    List<Robo> result;
-
-    for (int i = 0; i < _whoHasThisMap.length; i++)
-      {
-        result.add(_whoHasThisMap[i]);
-      }
-
-    return result;
-  }
-
-  void set whoHasThisMap(List<Robo> robos)
-  {
-    _whoHasThisMap = robos;
-  }
+//  get whoHasThisMap
+//  {
+//    List<Robo> result;
+//
+//    for (int i = 0; i < _whoHasThisMap.length; i++)
+//      {
+//        result.add(_whoHasThisMap[i]);
+//      }
+//
+//    return result;
+//  }
+//
+//  void set whoHasThisMap(List<Robo> robos)
+//  {
+//    _whoHasThisMap = robos;
+//  }
 
 }
 
@@ -98,7 +100,7 @@ class LocationID implements DatabaseObject
 
   LocationID(this._id,this._userId,this._roomID,this._name);
 
-  get id => id;
+  get id => _id;
 
   get name => _name;
 
