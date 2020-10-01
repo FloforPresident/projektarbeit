@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:turtlebot/databaseObjects/data_base_objects.dart';
 import 'package:turtlebot/socket_model/socket_model.dart';
+import 'package:turtlebot/databaseObjects/data_base_objects.dart';
 
 class Messages extends StatefulWidget {
   Messages({Key key}) : super(key: key);
@@ -26,7 +26,7 @@ class _MessagesState extends State<Messages> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              widget.controller.createRecipientDropdownMenu(this,[1,"hans", 2, "werner"]),
+              widget.controller.createRecipientDropdownMenu(this, <User>[User(1,"Hans",1), User(2,"Verena",2)]),
             ],
           ),
         ));
@@ -81,7 +81,7 @@ class ControllerMessages {
 
     int value;
 
-    switch(T.runtimeType)
+    switch(T)
     {
       case User:
         value = activeUser;
@@ -109,18 +109,10 @@ class ControllerMessages {
           DropdownButton(
             value: value,
             hint: Text("Recipient"),
-            items: [
-              DropdownMenuItem(
-                value: 1,
-                child: Text("Hans"),
-              ),
-              DropdownMenuItem(
-                value: 2,
-                child: Text("Hans2"),
-              )
-            ],
+            items: createDropdownMenuItem(data)
+            ,
             onChanged: (value) {
-              switch(T.runtimeType)
+              switch(T)
               {
                 case User:
                   activeUser = value;
@@ -144,9 +136,15 @@ class ControllerMessages {
     );
   }
 
-  List<DropdownMenuItem> createDropdownMenuItem<T>()
+  List<DropdownMenuItem> createDropdownMenuItem(List<DatabaseObject> objects)
   {
-
+   return objects.map((row)
+    {
+     return DropdownMenuItem(
+        value: row.id,
+        child: Text(row.name),
+      );
+    }).toList();
   }
 
   List<DropdownMenuItem<T>> produceDropdowMenuItemList<T>(List<List> items) {

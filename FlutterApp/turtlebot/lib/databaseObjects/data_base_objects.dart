@@ -6,10 +6,10 @@ class DatabaseObject
   int _id;
 
    get name
-   {}
+   {return _name;}
 
    get id
-   {}
+   {return _id;}
 
   DatabaseObject(this._name,this._id);
 }
@@ -69,7 +69,7 @@ class User implements DatabaseObject
 {
   int _id;
   String _name;
-  LocationID _activeLocation;
+  int _activeLocation; //Will be Location ID as type for now it is only an int todo Change in set Method aswell
 
   User(this._id,this._name,this._activeLocation);
 
@@ -83,7 +83,7 @@ class User implements DatabaseObject
 
   get activeLocation => _activeLocation;
 
-  void set activeLocation(LocationID locationID)
+  void set activeLocation(int locationID)
   {
     _activeLocation = locationID;
   }
