@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/basti/git_repository/projektarbeit/catkin_ws/src/find_person/src/shout.cpp
+/home/patrick/projektarbeit/catkin_ws/src/find_person/src/shout.cpp
 ros/ros.h
-/home/basti/git_repository/projektarbeit/catkin_ws/src/find_person/src/ros/ros.h
+/home/patrick/projektarbeit/catkin_ws/src/find_person/src/ros/ros.h
 std_msgs/String.h
-/home/basti/git_repository/projektarbeit/catkin_ws/src/find_person/src/std_msgs/String.h
+/home/patrick/projektarbeit/catkin_ws/src/find_person/src/std_msgs/String.h
 sstream
 -
 

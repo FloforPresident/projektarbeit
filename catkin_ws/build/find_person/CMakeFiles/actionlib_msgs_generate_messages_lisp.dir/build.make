@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/basti/git_repository/projektarbeit/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/basti/git_repository/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
 
 # Utility rule file for actionlib_msgs_generate_messages_lisp.
 
@@ -63,10 +63,10 @@ find_person/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build: actionli
 .PHONY : find_person/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
 
 find_person/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/clean:
-	cd /home/basti/git_repository/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/cmake_clean.cmake
+	cd /home/patrick/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/cmake_clean.cmake
 .PHONY : find_person/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/clean
 
 find_person/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/depend:
-	cd /home/basti/git_repository/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/git_repository/projektarbeit/catkin_ws/src /home/basti/git_repository/projektarbeit/catkin_ws/src/find_person /home/basti/git_repository/projektarbeit/catkin_ws/build /home/basti/git_repository/projektarbeit/catkin_ws/build/find_person /home/basti/git_repository/projektarbeit/catkin_ws/build/find_person/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/patrick/projektarbeit/catkin_ws/src /home/patrick/projektarbeit/catkin_ws/src/find_person /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build/find_person /home/patrick/projektarbeit/catkin_ws/build/find_person/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : find_person/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/depend
 
