@@ -2,8 +2,6 @@
 
 #----push data from command line ----
 
-Patrick ist dabei
-
 cd {REPOSITORY_PATH}
 
 git add {FOLDER_FILE_ETC_NAME} oder alles hinzufügen: "git add ."
