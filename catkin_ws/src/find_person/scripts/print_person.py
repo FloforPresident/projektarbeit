@@ -39,7 +39,6 @@
 import rospy
 from std_msgs.msg import String
 
-#muss selber name sein wie rospy.init_node
 def print_person():
     pub = rospy.Publisher('chatter', String, queue_size=10)
     rospy.init_node('print_person', anonymous=False)
