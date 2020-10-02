@@ -39,15 +39,14 @@
 import rospy
 from std_msgs.msg import String
 
-#muss selber name sein wie rospy.init_node
 def print_person():
     pub = rospy.Publisher('chatter', String, queue_size=10)
-    rospy.init_node('print_person', anonymous=True)
+    rospy.init_node('print_person', anonymous=False)
     rate = rospy.Rate(10) # 10hz
 
     while not rospy.is_shutdown():
         hello_str = "Bocklet %s" % rospy.get_time()
-        rospy.loginfo("Published info: "+ hello_str + " sagt hallo patrick")
+        rospy.loginfo(hello_str)
         pub.publish(hello_str)
         rate.sleep()
 
