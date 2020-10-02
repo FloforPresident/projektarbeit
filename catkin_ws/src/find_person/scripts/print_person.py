@@ -47,7 +47,7 @@ def print_person():
 
     while not rospy.is_shutdown():
         hello_str = "Bocklet %s" % rospy.get_time()
-        rospy.loginfo("Published info: "+ hello_str + " sagt hallo patrick")
+        rospy.loginfo(hello_str)
         pub.publish(hello_str)
         rate.sleep()
 
