@@ -2,6 +2,8 @@
 77253c3f5a2f51d55f6cbb38fd83e0c1 /home/patrick/projektarbeit/catkin_ws/devel/include/beginner_tutorials/AddTwoInts.h
 6788fd4f637b1ea2ea63d91bf8e85f1a /home/patrick/projektarbeit/catkin_ws/devel/include/beginner_tutorials/Num.h
 b9126dde2c26b8361c64608fb52634fb /home/patrick/projektarbeit/catkin_ws/devel/include/find_person/person_info.h
+bb27b6ba0b0d2a88781bfaf1a9b8b08b /home/patrick/projektarbeit/catkin_ws/devel/include/raspicam_node/CameraConfig.h
+ecd23c1d8bcf14690c20b28f91012a04 /home/patrick/projektarbeit/catkin_ws/devel/include/raspicam_node/MotionVectors.h
 8364d54587967dc1d95f5ac031e75bcb /home/patrick/projektarbeit/catkin_ws/devel/include/turtlebot3_example/Turtlebot3Action.h
 20edc6f98825e772ec26f0b22f928bcd /home/patrick/projektarbeit/catkin_ws/devel/include/turtlebot3_example/Turtlebot3ActionFeedback.h
 097bbc702f4d42030973f04117f34a8d /home/patrick/projektarbeit/catkin_ws/devel/include/turtlebot3_example/Turtlebot3ActionGoal.h
@@ -18,6 +20,8 @@ afafe005ff04bfd557fd79c07b114b85 /home/patrick/projektarbeit/catkin_ws/devel/lib
 de0a6adf16ed15aeb2a79634d620f8e0 /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/beginner_tutorials/srv/__init__.py
 ac8d1bd88058611ed3da0c4a5e9c1148 /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py
 6c7ebec12456f8426dd5bb0d90b911a9 /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py
+4c1fbec41ed5dce92aa5f695c396ec2f /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/raspicam_node/msg/_MotionVectors.py
+318a51029d520f89dabae8290e8676e5 /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/raspicam_node/msg/__init__.py
 519d1a4d2dbcdbf09396865c5b52acc2 /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/turtlebot3_example/msg/_Turtlebot3Action.py
 2f5b2f5cb67879a44502a8e698eff3b9 /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/turtlebot3_example/msg/_Turtlebot3ActionFeedback.py
 edcf4f5fa9222d780949453f77bd101a /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/turtlebot3_example/msg/_Turtlebot3ActionGoal.py
@@ -33,6 +37,7 @@ aa1df37b0414d6fdebf948995a3ce08a /home/patrick/projektarbeit/catkin_ws/devel/lib
 cb66158be01c2dcbffc3fb5b02f734c7 /home/patrick/projektarbeit/catkin_ws/devel/share/common-lisp/ros/beginner_tutorials/msg/Num.lisp
 531941101fefdb9bd5e274eabedb5b88 /home/patrick/projektarbeit/catkin_ws/devel/share/common-lisp/ros/beginner_tutorials/srv/AddTwoInts.lisp
 1f9a2d593e3f58948f76e9abd2d6f222 /home/patrick/projektarbeit/catkin_ws/devel/share/common-lisp/ros/find_person/msg/person_info.lisp
+2d14b8cdf78b39f848c53e24c9aab4f9 /home/patrick/projektarbeit/catkin_ws/devel/share/common-lisp/ros/raspicam_node/msg/MotionVectors.lisp
 f9ea3aa78aa9b636078b8b7b88600534 /home/patrick/projektarbeit/catkin_ws/devel/share/common-lisp/ros/turtlebot3_example/msg/Turtlebot3Action.lisp
 529cb9753056ca17f87640ac7f66af69 /home/patrick/projektarbeit/catkin_ws/devel/share/common-lisp/ros/turtlebot3_example/msg/Turtlebot3ActionFeedback.lisp
 0c199c311c4bb40646b753f86e2d6c4c /home/patrick/projektarbeit/catkin_ws/devel/share/common-lisp/ros/turtlebot3_example/msg/Turtlebot3ActionGoal.lisp
@@ -46,6 +51,7 @@ e6fc0b9e30552a40e1d84d17e0e6f43d /home/patrick/projektarbeit/catkin_ws/devel/sha
 966e975c85d26a370a9de53ea6c25212 /home/patrick/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/msg/Num.js
 e23fdc3efaeb4abe8dacc5a30886889c /home/patrick/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/srv/AddTwoInts.js
 b17a5bf34d6a3b86034548cce296afce /home/patrick/projektarbeit/catkin_ws/devel/share/gennodejs/ros/find_person/msg/person_info.js
+0e3f22226d0cc7310ecd1fcdd197f285 /home/patrick/projektarbeit/catkin_ws/devel/share/gennodejs/ros/raspicam_node/msg/MotionVectors.js
 9d18eba3ca10e6467fa3283e292221c8 /home/patrick/projektarbeit/catkin_ws/devel/share/gennodejs/ros/turtlebot3_example/msg/Turtlebot3Action.js
 bac586c37667888222d02d15352f803e /home/patrick/projektarbeit/catkin_ws/devel/share/gennodejs/ros/turtlebot3_example/msg/Turtlebot3ActionFeedback.js
 06872673eafcef13d8865bde63acbfd1 /home/patrick/projektarbeit/catkin_ws/devel/share/gennodejs/ros/turtlebot3_example/msg/Turtlebot3ActionGoal.js
@@ -62,6 +68,8 @@ e5e9a690ba0454c84b424f040c5e6241 /home/patrick/projektarbeit/catkin_ws/devel/sha
 da1104b540871f26eca578e4edbece3c /home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/find_person/manifest.l
 f10a0a5b52a947b9a8e19a376e2d49e5 /home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/find_person/msg/person_info.l
 22bc9f0aa0481c24dab4bb5ccc7dfbdd /home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/location_monitor/manifest.l
+4d22c7e169d8c37eaffd2dbed5acd83e /home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/raspicam_node/manifest.l
+10fb107517c387722aee65fcc5ad3b2a /home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/raspicam_node/msg/MotionVectors.l
 27ea9f7c41efd837075b7e44d568bd72 /home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/manifest.l
 013692e357cb17429500f89377c69767 /home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3Action.l
 9db138a8de1bb1d4751885bbc324a462 /home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/turtlebot3_example/msg/Turtlebot3ActionFeedback.l
@@ -89,6 +97,13 @@ c1db8bf0d8523a0d34299a88381531f9 find_person/CMakeFiles/find_person_generate_mes
 c1db8bf0d8523a0d34299a88381531f9 find_person/CMakeFiles/find_person_generate_messages_nodejs
 c1db8bf0d8523a0d34299a88381531f9 find_person/CMakeFiles/find_person_generate_messages_py
 c1ea4b7d278170ff20c3b5e21497f199 location_monitor/CMakeFiles/location_monitor_generate_messages_eus
+e6390313cf11e0f44812ef9923e1f419 raspicam_node/CMakeFiles/_raspicam_node_generate_messages_check_deps_MotionVectors
+df600d199f39e8613814e230c357f437 raspicam_node/CMakeFiles/raspicam_node_gencfg
+df600d199f39e8613814e230c357f437 raspicam_node/CMakeFiles/raspicam_node_generate_messages_cpp
+df600d199f39e8613814e230c357f437 raspicam_node/CMakeFiles/raspicam_node_generate_messages_eus
+df600d199f39e8613814e230c357f437 raspicam_node/CMakeFiles/raspicam_node_generate_messages_lisp
+df600d199f39e8613814e230c357f437 raspicam_node/CMakeFiles/raspicam_node_generate_messages_nodejs
+df600d199f39e8613814e230c357f437 raspicam_node/CMakeFiles/raspicam_node_generate_messages_py
 57d402312355c1805cd5197cd2512c4a turtlebot3/turtlebot3_example/CMakeFiles/_turtlebot3_example_generate_messages_check_deps_Turtlebot3Action
 f7bb64243f7fb295a8073aa4bd89c64b turtlebot3/turtlebot3_example/CMakeFiles/_turtlebot3_example_generate_messages_check_deps_Turtlebot3ActionFeedback
 6240c5f9fafbee747323d76901415618 turtlebot3/turtlebot3_example/CMakeFiles/_turtlebot3_example_generate_messages_check_deps_Turtlebot3ActionGoal
