@@ -44,7 +44,7 @@ def talker():
     rospy.init_node('print_person', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
-        hello_str = "Bocklet" % rospy.get_time()
+        hello_str = "Bocklet"
         rospy.loginfo("Published info:"+ hello_str + "hallo patrick")
         pub.publish(hello_str)
         rate.sleep()
