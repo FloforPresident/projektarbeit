@@ -11,12 +11,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'TurtleBot',
-      theme: ThemeData(primarySwatch: Colors.orange),
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
+    return GestureDetector(
+      onTap:
+      () {
+       FocusScopeNode currentFocus = FocusScope.of(context);
+       if(!currentFocus.hasPrimaryFocus)
+         {
+           currentFocus.unfocus();
+         }
+
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'TurtleBot',
+        theme: ThemeData(primarySwatch: Colors.orange),
+        initialRoute: '/',
+        onGenerateRoute: RouteGenerator.generateRoute,
+      ),
     );
   }
 }

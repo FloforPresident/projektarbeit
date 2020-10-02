@@ -1,11 +1,34 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/socket_model/socket_model.dart';
 import 'package:turtlebot/databaseObjects/data_base_objects.dart';
 
 class Messages extends StatefulWidget {
-  Messages({Key key}) : super(key: key);
+  Messages({Key key}) : super(key: key) {
+    controller = ControllerMessages(this);
+  }
 
-  ControllerMessages controller = ControllerMessages();
+  ControllerMessages controller;
+  double _fontsize = 18;
+  double _leftStart = 40;
+  double _topSpace = 15;
+  double _spaceRightLabel = 20;
+
+  get spaceRightLabel {
+    return _spaceRightLabel;
+  }
+
+  get topSpace {
+    return _topSpace;
+  }
+
+  get fontsize {
+    return _fontsize;
+  }
+
+  get leftStart {
+    return _leftStart;
+  }
 
   @override
   State<StatefulWidget> createState() {
@@ -21,57 +44,87 @@ class _MessagesState extends State<Messages> {
           title: Text("Send Message"),
           backgroundColor: Colors.orange,
         ),
-        body: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              widget.controller.createDropdownMenu(
-                  state: this,
-                  data: <User>[User(1, "Hans", 1), User(2, "Verena", 2)],
-                  label: "Recipient"),
-              widget.controller.createDropdownMenu(
-                  state: this,
-                  data: <Room>[Room(1, "First Floor"), Room(2, "Second Floor")],
-                  label: "Rooms"),
-              widget.controller.createDropdownMenu(
-                  state: this,
-                  data: <LocationID>[
-                    LocationID(1, 1, 1, "Kitchen"),
-                    LocationID(2, 2, 2, "Bath"),
-                  ],
-                  label: "Location"),
-              widget.controller.createDropdownMenu(
-                  state: this,
-                  data: <Robo>[
-                    Robo("Robob", "192.168.2.14", 1),
-                    Robo("Volley", "192.168.2.15", 2)
-                  ],
-                  label: "Robots"),
-              Container(
-                margin: EdgeInsets.fromLTRB(widget.controller.leftStart,15,20,0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 5,
-                      child: Container(
-                          child: Text(
-                        "Subject:",
-                        style: TextStyle(fontSize: widget.controller.fontsize),
-                      )),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: TextFormField(
-                        textAlignVertical: TextAlignVertical.bottom,
-                        decoration: InputDecoration(),
+        body: SingleChildScrollView(
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                widget.controller.createDropdownMenu(
+                    state: this,
+                    data: <User>[User(1, "Hans", 1), User(2, "Verena", 2)],
+                    label: "Recipient"),
+                widget.controller.createDropdownMenu(
+                    state: this,
+                    data: <Room>[
+                      Room(1, "First Floor"),
+                      Room(2, "Second Floor")
+                    ],
+                    label: "Rooms"),
+                widget.controller.createDropdownMenu(
+                    state: this,
+                    data: <LocationID>[
+                      LocationID(1, 1, 1, "Kitchen"),
+                      LocationID(2, 2, 2, "Bath"),
+                    ],
+                    label: "Location"),
+                widget.controller.createDropdownMenu(
+                    state: this,
+                    data: <Robo>[
+                      Robo("Robob", "192.168.2.14", 1),
+                      Robo("Volley", "192.168.2.15", 2)
+                    ],
+                    label: "Robots"),
+                Container(
+                  margin: EdgeInsets.fromLTRB(widget.leftStart, 15, 20, 0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 5,
+                        child: Container(
+                            child: Text(
+                          "Subject:",
+                          style: TextStyle(fontSize: widget.fontsize),
+                        )),
                       ),
-                    ),
-                    Spacer(flex: 2,)
-                  ],
+                      Expanded(
+                        flex: 3,
+                        child: TextFormField(
+                          maxLines: null,
+                          textAlignVertical: TextAlignVertical.bottom,
+                          decoration: InputDecoration(),
+                          maxLength: 25,
+                        ),
+                      ),
+                      Spacer(
+                        flex: 2,
+                      )
+                    ],
+                  ),
                 ),
-              )
-            ],
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                      margin: EdgeInsets.fromLTRB(
+                          widget.leftStart, widget.topSpace, 0, 0),
+                      child: Text("Message: ", style: TextStyle(fontSize: widget.fontsize))),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(widget.leftStart, widget.topSpace, widget.leftStart, 0),
+                    child: TextFormField(
+                  maxLines: null,
+                  maxLength: 300,
+
+                )),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () {},
+                    child: Text("Send Message"),
+                  ),
+                )
+              ],
+            ),
           ),
         ));
   }
@@ -86,17 +139,9 @@ class ControllerMessages {
   int _activeLocation;
   int _activeRoom;
   int _activeRobo;
-  double _fontsize = 18;
-  double _leftStart = 40;
+  Messages view;
 
-  get fontsize {
-    return _fontsize;
-  }
-
-  get leftStart
-  {
-    return _leftStart;
-  }
+  ControllerMessages(this.view);
 
   void set activeUser(int value) {
     this._activeUser = value;
@@ -152,14 +197,16 @@ class ControllerMessages {
     }
 
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+      margin: EdgeInsets.fromLTRB(0, view.topSpace, 0, 0),
       child: Row(
         children: [
           Expanded(
             flex: 5,
             child: Container(
-              child: Text(label + ":", style: TextStyle(fontSize: _fontsize)),
-              margin: EdgeInsets.fromLTRB(leftStart, 0, 20, 0),
+              child:
+                  Text(label + ":", style: TextStyle(fontSize: view.fontsize)),
+              margin: EdgeInsets.fromLTRB(
+                  view.leftStart, 0, view.spaceRightLabel, 0),
             ),
           ),
           Expanded(
@@ -204,15 +251,5 @@ class ControllerMessages {
         child: Text(row.name),
       );
     }).toList();
-  }
-
-  List<DropdownMenuItem<T>> produceDropdowMenuItemList<T>(List<List> items) {
-    Iterator iterator = items.iterator;
-    List<DropdownMenuItem> result;
-
-//    while(iterator.moveNext())
-//      {
-//        result.add(DropdownMenuItem(child: Text(iterator.moveNext()),))
-//      }
   }
 }
