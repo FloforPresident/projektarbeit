@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/patrick/projektarbeit/catkin_ws/src
-# Build directory: /home/patrick/projektarbeit/catkin_ws/build
+# Source directory: /home/basti/projektarbeit/catkin_ws/src
+# Build directory: /home/basti/projektarbeit/catkin_ws/build
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
@@ -12,7 +12,6 @@ subdirs(turtlebot3_simulations/turtlebot3_simulations)
 subdirs(beginner_tutorials)
 subdirs(find_person)
 subdirs(location_monitor)
-subdirs(raspicam_node)
 subdirs(turtlebot3/turtlebot3_bringup)
 subdirs(turtlebot3/turtlebot3_example)
 subdirs(turtlebot3_simulations/turtlebot3_fake)

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
 
 # Include any dependencies generated for this target.
 include find_person/CMakeFiles/shout.dir/depend.make
@@ -58,17 +58,17 @@ include find_person/CMakeFiles/shout.dir/progress.make
 include find_person/CMakeFiles/shout.dir/flags.make
 
 find_person/CMakeFiles/shout.dir/src/shout.cpp.o: find_person/CMakeFiles/shout.dir/flags.make
-find_person/CMakeFiles/shout.dir/src/shout.cpp.o: /home/patrick/projektarbeit/catkin_ws/src/find_person/src/shout.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object find_person/CMakeFiles/shout.dir/src/shout.cpp.o"
-	cd /home/patrick/projektarbeit/catkin_ws/build/find_person && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shout.dir/src/shout.cpp.o -c /home/patrick/projektarbeit/catkin_ws/src/find_person/src/shout.cpp
+find_person/CMakeFiles/shout.dir/src/shout.cpp.o: /home/basti/projektarbeit/catkin_ws/src/find_person/src/shout.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/basti/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object find_person/CMakeFiles/shout.dir/src/shout.cpp.o"
+	cd /home/basti/projektarbeit/catkin_ws/build/find_person && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shout.dir/src/shout.cpp.o -c /home/basti/projektarbeit/catkin_ws/src/find_person/src/shout.cpp
 
 find_person/CMakeFiles/shout.dir/src/shout.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shout.dir/src/shout.cpp.i"
-	cd /home/patrick/projektarbeit/catkin_ws/build/find_person && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/patrick/projektarbeit/catkin_ws/src/find_person/src/shout.cpp > CMakeFiles/shout.dir/src/shout.cpp.i
+	cd /home/basti/projektarbeit/catkin_ws/build/find_person && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/basti/projektarbeit/catkin_ws/src/find_person/src/shout.cpp > CMakeFiles/shout.dir/src/shout.cpp.i
 
 find_person/CMakeFiles/shout.dir/src/shout.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shout.dir/src/shout.cpp.s"
-	cd /home/patrick/projektarbeit/catkin_ws/build/find_person && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/patrick/projektarbeit/catkin_ws/src/find_person/src/shout.cpp -o CMakeFiles/shout.dir/src/shout.cpp.s
+	cd /home/basti/projektarbeit/catkin_ws/build/find_person && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/basti/projektarbeit/catkin_ws/src/find_person/src/shout.cpp -o CMakeFiles/shout.dir/src/shout.cpp.s
 
 find_person/CMakeFiles/shout.dir/src/shout.cpp.o.requires:
 
@@ -88,33 +88,33 @@ shout_OBJECTS = \
 # External object files for target shout
 shout_EXTERNAL_OBJECTS =
 
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: find_person/CMakeFiles/shout.dir/src/shout.cpp.o
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: find_person/CMakeFiles/shout.dir/build.make
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/libroscpp.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_signals.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/librosconsole.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/librosconsole_log4cxx.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/librosconsole_backend_interface.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_regex.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/libxmlrpcpp.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/libroscpp_serialization.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/librostime.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/libcpp_common.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_system.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_thread.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so
-/home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout: find_person/CMakeFiles/shout.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout"
-	cd /home/patrick/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/shout.dir/link.txt --verbose=$(VERBOSE)
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: find_person/CMakeFiles/shout.dir/src/shout.cpp.o
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: find_person/CMakeFiles/shout.dir/build.make
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/libroscpp.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_signals.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/librosconsole.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/librosconsole_log4cxx.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/librosconsole_backend_interface.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_regex.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/libxmlrpcpp.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/libroscpp_serialization.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/librostime.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /opt/ros/kinetic/lib/libcpp_common.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_system.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_thread.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libpthread.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so
+/home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout: find_person/CMakeFiles/shout.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/basti/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout"
+	cd /home/basti/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/shout.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-find_person/CMakeFiles/shout.dir/build: /home/patrick/projektarbeit/catkin_ws/devel/lib/find_person/shout
+find_person/CMakeFiles/shout.dir/build: /home/basti/projektarbeit/catkin_ws/devel/lib/find_person/shout
 
 .PHONY : find_person/CMakeFiles/shout.dir/build
 
@@ -123,10 +123,10 @@ find_person/CMakeFiles/shout.dir/requires: find_person/CMakeFiles/shout.dir/src/
 .PHONY : find_person/CMakeFiles/shout.dir/requires
 
 find_person/CMakeFiles/shout.dir/clean:
-	cd /home/patrick/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/shout.dir/cmake_clean.cmake
+	cd /home/basti/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/shout.dir/cmake_clean.cmake
 .PHONY : find_person/CMakeFiles/shout.dir/clean
 
 find_person/CMakeFiles/shout.dir/depend:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/patrick/projektarbeit/catkin_ws/src /home/patrick/projektarbeit/catkin_ws/src/find_person /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build/find_person /home/patrick/projektarbeit/catkin_ws/build/find_person/CMakeFiles/shout.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/find_person /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/find_person /home/basti/projektarbeit/catkin_ws/build/find_person/CMakeFiles/shout.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : find_person/CMakeFiles/shout.dir/depend
 

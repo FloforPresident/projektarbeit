@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
 
 # Utility rule file for turtlebot3_msgs_genpy.
 
@@ -63,10 +63,10 @@ turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_genpy.dir/build: turtlebot3_msgs_genp
 .PHONY : turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_genpy.dir/build
 
 turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_genpy.dir/clean:
-	cd /home/patrick/projektarbeit/catkin_ws/build/turtlebot3_msgs && $(CMAKE_COMMAND) -P CMakeFiles/turtlebot3_msgs_genpy.dir/cmake_clean.cmake
+	cd /home/basti/projektarbeit/catkin_ws/build/turtlebot3_msgs && $(CMAKE_COMMAND) -P CMakeFiles/turtlebot3_msgs_genpy.dir/cmake_clean.cmake
 .PHONY : turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_genpy.dir/clean
 
 turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_genpy.dir/depend:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/patrick/projektarbeit/catkin_ws/src /home/patrick/projektarbeit/catkin_ws/src/turtlebot3_msgs /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build/turtlebot3_msgs /home/patrick/projektarbeit/catkin_ws/build/turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_genpy.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/turtlebot3_msgs /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/turtlebot3_msgs /home/basti/projektarbeit/catkin_ws/build/turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_genpy.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : turtlebot3_msgs/CMakeFiles/turtlebot3_msgs_genpy.dir/depend
 

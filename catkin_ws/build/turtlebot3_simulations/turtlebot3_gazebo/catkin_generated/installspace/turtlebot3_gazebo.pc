@@ -1,4 +1,4 @@
-prefix=/home/patrick/projektarbeit/catkin_ws/install
+prefix=/home/basti/projektarbeit/catkin_ws/install
 
 Name: turtlebot3_gazebo
 Description: Description of turtlebot3_gazebo

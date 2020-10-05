@@ -67,14 +67,14 @@ set(find_person_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(find_person_SOURCE_PREFIX /home/patrick/projektarbeit/catkin_ws/src/find_person)
-  set(find_person_DEVEL_PREFIX /home/patrick/projektarbeit/catkin_ws/devel)
+  set(find_person_SOURCE_PREFIX /home/basti/projektarbeit/catkin_ws/src/find_person)
+  set(find_person_DEVEL_PREFIX /home/basti/projektarbeit/catkin_ws/devel)
   set(find_person_INSTALL_PREFIX "")
   set(find_person_PREFIX ${find_person_DEVEL_PREFIX})
 else()
   set(find_person_SOURCE_PREFIX "")
   set(find_person_DEVEL_PREFIX "")
-  set(find_person_INSTALL_PREFIX /home/patrick/projektarbeit/catkin_ws/install)
+  set(find_person_INSTALL_PREFIX /home/basti/projektarbeit/catkin_ws/install)
   set(find_person_PREFIX ${find_person_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/patrick/projektarbeit/catkin_ws/install/lib;/home/patrick/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+    foreach(path /home/basti/projektarbeit/catkin_ws/install/lib;/home/basti/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
