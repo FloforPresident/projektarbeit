@@ -868,19 +868,6 @@ beginner_tutorials_generate_messages_py/fast:
 .PHONY : beginner_tutorials_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named print_location
-
-# Build rule for target.
-print_location: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 print_location
-.PHONY : print_location
-
-# fast build rule for target.
-print_location/fast:
-	$(MAKE) -f find_person/CMakeFiles/print_location.dir/build.make find_person/CMakeFiles/print_location.dir/build
-.PHONY : print_location/fast
-
-#=============================================================================
 # Target rules for targets named find_person_genpy
 
 # Build rule for target.
@@ -1217,19 +1204,6 @@ find_person_gencpp: cmake_check_build_system
 find_person_gencpp/fast:
 	$(MAKE) -f find_person/CMakeFiles/find_person_gencpp.dir/build.make find_person/CMakeFiles/find_person_gencpp.dir/build
 .PHONY : find_person_gencpp/fast
-
-#=============================================================================
-# Target rules for targets named shout
-
-# Build rule for target.
-shout: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 shout
-.PHONY : shout
-
-# fast build rule for target.
-shout/fast:
-	$(MAKE) -f find_person/CMakeFiles/shout.dir/build.make find_person/CMakeFiles/shout.dir/build
-.PHONY : shout/fast
 
 #=============================================================================
 # Target rules for targets named find_person_geneus
@@ -2442,7 +2416,6 @@ help:
 	@echo "... beginner_tutorials_genlisp"
 	@echo "... beginner_tutorials_generate_messages"
 	@echo "... beginner_tutorials_generate_messages_py"
-	@echo "... print_location"
 	@echo "... find_person_genpy"
 	@echo "... find_person_generate_messages_py"
 	@echo "... find_person_generate_messages_nodejs"
@@ -2469,7 +2442,6 @@ help:
 	@echo "... find_person_generate_messages"
 	@echo "... _find_person_generate_messages_check_deps_person_info"
 	@echo "... find_person_gencpp"
-	@echo "... shout"
 	@echo "... find_person_geneus"
 	@echo "... location_monitor"
 	@echo "... location_monitor_genpy"

@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  geometry_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -39,7 +40,7 @@ find_package(catkin REQUIRED COMPONENTS
 ##     * add a exec_depend tag for "message_runtime"
 ## * In this file (CMakeLists.txt):
 ##   * add "message_generation" and every package in MSG_DEP_SET to
-     find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs nav_msgs message_generation)
+     find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs nav_msgs geometry_msgs message_generation)
 ##   * add "message_runtime" and every package in MSG_DEP_SET to
 ##     catkin_package(CATKIN_DEPENDS ...)
 ##   * uncomment the add_*_files sections below as needed
@@ -71,7 +72,7 @@ add_message_files(
 ## Generate added messages and services with any dependencies listed here
  generate_messages(
    DEPENDENCIES
-   nav_msgs   std_msgs
+   nav_msgs  geometry_msgs  std_msgs
  )
 
 ################################################
@@ -106,7 +107,7 @@ add_message_files(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES find_person
-  CATKIN_DEPENDS nav_msgs roscpp rospy std_msgs message_runtime
+  CATKIN_DEPENDS nav_msgs geometry_msgs roscpp rospy std_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -160,9 +161,8 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
-   scripts/print_person.py
-   scripts/publisher_test.py
-   scripts/subscriber_test.py
+   scripts/print_patrick.py
+   scripts/print_johannes.py
    scripts/go_to_person.py
    scripts/say_name.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -209,13 +209,8 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(print_location src/print_location.cpp)
-target_link_libraries(print_location ${catkin_LIBRARIES})
-add_dependencies(print_location find_person_generate_messages_cpp)
-
-
-add_executable(shout src/shout.cpp)
-target_link_libraries(shout ${catkin_LIBRARIES})
-add_dependencies(shout find_person_generate_messages_cpp)
-
+#WICHTIG FÜR CPP SKRIPTE
+#add_executable(print_location src/print_location.cpp)
+#target_link_libraries(print_location ${catkin_LIBRARIES})
+#add_dependencies(print_location find_person_generate_messages_cpp)
 

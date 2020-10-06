@@ -5,4 +5,4 @@ Description: Description of find_person
 Version: 0.0.0
 Cflags: -I/home/basti/projektarbeit/catkin_ws/devel/include
 Libs: -L${prefix}/lib 
-Requires: nav_msgs roscpp rospy std_msgs message_runtime
+Requires: nav_msgs geometry_msgs roscpp rospy std_msgs message_runtime

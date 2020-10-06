@@ -84,15 +84,15 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/find_person" TYPE PROGRAM FILES "/home/basti/projektarbeit/catkin_ws/build/find_person/catkin_generated/installspace/print_person.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/find_person" TYPE PROGRAM FILES "/home/basti/projektarbeit/catkin_ws/build/find_person/catkin_generated/installspace/print_patrick.py")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/find_person" TYPE PROGRAM FILES "/home/basti/projektarbeit/catkin_ws/build/find_person/catkin_generated/installspace/publisher_test.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/find_person" TYPE PROGRAM FILES "/home/basti/projektarbeit/catkin_ws/build/find_person/catkin_generated/installspace/print_johannes.py")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/find_person" TYPE PROGRAM FILES "/home/basti/projektarbeit/catkin_ws/build/find_person/catkin_generated/installspace/subscriber_test.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/find_person" TYPE PROGRAM FILES "/home/basti/projektarbeit/catkin_ws/build/find_person/catkin_generated/installspace/go_to_person.py")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")

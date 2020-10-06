@@ -45,9 +45,9 @@ def print_person():
     rate = rospy.Rate(10) # 10hz
 
     while not rospy.is_shutdown():
-        hello_str = "Bocklet %s" % rospy.get_time()
-        rospy.loginfo(hello_str)
-        pub.publish(hello_str)
+        person = "Johannes"
+        rospy.loginfo("Auf der Suche nach: "+person)
+        pub.publish(person)
         rate.sleep()
 
 if __name__ == '__main__':

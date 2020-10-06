@@ -10,7 +10,7 @@ def callback(data):
         engine = pyttsx.init()
         engine.say(text)
         engine.runAndWait()
-    say("thanks for nothing ida. hahahahahahahahahahahahahahahahahahah i love anne")
+    say(data.data)
     
 def listener():
     # In ROS, nodes are uniquely named. If two nodes with the same
