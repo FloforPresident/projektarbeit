@@ -163,6 +163,7 @@ include_directories(
    scripts/print_person.py
    scripts/publisher_test.py
    scripts/subscriber_test.py
+   scripts/go_to_person.py
    scripts/say_name.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
