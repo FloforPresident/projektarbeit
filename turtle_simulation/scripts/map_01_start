@@ -1,5 +1,0 @@
-#!/bin/bash
-#load map_01
-roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/turtle_simulation/maps/map_01.yaml
-
-
