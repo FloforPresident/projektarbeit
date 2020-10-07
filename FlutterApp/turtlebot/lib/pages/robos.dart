@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 
 class Robos extends StatefulWidget {
   _RobosController controller;
@@ -30,7 +31,7 @@ class _RobosState extends State<Robos> {
         key: widget.controller._key,
         initialItemCount: widget.controller.items.length,
         itemBuilder: (context, index, animation) {
-          return widget.controller.buildItem(widget.controller.items[index], animation, index);
+          return widget.controller.buildItem(context,widget.controller.items[index], animation, index);
         },
       ),
     );
@@ -79,7 +80,7 @@ class _RobosController
     return _key;
   }
 
-  Widget buildItem(List _item,Animation animation, int index) {
+  Widget buildItem(BuildContext context, List _item,Animation animation, int index) {
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -114,8 +115,11 @@ class _RobosController
                     ),
                     IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () {
-                        removeItem(index);
+                      onPressed: () async {
+
+                        bool delete = await OnDelete.onDelete(context);
+                        (delete) ? removeItem(index) : delete ;
+
                       },
                     )
                   ],
@@ -131,7 +135,7 @@ class _RobosController
   void removeItem(int index) {
     List removeItem = _items.removeAt(index);
     AnimatedListRemovedItemBuilder build = (context, animation) {
-      return buildItem(removeItem, animation, index);
+      return buildItem(context,removeItem, animation, index);
     };
 
     _key.currentState.removeItem(index, build);

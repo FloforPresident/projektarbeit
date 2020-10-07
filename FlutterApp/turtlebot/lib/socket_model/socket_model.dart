@@ -5,6 +5,10 @@ import 'package:turtlebot/pages/rooms.dart';
 
 class  SocketModel
 {
+  List<User> userData;
+  List<Room> roomData;
+  List<LocationID> locationData;
+  List<Robo> roboData;
 
   static final SocketModel _instance = SocketModel._internal();
 
@@ -13,21 +17,27 @@ class  SocketModel
     return _instance;
   }
 
-  SocketModel._internal();
+  SocketModel._internal()
+  {
+    userData = getUsers();
+    roomData = getRooms();
+    locationData = getLocationsID();
+    roboData = getRobos();
+  }
 
 
 
-  List<User> getUsers(Robo robo)
+  List<User> getUsers()
   {
 
   }
 
-  List<Room> getRooms(Robo robo)
+  List<Room> getRooms()
   {
 
   }
 
-  List<LocationID> getLocationsID(Room room)
+  List<LocationID> getLocationsID()
   {
 
   }

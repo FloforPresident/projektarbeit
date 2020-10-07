@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 
 class Friends extends StatelessWidget {
   _ControllerFriends controller;
@@ -19,7 +20,7 @@ class Friends extends StatelessWidget {
         initialItemCount: controller.items.length,
         itemBuilder: (context, index, animation) {
           return controller.buildItem(
-              controller.items[index], animation, index);
+              context, controller.items[index], animation, index);
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -64,7 +65,8 @@ class _ControllerFriends {
     return _key;
   }
 
-  Widget buildItem(List _item, Animation animation, int index) {
+  Widget buildItem(
+      BuildContext context, List _item, Animation animation, int index) {
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -91,8 +93,9 @@ class _ControllerFriends {
                     ),
                     IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () {
-                        removeItem(index);
+                      onPressed: () async {
+                        bool delete = await OnDelete.onDelete(context);
+                        (delete) ? removeItem(index) : delete;
                       },
                     )
                   ],
@@ -101,13 +104,16 @@ class _ControllerFriends {
             ],
           ),
           subtitle: Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Row(
-                  children: <Widget>[Text(_item[2] + " - ", style: TextStyle(
-                    color: Colors.indigo,
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                  )), Text(_item[3])])),
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: Row(children: <Widget>[
+                Text(_item[2] + " - ",
+                    style: TextStyle(
+                      color: Colors.indigo,
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text(_item[3])
+              ])),
         ),
       ),
     );
@@ -116,7 +122,7 @@ class _ControllerFriends {
   void removeItem(int index) {
     List removeItem = _items.removeAt(index);
     AnimatedListRemovedItemBuilder build = (context, animation) {
-      return buildItem(removeItem, animation, index);
+      return buildItem(context, removeItem, animation, index);
     };
 
     _key.currentState.removeItem(index, build);
