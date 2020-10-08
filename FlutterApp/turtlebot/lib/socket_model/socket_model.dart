@@ -12,6 +12,9 @@ class  SocketModel
 
   static final SocketModel _instance = SocketModel._internal();
 
+  SocketModel socket = SocketModel();
+
+
   factory SocketModel()
   {
     return _instance;

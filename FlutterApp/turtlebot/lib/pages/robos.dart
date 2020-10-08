@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:turtlebot/databaseObjects/data_base_objects.dart';
 
 class Robos extends StatefulWidget {
   _RobosController controller;
 
-
-
-  Robos({Key key}) : super(key: key)
-  {
+  Robos({Key key}) : super(key: key) {
     this.controller = _RobosController(Colors.blue);
   }
-
 
   @override
   _RobosState createState() {
@@ -19,7 +16,6 @@ class Robos extends StatefulWidget {
 }
 
 class _RobosState extends State<Robos> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,60 +23,59 @@ class _RobosState extends State<Robos> {
         title: Text("Connected Robos"),
         backgroundColor: widget.controller.colorTheme,
       ),
-      body:AnimatedList(
+      body: AnimatedList(
         key: widget.controller._key,
         initialItemCount: widget.controller.items.length,
         itemBuilder: (context, index, animation) {
-          return widget.controller.buildItem(context,widget.controller.items[index], animation, index);
+          return widget.controller.buildItem(
+              context, widget.controller.items[index], animation, index);
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        foregroundColor: Colors.white,
+        backgroundColor: widget.controller.colorTheme,
+        onPressed: () async {
+         bool result = await widget.controller.addItemDialog(context);
+         (result) ? widget.controller.addItem("hi","hi") : result;
         },
       ),
     );
   }
-
-
-
-
-
 }
 
-class _RobosController
-{
+class _RobosController {
   final GlobalKey<AnimatedListState> _key = GlobalKey();
-  final Color _colorTheme;
+  Color _colorTheme;
   List<List> _items;
 
-  _RobosController(this._colorTheme)
-  {
+  _RobosController(this._colorTheme) {
     this._items = _getData();
   }
 
-
-  List<List> _getData()
-  {
+  List<List> _getData() {
     return [
-      ["Robob", "192.185.2.26"],
-      ["Number 5", "192.185.2.55"],
-      ["Robobross", "192.185.2.234"],
-      ["McFlurryMachine", "192.185.2.26"],
+      ["Robob", "192.185.2.26",Room(1,"living-room")],
+      ["Number 5", "192.185.2.55",Room(2,"dining-room")],
+      ["Robobross", "192.185.2.234", Room(3,"study-room")],
+      ["McFlurryMachine", "192.185.2.26", Room(4, "basement")],
     ];
   }
 
-  get colorTheme
-  {
+  get colorTheme {
     return Color(_colorTheme.value);
   }
 
-  get items
-  {
+  get items {
     return _items;
   }
 
-  get key
-  {
+  get key {
     return _key;
   }
 
-  Widget buildItem(BuildContext context, List _item,Animation animation, int index) {
+  Widget buildItem(
+      BuildContext context, List item, Animation animation, int index) {
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -92,7 +87,7 @@ class _RobosController
                 flex: 4,
                 child: Row(
                   children: <Widget>[
-                    Text(_item[0] + " "),
+                    Text(item[0] + " "),
                   ],
                 ),
               ),
@@ -100,7 +95,7 @@ class _RobosController
                 flex: 3,
                 child: Row(
                   children: <Widget>[
-                    Text(_item[1] + " "),
+                    Text(item[1] + " "),
                   ],
                 ),
               ),
@@ -115,10 +110,8 @@ class _RobosController
                     ),
                     IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () async {
-
-                        bool delete = await OnDelete.onDelete(context);
-                        (delete) ? removeItem(index) : delete ;
+                      onPressed: ()  {
+                        OnDelete.onDelete(context);
 
                       },
                     )
@@ -127,6 +120,14 @@ class _RobosController
               ),
             ],
           ),
+          subtitle: Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: Text((item[2] as Room).name,
+                  style: TextStyle(
+                    color: Colors.indigo,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ))),
         ),
       ),
     );
@@ -135,55 +136,71 @@ class _RobosController
   void removeItem(int index) {
     List removeItem = _items.removeAt(index);
     AnimatedListRemovedItemBuilder build = (context, animation) {
-      return buildItem(context,removeItem, animation, index);
+      return buildItem(context, removeItem, animation, index);
     };
 
     _key.currentState.removeItem(index, build);
   }
 
-  void addItem(BuildContext context) {
-    showDialog(
+  void addItem(String name, String ip)
+  {
+    int end = _items.length;
+    _items.add(["hi","hi","hi","Hi"]);
+    AnimatedListItemBuilder build = (context,index,animation)
+    {
+      return buildItem(context, _items, animation, index);
+    };
+
+    _key.currentState.insertItem(end);
+  }
+
+  Future<bool> addItemDialog(BuildContext context) async {
+
+
+    TextEditingController nameCon = TextEditingController();
+    TextEditingController ipCon = TextEditingController();
+
+
+
+    return await showDialog(
       barrierDismissible: true,
       context: context,
       builder: (context) => SingleChildScrollView(
         child: AlertDialog(
-          title: Text("Add new User"),
+          title: Text("Add new Robo"),
           content: Column(
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(labelText: "Firstname"),
+                controller: nameCon,
+                decoration: InputDecoration(labelText: "Name"),
+                maxLines: null,
+                maxLength: 20,
               ),
               TextField(
-                decoration: InputDecoration(labelText: "Lastname"),
+                controller: ipCon,
+                decoration: InputDecoration(labelText: "IP-Address"),
+                maxLines: null,
+                maxLength: 20,
               ),
-              Container(
-                margin: EdgeInsets.all(15),
-                child: RaisedButton(
-                  child: Text("Add Faceembedding"),
-                  color: _colorTheme,
-                  textColor: Colors.white,
-                  onPressed: () {},
-                ),
-              ),
-              CheckboxListTile(
-                title: Text("Faceembedding uploaded"),
-                value: false,
-              )
             ],
           ),
           actions: <Widget>[
             FlatButton(
               child: Text("No"),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(false);
               },
             ),
-            FlatButton(child: Text("Yes")),
+            FlatButton(
+              child: Text("Yes"),
+              onPressed: () {
+                addItem(nameCon.text,ipCon.text);
+                Navigator.of(context).pop(true);
+              },
+            ),
           ],
         ),
       ),
     );
   }
-
-
 }

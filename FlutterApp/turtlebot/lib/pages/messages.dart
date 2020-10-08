@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/socket_model/socket_model.dart';
 import 'package:turtlebot/databaseObjects/data_base_objects.dart';
+import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 
 class Messages extends StatefulWidget {
   Messages({Key key}) : super(key: key) {
-    controller = ControllerMessages(this);
+    controller = ControllerMessages(this, Colors.orange);
   }
 
   ControllerMessages controller;
@@ -42,7 +43,7 @@ class _MessagesState extends State<Messages> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Send Message"),
-          backgroundColor: Colors.orange,
+          backgroundColor: widget.controller.colorTheme,
         ),
         body: SingleChildScrollView(
           child: SizedBox(
@@ -50,31 +51,21 @@ class _MessagesState extends State<Messages> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                widget.controller.createDropdownMenu(
-                    state: this,
-                    data: <User>[User(1, "Hans", 1), User(2, "Verena", 2)],
+                CustomDropdownMenu(
+                    data: <User>[User(1, "Hans", "living-room"), User(2, "Verena", "dining-room")],
                     label: "Recipient"),
-                widget.controller.createDropdownMenu(
-                    state: this,
-                    data: <Room>[
-                      Room(1, "First Floor"),
-                      Room(2, "Second Floor")
-                    ],
-                    label: "Rooms"),
-                widget.controller.createDropdownMenu(
-                    state: this,
-                    data: <LocationID>[
-                      LocationID(1, 1, 1, "Kitchen"),
-                      LocationID(2, 2, 2, "Bath"),
-                    ],
+                CustomDropdownMenu(
+                    data: <Room>[ Room(1, "First Floor"),
+                      Room(2, "Second Floor")],
+                    label: "Room"),
+                CustomDropdownMenu(
+                    data: <LocationID>[LocationID(1, 1, 1, "Kitchen"),
+                      LocationID(2, 2, 2, "Bath"),],
                     label: "Location"),
-                widget.controller.createDropdownMenu(
-                    state: this,
-                    data: <Robo>[
-                      Robo("Robob", "192.168.2.14", 1),
-                      Robo("Volley", "192.168.2.15", 2)
-                    ],
-                    label: "Robots"),
+                CustomDropdownMenu(
+                    data: <Robo>[ Robo("Robob", "192.168.2.14", 1, Room(1,"living-Room")),
+                      Robo("Volley", "192.168.2.15", 2, Room(2, "dining-Room"))],
+                    label: "Robo"),
                 Container(
                   margin: EdgeInsets.fromLTRB(widget.leftStart, 15, 20, 0),
                   child: Row(
@@ -135,13 +126,19 @@ class _MessagesState extends State<Messages> {
 }
 
 class ControllerMessages {
+  Color _colorTheme;
   int _activeUser;
   int _activeLocation;
   int _activeRoom;
   int _activeRobo;
   Messages view;
 
-  ControllerMessages(this.view);
+  ControllerMessages(this.view,this._colorTheme);
+
+  get colorTheme
+  {
+    return Color(_colorTheme.value);
+  }
 
   void set activeUser(int value) {
     this._activeUser = value;
@@ -175,7 +172,7 @@ class ControllerMessages {
     return _activeRobo;
   }
 
-  createDropdownMenu<T extends DatabaseObject>(
+  createDropdownMenu<T extends DatabaseObject,H extends StatefulWidget>(
       {@required _MessagesState state,
       @required List<T> data,
       @required String label}) {
