@@ -23,15 +23,6 @@ class Friends extends StatelessWidget {
               context, controller.items[index], animation, index);
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        foregroundColor: Colors.white,
-        backgroundColor: controller.colorTheme,
-        onPressed: () async {
-          bool result = await controller.addItemDialog(context);
-          (result) ? controller.addItem() : result;
-        },
-      ),
     );
   }
 }
@@ -129,66 +120,5 @@ class _ControllerFriends {
     _key.currentState.removeItem(index, build);
   }
 
-  void addItem()
-  {
-    int end = _items.length;
-    _items.add(["hi","hi","hi","Hi"]);
-    AnimatedListItemBuilder build = (context,index,animation)
-    {
-      return buildItem(context, _items, animation, index);
-    };
 
-    _key.currentState.insertItem(end);
-  }
-
-
-
-  Future<bool> addItemDialog(BuildContext context) async {
-   return await showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (context) => SingleChildScrollView(
-        child: AlertDialog(
-          title: Text("Add new User"),
-          content: Column(
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: "Name"),
-                maxLines: null,
-                maxLength: 20,
-              ),
-              Container(
-                margin: EdgeInsets.all(15),
-                child: RaisedButton(
-                  child: Text("Add Faceembedding"),
-                  color: _colorTheme,
-                  textColor: Colors.white,
-                  onPressed: () {},
-                ),
-              ),
-              CheckboxListTile(
-                title: Text("Faceembedding uploaded"),
-                value: false,
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: "Password"),
-                maxLines: null,
-                maxLength: 20,
-              )
-            ],
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("No"),
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-            ),
-            FlatButton(child: Text("Yes"),
-            onPressed: () {Navigator.of(context).pop(true);},),
-          ],
-        ),
-      ),
-    );
-  }
 }

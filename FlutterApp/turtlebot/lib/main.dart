@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'TurtleBot',
         theme: ThemeData(primarySwatch: Colors.orange),
-        initialRoute: '/',
+        initialRoute: '/login',
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
@@ -46,6 +46,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Center(child: Text("Turtlebot Control App")),
         backgroundColor: Colors.grey,
       ),

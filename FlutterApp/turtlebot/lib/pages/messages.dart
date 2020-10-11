@@ -52,20 +52,9 @@ class _MessagesState extends State<Messages> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 CustomDropdownMenu(
+                  controller: widget.controller.dropController,
                     data: <User>[User(1, "Hans", "living-room"), User(2, "Verena", "dining-room")],
                     label: "Recipient"),
-                CustomDropdownMenu(
-                    data: <Room>[ Room(1, "First Floor"),
-                      Room(2, "Second Floor")],
-                    label: "Room"),
-                CustomDropdownMenu(
-                    data: <LocationID>[LocationID(1, 1, 1, "Kitchen"),
-                      LocationID(2, 2, 2, "Bath"),],
-                    label: "Location"),
-                CustomDropdownMenu(
-                    data: <Robo>[ Robo("Robob", "192.168.2.14", 1, Room(1,"living-Room")),
-                      Robo("Volley", "192.168.2.15", 2, Room(2, "dining-Room"))],
-                    label: "Robo"),
                 Container(
                   margin: EdgeInsets.fromLTRB(widget.leftStart, 15, 20, 0),
                   child: Row(
@@ -120,17 +109,13 @@ class _MessagesState extends State<Messages> {
         ));
   }
 
-  void refreshState() {
-    setState(() {});
-  }
 }
 
 class ControllerMessages {
   Color _colorTheme;
-  int _activeUser;
-  int _activeLocation;
-  int _activeRoom;
-  int _activeRobo;
+  ControllerCustomDropdown dropController = ControllerCustomDropdown<User>();
+
+
   Messages view;
 
   ControllerMessages(this.view,this._colorTheme);
@@ -140,113 +125,5 @@ class ControllerMessages {
     return Color(_colorTheme.value);
   }
 
-  void set activeUser(int value) {
-    this._activeUser = value;
-  }
 
-  get activeUser {
-    return _activeUser;
-  }
-
-  void set activeLocation(int value) {
-    this._activeLocation = value;
-  }
-
-  get activeLocation {
-    return _activeLocation;
-  }
-
-  void set activeRoom(int value) {
-    this._activeRoom = value;
-  }
-
-  get activeRoom {
-    return _activeRoom;
-  }
-
-  void set activeRobo(int value) {
-    this._activeRobo = value;
-  }
-
-  get activeRobo {
-    return _activeRobo;
-  }
-
-  createDropdownMenu<T extends DatabaseObject,H extends StatefulWidget>(
-      {@required _MessagesState state,
-      @required List<T> data,
-      @required String label}) {
-    int value;
-
-    switch (T) {
-      case User:
-        value = activeUser;
-        break;
-      case Room:
-        value = activeRoom;
-        break;
-      case LocationID:
-        value = activeLocation;
-        break;
-      case Robo:
-        value = activeRobo;
-        break;
-    }
-
-    return Container(
-      margin: EdgeInsets.fromLTRB(0, view.topSpace, 0, 0),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 5,
-            child: Container(
-              child:
-                  Text(label + ":", style: TextStyle(fontSize: view.fontsize)),
-              margin: EdgeInsets.fromLTRB(
-                  view.leftStart, 0, view.spaceRightLabel, 0),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: DropdownButton(
-              isExpanded: true,
-              value: value,
-              hint: Text(label),
-              items: _createDropdownMenuItem(data),
-              onChanged: (value) {
-                switch (T) {
-                  case User:
-                    activeUser = value;
-                    break;
-                  case Room:
-                    activeRoom = value;
-                    break;
-                  case LocationID:
-                    activeLocation = value;
-                    break;
-                  case Robo:
-                    activeRobo = value;
-                    break;
-                }
-                state.refreshState();
-              },
-            ),
-          ),
-          Spacer(
-            flex: 2,
-          ),
-        ],
-        mainAxisAlignment: MainAxisAlignment.center,
-      ),
-    );
-  }
-
-  List<DropdownMenuItem> _createDropdownMenuItem(List<DatabaseObject> objects) {
-    return objects.map((row) {
-      return DropdownMenuItem(
-        value: row.id,
-        child: Text(row.name),
-      );
-    }).toList();
-  }
 }
