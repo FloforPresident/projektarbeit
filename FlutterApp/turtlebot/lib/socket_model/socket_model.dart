@@ -1,10 +1,6 @@
-import 'dart:io';
-
 import 'package:turtlebot/databaseObjects/data_base_objects.dart';
-import 'package:turtlebot/pages/rooms.dart';
 
-class  SocketModel
-{
+class SocketModel {
   List<User> userData;
   List<Room> roomData;
   List<LocationID> locationData;
@@ -12,38 +8,22 @@ class  SocketModel
 
   static final SocketModel _instance = SocketModel._internal();
 
-  factory SocketModel()
-  {
+  factory SocketModel() {
     return _instance;
   }
 
-  SocketModel._internal()
-  {
+  SocketModel._internal() {
     userData = getUsers();
     roomData = getRooms();
     locationData = getLocationsID();
     roboData = getRobos();
   }
 
+  List<User> getUsers() {}
 
+  List<Room> getRooms() {}
 
-  List<User> getUsers()
-  {
+  List<LocationID> getLocationsID() {}
 
-  }
-
-  List<Room> getRooms()
-  {
-
-  }
-
-  List<LocationID> getLocationsID()
-  {
-
-  }
-
-  List<Robo> getRobos()
-  {
-
-  }
+  List<Robo> getRobos() {}
 }

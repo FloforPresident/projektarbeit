@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 
+import '../main.dart';
+
 class Robos extends StatefulWidget {
   _RobosController controller;
 
-
-
-  Robos({Key key}) : super(key: key)
-  {
+  Robos({Key key}) : super(key: key) {
     this.controller = _RobosController(Colors.blue);
   }
-
 
   @override
   _RobosState createState() {
@@ -19,7 +17,6 @@ class Robos extends StatefulWidget {
 }
 
 class _RobosState extends State<Robos> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,36 +24,34 @@ class _RobosState extends State<Robos> {
         title: Text("Connected Robos"),
         backgroundColor: widget.controller.colorTheme,
       ),
-      body:AnimatedList(
+      body: AnimatedList(
         key: widget.controller._key,
         initialItemCount: widget.controller.items.length,
         itemBuilder: (context, index, animation) {
-          return widget.controller.buildItem(context,widget.controller.items[index], animation, index);
+          return widget.controller.buildItem(
+              context, widget.controller.items[index], animation, index);
         },
       ),
+      // body: StreamBuilder(
+      //   stream: MyApp.channels['robos'].stream,
+      //   builder: (context, snapshot) {
+      //     return Text(snapshot.hasData ? '${snapshot.data}' : '');
+      //   },
+      // ),
     );
   }
-
-
-
-
-
 }
 
-class _RobosController
-{
+class _RobosController {
   final GlobalKey<AnimatedListState> _key = GlobalKey();
   final Color _colorTheme;
   List<List> _items;
 
-  _RobosController(this._colorTheme)
-  {
+  _RobosController(this._colorTheme) {
     this._items = _getData();
   }
 
-
-  List<List> _getData()
-  {
+  List<List> _getData() {
     return [
       ["Robob", "192.185.2.26"],
       ["Number 5", "192.185.2.55"],
@@ -65,22 +60,20 @@ class _RobosController
     ];
   }
 
-  get colorTheme
-  {
+  get colorTheme {
     return Color(_colorTheme.value);
   }
 
-  get items
-  {
+  get items {
     return _items;
   }
 
-  get key
-  {
+  get key {
     return _key;
   }
 
-  Widget buildItem(BuildContext context, List _item,Animation animation, int index) {
+  Widget buildItem(
+      BuildContext context, List _item, Animation animation, int index) {
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -116,10 +109,8 @@ class _RobosController
                     IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () async {
-
                         bool delete = await OnDelete.onDelete(context);
-                        (delete) ? removeItem(index) : delete ;
-
+                        (delete) ? removeItem(index) : delete;
                       },
                     )
                   ],
@@ -135,7 +126,7 @@ class _RobosController
   void removeItem(int index) {
     List removeItem = _items.removeAt(index);
     AnimatedListRemovedItemBuilder build = (context, animation) {
-      return buildItem(context,removeItem, animation, index);
+      return buildItem(context, removeItem, animation, index);
     };
 
     _key.currentState.removeItem(index, build);
@@ -184,6 +175,4 @@ class _RobosController
       ),
     );
   }
-
-
 }

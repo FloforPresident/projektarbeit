@@ -9,57 +9,74 @@ import 'package:turtlebot/main.dart';
 import 'package:turtlebot/pages/messages.dart';
 
 class RouteGenerator {
-
-  _RouteGenerator() {}
+  // _RouteGenerator() {}
 
   static const String RouteRoboStatus = '/roboStatus';
   static const String RouteRoboCommands = '/roboCommands';
   static const String RouteManualControl = '/manControl';
   static const String RouteHome = '/';
 
-
-
-
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => Home());
-      case '/robos':
-        return MaterialPageRoute(builder: (_) => Robos());
-      case '/friends':
-        return MaterialPageRoute(builder: (_) => Friends());
-      case '/rooms':
-        return MaterialPageRoute(builder: (_) => Rooms());
-      case '/messages':
-        return MaterialPageRoute(builder: (_) => Messages());
+        {
+          MyApp.addChannel(settings.name);
+          return MaterialPageRoute(builder: (_) => Home());
+        }
+
+      case 'robos':
+        {
+          MyApp.addChannel(settings.name);
+          return MaterialPageRoute(builder: (_) => Robos());
+        }
+      case 'friends':
+        {
+          MyApp.addChannel(settings.name);
+          return MaterialPageRoute(builder: (_) => Friends());
+        }
+      case 'rooms':
+        {
+          MyApp.addChannel(settings.name);
+          return MaterialPageRoute(builder: (_) => Rooms());
+        }
+      case 'messages':
+        {
+          MyApp.addChannel(settings.name);
+          return MaterialPageRoute(builder: (_) => Messages());
+        }
       case RouteRoboStatus:
-        return MaterialPageRoute(builder: (_) => RoboStatus());
+        {
+          MyApp.addChannel(settings.name);
+          return MaterialPageRoute(builder: (_) => RoboStatus());
+        }
       case RouteRoboCommands:
-        return MaterialPageRoute(builder: (_) => RoboCommands());
+        {
+          MyApp.addChannel(settings.name);
+          return MaterialPageRoute(builder: (_) => RoboCommands());
+        }
       case RouteManualControl:
-        return MaterialPageRoute(builder: (_) => RoboManControl());
+        {
+          MyApp.addChannel(settings.name);
+          return MaterialPageRoute(builder: (_) => RoboManControl());
+        }
       default:
         throw Exception('Invalid route: ${settings.name}');
     }
   }
 
-  static onTapToHome(BuildContext context)
-  {
-    Navigator.pushNamed(context,RouteGenerator.RouteHome);
+  static onTapToHome(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteHome);
   }
 
-  static onTapToRoboStatus(BuildContext context)
-  {
-    Navigator.pushNamed(context,RouteGenerator.RouteRoboStatus);
+  static onTapToRoboStatus(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteRoboStatus);
   }
 
-  static onTapToRoboCommands(BuildContext context)
-  {
-    Navigator.pushNamed(context,RouteGenerator.RouteRoboCommands);
+  static onTapToRoboCommands(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteRoboCommands);
   }
 
-  static onTapToRoboManControl(BuildContext context)
-  {
-    Navigator.pushNamed(context,RouteGenerator.RouteManualControl);
+  static onTapToRoboManControl(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteManualControl);
   }
 }

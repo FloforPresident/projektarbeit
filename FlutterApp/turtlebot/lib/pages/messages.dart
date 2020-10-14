@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:turtlebot/socket_model/socket_model.dart';
 import 'package:turtlebot/databaseObjects/data_base_objects.dart';
 
 class Messages extends StatefulWidget {
@@ -107,15 +106,16 @@ class _MessagesState extends State<Messages> {
                   child: Container(
                       margin: EdgeInsets.fromLTRB(
                           widget.leftStart, widget.topSpace, 0, 0),
-                      child: Text("Message: ", style: TextStyle(fontSize: widget.fontsize))),
+                      child: Text("Message: ",
+                          style: TextStyle(fontSize: widget.fontsize))),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(widget.leftStart, widget.topSpace, widget.leftStart, 0),
+                    padding: EdgeInsets.fromLTRB(
+                        widget.leftStart, widget.topSpace, widget.leftStart, 0),
                     child: TextFormField(
-                  maxLines: null,
-                  maxLength: 300,
-
-                )),
+                      maxLines: null,
+                      maxLength: 300,
+                    )),
                 Container(
                   margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
                   child: RaisedButton(
