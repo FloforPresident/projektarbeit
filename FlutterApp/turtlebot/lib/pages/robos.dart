@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 
-import '../main.dart';
+import 'package:turtlebot/main.dart';
 
 class Robos extends StatefulWidget {
   _RobosController controller;
@@ -32,12 +32,6 @@ class _RobosState extends State<Robos> {
               context, widget.controller.items[index], animation, index);
         },
       ),
-      // body: StreamBuilder(
-      //   stream: MyApp.channels['robos'].stream,
-      //   builder: (context, snapshot) {
-      //     return Text(snapshot.hasData ? '${snapshot.data}' : '');
-      //   },
-      // ),
     );
   }
 }
