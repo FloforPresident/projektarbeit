@@ -24,7 +24,7 @@ class Friends extends StatelessWidget {
             children: <Widget>[
               // TextField(
               //     controller: _controller,
-              //     decoration: InputDecoration(labelText: 'Tryout Websocket')),
+//              //     decoration: InputDecoration(labelText: 'Tryout Websocket')),
               StreamBuilder(
                 stream: MyApp.channels['friends'].stream,
                 builder: (context, snapshot) {
