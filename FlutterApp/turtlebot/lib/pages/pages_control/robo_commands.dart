@@ -22,16 +22,29 @@ class _RoboCommandsState extends State<RoboCommands> {
             RouteGenerator.onTapToHome(context);
           },
         ),
-        title: TopAppBar([
+        title: TopAppBar(navigationFields: [
           TopBarImageIcon(Icon(Icons.format_list_bulleted),
               RouteGenerator.onTapToRoboStatus),
           TopBarImageIcon(Icon(Icons.computer, color: Colors.white),
               RouteGenerator.onTapToRoboCommands),
           TopBarImageIcon(
               Icon(Icons.games), RouteGenerator.onTapToRoboManControl)
-        ], widget._titleText),
+        ],titleText: widget._titleText),
         backgroundColor: Colors.purple,
       ),
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[RaisedButton(
+            child: Text("Scan Room"),
+          ),
+            RaisedButton(
+              child: Text("Bla bla"),
+            )],
+        ),
+      )
+
     );
   }
 }

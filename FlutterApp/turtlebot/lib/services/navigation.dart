@@ -20,7 +20,7 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                 height: 100,
                 child: RaisedButton.icon(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/robos');
+                    Navigator.pushNamed(context, RouteGenerator.RouteRobos);
                   },
                   icon: Icon(Icons.mood),
                   label: Text('Robos'),
@@ -32,7 +32,7 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                 height: 100,
                 child: RaisedButton.icon(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/friends');
+                    Navigator.pushNamed(context, RouteGenerator.RouteFriends);
                   },
                   icon: Icon(Icons.perm_contact_calendar),
                   label: Text('Friends'),
@@ -44,7 +44,7 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                 height: 100,
                 child: RaisedButton.icon(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/rooms');
+                    Navigator.pushNamed(context, RouteGenerator.RouteRooms);
                   },
                   icon: Icon(Icons.location_on),
                   label: Text('Rooms'),
@@ -56,7 +56,7 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                 height: 100,
                 child: RaisedButton.icon(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/messages');
+                    Navigator.pushNamed(context, RouteGenerator.RouteMessages);
                   },
                   icon: Icon(Icons.mail),
                   label: Text('Message'),
@@ -68,7 +68,8 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                 height: 100,
                 child: RaisedButton.icon(
                   onPressed: () {
-                    Navigator.pushNamed(context, RouteGenerator.RouteRoboStatus);
+                    Navigator.pushNamed(
+                        context, RouteGenerator.RouteRoboStatus);
                   },
                   icon: Icon(Icons.videogame_asset),
                   label: Text('Control'),

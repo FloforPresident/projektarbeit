@@ -31,15 +31,14 @@ class _RoboStatusState extends State<RoboStatus> {
               RouteGenerator.onTapToHome(context);
             },
           ),
-          title: TopAppBar([
-            TopBarImageIcon(
-                Icon(Icons.format_list_bulleted, color: Colors.white),
+          title: TopAppBar(navigationFields: [
+            TopBarImageIcon(Icon(Icons.format_list_bulleted,color: Colors.white),
                 RouteGenerator.onTapToRoboStatus),
-            TopBarImageIcon(
-                Icon(Icons.computer), RouteGenerator.onTapToRoboCommands),
+            TopBarImageIcon(Icon(Icons.computer, ),
+                RouteGenerator.onTapToRoboCommands),
             TopBarImageIcon(
                 Icon(Icons.games), RouteGenerator.onTapToRoboManControl)
-          ], widget._titleText),
+          ],titleText: widget._titleText),
           backgroundColor: Colors.purple,
         ),
         body: CustomDataTable(

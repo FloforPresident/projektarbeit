@@ -1,93 +1,114 @@
 import 'package:flutter/material.dart';
-import 'package:turtlebot/databaseObjects/data_base_objects.dart';
+import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
 import 'package:turtlebot/services/routing.dart';
+import 'package:turtlebot/databaseObjects/data_base_objects.dart';
 
-class Rooms extends StatelessWidget {
-  _ControllerRooms controller;
+class Locations extends StatefulWidget {
+  final LocationsController controller = LocationsController(Colors.pink);
+  final ControllerCustomDropdown<Room> dropdownCon = ControllerCustomDropdown();
 
-  Rooms({Key key}) : super(key: key) {
-    this.controller = _ControllerRooms(Colors.green);
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _LocationsState();
   }
+}
 
+class _LocationsState extends State<Locations> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () {
-          RouteGenerator.onTapToHome(context);
-        },),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            RouteGenerator.onTapToHome(context);
+          },
+        ),
+        backgroundColor: widget.controller.colorTheme,
         title: TopAppBar(
           navigationFields: <Widget>[
             TopBarImageIcon(
-                Icon(
-                  Icons.map,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                (context) {}),
+                Icon(Icons.map, size: 30), RouteGenerator.onTapToRooms),
             TopBarImageIcon(
-                Icon(Icons.room, size: 30), RouteGenerator.onTapToLocations),
+                Icon(Icons.room, color: Colors.white, size: 30), (context) {}),
           ],
-          titleText: "Rooms",
+          titleText: "Locations",
         ),
-        backgroundColor: controller.colorTheme,
       ),
-      body: AnimatedList(
-        key: controller.key,
-        initialItemCount: controller.items.length,
-        itemBuilder: (context, index, animation) {
-          return controller._buildItem(
-              controller.items[index], animation, index);
-        },
+      body: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
+            child: CustomDropdownLabel(
+              label: "Rooms",
+              child: CustomDropdownMenu<Room>(
+                controller: widget.dropdownCon,
+                data: widget.controller._getRoomData(),
+              ),
+            ),
+          ),
+          Flexible(
+            child: AnimatedList(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              key: widget.controller.key,
+              initialItemCount: widget.controller.items.length,
+              itemBuilder: (context,index,animation)
+                {
+                  return widget.controller._buildItem(
+                    widget.controller.items[index], animation,index);
+                },
+            ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        backgroundColor: controller.colorTheme,
-        onPressed: () {
-          controller.addItemDialog(context);
-        },
+        backgroundColor: widget.controller.colorTheme,
+        child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }
 }
 
-class _ControllerRooms {
+class LocationsController {
+  Color _colorTheme;
   final GlobalKey<AnimatedListState> _key = GlobalKey();
-  final Color _colorTheme;
   List<Room> _items;
 
-  _ControllerRooms(this._colorTheme) {
-    _items = _getData();
+
+  List<Room> get items => _items;
+
+  GlobalKey<AnimatedListState> get key => _key;
+
+  Color get colorTheme => _colorTheme;
+
+  LocationsController(this._colorTheme)
+  {
+    _items = _getRoomData();
   }
 
-  List<Room> _getData() {
+  List<Room> _getRoomData() {
     return [
-      Room(1,"living-room"),
+      Room(1, "living-room"),
       Room(2, "dining-room"),
       Room(3, "study-room"),
       Room(4, "basement"),
+      Room(5, "hiaf"),
+      Room(6, "dfasf"),
+      Room(7, "dafsdf"),
+      Room(8, "dafsd"),
+      Room(5, "hiaf"),
+      Room(6, "dfasf"),
+      Room(7, "dafsdf"),
+      Room(8, "dafsd"),
     ];
-  }
-
-  get colorTheme {
-    return Color(_colorTheme.value);
-  }
-
-  get items {
-    return _items;
-  }
-
-  get key {
-    return _key;
   }
 
   Widget _buildItem(Room item, Animation animation, int index) {
     Icon _selected =
-        (true) ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank);
+    (true) ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank);
 
     return SizeTransition(
       sizeFactor: animation,
@@ -102,16 +123,6 @@ class _ControllerRooms {
                   children: <Widget>[
                     Text(item.name),
                   ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Align(
-                  child: Padding(
-                    child: _selected,
-                    padding: EdgeInsets.fromLTRB(5, 0, 15, 0),
-                  ),
-                  alignment: Alignment.centerRight,
                 ),
               ),
               Expanded(
@@ -138,6 +149,7 @@ class _ControllerRooms {
       ),
     );
   }
+
 
   void _removeItem(int index) {
     Room removeItem = _items.removeAt(index);

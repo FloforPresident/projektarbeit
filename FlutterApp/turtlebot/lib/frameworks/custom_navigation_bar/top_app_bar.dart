@@ -8,28 +8,15 @@ import 'package:flutter/material.dart';
 class TopAppBar extends StatefulWidget {
   @override
 
-  final List<Widget> _navigationFields;
+  final List<Widget> navigationFields;
   final String titleText;
 
-  TopAppBar(this._navigationFields, this.titleText);
+  TopAppBar({@required this.navigationFields,@required this.titleText});
 
 
   State<StatefulWidget> createState() {
     return _TopAppBar();
   }
-
-//  List<Widget> _generateNavFields()
-//  {
-//    List<Widget> widgets = new List();
-//
-//
-//    for(int i = 0; i < _navigationFields.length; i++)
-//      {
-//        widgets.add(TopBarImageIcon(_navigationFields[i][0], _navigationFields[i][1]));
-//      }
-//
-//    return widgets;
-//  }
 }
 
 class _TopAppBar extends State<TopAppBar> {
@@ -43,7 +30,8 @@ class _TopAppBar extends State<TopAppBar> {
         ),
         Spacer(),
         Row(
-          children: widget._navigationFields,
+          children: widget.navigationFields,
+          mainAxisAlignment: MainAxisAlignment.center,
         )
       ],
     );
@@ -56,8 +44,10 @@ class _TopAppBar extends State<TopAppBar> {
 class TopBarImageIcon extends StatefulWidget {
   final Widget _image;
   final Function _routing;
+  final double leftSpace;
 
-  TopBarImageIcon(this._image, this._routing);
+
+  TopBarImageIcon(this._image, this._routing, {this.leftSpace = 15});
 
   @override
   State<StatefulWidget> createState() {
@@ -74,10 +64,10 @@ class _TopBarImageIcon extends State<TopBarImageIcon> {
           widget._routing(context);
         },
         child: Container(
-          margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+          margin: EdgeInsets.fromLTRB(widget.leftSpace, 0, 0, 0),
           child: widget._image,
-          width: 25,
-          height: 25,
+          width: 30,
+          height: 30,
         )
     );
   }
