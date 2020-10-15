@@ -5,15 +5,15 @@ from std_msgs.msg import String
 from geometry_msgs.msg import PoseStamped
 
 def callback(data):
-    person = data.data
-    pub = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
-    rate = rospy.Rate(10) # 10hz
+	person = data.data
+	pub = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
+	#rate = rospy.Rate(10) # 10hz
 
-    while not rospy.is_shutdown():
+    	#while not rospy.is_shutdown():
 	now = rospy.get_rostime()
 
 	answer = PoseStamped()
-        answer.header.stamp = now
+	answer.header.stamp = now
 
 	if person == "Patrick":
 		x = -3.5
@@ -24,6 +24,7 @@ def callback(data):
 	else:
 		x = 0
 		y = 0
+		person = "no person selected"
 
 	answer.header.frame_id = "map"
 	answer.pose.position.x = x
@@ -33,8 +34,8 @@ def callback(data):
 	answer.pose.orientation.w = 1.0
 
 	rospy.loginfo("Gehe ins Buero von: "+person)
-        pub.publish(answer)
-        rate.sleep()
+	pub.publish(answer)
+	#rate.sleep()
 
 	
 def letsGo():

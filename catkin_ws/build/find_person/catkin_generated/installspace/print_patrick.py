@@ -40,15 +40,16 @@ import rospy
 from std_msgs.msg import String
 
 def print_person():
-    pub = rospy.Publisher('chatter', String, queue_size=10)
-    rospy.init_node('print_person', anonymous=False)
-    rate = rospy.Rate(10) # 10hz
+	pub = rospy.Publisher('chatter', String, queue_size=10)
+	rospy.init_node('print_person', anonymous=False)
+	#rate = rospy.Rate(10) # 10hz
 
-    while not rospy.is_shutdown():
-        person = "Patrick"
-        rospy.loginfo("Auf der Suche nach: "+person)
-        pub.publish(person)
-        rate.sleep()
+	#publish only once
+	#while not rospy.is_shutdown():
+	person = "Patrick"
+	rospy.loginfo("Auf der Suche nach: "+person)
+	pub.publish(person)
+	#rate.sleep()
 
 if __name__ == '__main__':
     try:
