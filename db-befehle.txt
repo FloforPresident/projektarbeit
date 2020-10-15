@@ -2,8 +2,10 @@ Template:
 - Befehl (mitgegebene Parameter)
 ?steht zur Debatte?
 
+***DB COMMANDS***
+
 USER:
-- ADD USER (name, password, image, location)
+- ADD USER (name, password, image, location) -> weiterverarbeitung im socket für Face embedding
 - DELETE USER (name, password)
 - LOGIN USER (name, password)
 - LOGOUT USER (name)
@@ -13,14 +15,17 @@ ROBO:
 - DELETE ROBO (name, ?username?)
 
 ROOM:
-- ADD ROOM (name, roboname, ?username?)
+- ADD ROOM (name, roboname, ?username?) -> weiterverarbeitung im socket für room scanning
 - DELETE ROOM (name, ?username?)
 - ?EDIT ROOM? (name, ?username?)
 
 LOCATION:
-- ADD LOCATION (name, x, y, username, ?room o. robo?)
+- ADD LOCATION (name, x, y, username, ?room o. robo?) -> weiterverarbeitung im socket wegpunkt auf map markieren
 - DELETE LOCATION (name, ?username?)
 - CHANGE ACTIVE LOCATION (locationname, username)
 
 MESSAGE:
-- SEND MESSAGE (username - sender, username - receiver, text)
+- SEND MESSAGE (username - sender, username - receiver, text) -> weiterverarbeitung im socket (Robo x fahr zu Person y mit location z)
+
+
+
