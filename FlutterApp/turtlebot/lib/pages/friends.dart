@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 
+import 'package:turtlebot/main.dart';
+
 class Friends extends StatelessWidget {
   _ControllerFriends controller;
 
@@ -15,12 +17,40 @@ class Friends extends StatelessWidget {
         title: Text("Robo Friends"),
         backgroundColor: controller.colorTheme,
       ),
-      body: AnimatedList(
-        key: controller.key,
-        initialItemCount: controller.items.length,
-        itemBuilder: (context, index, animation) {
-          return controller.buildItem(
-              context, controller.items[index], animation, index);
+      body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              // TextField(
+              //     controller: _controller,
+              //     decoration: InputDecoration(labelText: 'Tryout Websocket')),
+              StreamBuilder(
+                stream: MyApp.channels['friends'].stream,
+                builder: (context, snapshot) {
+                  return Text(snapshot.hasData ? '${snapshot.data}' : '');
+                },
+              ),
+              AnimatedList(
+                shrinkWrap: true,
+                key: controller.key,
+                initialItemCount: controller.items.length,
+                itemBuilder: (context, index, animation) {
+                  return controller.buildItem(
+                      context, controller.items[index], animation, index);
+                },
+              ),
+            ],
+          )),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        foregroundColor: Colors.white,
+        backgroundColor: controller.colorTheme,
+        onPressed: () {
+          controller.addItem(context);
+          // if (_controller.text.isNotEmpty) {
+          //   MyApp.channels['friends'].sink.add(_controller.text);
+          // }
         },
       ),
     );
@@ -28,6 +58,7 @@ class Friends extends StatelessWidget {
 }
 
 class _ControllerFriends {
+  TextEditingController _firstname, _lastname = TextEditingController();
   final GlobalKey<AnimatedListState> _key = GlobalKey();
   final Color _colorTheme;
   List<List> _items;
@@ -120,5 +151,65 @@ class _ControllerFriends {
     _key.currentState.removeItem(index, build);
   }
 
+  void addItem(BuildContext context) {
+    bool uploadedImage = false;
 
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) => SingleChildScrollView(
+        child: AlertDialog(
+          title: Text("Add new User"),
+          content: Column(
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(labelText: "Firstname"),
+                controller: _firstname,
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: "Lastname"),
+                controller: _firstname,
+              ),
+              Container(
+                margin: EdgeInsets.all(15),
+                child: RaisedButton(
+                  child: Text("Add Faceembedding"),
+                  color: _colorTheme,
+                  textColor: Colors.white,
+                  onPressed: () {},
+                ),
+              ),
+              CheckboxListTile(
+                title: Text("Faceembedding uploaded"),
+                value: uploadedImage,
+                onChanged: (bool value) {
+                  setState() {
+                    uploadedImage = value;
+                  }
+                },
+              )
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("No"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text("Yes"),
+              // onPressed: () {
+              //   if (_firstname.text.isNotEmpty &&
+              //       _lastname.text.isNotEmpty &&
+              //       uploadedImage == true) {
+              //     MyApp.channels['friends'].sink.add(_firstname.text);
+              //   }
+              // },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

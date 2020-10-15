@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:turtlebot/socket_model/socket_model.dart';
 import 'package:turtlebot/databaseObjects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 
