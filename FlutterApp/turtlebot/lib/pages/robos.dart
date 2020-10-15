@@ -178,10 +178,12 @@ class _RobosController {
                 maxLines: null,
                 maxLength: 20,
               ),
-              CustomDropdownMenu(
-                controller: dropController,
+              CustomDropdownLabel(
                 label: "Position",
-                data: [Room(1,"living-room"),Room(2, "dining-room")]
+                child: CustomDropdownMenu(
+                  controller: dropController,
+                  data: [Room(1,"living-room"),Room(2, "dining-room")]
+                ),
               )
             ],
           ),

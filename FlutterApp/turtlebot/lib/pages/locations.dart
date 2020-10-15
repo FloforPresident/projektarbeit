@@ -41,10 +41,12 @@ class _LocationsState extends State<Locations> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
-            child: CustomDropdownMenu<Room>(
-              label: "Room",
-              controller: widget.dropdownCon,
-              data: widget.controller._getRoomData(),
+            child: CustomDropdownLabel(
+              label: "Rooms",
+              child: CustomDropdownMenu<Room>(
+                controller: widget.dropdownCon,
+                data: widget.controller._getRoomData(),
+              ),
             ),
           ),
           Flexible(

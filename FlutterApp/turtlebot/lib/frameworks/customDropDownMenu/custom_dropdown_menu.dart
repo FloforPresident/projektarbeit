@@ -6,10 +6,6 @@ class CustomDropdownMenu<T> extends StatefulWidget {
   T value;
   int counter;
   double fontSize;
-  double leftStart;
-  String label;
-  double labelRightSpace;
-  double topSpace;
   List<DatabaseObject> data;
   ControllerCustomDropdown<T> controller;
   State<CustomDropdownMenu> version;
@@ -18,18 +14,11 @@ class CustomDropdownMenu<T> extends StatefulWidget {
       {this.counter,
       @required this.controller,
       this.fontSize = 18,
-      this.leftStart = 40,
-      this.label,
-      this.labelRightSpace = 20,
-      this.topSpace = 15,
       @required this.data});
 
   State<StatefulWidget> createState() {
     controller.initialize(this);
 
-    if (label == null)
-      return _StateCustomDropdownMenuWithoutLabel();
-    else
       return _StateCustomDropdownMenu();
   }
 }
@@ -37,24 +26,14 @@ class CustomDropdownMenu<T> extends StatefulWidget {
 class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
+      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Row(
         children: [
-          Expanded(
-            flex: 5,
-            child: Container(
-              child: Text(widget.label + ":",
-                  style: TextStyle(fontSize: widget.fontSize)),
-              margin: EdgeInsets.fromLTRB(
-                  widget.leftStart, 0, widget.labelRightSpace, 0),
-            ),
-          ),
           Expanded(
             flex: 3,
             child: DropdownButton(
               isExpanded: true,
               value: widget.counter,
-              hint: Text(widget.label),
               items: widget.controller._createDropdownMenuItem(widget.data),
               onChanged: (value) {
                 setState(() {
@@ -73,33 +52,47 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
   }
 }
 
-class _StateCustomDropdownMenuWithoutLabel extends State<CustomDropdownMenu> {
+class CustomDropdownLabel extends StatelessWidget
+{
+  CustomDropdownMenu child;
+  double fontSize;
+  double leftStart;
+  String label;
+  double labelRightSpace;
+  double topSpace;
+
+  CustomDropdownLabel({@required this.child, this.fontSize = 18,
+    this.leftStart = 40,@required  this.label, this.labelRightSpace = 20, this.topSpace= 15});
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
+    // TODO: implement build
+     return Container(
+      margin: EdgeInsets.fromLTRB(0, topSpace, 0, 0),
       child: Row(
         children: [
           Expanded(
-            flex: 3,
-            child: DropdownButton(
-              isExpanded: true,
-              value: widget.counter,
-              items: widget.controller._createDropdownMenuItem(widget.data),
-              onChanged: (value) {
-                setState(() {
-                  widget.controller.resetState(value);
-                });
-              },
+            flex: 5,
+            child: Container(
+              child: Text(label + ":",
+                  style: TextStyle(fontSize: fontSize)),
+              margin: EdgeInsets.fromLTRB(
+                  leftStart, 0, labelRightSpace, 0),
             ),
           ),
-          Spacer(
-            flex: 2,
+          Expanded(
+            flex: 5,
+            child: child,
           ),
+
         ],
         mainAxisAlignment: MainAxisAlignment.center,
       ),
-    );
+    );;
   }
+
+
+
 }
 
 class ControllerCustomDropdown<T> {

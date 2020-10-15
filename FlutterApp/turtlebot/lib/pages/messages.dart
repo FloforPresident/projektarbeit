@@ -51,10 +51,16 @@ class _MessagesState extends State<Messages> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CustomDropdownMenu(
-                  controller: widget.controller.dropController,
-                    data: <User>[User(1, "Hans", "living-room"), User(2, "Verena", "dining-room")],
-                    label: "Recipient"),
+                CustomDropdownLabel(
+                  label: "Recipient",
+                  child: CustomDropdownMenu(
+                    controller: widget.controller.dropController,
+                    data: <User>[
+                      User(1, "Hans", "living-room"),
+                      User(2, "Verena", "dining-room")
+                    ],
+                  ),
+                ),
                 Container(
                   margin: EdgeInsets.fromLTRB(widget.leftStart, 15, 20, 0),
                   child: Row(
@@ -87,15 +93,16 @@ class _MessagesState extends State<Messages> {
                   child: Container(
                       margin: EdgeInsets.fromLTRB(
                           widget.leftStart, widget.topSpace, 0, 0),
-                      child: Text("Message: ", style: TextStyle(fontSize: widget.fontsize))),
+                      child: Text("Message: ",
+                          style: TextStyle(fontSize: widget.fontsize))),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(widget.leftStart, widget.topSpace, widget.leftStart, 0),
+                    padding: EdgeInsets.fromLTRB(
+                        widget.leftStart, widget.topSpace, widget.leftStart, 0),
                     child: TextFormField(
-                  maxLines: null,
-                  maxLength: 300,
-
-                )),
+                      maxLines: null,
+                      maxLength: 300,
+                    )),
                 Container(
                   margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
                   child: RaisedButton(
@@ -108,22 +115,17 @@ class _MessagesState extends State<Messages> {
           ),
         ));
   }
-
 }
 
 class ControllerMessages {
   Color _colorTheme;
   ControllerCustomDropdown dropController = ControllerCustomDropdown<User>();
 
-
   Messages view;
 
-  ControllerMessages(this.view,this._colorTheme);
+  ControllerMessages(this.view, this._colorTheme);
 
-  get colorTheme
-  {
+  get colorTheme {
     return Color(_colorTheme.value);
   }
-
-
 }
