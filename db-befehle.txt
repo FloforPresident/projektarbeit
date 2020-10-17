@@ -1,5 +1,5 @@
 Template: 
-- Befehl (mitgegebene Parameter)
+- ACTION (mitgegebene Parameter)
 ?steht zur Debatte?
 
 ***DB COMMANDS***
@@ -13,19 +13,23 @@ USER:
 ROBO:
 - ADD ROBO (name, ?ip?, ?username?)
 - DELETE ROBO (name, ?username?)
+- GET ROBOS
 
 ROOM:
 - ADD ROOM (name, roboname, ?username?) -> weiterverarbeitung im socket für room scanning
 - DELETE ROOM (name, ?username?)
 - ?EDIT ROOM? (name, ?username?)
+- GET ROOMS
 
 LOCATION:
 - ADD LOCATION (name, x, y, username, ?room o. robo?) -> weiterverarbeitung im socket wegpunkt auf map markieren
 - DELETE LOCATION (name, ?username?)
 - CHANGE ACTIVE LOCATION (locationname, username)
+- GET LOCATIONS (username)
 
 MESSAGE:
 - SEND MESSAGE (username - sender, username - receiver, text) -> weiterverarbeitung im socket (Robo x fahr zu Person y mit location z)
+- ?GET MESSAGES? (username)
 
 
 
