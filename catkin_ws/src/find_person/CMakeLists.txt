@@ -161,11 +161,12 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
-   scripts/print_patrick.py
-   scripts/print_johannes.py
-   scripts/go_to_person.py
-   scripts/say_name.py
-   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+	scripts/print_patrick.py
+	scripts/print_johannes.py
+	scripts/go_to_person.py
+	scripts/say_name.py
+	scripts/datenbank_test.py
+	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
 ## Mark executables for installation

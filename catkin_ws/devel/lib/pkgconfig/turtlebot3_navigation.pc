@@ -1,4 +1,4 @@
-prefix=/home/patrick/projektarbeit/catkin_ws/devel
+prefix=/home/basti/projektarbeit/catkin_ws/devel
 
 Name: turtlebot3_navigation
 Description: Description of turtlebot3_navigation

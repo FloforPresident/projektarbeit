@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
 
 # Utility rule file for geometry_msgs_generate_messages_py.
 
@@ -63,10 +63,10 @@ find_person/CMakeFiles/geometry_msgs_generate_messages_py.dir/build: geometry_ms
 .PHONY : find_person/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
 
 find_person/CMakeFiles/geometry_msgs_generate_messages_py.dir/clean:
-	cd /home/patrick/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/geometry_msgs_generate_messages_py.dir/cmake_clean.cmake
+	cd /home/basti/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/geometry_msgs_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : find_person/CMakeFiles/geometry_msgs_generate_messages_py.dir/clean
 
 find_person/CMakeFiles/geometry_msgs_generate_messages_py.dir/depend:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/patrick/projektarbeit/catkin_ws/src /home/patrick/projektarbeit/catkin_ws/src/find_person /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build/find_person /home/patrick/projektarbeit/catkin_ws/build/find_person/CMakeFiles/geometry_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/find_person /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/find_person /home/basti/projektarbeit/catkin_ws/build/find_person/CMakeFiles/geometry_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : find_person/CMakeFiles/geometry_msgs_generate_messages_py.dir/depend
 
