@@ -1,9 +1,14 @@
+import rospy
+from std_msgs.msg import String
+
 #datenbank
 import mysql.connector
+
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="yourusername",
-  password="yourpassword"
+  host="localhost:8080/phpmyadmin/",
+  user="root",
+  password="",
+  database="test"
 )
 
-print(mydb)
+rospy.loginfo(print(mydb))
