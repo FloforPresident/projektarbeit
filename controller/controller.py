@@ -53,25 +53,29 @@ def go_to_goal(pos_X, pos_Y, tolerance):
 
 # websocket server --------------------------------------------------------------
 
+connected = set()
+
 async def ws_recieve(websocket, path):
+	connected.add(websocket)
+	print(websocket)
 	msg = await websocket.recv()
-	#decoded = json.loads(msg)
+	decoded = json.loads(msg)
 	#param1 = decoded["param1"]
 	#param2 = decoded["param2"]
 	#param3 = decoded["param3"]
 	
-	#if(decoded["action"] == "move"):
-	#	move_sim(3,1)
+	if(decoded["action"] == "move"):
+		move_sim(3,1)
+		await websocket.send("sucess")
 	#elif(decoded["action"] == "goToGoal"):
 	#	go_to_goal(param1, param2, param3)
 	# await websocket.send(greeting)
 	print(msg)
 
-start_server = websockets.serve(ws_recieve, "192.168.1.225", 8765)
+start_server = websockets.serve(ws_recieve, "192.168.1.225", 8765, close_timeout=1000)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
-
 
 # test ----------------------------------------------------------------------------
 
