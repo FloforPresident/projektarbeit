@@ -24,11 +24,6 @@ class RouteGenerator {
   static const String RouteFriends = '/friends';
   static const String RouteMessages = '/messages';
 
-
-
-
-
-
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteHome:
@@ -69,10 +64,13 @@ class RouteGenerator {
         }
       case RouteManualControl:
         return MaterialPageRoute(builder: (_) => RoboManControl());
+
       case RouteLogin:
-      return MaterialPageRoute(builder: (_) => Login());
+        return MaterialPageRoute(builder: (_) => Login());
+
       case RouteLocations:
         return MaterialPageRoute(builder: (_) => Locations());
+
       default:
         throw Exception('Invalid route: ${settings.name}');
     }
@@ -94,13 +92,11 @@ class RouteGenerator {
     Navigator.pushNamed(context, RouteGenerator.RouteManualControl);
   }
 
-  static onTapToLocations(BuildContext context)
-  {
-    Navigator.pushNamed(context,RouteGenerator.RouteLocations);
+  static onTapToLocations(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteLocations);
   }
 
-  static onTapToRooms(BuildContext context)
-  {
-    Navigator.pushNamed(context,RouteGenerator.RouteRooms);
+  static onTapToRooms(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteRooms);
   }
 }
