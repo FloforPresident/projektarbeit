@@ -1,0 +1,8 @@
+prefix=/home/basti/projektarbeit/catkin_ws/devel
+
+Name: face_recognition
+Description: Description of face_recognition
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

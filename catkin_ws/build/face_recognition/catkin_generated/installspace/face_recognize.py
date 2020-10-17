@@ -1,26 +1,28 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 import face_recognition
 import cv2
 import numpy as np
 from gtts import gTTS
 language = 'de'
-from io import BytesIO
-from mpyg321.mpyg321 import MPyg321Player
+#from io import BytesIO
+#from mpyg321.mpyg321 import MPyg321Player
 
 # Get a reference to webcam #0 (the default one)
 video_capture = cv2.VideoCapture(0)
 
 #audio player
-player = MPyg321Player()
+#player = MPyg321Player()
 
 
 ####################################
 ########     ROS    ################
 ####################################
-import rospy #for writing a ROS Node
-from nav_msgs.msg import face_text_data
+#for writing a ROS Node
+import rospy
+from std_msgs.msg import String
+#from nav_msgs.msg import Image
+#import face_text_data
 from cv_bridge import CvBridge
-
 
 
 ######     Get Image    #####################################################################################################################
@@ -62,7 +64,7 @@ def talker():
 
 
 if __name__=='__main__':
-    listener()
+    #listener()
 
 known_face_encoding = [
     person_face_encoding
@@ -104,7 +106,7 @@ while True:
         if True in matches:
             first_match_index = matches.index(True)
             recognised_name = known_face_name[first_match_index]
-            talker()
+            #talker()
             break
 
     tts = gTTS('Hallo' + recognised_name)
