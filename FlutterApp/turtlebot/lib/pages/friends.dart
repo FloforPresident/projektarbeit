@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 
 import 'package:turtlebot/main.dart';
+import 'package:turtlebot/services/routing.dart';
 
 class Friends extends StatelessWidget {
   _ControllerFriends controller;
@@ -26,7 +27,7 @@ class Friends extends StatelessWidget {
               //     controller: _controller,
 //              //     decoration: InputDecoration(labelText: 'Tryout Websocket')),
               StreamBuilder(
-                stream: MyApp.channels['friends'].stream,
+                stream: MyApp.channels[RouteGenerator.RouteFriends].stream,
                 builder: (context, snapshot) {
                   return Text(snapshot.hasData ? '${snapshot.data}' : '');
                 },
