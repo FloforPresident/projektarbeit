@@ -66,6 +66,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => RoboManControl());
 
       case RouteLogin:
+        MyApp.addChannel(settings.name);
         return MaterialPageRoute(builder: (_) => Login());
 
       case RouteLocations:

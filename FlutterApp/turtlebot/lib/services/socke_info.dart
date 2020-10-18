@@ -4,7 +4,7 @@ class SocketInfo {
   // static const String port = ':8765';
 
   //Flo
-  static const String hostAdress = '192.168.1.4';
+  static const String hostAdress = '192.168.0.175';
   static const String port = ':8765';
 
   //echo

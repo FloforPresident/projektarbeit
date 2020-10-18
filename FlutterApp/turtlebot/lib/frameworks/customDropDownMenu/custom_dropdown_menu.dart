@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turtlebot/databaseObjects/data_base_objects.dart';
+import 'package:turtlebot/objects/data_base_objects.dart';
 
 class CustomDropdownMenu<T> extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class CustomDropdownMenu<T> extends StatefulWidget {
   State<StatefulWidget> createState() {
     controller.initialize(this);
 
-      return _StateCustomDropdownMenu();
+    return _StateCustomDropdownMenu();
   }
 }
 
@@ -52,8 +52,7 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
   }
 }
 
-class CustomDropdownLabel extends StatelessWidget
-{
+class CustomDropdownLabel extends StatelessWidget {
   CustomDropdownMenu child;
   double fontSize;
   double leftStart;
@@ -61,38 +60,38 @@ class CustomDropdownLabel extends StatelessWidget
   double labelRightSpace;
   double topSpace;
 
-  CustomDropdownLabel({@required this.child, this.fontSize = 18,
-    this.leftStart = 40,@required  this.label, this.labelRightSpace = 20, this.topSpace= 15});
+  CustomDropdownLabel(
+      {@required this.child,
+      this.fontSize = 18,
+      this.leftStart = 40,
+      @required this.label,
+      this.labelRightSpace = 20,
+      this.topSpace = 15});
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-     return Container(
+    return Container(
       margin: EdgeInsets.fromLTRB(0, topSpace, 0, 0),
       child: Row(
         children: [
           Expanded(
             flex: 5,
             child: Container(
-              child: Text(label + ":",
-                  style: TextStyle(fontSize: fontSize)),
-              margin: EdgeInsets.fromLTRB(
-                  leftStart, 0, labelRightSpace, 0),
+              child: Text(label + ":", style: TextStyle(fontSize: fontSize)),
+              margin: EdgeInsets.fromLTRB(leftStart, 0, labelRightSpace, 0),
             ),
           ),
           Expanded(
             flex: 5,
             child: child,
           ),
-
         ],
         mainAxisAlignment: MainAxisAlignment.center,
       ),
-    );;
+    );
+    ;
   }
-
-
-
 }
 
 class ControllerCustomDropdown<T> {
