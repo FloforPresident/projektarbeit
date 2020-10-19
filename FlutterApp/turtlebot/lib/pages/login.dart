@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:turtlebot/main.dart';
-import 'package:turtlebot/objects/user.dart';
 import 'package:turtlebot/services/routing.dart';
 
 class Login extends StatelessWidget {
@@ -12,6 +9,9 @@ class Login extends StatelessWidget {
   Color colorTheme = Colors.green;
   Color secondaryTheme = Colors.white;
   _LoginController controller;
+
+  TextEditingController name = new TextEditingController();
+  TextEditingController password = new TextEditingController();
 
   Login() {
     controller = _LoginController(colorTheme);
@@ -38,12 +38,6 @@ class Login extends StatelessWidget {
           width: double.infinity,
           child: Column(
             children: <Widget>[
-              StreamBuilder(
-                stream: MyApp.channels[RouteGenerator.RouteLogin].stream,
-                builder: (context, snapshot) {
-                  return Text(snapshot.hasData ? '${snapshot.data}' : '');
-                },
-              ),
               Container(
                 margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 child: Icon(Icons.adb, color: Colors.green, size: 60),
@@ -51,6 +45,7 @@ class Login extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
                 child: TextFormField(
+                  controller: name,
                   decoration: InputDecoration(
                       labelText: "Username",
                       labelStyle: TextStyle(
@@ -64,6 +59,7 @@ class Login extends StatelessWidget {
                 padding:
                     EdgeInsets.fromLTRB(_leftStart, _topSpace, _rightEnd, 40),
                 child: TextFormField(
+                  controller: password,
                   decoration: InputDecoration(
                       labelText: "Password",
                       labelStyle: TextStyle(
@@ -82,9 +78,23 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  RouteGenerator.onTapToHome(context);
+                  if (name.text.isNotEmpty && password.text.isNotEmpty) {
+                    userAction("LOGIN USER", name.text, password.text);
+                    MyApp.channels[RouteGenerator.RouteLogin].stream
+                        .listen((data) {
+                      if (data == 'success') {
+                        RouteGenerator.onTapToHome(context);
+                      }
+                    });
+                  }
                 },
               ),
+              // StreamBuilder(
+              //   stream: MyApp.channels[RouteGenerator.RouteLogin].stream,
+              //   builder: (context, snapshot) {
+              //     return Text(snapshot.hasData ? '${snapshot.data}' : '');
+              //   },
+              // ),
             ],
           ),
         ),
@@ -99,19 +109,23 @@ class Login extends StatelessWidget {
     );
   }
 
-  static void addUser(_name, _password) {
-    String data =
-        '{"action": "ADD USER", "name": $_name, "password": $_password}';
-    Map<String, dynamic> user = jsonDecode(data);
+  static void userAction(String action, [String name, String password]) {
+    String data;
 
-    MyApp.channels[RouteGenerator.RouteLogin].sink.add(user);
+    if (name.isNotEmpty && password.isNotEmpty) {
+      data = '{"action": "$action", "name": "$name", "password": "$password"}';
+    } else {
+      data = '{"action": "$action"}';
+    }
+
+    MyApp.channels[RouteGenerator.RouteLogin].sink.add(data);
   }
 }
 
 class _LoginController {
   Color _colorTheme;
-  TextEditingController _name = new TextEditingController();
-  TextEditingController _password = new TextEditingController();
+  TextEditingController name = new TextEditingController();
+  TextEditingController password = new TextEditingController();
 
   _LoginController(Color colorTheme) {
     _colorTheme = colorTheme;
@@ -130,7 +144,7 @@ class _LoginController {
             children: <Widget>[
               TextField(
                 decoration: InputDecoration(labelText: "Name"),
-                controller: _name,
+                controller: name,
                 maxLines: null,
                 maxLength: 20,
               ),
@@ -153,7 +167,7 @@ class _LoginController {
                   }),
               TextField(
                 decoration: InputDecoration(labelText: "Password"),
-                controller: _password,
+                controller: password,
                 maxLines: null,
                 maxLength: 20,
               )
@@ -169,10 +183,10 @@ class _LoginController {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                if (_name.text.isNotEmpty &&
-                    _password.text.isNotEmpty &&
+                if (name.text.isNotEmpty &&
+                    password.text.isNotEmpty &&
                     _uploadedImage == true) {
-                  //Login.addUser(_name.text, _password.text);
+                  Login.userAction("ADD USER", name.text, password.text);
                   Navigator.of(context).pop();
                   RouteGenerator.onTapToHome(context);
                 }

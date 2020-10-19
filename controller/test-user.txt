@@ -1,0 +1,4 @@
+{"name": "Flo", "password": "123"}
+{"name": "Basti", "password": "abc"}
+{"name": "Stefan", "password": "password"}
+{"name": "Coach", "password": "123abc"}

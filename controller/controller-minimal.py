@@ -4,6 +4,22 @@ import json
 import asyncio
 import websockets
 
+# functions
+
+def writeData(file, data):
+	
+	#remove action
+	del data['action']
+	
+	#append data to file
+	with open(file, 'a+') as doc:
+		doc.seek(0)
+		content = doc.read(100)
+		if len(content) > 0:
+			doc.write("\n")
+		json.dump(data, doc, sort_keys=True)
+
+
 # websocket server --------------------------------------------------------------
 
 connected = set()
@@ -13,19 +29,31 @@ async def ws_recieve(websocket, path):
 	print(websocket)
 	msg = await websocket.recv()
 	data = json.loads(msg)
-	
+	response = ''
+
 	
 	if(data['action'] == 'ADD USER'):
-		with open('test-user.txt', 'w') as file:
-			json.dump(data, file)
+		writeData('test-user.txt', data)
+		
+	if(data['action'] == 'LOGIN USER'):
+		with open('test-user.txt', 'r') as file:
+			lines = file.readlines()
+
+			for line in lines:
+				user = json.loads(line)	
+
+				if user['name'] == data['name']:
+					if user['password'] == data['password']:
+						response = 'success'
+						break
+					else: 
+						response = 'Incorrect password'
+				else: 
+					response = 'User not known, try to sign up'
 	
-	if(decoded["action"] == "move"):
-		
-		with open('test-user.txt', 'w') as file:
-			json.dump(decoded, file)
-		
-		await websocket.send("sucess")
-	print(msg)
+	await websocket.send(response)
+
+	
 
 start_server = websockets.serve(ws_recieve, "192.168.0.175", 8765, close_timeout=1000)
 

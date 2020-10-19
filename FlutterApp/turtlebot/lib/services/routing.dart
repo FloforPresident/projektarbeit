@@ -81,6 +81,10 @@ class RouteGenerator {
     Navigator.pushNamed(context, RouteGenerator.RouteHome);
   }
 
+  static onTapToLogin(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteLogin);
+  }
+
   static onTapToRoboStatus(BuildContext context) {
     Navigator.pushNamed(context, RouteGenerator.RouteRoboStatus);
   }
