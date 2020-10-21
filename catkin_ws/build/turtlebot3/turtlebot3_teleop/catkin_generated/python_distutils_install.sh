@@ -14,20 +14,20 @@ fi
 
 echo_and_run() { echo "+ $@" ; "$@" ; }
 
-echo_and_run cd "/home/basti/projektarbeit/catkin_ws/src/turtlebot3/turtlebot3_teleop"
+echo_and_run cd "/home/patrick/projektarbeit/catkin_ws/src/turtlebot3/turtlebot3_teleop"
 
 # ensure that Python install destination exists
-echo_and_run mkdir -p "$DESTDIR/home/basti/projektarbeit/catkin_ws/install/lib/python2.7/dist-packages"
+echo_and_run mkdir -p "$DESTDIR/home/patrick/projektarbeit/catkin_ws/install/lib/python2.7/dist-packages"
 
 # Note that PYTHONPATH is pulled from the environment to support installing
 # into one location when some dependencies were installed in another
 # location, #123.
 echo_and_run /usr/bin/env \
-    PYTHONPATH="/home/basti/projektarbeit/catkin_ws/install/lib/python2.7/dist-packages:/home/basti/projektarbeit/catkin_ws/build/lib/python2.7/dist-packages:$PYTHONPATH" \
-    CATKIN_BINARY_DIR="/home/basti/projektarbeit/catkin_ws/build" \
+    PYTHONPATH="/home/patrick/projektarbeit/catkin_ws/install/lib/python2.7/dist-packages:/home/patrick/projektarbeit/catkin_ws/build/lib/python2.7/dist-packages:$PYTHONPATH" \
+    CATKIN_BINARY_DIR="/home/patrick/projektarbeit/catkin_ws/build" \
     "/usr/bin/python2" \
-    "/home/basti/projektarbeit/catkin_ws/src/turtlebot3/turtlebot3_teleop/setup.py" \
-    build --build-base "/home/basti/projektarbeit/catkin_ws/build/turtlebot3/turtlebot3_teleop" \
+    "/home/patrick/projektarbeit/catkin_ws/src/turtlebot3/turtlebot3_teleop/setup.py" \
+    build --build-base "/home/patrick/projektarbeit/catkin_ws/build/turtlebot3/turtlebot3_teleop" \
     install \
     $DESTDIR_ARG \
-    --install-layout=deb --prefix="/home/basti/projektarbeit/catkin_ws/install" --install-scripts="/home/basti/projektarbeit/catkin_ws/install/bin"
+    --install-layout=deb --prefix="/home/patrick/projektarbeit/catkin_ws/install" --install-scripts="/home/patrick/projektarbeit/catkin_ws/install/bin"

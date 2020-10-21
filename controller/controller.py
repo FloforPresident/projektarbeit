@@ -1,3 +1,13 @@
+"""
+Controller, operates as bridge between app, database, and ROS
+
+Features:
+- Accesses database script
+- Receives actions from app over websocket protocol
+- Sends actions to ROS (topics, nodes...) -> actions should be outsourced to own scripts
+
+"""
+
 import database_access as db
 import json
 
@@ -9,10 +19,11 @@ import websockets
 
 import time
 
-# topics & msg
-from geometry_msgs.msg import Twist
-
-import goToGoal
+# robot action imports
+import go_to_goal
+import init_position
+import move_forward
+#import move_to_goal
 
 ACTION_KEY = "action"
 
@@ -28,30 +39,27 @@ def json_get_value_by_key(jsonObj, key):
 	return data[key]
 
 
+######################### ROBOT ACTIONS ##############################################
 
-# move forward example -----------------------------------------------------------
 
-def move_sim(seconds, direction):
-	# dummy Twist msg for moving forward
-	vel_msg = Twist()
-	vel_msg.linear.x = direction
-	vel_msg.linear.y = 0
-	vel_msg.linear.z = 0
-	vel_msg.angular.x = 0
-	vel_msg.angular.y = 0
-	vel_msg.angular.z = 1.0
 
-	t_end = time.time() + seconds
-	while time.time() < t_end:
-		rospy.init_node('move', anonymous=True)
-		pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10)
-		pub.publish(vel_msg)
+def init_position_action(x,y):
+	
+	#init_position.init_position(x,y)
+	
+# dummy Twist action for moving forward
+def move_forward_action(seconds, direction):
+
+	#move_forward.move_forward(seconds, direction)
 
 # go to goal example with import -----------------------------------------------------------
-def go_to_goal(pos_X, pos_Y, tolerance):
-	goToGoal.move_to_goal(pos_X, pos_Y, tolerance)
+def go_to_goal_action(pos_X, pos_Y, tolerance):
+	
+	#TODO implement
+	#go_to_goal.move_to_goal(pos_X, pos_Y, tolerance)
 
-# websocket server --------------------------------------------------------------
+######################### WEBSOCKET ####################################################
+
 
 connected = set()
 
@@ -61,25 +69,20 @@ async def ws_recieve(websocket, path):
 	msg = await websocket.recv()
 	decoded = json.loads(msg)
 	#param1 = decoded["param1"]
-	#param2 = decoded["param2"]
-	#param3 = decoded["param3"]
 	
 	if(decoded["action"] == "move"):
-		move_sim(3,1)
+		# move_forward(3,1)
 		await websocket.send("sucess")
-	#elif(decoded["action"] == "goToGoal"):
-	#	go_to_goal(param1, param2, param3)
-	# await websocket.send(greeting)
 	print(msg)
 
-start_server = websockets.serve(ws_recieve, "192.168.1.225", 8765, close_timeout=1000)
+start_server = websockets.serve(ws_recieve, "192.168.1.225", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
 
-# test ----------------------------------------------------------------------------
+######################### TEST ####################################################
 
-# move_sim(3)
+# move_forward(3)
 
 dummyJson = '{ "action": "find_goal", "name":"bocklet", "room":1 }'
 

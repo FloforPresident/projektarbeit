@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
 
 # Utility rule file for nav_msgs_generate_messages_nodejs.
 
@@ -63,10 +63,10 @@ face_recognition/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build: nav_msg
 .PHONY : face_recognition/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
 
 face_recognition/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean:
-	cd /home/basti/projektarbeit/catkin_ws/build/face_recognition && $(CMAKE_COMMAND) -P CMakeFiles/nav_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/patrick/projektarbeit/catkin_ws/build/face_recognition && $(CMAKE_COMMAND) -P CMakeFiles/nav_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : face_recognition/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean
 
 face_recognition/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/depend:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/face_recognition /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/face_recognition /home/basti/projektarbeit/catkin_ws/build/face_recognition/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/patrick/projektarbeit/catkin_ws/src /home/patrick/projektarbeit/catkin_ws/src/face_recognition /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build/face_recognition /home/patrick/projektarbeit/catkin_ws/build/face_recognition/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : face_recognition/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/depend
 

@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "urdf;xacro".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "turtlebot3_description"
-PROJECT_SPACE_DIR = "/home/basti/projektarbeit/catkin_ws/devel"
+PROJECT_SPACE_DIR = "/home/patrick/projektarbeit/catkin_ws/devel"
 PROJECT_VERSION = "1.2.3"
