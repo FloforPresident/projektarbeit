@@ -18,10 +18,6 @@ def printLocation(data):
 def letsGo():
 	rospy.init_node('location_monitor', anonymous=True)
 
-	#start topic
-	pub = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
-	pub.publish();
-
 	rate = rospy.Rate(10) # 10hz
 	while not rospy.is_shutdown():
 		rospy.Subscriber("move_base/feedback", MoveBaseActionFeedback, printLocation)

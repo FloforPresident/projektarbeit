@@ -1,0 +1,6 @@
+<launch>
+
+  <node pkg="find_person" name="print_patrick" type="print_patrick.py" output="screen">
+</node>
+
+</launch>
