@@ -67,3 +67,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor" TYPE FILE FILES "/home/basti/projektarbeit/catkin_ws/src/location_monitor/package.xml")
 endif()
 
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/location_monitor" TYPE PROGRAM FILES "/home/basti/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/print_location.py")
+endif()
+

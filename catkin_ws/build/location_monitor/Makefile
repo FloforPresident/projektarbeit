@@ -56,6 +56,16 @@ CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -67,49 +77,6 @@ install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
 
 # Special rule for the target test
 test:
@@ -132,6 +99,39 @@ install/local: preinstall
 install/local/fast: install/local
 
 .PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: install/strip
+
+.PHONY : install/strip/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -166,34 +166,34 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-location_monitor/CMakeFiles/location_monitor.dir/rule:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor.dir/rule
-.PHONY : location_monitor/CMakeFiles/location_monitor.dir/rule
+location_monitor/CMakeFiles/location_monitor_geneus.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_geneus.dir/rule
+.PHONY : location_monitor/CMakeFiles/location_monitor_geneus.dir/rule
 
 # Convenience name for target.
-location_monitor: location_monitor/CMakeFiles/location_monitor.dir/rule
+location_monitor_geneus: location_monitor/CMakeFiles/location_monitor_geneus.dir/rule
 
-.PHONY : location_monitor
+.PHONY : location_monitor_geneus
 
 # fast build rule for target.
-location_monitor/fast:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor.dir/build.make location_monitor/CMakeFiles/location_monitor.dir/build
-.PHONY : location_monitor/fast
+location_monitor_geneus/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_geneus.dir/build.make location_monitor/CMakeFiles/location_monitor_geneus.dir/build
+.PHONY : location_monitor_geneus/fast
 
 # Convenience name for target.
-location_monitor/CMakeFiles/location_monitor_genpy.dir/rule:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_genpy.dir/rule
-.PHONY : location_monitor/CMakeFiles/location_monitor_genpy.dir/rule
+location_monitor/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
+.PHONY : location_monitor/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-location_monitor_genpy: location_monitor/CMakeFiles/location_monitor_genpy.dir/rule
+move_base_msgs_generate_messages_cpp: location_monitor/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
 
-.PHONY : location_monitor_genpy
+.PHONY : move_base_msgs_generate_messages_cpp
 
 # fast build rule for target.
-location_monitor_genpy/fast:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_genpy.dir/build.make location_monitor/CMakeFiles/location_monitor_genpy.dir/build
-.PHONY : location_monitor_genpy/fast
+move_base_msgs_generate_messages_cpp/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/build.make location_monitor/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/build
+.PHONY : move_base_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 location_monitor/CMakeFiles/location_monitor_generate_messages_eus.dir/rule:
@@ -209,51 +209,6 @@ location_monitor_generate_messages_eus: location_monitor/CMakeFiles/location_mon
 location_monitor_generate_messages_eus/fast:
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_generate_messages_eus.dir/build.make location_monitor/CMakeFiles/location_monitor_generate_messages_eus.dir/build
 .PHONY : location_monitor_generate_messages_eus/fast
-
-# Convenience name for target.
-location_monitor/CMakeFiles/location_monitor_gencpp.dir/rule:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_gencpp.dir/rule
-.PHONY : location_monitor/CMakeFiles/location_monitor_gencpp.dir/rule
-
-# Convenience name for target.
-location_monitor_gencpp: location_monitor/CMakeFiles/location_monitor_gencpp.dir/rule
-
-.PHONY : location_monitor_gencpp
-
-# fast build rule for target.
-location_monitor_gencpp/fast:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_gencpp.dir/build.make location_monitor/CMakeFiles/location_monitor_gencpp.dir/build
-.PHONY : location_monitor_gencpp/fast
-
-# Convenience name for target.
-location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/rule:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/rule
-.PHONY : location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-location_monitor_generate_messages_lisp: location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/rule
-
-.PHONY : location_monitor_generate_messages_lisp
-
-# fast build rule for target.
-location_monitor_generate_messages_lisp/fast:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/build.make location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/build
-.PHONY : location_monitor_generate_messages_lisp/fast
-
-# Convenience name for target.
-location_monitor/CMakeFiles/location_monitor_gennodejs.dir/rule:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_gennodejs.dir/rule
-.PHONY : location_monitor/CMakeFiles/location_monitor_gennodejs.dir/rule
-
-# Convenience name for target.
-location_monitor_gennodejs: location_monitor/CMakeFiles/location_monitor_gennodejs.dir/rule
-
-.PHONY : location_monitor_gennodejs
-
-# fast build rule for target.
-location_monitor_gennodejs/fast:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_gennodejs.dir/build.make location_monitor/CMakeFiles/location_monitor_gennodejs.dir/build
-.PHONY : location_monitor_gennodejs/fast
 
 # Convenience name for target.
 location_monitor/CMakeFiles/location_monitor_generate_messages_cpp.dir/rule:
@@ -286,34 +241,124 @@ location_monitor_generate_messages/fast:
 .PHONY : location_monitor_generate_messages/fast
 
 # Convenience name for target.
-location_monitor/CMakeFiles/location_monitor_geneus.dir/rule:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_geneus.dir/rule
-.PHONY : location_monitor/CMakeFiles/location_monitor_geneus.dir/rule
+location_monitor/CMakeFiles/location_monitor_gencpp.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_gencpp.dir/rule
+.PHONY : location_monitor/CMakeFiles/location_monitor_gencpp.dir/rule
 
 # Convenience name for target.
-location_monitor_geneus: location_monitor/CMakeFiles/location_monitor_geneus.dir/rule
+location_monitor_gencpp: location_monitor/CMakeFiles/location_monitor_gencpp.dir/rule
 
-.PHONY : location_monitor_geneus
+.PHONY : location_monitor_gencpp
 
 # fast build rule for target.
-location_monitor_geneus/fast:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_geneus.dir/build.make location_monitor/CMakeFiles/location_monitor_geneus.dir/build
-.PHONY : location_monitor_geneus/fast
+location_monitor_gencpp/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_gencpp.dir/build.make location_monitor/CMakeFiles/location_monitor_gencpp.dir/build
+.PHONY : location_monitor_gencpp/fast
 
 # Convenience name for target.
-location_monitor/CMakeFiles/location_monitor_genlisp.dir/rule:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_genlisp.dir/rule
-.PHONY : location_monitor/CMakeFiles/location_monitor_genlisp.dir/rule
+location_monitor/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule
+.PHONY : location_monitor/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-location_monitor_genlisp: location_monitor/CMakeFiles/location_monitor_genlisp.dir/rule
+move_base_msgs_generate_messages_eus: location_monitor/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule
 
-.PHONY : location_monitor_genlisp
+.PHONY : move_base_msgs_generate_messages_eus
 
 # fast build rule for target.
-location_monitor_genlisp/fast:
-	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_genlisp.dir/build.make location_monitor/CMakeFiles/location_monitor_genlisp.dir/build
-.PHONY : location_monitor_genlisp/fast
+move_base_msgs_generate_messages_eus/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/move_base_msgs_generate_messages_eus.dir/build.make location_monitor/CMakeFiles/move_base_msgs_generate_messages_eus.dir/build
+.PHONY : move_base_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+location_monitor/CMakeFiles/location_monitor_genpy.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_genpy.dir/rule
+.PHONY : location_monitor/CMakeFiles/location_monitor_genpy.dir/rule
+
+# Convenience name for target.
+location_monitor_genpy: location_monitor/CMakeFiles/location_monitor_genpy.dir/rule
+
+.PHONY : location_monitor_genpy
+
+# fast build rule for target.
+location_monitor_genpy/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_genpy.dir/build.make location_monitor/CMakeFiles/location_monitor_genpy.dir/build
+.PHONY : location_monitor_genpy/fast
+
+# Convenience name for target.
+location_monitor/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
+.PHONY : location_monitor/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+move_base_msgs_generate_messages_lisp: location_monitor/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : move_base_msgs_generate_messages_lisp
+
+# fast build rule for target.
+move_base_msgs_generate_messages_lisp/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/build.make location_monitor/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/build
+.PHONY : move_base_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+location_monitor/CMakeFiles/location_monitor.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor.dir/rule
+.PHONY : location_monitor/CMakeFiles/location_monitor.dir/rule
+
+# Convenience name for target.
+location_monitor: location_monitor/CMakeFiles/location_monitor.dir/rule
+
+.PHONY : location_monitor
+
+# fast build rule for target.
+location_monitor/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor.dir/build.make location_monitor/CMakeFiles/location_monitor.dir/build
+.PHONY : location_monitor/fast
+
+# Convenience name for target.
+location_monitor/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
+.PHONY : location_monitor/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+move_base_msgs_generate_messages_py: location_monitor/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
+
+.PHONY : move_base_msgs_generate_messages_py
+
+# fast build rule for target.
+move_base_msgs_generate_messages_py/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/move_base_msgs_generate_messages_py.dir/build.make location_monitor/CMakeFiles/move_base_msgs_generate_messages_py.dir/build
+.PHONY : move_base_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+location_monitor/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule
+.PHONY : location_monitor/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+move_base_msgs_generate_messages_nodejs: location_monitor/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : move_base_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+move_base_msgs_generate_messages_nodejs/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/build.make location_monitor/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/build
+.PHONY : move_base_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/rule
+.PHONY : location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+location_monitor_generate_messages_lisp: location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/rule
+
+.PHONY : location_monitor_generate_messages_lisp
+
+# fast build rule for target.
+location_monitor_generate_messages_lisp/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/build.make location_monitor/CMakeFiles/location_monitor_generate_messages_lisp.dir/build
+.PHONY : location_monitor_generate_messages_lisp/fast
 
 # Convenience name for target.
 location_monitor/CMakeFiles/location_monitor_generate_messages_nodejs.dir/rule:
@@ -331,6 +376,21 @@ location_monitor_generate_messages_nodejs/fast:
 .PHONY : location_monitor_generate_messages_nodejs/fast
 
 # Convenience name for target.
+location_monitor/CMakeFiles/location_monitor_gennodejs.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_gennodejs.dir/rule
+.PHONY : location_monitor/CMakeFiles/location_monitor_gennodejs.dir/rule
+
+# Convenience name for target.
+location_monitor_gennodejs: location_monitor/CMakeFiles/location_monitor_gennodejs.dir/rule
+
+.PHONY : location_monitor_gennodejs
+
+# fast build rule for target.
+location_monitor_gennodejs/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_gennodejs.dir/build.make location_monitor/CMakeFiles/location_monitor_gennodejs.dir/build
+.PHONY : location_monitor_gennodejs/fast
+
+# Convenience name for target.
 location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/rule:
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/rule
 .PHONY : location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/rule
@@ -344,6 +404,21 @@ location_monitor_generate_messages_py: location_monitor/CMakeFiles/location_moni
 location_monitor_generate_messages_py/fast:
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/build.make location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/build
 .PHONY : location_monitor_generate_messages_py/fast
+
+# Convenience name for target.
+location_monitor/CMakeFiles/location_monitor_genlisp.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 location_monitor/CMakeFiles/location_monitor_genlisp.dir/rule
+.PHONY : location_monitor/CMakeFiles/location_monitor_genlisp.dir/rule
+
+# Convenience name for target.
+location_monitor_genlisp: location_monitor/CMakeFiles/location_monitor_genlisp.dir/rule
+
+.PHONY : location_monitor_genlisp
+
+# fast build rule for target.
+location_monitor_genlisp/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f location_monitor/CMakeFiles/location_monitor_genlisp.dir/build.make location_monitor/CMakeFiles/location_monitor_genlisp.dir/build
+.PHONY : location_monitor_genlisp/fast
 
 src/location_monitor.o: src/location_monitor.cpp.o
 
@@ -378,25 +453,30 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install"
-	@echo "... rebuild_cache"
-	@echo "... edit_cache"
 	@echo "... list_install_components"
-	@echo "... install/strip"
-	@echo "... location_monitor"
-	@echo "... test"
-	@echo "... location_monitor_genpy"
+	@echo "... install"
+	@echo "... location_monitor_geneus"
+	@echo "... move_base_msgs_generate_messages_cpp"
 	@echo "... location_monitor_generate_messages_eus"
-	@echo "... location_monitor_gencpp"
-	@echo "... location_monitor_generate_messages_lisp"
-	@echo "... location_monitor_gennodejs"
 	@echo "... location_monitor_generate_messages_cpp"
 	@echo "... location_monitor_generate_messages"
-	@echo "... location_monitor_geneus"
+	@echo "... location_monitor_gencpp"
+	@echo "... move_base_msgs_generate_messages_eus"
+	@echo "... location_monitor_genpy"
+	@echo "... test"
+	@echo "... move_base_msgs_generate_messages_lisp"
+	@echo "... location_monitor"
+	@echo "... move_base_msgs_generate_messages_py"
+	@echo "... move_base_msgs_generate_messages_nodejs"
+	@echo "... location_monitor_generate_messages_lisp"
 	@echo "... install/local"
-	@echo "... location_monitor_genlisp"
 	@echo "... location_monitor_generate_messages_nodejs"
+	@echo "... location_monitor_gennodejs"
 	@echo "... location_monitor_generate_messages_py"
+	@echo "... location_monitor_genlisp"
+	@echo "... install/strip"
+	@echo "... edit_cache"
+	@echo "... rebuild_cache"
 	@echo "... src/location_monitor.o"
 	@echo "... src/location_monitor.i"
 	@echo "... src/location_monitor.s"

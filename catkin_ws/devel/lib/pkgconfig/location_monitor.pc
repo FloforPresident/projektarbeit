@@ -5,4 +5,4 @@ Description: Description of location_monitor
 Version: 0.0.0
 Cflags: 
 Libs: -L${prefix}/lib 
-Requires: nav_msgs roscpp rospy
+Requires: nav_msgs move_base_msgs geometry_msgs roscpp rospy

@@ -58,7 +58,7 @@ location_monitor/CMakeFiles/location_monitor_generate_messages_eus: /home/basti/
 
 /home/basti/projektarbeit/catkin_ws/devel/share/roseus/ros/location_monitor/manifest.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/basti/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp manifest code for location_monitor"
-	cd /home/basti/projektarbeit/catkin_ws/build/location_monitor && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/basti/projektarbeit/catkin_ws/devel/share/roseus/ros/location_monitor location_monitor nav_msgs
+	cd /home/basti/projektarbeit/catkin_ws/build/location_monitor && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/basti/projektarbeit/catkin_ws/devel/share/roseus/ros/location_monitor location_monitor nav_msgs move_base_msgs geometry_msgs
 
 location_monitor_generate_messages_eus: location_monitor/CMakeFiles/location_monitor_generate_messages_eus
 location_monitor_generate_messages_eus: /home/basti/projektarbeit/catkin_ws/devel/share/roseus/ros/location_monitor/manifest.l
