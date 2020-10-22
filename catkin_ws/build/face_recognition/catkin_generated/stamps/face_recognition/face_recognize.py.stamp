@@ -8,7 +8,7 @@ language = 'de'
 #from mpyg321.mpyg321 import MPyg321Player
 
 # Get a reference to webcam #0 (the default one)
-video_capture = cv2.VideoCapture(0)
+#video_capture = cv2.VideoCapture(0)
 
 #audio player
 #player = MPyg321Player()
@@ -28,6 +28,7 @@ from cv_bridge import CvBridge
 ######     Get Image    #####################################################################################################################
 # Get image from /raspicam_node/image
 
+
 def __init__(self):
     self.bridge = CvBridge()
     self.image_sub = rospy.Subscriber("/raspicam_node/image",Image,self.callback)
@@ -35,6 +36,7 @@ def __init__(self):
 def callback(self,data):
     try:
         cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+	print("success")
     except CvBridgeError as e:
         print(e)
 
@@ -64,23 +66,24 @@ def talker():
 
 
 if __name__=='__main__':
+	cv_image
     #listener()
 
-known_face_encoding = [
-    person_face_encoding
-    ]
-known_face_name = [
-    person_name
-    ]
+#known_face_encoding = [
+ #   person_face_encoding
+  #  ]
+#known_face_name = [
+ #   person_name
+  #  ]
 
-face_locations = []
-face_encodings = []
-face_names = []
-process_this_frame = True
+#face_locations = []
+#face_encodings = []
+#face_names = []
+#process_this_frame=True
 
 ######     Face Recognition    #####################################################################################################################
 
-while True:
+#while True:
     # Grab a single frame of video
     ret, frame = cv_image.read()
 
@@ -132,27 +135,27 @@ while True:
 
 
     # Display the results
-    for (top, right, bottom, left), name in zip(face_locations, face_names):
+    #for (top, right, bottom, left), name in zip(face_locations, face_names):
         # Scale back up face locations since the frame we detected in was scaled to 1/4 size
-        top *= 4
-        right *= 4
-        bottom *= 4
-        left *= 4
+#        top *= 4
+ #       right *= 4
+  #      bottom *= 4
+   #     left *= 4
 
         # Draw a box around the faceq
-        cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
+    #    cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
         # Draw a label with a name below the face
-        cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
-        font = cv2.FONT_HERSHEY_DUPLEX
-        cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+     #   cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+      #  font = cv2.FONT_HERSHEY_DUPLEX
+       # cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
 
     # Display the resulting image
-    cv2.imshow('Video', frame)
+    #cv2.imshow('Video', frame)
 
     # Hit 'q' on the keyboard to quit!
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    #if cv2.waitKey(1) & 0xFF == ord('q'):
+      #  break
 
 # Release handle to the webcam
 video_capture.release()

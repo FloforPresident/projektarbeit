@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
 import 'package:turtlebot/services/routing.dart';
-import 'package:turtlebot/databaseObjects/data_base_objects.dart';
+import 'package:turtlebot/objects/data_base_objects.dart';
 
 class Locations extends StatefulWidget {
   final LocationsController controller = LocationsController(Colors.pink);
@@ -55,11 +55,10 @@ class _LocationsState extends State<Locations> {
               scrollDirection: Axis.vertical,
               key: widget.controller.key,
               initialItemCount: widget.controller.items.length,
-              itemBuilder: (context,index,animation)
-                {
-                  return widget.controller._buildItem(
-                    widget.controller.items[index], animation,index);
-                },
+              itemBuilder: (context, index, animation) {
+                return widget.controller._buildItem(
+                    widget.controller.items[index], animation, index);
+              },
             ),
           )
         ],
@@ -77,15 +76,13 @@ class LocationsController {
   final GlobalKey<AnimatedListState> _key = GlobalKey();
   List<Room> _items;
 
-
   List<Room> get items => _items;
 
   GlobalKey<AnimatedListState> get key => _key;
 
   Color get colorTheme => _colorTheme;
 
-  LocationsController(this._colorTheme)
-  {
+  LocationsController(this._colorTheme) {
     _items = _getRoomData();
   }
 
@@ -108,7 +105,7 @@ class LocationsController {
 
   Widget _buildItem(Room item, Animation animation, int index) {
     Icon _selected =
-    (true) ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank);
+        (true) ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank);
 
     return SizeTransition(
       sizeFactor: animation,
@@ -150,7 +147,6 @@ class LocationsController {
     );
   }
 
-
   void _removeItem(int index) {
     Room removeItem = _items.removeAt(index);
     AnimatedListRemovedItemBuilder build = (context, animation) {
@@ -160,12 +156,10 @@ class LocationsController {
     _key.currentState.removeItem(index, build);
   }
 
-  void _addItem(Room room)
-  {
+  void _addItem(Room room) {
     int end = _items.length;
     _items.add(room);
-    AnimatedListItemBuilder build = (context,index,animation)
-    {
+    AnimatedListItemBuilder build = (context, index, animation) {
       return _buildItem(_items[index], animation, index);
     };
 
@@ -212,7 +206,7 @@ class LocationsController {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                _addItem(Room(items.length+1,controller.text));
+                _addItem(Room(items.length + 1, controller.text));
                 Navigator.of(context).pop();
               },
             ),

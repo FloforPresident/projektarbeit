@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/services/navigation.dart';
 import 'package:web_socket_channel/io.dart';
+import 'package:turtlebot/services/socke_info.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,9 +11,14 @@ class MyApp extends StatelessWidget {
   static Map<String, IOWebSocketChannel> channels = Map();
 
   static IOWebSocketChannel addChannel(routeName) {
-    return channels[routeName] =
-        IOWebSocketChannel.connect('ws://echo.websocket.org');
+    return channels[routeName] = IOWebSocketChannel.connect(
+        'ws://' + SocketInfo.hostAdress + SocketInfo.port);
     // return channels[routeName] = channel.stream.asBroadcastStream();
+  }
+
+  static deleteChannel(routeName) {
+    channels[routeName].sink.close(0, "Closed by the client");
+    channels.removeWhere((name, channel) => name == routeName);
   }
   //
 

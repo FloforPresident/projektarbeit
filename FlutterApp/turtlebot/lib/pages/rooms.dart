@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turtlebot/databaseObjects/data_base_objects.dart';
+import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
 import 'package:turtlebot/services/routing.dart';
 
@@ -14,9 +14,12 @@ class Rooms extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () {
-          RouteGenerator.onTapToHome(context);
-        },),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            RouteGenerator.onTapToHome(context);
+          },
+        ),
         title: TopAppBar(
           navigationFields: <Widget>[
             TopBarImageIcon(
@@ -66,7 +69,7 @@ class _ControllerRooms {
 
   List<Room> _getData() {
     return [
-      Room(1,"living-room"),
+      Room(1, "living-room"),
       Room(2, "dining-room"),
       Room(3, "study-room"),
       Room(4, "basement"),
@@ -148,12 +151,10 @@ class _ControllerRooms {
     _key.currentState.removeItem(index, build);
   }
 
-  void _addItem(Room room)
-  {
+  void _addItem(Room room) {
     int end = _items.length;
     _items.add(room);
-    AnimatedListItemBuilder build = (context,index,animation)
-    {
+    AnimatedListItemBuilder build = (context, index, animation) {
       return _buildItem(_items[index], animation, index);
     };
 
@@ -200,7 +201,7 @@ class _ControllerRooms {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                _addItem(Room(items.length+1,controller.text));
+                _addItem(Room(items.length + 1, controller.text));
                 Navigator.of(context).pop();
               },
             ),
