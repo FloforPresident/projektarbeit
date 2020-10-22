@@ -26,6 +26,7 @@ def connect():
 def add_user(name, password, image, location):
 	#TODO
 	print(name)
+	print("TEST")
 
 def delete_user(name, password):
 
@@ -85,10 +86,12 @@ def send_message_db(usernameSender, usernameReceiver, text):
 def get_messages_db():
 	db.get_messages()
 
-'''
+
 
 if __name__ == '__main__':
     try:
         connect()
     except rospy.ROSInterruptException:
         pass
+
+'''
