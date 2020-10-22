@@ -38,7 +38,72 @@ def json_get_value_by_key(jsonObj, key):
 	data = json.loads(jsonObj)
 	return data[key]
 
+######################### DATABASE ACTIONS ##############################################
 
+# implementation in DB script
+
+#------------- USER --------------
+
+def add_user_db(name, password, image, location):
+	db.add_user(name, password, image, location)
+
+def delete_user_db(name, password):
+	db.delete_user(name, password)
+
+def login_user_db(name, password):
+	db.login_user(name, password)
+
+def logout_user_db(name):
+	db.logout_user(name)
+
+'''
+#------------- ROBOS --------------
+
+def add_robo_db(name, ip, username):
+	db.add_robo(name, ip, username)
+
+def delete_robo_db(name, username):
+	db.delete_robo(name, username)
+
+def get_robos():
+	db.get_robos()
+
+#------------- ROOM --------------
+
+def add_room_db(name, roboname, username):
+	db.add_room(name, roboname, username)
+
+def delete_room_db(name, username):
+	db.delete_room(name, username)
+
+def get_rooms_db():
+	db.get_rooms()
+
+#------------- LOCATION --------------	
+
+def add_location_db(name, x, y, username, room):
+	db.add_location(name, x, y, username, room)
+
+def delete_location_db(name, username):
+	db.delete_location(name, username)
+
+def change_active_location_db(locationname, username):
+	db.change_active_location(locationname, username)
+
+def get_locations_db(username):
+	db.get_locations(username)
+
+#------------- LOCATION --------------	
+
+def send_message_db(usernameSender, usernameReceiver, text):
+	db.send_message(usernameSender, usernameReceiver, text)
+
+def get_messages_db():
+	db.get_messages()
+
+'''
+
+'''
 ######################### ROBOT ACTIONS ##############################################
 
 
@@ -57,6 +122,8 @@ def go_to_goal_action(pos_X, pos_Y, tolerance):
 	
 	#TODO implement
 	#go_to_goal.move_to_goal(pos_X, pos_Y, tolerance)
+
+'''
 
 ######################### WEBSOCKET ####################################################
 
@@ -92,3 +159,7 @@ testAction = json_get_action(dummyJson)
 # print(testRoom)
 # print(testName)
 # print(testAction)
+
+
+if __name__ == '__main__':
+	add_user_db("Patrick", "123", "TestImage", "Room1")
