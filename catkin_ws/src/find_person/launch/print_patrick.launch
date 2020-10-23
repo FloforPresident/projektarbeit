@@ -1,6 +1,7 @@
 <launch>
 
-  <node pkg="find_person" name="print_patrick" type="print_patrick.py" output="screen">
-</node>
+<node pkg="find_person" name="print_patrick" type="print_patrick.py" output="screen"></node>
+<node pkg="find_person" name="print_johannes" type="print_johannes.py" output="screen"></node>
+<node pkg="beginner_tutorials" name="hello_world" type="talker" output="screen"></node>
 
 </launch>
