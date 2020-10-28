@@ -9,6 +9,7 @@ import 'package:turtlebot/main.dart';
 import 'package:turtlebot/pages/messages.dart';
 import 'package:turtlebot/pages/locations.dart';
 import 'package:turtlebot/pages/login.dart';
+import 'package:web_socket_channel/io.dart';
 
 class RouteGenerator {
   // _RouteGenerator() {}
@@ -28,46 +29,39 @@ class RouteGenerator {
     switch (settings.name) {
       case RouteHome:
         {
-          MyApp.addChannel(settings.name);
-          return MaterialPageRoute(builder: (_) => Home());
+          return MaterialPageRoute(
+              builder: (_) => Home(channel: MyApp.channel));
         }
 
       case RouteRobos:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => Robos());
         }
       case RouteFriends:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => Friends());
         }
       case RouteRooms:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => Rooms());
         }
       case RouteMessages:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => Messages());
         }
       case RouteRoboStatus:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => RoboStatus());
         }
       case RouteRoboCommands:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => RoboCommands());
         }
       case RouteManualControl:
         return MaterialPageRoute(builder: (_) => RoboManControl());
 
       case RouteLogin:
-        MyApp.addChannel(settings.name);
-        return MaterialPageRoute(builder: (_) => Login());
+        return MaterialPageRoute(builder: (_) => Login(channel: MyApp.channel));
 
       case RouteLocations:
         return MaterialPageRoute(builder: (_) => Locations());

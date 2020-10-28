@@ -1,4 +1,4 @@
-import 'package:turtlebot/databaseObjects/data_base_objects.dart';
+import 'package:turtlebot/objects/data_base_objects.dart';
 
 class SocketModel {
   List<User> userData;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/services/routing.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Login extends StatelessWidget {
   double _leftStart = 40;
@@ -8,13 +9,15 @@ class Login extends StatelessWidget {
   double _topSpace = 20;
   Color colorTheme = Colors.green;
   Color secondaryTheme = Colors.white;
-  _LoginController controller;
 
   TextEditingController name = new TextEditingController();
   TextEditingController password = new TextEditingController();
 
-  Login() {
-    controller = _LoginController(colorTheme);
+  final WebSocketChannel channel;
+  _LoginController controller;
+
+  Login({Key key, @required this.channel}) : super(key: key) {
+    this.controller = _LoginController(colorTheme);
   }
 
   @override
@@ -80,8 +83,7 @@ class Login extends StatelessWidget {
                 onPressed: () {
                   if (name.text.isNotEmpty && password.text.isNotEmpty) {
                     userAction("LOGIN USER", name.text, password.text);
-                    MyApp.channels[RouteGenerator.RouteLogin].stream
-                        .listen((data) {
+                    channel.stream.listen((data) {
                       if (data == 'success') {
                         RouteGenerator.onTapToHome(context);
                       }
@@ -89,12 +91,6 @@ class Login extends StatelessWidget {
                   }
                 },
               ),
-              // StreamBuilder(
-              //   stream: MyApp.channels[RouteGenerator.RouteLogin].stream,
-              //   builder: (context, snapshot) {
-              //     return Text(snapshot.hasData ? '${snapshot.data}' : '');
-              //   },
-              // ),
             ],
           ),
         ),
@@ -103,13 +99,13 @@ class Login extends StatelessWidget {
         child: Icon(Icons.add, color: Colors.white),
         backgroundColor: colorTheme,
         onPressed: () {
-          controller.addItemDialog(context);
+          _LoginController(colorTheme).addItemDialog(context);
         },
       ),
     );
   }
 
-  static void userAction(String action, [String name, String password]) {
+  void userAction(String action, [String name, String password]) {
     String data;
 
     if (name.isNotEmpty && password.isNotEmpty) {
@@ -118,11 +114,17 @@ class Login extends StatelessWidget {
       data = '{"action": "$action"}';
     }
 
-    MyApp.channels[RouteGenerator.RouteLogin].sink.add(data);
+    channel.sink.add(data);
+  }
+
+  @override
+  void dispose() {
+    channel.sink.close();
+    dispose();
   }
 }
 
-class _LoginController {
+class _LoginController extends Login {
   Color _colorTheme;
   TextEditingController name = new TextEditingController();
   TextEditingController password = new TextEditingController();
@@ -186,7 +188,9 @@ class _LoginController {
                 if (name.text.isNotEmpty &&
                     password.text.isNotEmpty &&
                     _uploadedImage == true) {
-                  Login.userAction("ADD USER", name.text, password.text);
+                  //Not working cause i need access to Login widget.channel out of class _LoginController.
+                  //How is this possible? Until then no signUp possible
+                  userAction("ADD USER", name.text, password.text);
                   Navigator.of(context).pop();
                   RouteGenerator.onTapToHome(context);
                 }
