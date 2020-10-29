@@ -6,11 +6,19 @@
 
 #IncludeRegexTransform: 
 
+<<<<<<< HEAD
 /home/basti/projektarbeit/catkin_ws/src/location_monitor/src/location_monitor.cpp
 ros/ros.h
 /home/basti/projektarbeit/catkin_ws/src/location_monitor/src/ros/ros.h
 nav_msgs/Odometry.h
 /home/basti/projektarbeit/catkin_ws/src/location_monitor/src/nav_msgs/Odometry.h
+=======
+/home/stefan/projektarbeit/catkin_ws/src/location_monitor/src/location_monitor.cpp
+ros/ros.h
+/home/stefan/projektarbeit/catkin_ws/src/location_monitor/src/ros/ros.h
+nav_msgs/Odometry.h
+/home/stefan/projektarbeit/catkin_ws/src/location_monitor/src/nav_msgs/Odometry.h
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 /opt/ros/kinetic/include/geometry_msgs/Point.h
 string

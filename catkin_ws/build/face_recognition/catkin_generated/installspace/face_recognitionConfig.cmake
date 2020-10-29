@@ -67,14 +67,23 @@ set(face_recognition_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
+<<<<<<< HEAD
   set(face_recognition_SOURCE_PREFIX /home/basti/projektarbeit/catkin_ws/src/face_recognition)
   set(face_recognition_DEVEL_PREFIX /home/basti/projektarbeit/catkin_ws/devel)
+=======
+  set(face_recognition_SOURCE_PREFIX /home/stefan/projektarbeit/catkin_ws/src/face_recognition)
+  set(face_recognition_DEVEL_PREFIX /home/stefan/projektarbeit/catkin_ws/devel)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   set(face_recognition_INSTALL_PREFIX "")
   set(face_recognition_PREFIX ${face_recognition_DEVEL_PREFIX})
 else()
   set(face_recognition_SOURCE_PREFIX "")
   set(face_recognition_DEVEL_PREFIX "")
+<<<<<<< HEAD
   set(face_recognition_INSTALL_PREFIX /home/basti/projektarbeit/catkin_ws/install)
+=======
+  set(face_recognition_INSTALL_PREFIX /home/stefan/projektarbeit/catkin_ws/install)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   set(face_recognition_PREFIX ${face_recognition_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +163,11 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
+<<<<<<< HEAD
     foreach(path /home/basti/projektarbeit/catkin_ws/install/lib;/home/basti/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+=======
+    foreach(path /home/stefan/projektarbeit/catkin_ws/install/lib;/home/stefan/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

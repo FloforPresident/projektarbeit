@@ -6,11 +6,19 @@
 
 #IncludeRegexTransform: 
 
+<<<<<<< HEAD
 /home/basti/projektarbeit/catkin_ws/src/beginner_tutorials/src/listener.cpp
 ros/ros.h
 /home/basti/projektarbeit/catkin_ws/src/beginner_tutorials/src/ros/ros.h
 std_msgs/String.h
 /home/basti/projektarbeit/catkin_ws/src/beginner_tutorials/src/std_msgs/String.h
+=======
+/home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/src/listener.cpp
+ros/ros.h
+/home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/src/ros/ros.h
+std_msgs/String.h
+/home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/src/std_msgs/String.h
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 /opt/ros/kinetic/include/ros/advertise_options.h
 ros/forwards.h

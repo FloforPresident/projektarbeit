@@ -43,10 +43,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
+=======
+CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Utility rule file for _beginner_tutorials_generate_messages_check_deps_Num.
 
@@ -54,7 +61,11 @@ CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
 include beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/progress.make
 
 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num:
+<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py beginner_tutorials /home/basti/projektarbeit/catkin_ws/src/beginner_tutorials/msg/Num.msg 
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py beginner_tutorials /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/msg/Num.msg 
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 _beginner_tutorials_generate_messages_check_deps_Num: beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num
 _beginner_tutorials_generate_messages_check_deps_Num: beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/build.make
@@ -67,10 +78,18 @@ beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_N
 .PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/build
 
 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/clean:
+<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/cmake_clean.cmake
 .PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/clean
 
 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/depend:
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/beginner_tutorials /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/DependInfo.cmake --color=$(COLOR)
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/cmake_clean.cmake
+.PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/clean
+
+beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/depend:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/DependInfo.cmake --color=$(COLOR)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/depend
 

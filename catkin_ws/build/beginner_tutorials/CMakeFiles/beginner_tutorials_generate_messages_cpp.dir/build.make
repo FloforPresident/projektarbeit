@@ -43,16 +43,24 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
+=======
+CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Utility rule file for beginner_tutorials_generate_messages_cpp.
 
 # Include the progress variables for this target.
 include beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/progress.make
 
+<<<<<<< HEAD
 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp: /home/basti/projektarbeit/catkin_ws/devel/include/beginner_tutorials/Num.h
 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp: /home/basti/projektarbeit/catkin_ws/devel/include/beginner_tutorials/AddTwoInts.h
 
@@ -73,6 +81,28 @@ beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp: /home/ba
 beginner_tutorials_generate_messages_cpp: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp
 beginner_tutorials_generate_messages_cpp: /home/basti/projektarbeit/catkin_ws/devel/include/beginner_tutorials/Num.h
 beginner_tutorials_generate_messages_cpp: /home/basti/projektarbeit/catkin_ws/devel/include/beginner_tutorials/AddTwoInts.h
+=======
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp: /home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/Num.h
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp: /home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/AddTwoInts.h
+
+
+/home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/Num.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/Num.h: /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/msg/Num.msg
+/home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/Num.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from beginner_tutorials/Num.msg"
+	cd /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials && /home/stefan/projektarbeit/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/msg/Num.msg -Ibeginner_tutorials:/home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p beginner_tutorials -o /home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials -e /opt/ros/kinetic/share/gencpp/cmake/..
+
+/home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/AddTwoInts.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/AddTwoInts.h: /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/srv/AddTwoInts.srv
+/home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/AddTwoInts.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+/home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/AddTwoInts.h: /opt/ros/kinetic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from beginner_tutorials/AddTwoInts.srv"
+	cd /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials && /home/stefan/projektarbeit/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/srv/AddTwoInts.srv -Ibeginner_tutorials:/home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p beginner_tutorials -o /home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials -e /opt/ros/kinetic/share/gencpp/cmake/..
+
+beginner_tutorials_generate_messages_cpp: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp
+beginner_tutorials_generate_messages_cpp: /home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/Num.h
+beginner_tutorials_generate_messages_cpp: /home/stefan/projektarbeit/catkin_ws/devel/include/beginner_tutorials/AddTwoInts.h
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 beginner_tutorials_generate_messages_cpp: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/build.make
 
 .PHONY : beginner_tutorials_generate_messages_cpp
@@ -83,10 +113,18 @@ beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/build
 .PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/build
 
 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/clean:
+<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/clean
 
 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/depend:
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/beginner_tutorials /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/cmake_clean.cmake
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/clean
+
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/depend:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/depend
 

@@ -1,2 +1,6 @@
 - setup-file:
+<<<<<<< HEAD
     local-name: /home/basti/projektarbeit/catkin_ws/install/setup.sh
+=======
+    local-name: /home/stefan/projektarbeit/catkin_ws/install/setup.sh
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357

@@ -43,10 +43,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
+=======
+CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Utility rule file for find_person_gencpp.
 
@@ -63,10 +70,18 @@ find_person/CMakeFiles/find_person_gencpp.dir/build: find_person_gencpp
 .PHONY : find_person/CMakeFiles/find_person_gencpp.dir/build
 
 find_person/CMakeFiles/find_person_gencpp.dir/clean:
+<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/find_person_gencpp.dir/cmake_clean.cmake
 .PHONY : find_person/CMakeFiles/find_person_gencpp.dir/clean
 
 find_person/CMakeFiles/find_person_gencpp.dir/depend:
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/find_person /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/find_person /home/basti/projektarbeit/catkin_ws/build/find_person/CMakeFiles/find_person_gencpp.dir/DependInfo.cmake --color=$(COLOR)
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/find_person_gencpp.dir/cmake_clean.cmake
+.PHONY : find_person/CMakeFiles/find_person_gencpp.dir/clean
+
+find_person/CMakeFiles/find_person_gencpp.dir/depend:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/src/find_person /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/find_person /home/stefan/projektarbeit/catkin_ws/build/find_person/CMakeFiles/find_person_gencpp.dir/DependInfo.cmake --color=$(COLOR)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_gencpp.dir/depend
 

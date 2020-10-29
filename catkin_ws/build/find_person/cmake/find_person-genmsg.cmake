@@ -2,7 +2,11 @@
 
 message(STATUS "find_person: 1 messages, 0 services")
 
+<<<<<<< HEAD
 set(MSG_I_FLAGS "-Ifind_person:/home/basti/projektarbeit/catkin_ws/src/find_person/msg;-Inav_msgs:/opt/ros/kinetic/share/nav_msgs/cmake/../msg;-Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg;-Iactionlib_msgs:/opt/ros/kinetic/share/actionlib_msgs/cmake/../msg")
+=======
+set(MSG_I_FLAGS "-Ifind_person:/home/stefan/projektarbeit/catkin_ws/src/find_person/msg;-Inav_msgs:/opt/ros/kinetic/share/nav_msgs/cmake/../msg;-Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg;-Iactionlib_msgs:/opt/ros/kinetic/share/actionlib_msgs/cmake/../msg")
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -17,9 +21,15 @@ add_custom_target(find_person_generate_messages ALL)
 
 
 
+<<<<<<< HEAD
 get_filename_component(_filename "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
 add_custom_target(_find_person_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "find_person" "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" ""
+=======
+get_filename_component(_filename "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+add_custom_target(_find_person_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "find_person" "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" ""
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 )
 
 #
@@ -29,7 +39,11 @@ add_custom_target(_find_person_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(find_person
+<<<<<<< HEAD
   "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg"
+=======
+  "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg"
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/find_person
@@ -49,7 +63,11 @@ add_custom_target(find_person_generate_messages_cpp
 add_dependencies(find_person_generate_messages find_person_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+<<<<<<< HEAD
 get_filename_component(_filename "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 add_dependencies(find_person_generate_messages_cpp _find_person_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -62,7 +80,11 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS find_person_generate_messages_cpp)
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(find_person
+<<<<<<< HEAD
   "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg"
+=======
+  "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg"
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/find_person
@@ -82,7 +104,11 @@ add_custom_target(find_person_generate_messages_eus
 add_dependencies(find_person_generate_messages find_person_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+<<<<<<< HEAD
 get_filename_component(_filename "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 add_dependencies(find_person_generate_messages_eus _find_person_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -95,7 +121,11 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS find_person_generate_messages_eus)
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(find_person
+<<<<<<< HEAD
   "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg"
+=======
+  "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg"
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/find_person
@@ -115,7 +145,11 @@ add_custom_target(find_person_generate_messages_lisp
 add_dependencies(find_person_generate_messages find_person_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+<<<<<<< HEAD
 get_filename_component(_filename "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 add_dependencies(find_person_generate_messages_lisp _find_person_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -128,7 +162,11 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS find_person_generate_messages_lisp)
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(find_person
+<<<<<<< HEAD
   "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg"
+=======
+  "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg"
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/find_person
@@ -148,7 +186,11 @@ add_custom_target(find_person_generate_messages_nodejs
 add_dependencies(find_person_generate_messages find_person_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+<<<<<<< HEAD
 get_filename_component(_filename "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 add_dependencies(find_person_generate_messages_nodejs _find_person_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -161,7 +203,11 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS find_person_generate_messages_nodej
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(find_person
+<<<<<<< HEAD
   "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg"
+=======
+  "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg"
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/find_person
@@ -181,7 +227,11 @@ add_custom_target(find_person_generate_messages_py
 add_dependencies(find_person_generate_messages find_person_generate_messages_py)
 
 # add dependencies to all check dependencies targets
+<<<<<<< HEAD
 get_filename_component(_filename "/home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+=======
+get_filename_component(_filename "/home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg" NAME_WE)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 add_dependencies(find_person_generate_messages_py _find_person_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
