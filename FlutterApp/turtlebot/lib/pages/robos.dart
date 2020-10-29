@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
-import 'package:turtlebot/main.dart';
-
-class Robos extends StatefulWidget {
+class Robos extends StatelessWidget {
+  final WebSocketChannel channel;
   _RobosController controller;
 
-  Robos({Key key}) : super(key: key) {
+  Robos({Key key, @required this.channel}) : super(key: key) {
     this.controller = _RobosController(Colors.blue);
   }
 
-  @override
-  _RobosState createState() {
-    return _RobosState();
-  }
-}
-
-class _RobosState extends State<Robos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Connected Robos"),
-        backgroundColor: widget.controller.colorTheme,
+        backgroundColor: controller.colorTheme,
       ),
       body: AnimatedList(
-        key: widget.controller._key,
-        initialItemCount: widget.controller.items.length,
+        key: controller._key,
+        initialItemCount: controller.items.length,
         itemBuilder: (context, index, animation) {
-          return widget.controller.buildItem(
-              context, widget.controller.items[index], animation, index);
+          return controller.buildItem(
+              context, controller.items[index], animation, index);
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        foregroundColor: Colors.white,
+        backgroundColor: controller.colorTheme,
+        onPressed: () {
+          controller.addItem(context);
         },
       ),
     );
