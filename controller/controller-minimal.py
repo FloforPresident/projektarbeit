@@ -50,6 +50,8 @@ async def ws_recieve(websocket, path):
 						response = 'Incorrect password'
 				else: 
 					response = 'User not known, try to sign up'
+
+	print(data)
 	
 	await websocket.send(response)
 

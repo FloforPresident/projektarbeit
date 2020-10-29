@@ -4,3 +4,6 @@
 {"name": "Coach", "password": "123abc"}
 {"name": "dcvdns", "password": "1234"}
 {"name": "dcvdns", "password": "1234"}
+{"name": "Testung", "password": "testung"}
+{"name": "Neuer User", "password": "Hi"}
+{"name": "Neuer User", "password": "test"}
