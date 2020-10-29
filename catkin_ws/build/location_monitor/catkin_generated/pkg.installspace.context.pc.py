@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "nav_msgs;move_base_msgs;geometry_msgs;roscpp;rospy".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "location_monitor"
-PROJECT_SPACE_DIR = "/home/patrick/projektarbeit/catkin_ws/install"
+PROJECT_SPACE_DIR = "/home/stefan/projektarbeit/catkin_ws/install"
 PROJECT_VERSION = "0.0.0"

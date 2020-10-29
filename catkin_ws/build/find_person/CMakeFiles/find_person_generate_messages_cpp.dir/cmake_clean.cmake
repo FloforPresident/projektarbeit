@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/find_person_generate_messages_cpp"
-  "/home/patrick/projektarbeit/catkin_ws/devel/include/find_person/person_info.h"
+  "/home/stefan/projektarbeit/catkin_ws/devel/include/find_person/person_info.h"
 )
 
 # Per-language clean rules from dependency scanning.

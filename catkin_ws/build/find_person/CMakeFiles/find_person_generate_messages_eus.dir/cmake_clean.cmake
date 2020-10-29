@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/find_person_generate_messages_eus"
-  "/home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/find_person/msg/person_info.l"
-  "/home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/find_person/manifest.l"
+  "/home/stefan/projektarbeit/catkin_ws/devel/share/roseus/ros/find_person/msg/person_info.l"
+  "/home/stefan/projektarbeit/catkin_ws/devel/share/roseus/ros/find_person/manifest.l"
 )
 
 # Per-language clean rules from dependency scanning.

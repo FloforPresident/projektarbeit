@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/find_person_generate_messages_lisp"
-  "/home/patrick/projektarbeit/catkin_ws/devel/share/common-lisp/ros/find_person/msg/person_info.lisp"
+  "/home/stefan/projektarbeit/catkin_ws/devel/share/common-lisp/ros/find_person/msg/person_info.lisp"
 )
 
 # Per-language clean rules from dependency scanning.
