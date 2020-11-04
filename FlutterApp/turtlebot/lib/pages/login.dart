@@ -78,15 +78,15 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  if (name.text.isNotEmpty && password.text.isNotEmpty) {
-                    userAction("LOGIN USER", name.text, password.text);
-                    MyApp.channels[RouteGenerator.RouteLogin].stream
-                        .listen((data) {
-                      if (data == 'success') {
+//                  if (name.text.isNotEmpty && password.text.isNotEmpty) {
+//                    userAction("LOGIN USER", name.text, password.text);
+//                    MyApp.channels[RouteGenerator.RouteLogin].stream
+//                        .listen((data) {
+//                      if (data == 'success') {
                         RouteGenerator.onTapToHome(context);
-                      }
-                    });
-                  }
+//                      }
+//                    });
+//                  }
                 },
               ),
               // StreamBuilder(
