@@ -67,14 +67,23 @@ set(location_monitor_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(location_monitor_SOURCE_PREFIX /home/patrick/projektarbeit/catkin_ws/src/location_monitor)
-  set(location_monitor_DEVEL_PREFIX /home/patrick/projektarbeit/catkin_ws/devel)
+<<<<<<< HEAD
+  set(location_monitor_SOURCE_PREFIX /home/basti/projektarbeit/catkin_ws/src/location_monitor)
+  set(location_monitor_DEVEL_PREFIX /home/basti/projektarbeit/catkin_ws/devel)
+=======
+  set(location_monitor_SOURCE_PREFIX /home/stefan/projektarbeit/catkin_ws/src/location_monitor)
+  set(location_monitor_DEVEL_PREFIX /home/stefan/projektarbeit/catkin_ws/devel)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   set(location_monitor_INSTALL_PREFIX "")
   set(location_monitor_PREFIX ${location_monitor_DEVEL_PREFIX})
 else()
   set(location_monitor_SOURCE_PREFIX "")
   set(location_monitor_DEVEL_PREFIX "")
-  set(location_monitor_INSTALL_PREFIX /home/patrick/projektarbeit/catkin_ws/install)
+<<<<<<< HEAD
+  set(location_monitor_INSTALL_PREFIX /home/basti/projektarbeit/catkin_ws/install)
+=======
+  set(location_monitor_INSTALL_PREFIX /home/stefan/projektarbeit/catkin_ws/install)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   set(location_monitor_PREFIX ${location_monitor_INSTALL_PREFIX})
 endif()
 
@@ -110,7 +119,11 @@ if(NOT " " STREQUAL " ")
         message(FATAL_ERROR "Project 'location_monitor' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'location_monitor' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/patrick/projektarbeit/catkin_ws/src/location_monitor/${idir}'.  ${_report}")
+<<<<<<< HEAD
+      message(FATAL_ERROR "Project 'location_monitor' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/basti/projektarbeit/catkin_ws/src/location_monitor/${idir}'.  ${_report}")
+=======
+      message(FATAL_ERROR "Project 'location_monitor' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/stefan/projektarbeit/catkin_ws/src/location_monitor/${idir}'.  ${_report}")
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
     endif()
     _list_append_unique(location_monitor_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +167,11 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/patrick/projektarbeit/catkin_ws/devel/lib;/home/patrick/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+<<<<<<< HEAD
+    foreach(path /home/basti/projektarbeit/catkin_ws/devel/lib;/home/basti/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+=======
+    foreach(path /home/stefan/projektarbeit/catkin_ws/devel/lib;/home/stefan/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -185,7 +202,7 @@ foreach(t ${location_monitor_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "nav_msgs;roscpp;rospy")
+set(depends "nav_msgs;move_base_msgs;geometry_msgs;roscpp;rospy")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls

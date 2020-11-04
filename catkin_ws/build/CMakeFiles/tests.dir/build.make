@@ -43,10 +43,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
+<<<<<<< HEAD
+CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
+=======
+CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Utility rule file for tests.
 
@@ -67,6 +74,10 @@ CMakeFiles/tests.dir/clean:
 .PHONY : CMakeFiles/tests.dir/clean
 
 CMakeFiles/tests.dir/depend:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/patrick/projektarbeit/catkin_ws/src /home/patrick/projektarbeit/catkin_ws/src /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : CMakeFiles/tests.dir/depend
 

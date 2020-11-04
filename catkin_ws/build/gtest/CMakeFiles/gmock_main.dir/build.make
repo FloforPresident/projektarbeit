@@ -43,10 +43,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
+<<<<<<< HEAD
+CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
+=======
+CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Include any dependencies generated for this target.
 include gtest/CMakeFiles/gmock_main.dir/depend.make
@@ -59,16 +66,29 @@ include gtest/CMakeFiles/gmock_main.dir/flags.make
 
 gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o: gtest/CMakeFiles/gmock_main.dir/flags.make
 gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o: /usr/src/gtest/src/gtest-all.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o"
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc
+<<<<<<< HEAD
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/basti/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o"
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc
 
 gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.i"
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /usr/src/gtest/src/gtest-all.cc > CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.i
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /usr/src/gtest/src/gtest-all.cc > CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.i
 
 gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.s"
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /usr/src/gtest/src/gtest-all.cc -o CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.s
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /usr/src/gtest/src/gtest-all.cc -o CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.s
+=======
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o"
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc
+
+gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.i"
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /usr/src/gtest/src/gtest-all.cc > CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.i
+
+gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.s"
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /usr/src/gtest/src/gtest-all.cc -o CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.s
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o.requires:
 
@@ -83,16 +103,29 @@ gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o.provides.build:
 
 gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o: gtest/CMakeFiles/gmock_main.dir/flags.make
 gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o: /usr/src/gmock/src/gmock-all.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o"
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/src/gmock-all.cc.o -c /usr/src/gmock/src/gmock-all.cc
+<<<<<<< HEAD
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/basti/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o"
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/src/gmock-all.cc.o -c /usr/src/gmock/src/gmock-all.cc
 
 gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gmock_main.dir/src/gmock-all.cc.i"
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /usr/src/gmock/src/gmock-all.cc > CMakeFiles/gmock_main.dir/src/gmock-all.cc.i
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /usr/src/gmock/src/gmock-all.cc > CMakeFiles/gmock_main.dir/src/gmock-all.cc.i
 
 gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gmock_main.dir/src/gmock-all.cc.s"
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /usr/src/gmock/src/gmock-all.cc -o CMakeFiles/gmock_main.dir/src/gmock-all.cc.s
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /usr/src/gmock/src/gmock-all.cc -o CMakeFiles/gmock_main.dir/src/gmock-all.cc.s
+=======
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o"
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/src/gmock-all.cc.o -c /usr/src/gmock/src/gmock-all.cc
+
+gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gmock_main.dir/src/gmock-all.cc.i"
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /usr/src/gmock/src/gmock-all.cc > CMakeFiles/gmock_main.dir/src/gmock-all.cc.i
+
+gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gmock_main.dir/src/gmock-all.cc.s"
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /usr/src/gmock/src/gmock-all.cc -o CMakeFiles/gmock_main.dir/src/gmock-all.cc.s
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o.requires:
 
@@ -107,16 +140,29 @@ gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o.provides.build: gtest/CMakeFi
 
 gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o: gtest/CMakeFiles/gmock_main.dir/flags.make
 gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o: /usr/src/gmock/src/gmock_main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o"
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /usr/src/gmock/src/gmock_main.cc
+<<<<<<< HEAD
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/basti/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o"
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /usr/src/gmock/src/gmock_main.cc
 
 gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gmock_main.dir/src/gmock_main.cc.i"
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /usr/src/gmock/src/gmock_main.cc > CMakeFiles/gmock_main.dir/src/gmock_main.cc.i
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /usr/src/gmock/src/gmock_main.cc > CMakeFiles/gmock_main.dir/src/gmock_main.cc.i
 
 gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gmock_main.dir/src/gmock_main.cc.s"
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /usr/src/gmock/src/gmock_main.cc -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.s
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /usr/src/gmock/src/gmock_main.cc -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.s
+=======
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o"
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /usr/src/gmock/src/gmock_main.cc
+
+gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gmock_main.dir/src/gmock_main.cc.i"
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /usr/src/gmock/src/gmock_main.cc > CMakeFiles/gmock_main.dir/src/gmock_main.cc.i
+
+gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gmock_main.dir/src/gmock_main.cc.s"
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /usr/src/gmock/src/gmock_main.cc -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.s
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o.requires:
 
@@ -143,8 +189,13 @@ gtest/libgmock_main.so: gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o
 gtest/libgmock_main.so: gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o
 gtest/libgmock_main.so: gtest/CMakeFiles/gmock_main.dir/build.make
 gtest/libgmock_main.so: gtest/CMakeFiles/gmock_main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared library libgmock_main.so"
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gmock_main.dir/link.txt --verbose=$(VERBOSE)
+<<<<<<< HEAD
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/basti/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared library libgmock_main.so"
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gmock_main.dir/link.txt --verbose=$(VERBOSE)
+=======
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared library libgmock_main.so"
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gmock_main.dir/link.txt --verbose=$(VERBOSE)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Rule to build all files generated by this target.
 gtest/CMakeFiles/gmock_main.dir/build: gtest/libgmock_main.so
@@ -158,10 +209,18 @@ gtest/CMakeFiles/gmock_main.dir/requires: gtest/CMakeFiles/gmock_main.dir/src/gm
 .PHONY : gtest/CMakeFiles/gmock_main.dir/requires
 
 gtest/CMakeFiles/gmock_main.dir/clean:
-	cd /home/patrick/projektarbeit/catkin_ws/build/gtest && $(CMAKE_COMMAND) -P CMakeFiles/gmock_main.dir/cmake_clean.cmake
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build/gtest && $(CMAKE_COMMAND) -P CMakeFiles/gmock_main.dir/cmake_clean.cmake
 .PHONY : gtest/CMakeFiles/gmock_main.dir/clean
 
 gtest/CMakeFiles/gmock_main.dir/depend:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/patrick/projektarbeit/catkin_ws/src /usr/src/gmock /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build/gtest /home/patrick/projektarbeit/catkin_ws/build/gtest/CMakeFiles/gmock_main.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /usr/src/gmock /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/gtest /home/basti/projektarbeit/catkin_ws/build/gtest/CMakeFiles/gmock_main.dir/DependInfo.cmake --color=$(COLOR)
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build/gtest && $(CMAKE_COMMAND) -P CMakeFiles/gmock_main.dir/cmake_clean.cmake
+.PHONY : gtest/CMakeFiles/gmock_main.dir/clean
+
+gtest/CMakeFiles/gmock_main.dir/depend:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /usr/src/gmock /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/gtest /home/stefan/projektarbeit/catkin_ws/build/gtest/CMakeFiles/gmock_main.dir/DependInfo.cmake --color=$(COLOR)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : gtest/CMakeFiles/gmock_main.dir/depend
 

@@ -1,8 +1,12 @@
-prefix=/home/patrick/projektarbeit/catkin_ws/devel
+<<<<<<< HEAD
+prefix=/home/basti/projektarbeit/catkin_ws/devel
+=======
+prefix=/home/stefan/projektarbeit/catkin_ws/devel
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 Name: location_monitor
 Description: Description of location_monitor
 Version: 0.0.0
 Cflags: 
 Libs: -L${prefix}/lib 
-Requires: nav_msgs roscpp rospy
+Requires: nav_msgs move_base_msgs geometry_msgs roscpp rospy

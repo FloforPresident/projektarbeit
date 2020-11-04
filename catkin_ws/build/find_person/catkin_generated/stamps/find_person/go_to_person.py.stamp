@@ -39,9 +39,9 @@ def callback(data):
 
 	
 def letsGo():
-    rospy.init_node('find_person', anonymous=True)
-    rospy.Subscriber("chatter", String, callback)
-    rospy.spin()
+	rospy.init_node('find_person', anonymous=True)
+	rospy.Subscriber("chatter", String, callback)
+	rospy.spin()
 
 
 if __name__ == '__main__':

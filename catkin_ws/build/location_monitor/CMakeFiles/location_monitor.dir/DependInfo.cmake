@@ -4,7 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/patrick/projektarbeit/catkin_ws/src/location_monitor/src/location_monitor.cpp" "/home/patrick/projektarbeit/catkin_ws/build/location_monitor/CMakeFiles/location_monitor.dir/src/location_monitor.cpp.o"
+<<<<<<< HEAD
+  "/home/basti/projektarbeit/catkin_ws/src/location_monitor/src/location_monitor.cpp" "/home/basti/projektarbeit/catkin_ws/build/location_monitor/CMakeFiles/location_monitor.dir/src/location_monitor.cpp.o"
+=======
+  "/home/stefan/projektarbeit/catkin_ws/src/location_monitor/src/location_monitor.cpp" "/home/stefan/projektarbeit/catkin_ws/build/location_monitor/CMakeFiles/location_monitor.dir/src/location_monitor.cpp.o"
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,7 +21,11 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/patrick/projektarbeit/catkin_ws/src/location_monitor/include"
+<<<<<<< HEAD
+  "/home/basti/projektarbeit/catkin_ws/src/location_monitor/include"
+=======
+  "/home/stefan/projektarbeit/catkin_ws/src/location_monitor/include"
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   "/opt/ros/kinetic/include"
   "/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   )

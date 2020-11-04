@@ -43,10 +43,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
+<<<<<<< HEAD
+CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
+=======
+CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Utility rule file for _beginner_tutorials_generate_messages_check_deps_AddTwoInts.
 
@@ -54,7 +61,11 @@ CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
 include beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/progress.make
 
 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts:
-	cd /home/patrick/projektarbeit/catkin_ws/build/beginner_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py beginner_tutorials /home/patrick/projektarbeit/catkin_ws/src/beginner_tutorials/srv/AddTwoInts.srv 
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py beginner_tutorials /home/basti/projektarbeit/catkin_ws/src/beginner_tutorials/srv/AddTwoInts.srv 
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py beginner_tutorials /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/srv/AddTwoInts.srv 
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 _beginner_tutorials_generate_messages_check_deps_AddTwoInts: beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts
 _beginner_tutorials_generate_messages_check_deps_AddTwoInts: beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/build.make
@@ -67,10 +78,18 @@ beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_A
 .PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/build
 
 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/clean:
-	cd /home/patrick/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/cmake_clean.cmake
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/cmake_clean.cmake
 .PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/clean
 
 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/depend:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/patrick/projektarbeit/catkin_ws/src /home/patrick/projektarbeit/catkin_ws/src/beginner_tutorials /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build/beginner_tutorials /home/patrick/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/beginner_tutorials /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/DependInfo.cmake --color=$(COLOR)
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/cmake_clean.cmake
+.PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/clean
+
+beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/depend:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/DependInfo.cmake --color=$(COLOR)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/depend
 

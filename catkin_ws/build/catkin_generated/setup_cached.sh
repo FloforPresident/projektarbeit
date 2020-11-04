@@ -7,8 +7,13 @@
 # new environment variables
 
 # modified environment variables
+<<<<<<< HEAD
+export PWD="/home/basti/projektarbeit/catkin_ws/build"
+export ROS_PACKAGE_PATH="/home/basti/projektarbeit/catkin_ws/src:/opt/ros/kinetic/share"
+=======
 export LD_LIBRARY_PATH="/opt/ros/kinetic/lib:/opt/ros/kinetic/lib/x86_64-linux-gnu"
-export PATH="/opt/ros/kinetic/bin:/home/patrick/bin:/home/patrick/.local/bin:/home/patrick/bin:/home/patrick/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 export PKG_CONFIG_PATH="/opt/ros/kinetic/lib/pkgconfig:/opt/ros/kinetic/lib/x86_64-linux-gnu/pkgconfig"
-export PWD="/home/patrick/projektarbeit/catkin_ws/build"
+export PWD="/home/stefan/projektarbeit/catkin_ws/build"
 export PYTHONPATH="/opt/ros/kinetic/lib/python2.7/dist-packages"
+export ROS_PACKAGE_PATH="/home/stefan/projektarbeit/catkin_ws/src:/opt/ros/kinetic/share"
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357

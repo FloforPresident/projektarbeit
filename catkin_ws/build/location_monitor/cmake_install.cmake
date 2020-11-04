@@ -1,8 +1,16 @@
-# Install script for directory: /home/patrick/projektarbeit/catkin_ws/src/location_monitor
+<<<<<<< HEAD
+# Install script for directory: /home/basti/projektarbeit/catkin_ws/src/location_monitor
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/patrick/projektarbeit/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/basti/projektarbeit/catkin_ws/install")
+=======
+# Install script for directory: /home/stefan/projektarbeit/catkin_ws/src/location_monitor
+
+# Set the install prefix
+if(NOT DEFINED CMAKE_INSTALL_PREFIX)
+  set(CMAKE_INSTALL_PREFIX "/home/stefan/projektarbeit/catkin_ws/install")
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,37 +41,78 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor/cmake" TYPE FILE FILES "/home/patrick/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitor-msg-paths.cmake")
+<<<<<<< HEAD
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor/cmake" TYPE FILE FILES "/home/basti/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitor-msg-paths.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/patrick/projektarbeit/catkin_ws/devel/share/roseus/ros/location_monitor")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/basti/projektarbeit/catkin_ws/devel/share/roseus/ros/location_monitor")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/location_monitor")
+  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/location_monitor")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/location_monitor")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/location_monitor")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/patrick/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitor.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/basti/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitor.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor/cmake" TYPE FILE FILES "/home/patrick/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitor-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor/cmake" TYPE FILE FILES "/home/basti/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitor-msg-extras.cmake")
+=======
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor/cmake" TYPE FILE FILES "/home/stefan/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitor-msg-paths.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/stefan/projektarbeit/catkin_ws/devel/share/roseus/ros/location_monitor")
+endif()
+
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/location_monitor")
+endif()
+
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/location_monitor")
+endif()
+
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/stefan/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitor.pc")
+endif()
+
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor/cmake" TYPE FILE FILES "/home/stefan/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitor-msg-extras.cmake")
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor/cmake" TYPE FILE FILES
-    "/home/patrick/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitorConfig.cmake"
-    "/home/patrick/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitorConfig-version.cmake"
+<<<<<<< HEAD
+    "/home/basti/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitorConfig.cmake"
+    "/home/basti/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitorConfig-version.cmake"
+=======
+    "/home/stefan/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitorConfig.cmake"
+    "/home/stefan/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/location_monitorConfig-version.cmake"
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor" TYPE FILE FILES "/home/patrick/projektarbeit/catkin_ws/src/location_monitor/package.xml")
+<<<<<<< HEAD
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor" TYPE FILE FILES "/home/basti/projektarbeit/catkin_ws/src/location_monitor/package.xml")
+endif()
+
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/location_monitor" TYPE PROGRAM FILES "/home/basti/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/print_location.py")
+=======
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/location_monitor" TYPE FILE FILES "/home/stefan/projektarbeit/catkin_ws/src/location_monitor/package.xml")
+endif()
+
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/location_monitor" TYPE PROGRAM FILES "/home/stefan/projektarbeit/catkin_ws/build/location_monitor/catkin_generated/installspace/print_location.py")
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 endif()
 

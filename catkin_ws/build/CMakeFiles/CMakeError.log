@@ -1,24 +1,47 @@
 Determining if the pthread_create exist failed with the following output:
-Change Dir: /home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp
+<<<<<<< HEAD
+Change Dir: /home/basti/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_eb0ce/fast"
-/usr/bin/make -f CMakeFiles/cmTC_eb0ce.dir/build.make CMakeFiles/cmTC_eb0ce.dir/build
-make[1]: Verzeichnis „/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp“ wird betreten
-Building C object CMakeFiles/cmTC_eb0ce.dir/CheckSymbolExists.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_eb0ce.dir/CheckSymbolExists.c.o   -c /home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_eb0ce
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eb0ce.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_eb0ce.dir/CheckSymbolExists.c.o  -o cmTC_eb0ce -rdynamic 
-CMakeFiles/cmTC_eb0ce.dir/CheckSymbolExists.c.o: In Funktion `main':
-CheckSymbolExists.c:(.text+0x16): Nicht definierter Verweis auf `pthread_create'
+Run Build Command:"/usr/bin/make" "cmTC_5e7b6/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5e7b6.dir/build.make CMakeFiles/cmTC_5e7b6.dir/build
+make[1]: Entering directory '/home/basti/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5e7b6.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_5e7b6.dir/CheckSymbolExists.c.o   -c /home/basti/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_5e7b6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5e7b6.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_5e7b6.dir/CheckSymbolExists.c.o  -o cmTC_5e7b6 -rdynamic 
+CMakeFiles/cmTC_5e7b6.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_eb0ce.dir/build.make:97: die Regel für Ziel „cmTC_eb0ce“ scheiterte
-make[1]: *** [cmTC_eb0ce] Fehler 1
-make[1]: Verzeichnis „/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp“ wird verlassen
-Makefile:126: die Regel für Ziel „cmTC_eb0ce/fast“ scheiterte
-make: *** [cmTC_eb0ce/fast] Fehler 2
+CMakeFiles/cmTC_5e7b6.dir/build.make:97: recipe for target 'cmTC_5e7b6' failed
+make[1]: *** [cmTC_5e7b6] Error 1
+make[1]: Leaving directory '/home/basti/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_5e7b6/fast' failed
+make: *** [cmTC_5e7b6/fast] Error 2
 
-File /home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+File /home/basti/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+=======
+Change Dir: /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_7622c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7622c.dir/build.make CMakeFiles/cmTC_7622c.dir/build
+make[1]: Entering directory '/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7622c.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_7622c.dir/CheckSymbolExists.c.o   -c /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_7622c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7622c.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_7622c.dir/CheckSymbolExists.c.o  -o cmTC_7622c -rdynamic 
+CMakeFiles/cmTC_7622c.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7622c.dir/build.make:97: recipe for target 'cmTC_7622c' failed
+make[1]: *** [cmTC_7622c] Error 1
+make[1]: Leaving directory '/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_7622c/fast' failed
+make: *** [cmTC_7622c/fast] Error 2
+
+File /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 /* */
 #include <pthread.h>
 
@@ -34,22 +57,42 @@ int main(int argc, char** argv)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp
+<<<<<<< HEAD
+Change Dir: /home/basti/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_5fa56/fast"
-/usr/bin/make -f CMakeFiles/cmTC_5fa56.dir/build.make CMakeFiles/cmTC_5fa56.dir/build
-make[1]: Verzeichnis „/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp“ wird betreten
-Building C object CMakeFiles/cmTC_5fa56.dir/CheckFunctionExists.c.o
-/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_5fa56.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
-Linking C executable cmTC_5fa56
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5fa56.dir/link.txt --verbose=1
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_5fa56.dir/CheckFunctionExists.c.o  -o cmTC_5fa56 -rdynamic -lpthreads 
+Run Build Command:"/usr/bin/make" "cmTC_4b7fa/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4b7fa.dir/build.make CMakeFiles/cmTC_4b7fa.dir/build
+make[1]: Entering directory '/home/basti/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4b7fa.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_4b7fa.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4b7fa
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4b7fa.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_4b7fa.dir/CheckFunctionExists.c.o  -o cmTC_4b7fa -rdynamic -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_5fa56.dir/build.make:97: die Regel für Ziel „cmTC_5fa56“ scheiterte
-make[1]: *** [cmTC_5fa56] Fehler 1
-make[1]: Verzeichnis „/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp“ wird verlassen
-Makefile:126: die Regel für Ziel „cmTC_5fa56/fast“ scheiterte
-make: *** [cmTC_5fa56/fast] Fehler 2
+CMakeFiles/cmTC_4b7fa.dir/build.make:97: recipe for target 'cmTC_4b7fa' failed
+make[1]: *** [cmTC_4b7fa] Error 1
+make[1]: Leaving directory '/home/basti/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_4b7fa/fast' failed
+make: *** [cmTC_4b7fa/fast] Error 2
+=======
+Change Dir: /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_5f1c7/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5f1c7.dir/build.make CMakeFiles/cmTC_5f1c7.dir/build
+make[1]: Entering directory '/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5f1c7.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_5f1c7.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_5f1c7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5f1c7.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_5f1c7.dir/CheckFunctionExists.c.o  -o cmTC_5f1c7 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_5f1c7.dir/build.make:97: recipe for target 'cmTC_5f1c7' failed
+make[1]: *** [cmTC_5f1c7] Error 1
+make[1]: Leaving directory '/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_5f1c7/fast' failed
+make: *** [cmTC_5f1c7/fast] Error 2
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 

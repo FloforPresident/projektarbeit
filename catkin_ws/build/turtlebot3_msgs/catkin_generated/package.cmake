@@ -1,6 +1,6 @@
 set(_CATKIN_CURRENT_PACKAGE "turtlebot3_msgs")
-set(turtlebot3_msgs_VERSION "1.0.0")
-set(turtlebot3_msgs_MAINTAINER "Pyo <pyo@robotis.com>, Gilbert <kkjong@robotis.com>")
+set(turtlebot3_msgs_VERSION "1.0.1")
+set(turtlebot3_msgs_MAINTAINER "Will Son <willson@robotis.com>")
 set(turtlebot3_msgs_PACKAGE_FORMAT "2")
 set(turtlebot3_msgs_BUILD_DEPENDS "message_generation" "std_msgs")
 set(turtlebot3_msgs_BUILD_EXPORT_DEPENDS "message_runtime" "std_msgs")

@@ -1,8 +1,16 @@
-prefix=/home/patrick/projektarbeit/catkin_ws/devel
+<<<<<<< HEAD
+prefix=/home/basti/projektarbeit/catkin_ws/devel
+=======
+prefix=/home/stefan/projektarbeit/catkin_ws/devel
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 Name: beginner_tutorials
 Description: Description of beginner_tutorials
 Version: 0.0.0
-Cflags: -I/home/patrick/projektarbeit/catkin_ws/devel/include
+<<<<<<< HEAD
+Cflags: -I/home/basti/projektarbeit/catkin_ws/devel/include
+=======
+Cflags: -I/home/stefan/projektarbeit/catkin_ws/devel/include
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 Libs: -L${prefix}/lib 
 Requires: roscpp rospy std_msgs message_runtime

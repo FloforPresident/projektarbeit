@@ -48,10 +48,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
+<<<<<<< HEAD
+CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
+=======
+CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -135,14 +142,24 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/patrick/projektarbeit/catkin_ws/build/CMakeFiles /home/patrick/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/progress.marks
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/patrick/projektarbeit/catkin_ws/build/CMakeFiles 0
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/basti/projektarbeit/catkin_ws/build/CMakeFiles /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/progress.marks
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/basti/projektarbeit/catkin_ws/build/CMakeFiles 0
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/progress.marks
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles 0
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/clean
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/clean
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/clean
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : clean
 
 # The main clean target
@@ -152,22 +169,38 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/preinstall
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/preinstall
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/preinstall
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/preinstall
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/preinstall
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/preinstall
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : depend
 
 # Convenience name for target.
 beginner_tutorials/CMakeFiles/listener.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/listener.dir/rule
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/listener.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/listener.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : beginner_tutorials/CMakeFiles/listener.dir/rule
 
 # Convenience name for target.
@@ -177,12 +210,20 @@ listener: beginner_tutorials/CMakeFiles/listener.dir/rule
 
 # fast build rule for target.
 listener/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/build
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : listener/fast
 
 # Convenience name for target.
 beginner_tutorials/CMakeFiles/talker.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/talker.dir/rule
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/talker.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/talker.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : beginner_tutorials/CMakeFiles/talker.dir/rule
 
 # Convenience name for target.
@@ -192,12 +233,20 @@ talker: beginner_tutorials/CMakeFiles/talker.dir/rule
 
 # fast build rule for target.
 talker/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/build
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : talker/fast
 
 # Convenience name for target.
 beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/rule
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/rule
 
 # Convenience name for target.
@@ -207,73 +256,23 @@ beginner_tutorials_genpy: beginner_tutorials/CMakeFiles/beginner_tutorials_genpy
 
 # fast build rule for target.
 beginner_tutorials_genpy/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/build
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/build
 .PHONY : beginner_tutorials_genpy/fast
 
 # Convenience name for target.
 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 .PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_cpp: beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_cpp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-beginner_tutorials_generate_messages_nodejs: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule
-
-.PHONY : beginner_tutorials_generate_messages_nodejs
-
-# fast build rule for target.
-beginner_tutorials_generate_messages_nodejs/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/build
-.PHONY : beginner_tutorials_generate_messages_nodejs/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_py: beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/rule
-
-.PHONY : roscpp_generate_messages_py
-
-# fast build rule for target.
-roscpp_generate_messages_py/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/build
-.PHONY : roscpp_generate_messages_py/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_eus: beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_eus
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
-.PHONY : rosgraph_msgs_generate_messages_eus/fast
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_genpy.dir/build
+.PHONY : beginner_tutorials_genpy/fast
 
 # Convenience name for target.
 beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/rule
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/rule
 .PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Convenience name for target.
 beginner_tutorials_gennodejs: beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/rule
@@ -281,178 +280,48 @@ beginner_tutorials_gennodejs: beginner_tutorials/CMakeFiles/beginner_tutorials_g
 .PHONY : beginner_tutorials_gennodejs
 
 # fast build rule for target.
+<<<<<<< HEAD
+rosgraph_msgs_generate_messages_cpp/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule
+=======
 beginner_tutorials_gennodejs/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/build
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/build
 .PHONY : beginner_tutorials_gennodejs/fast
 
 # Convenience name for target.
-beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Convenience name for target.
-rosgraph_msgs_generate_messages_nodejs: beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+beginner_tutorials_genlisp: beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule
 
-.PHONY : rosgraph_msgs_generate_messages_nodejs
+.PHONY : beginner_tutorials_genlisp
 
 # fast build rule for target.
-rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
-.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
+<<<<<<< HEAD
+beginner_tutorials_generate_messages_nodejs/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/build
+.PHONY : beginner_tutorials_generate_messages_nodejs/fast
 
 # Convenience name for target.
-beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_cpp: beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-.PHONY : roscpp_generate_messages_cpp
-
-# fast build rule for target.
-roscpp_generate_messages_cpp/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-.PHONY : roscpp_generate_messages_cpp/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_eus: beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-
-.PHONY : roscpp_generate_messages_eus
-
-# fast build rule for target.
-roscpp_generate_messages_eus/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/build
-.PHONY : roscpp_generate_messages_eus/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_py: beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_py
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_py/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
-.PHONY : rosgraph_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_lisp: beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_lisp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_lisp/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_nodejs: beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-
-.PHONY : roscpp_generate_messages_nodejs
-
-# fast build rule for target.
-roscpp_generate_messages_nodejs/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
-.PHONY : roscpp_generate_messages_nodejs/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_lisp: beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-
-.PHONY : roscpp_generate_messages_lisp
-
-# fast build rule for target.
-roscpp_generate_messages_lisp/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/build
-.PHONY : roscpp_generate_messages_lisp/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/rule
-
-# Convenience name for target.
-_beginner_tutorials_generate_messages_check_deps_AddTwoInts: beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/rule
-
-.PHONY : _beginner_tutorials_generate_messages_check_deps_AddTwoInts
-
-# fast build rule for target.
-_beginner_tutorials_generate_messages_check_deps_AddTwoInts/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/build.make beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/build
-.PHONY : _beginner_tutorials_generate_messages_check_deps_AddTwoInts/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-beginner_tutorials_generate_messages_cpp: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/rule
-
-.PHONY : beginner_tutorials_generate_messages_cpp
-
-# fast build rule for target.
-beginner_tutorials_generate_messages_cpp/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/build
-.PHONY : beginner_tutorials_generate_messages_cpp/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/rule
-
-# Convenience name for target.
-beginner_tutorials_gencpp: beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/rule
-
-.PHONY : beginner_tutorials_gencpp
-
-# fast build rule for target.
-beginner_tutorials_gencpp/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/build
-.PHONY : beginner_tutorials_gencpp/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-beginner_tutorials_generate_messages_eus: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/rule
-
-.PHONY : beginner_tutorials_generate_messages_eus
-
-# fast build rule for target.
-beginner_tutorials_generate_messages_eus/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/build
-.PHONY : beginner_tutorials_generate_messages_eus/fast
+beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/rule
+=======
+beginner_tutorials_genlisp/fast:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/build
+.PHONY : beginner_tutorials_genlisp/fast
 
 # Convenience name for target.
 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/rule
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/rule
 .PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -462,72 +331,27 @@ beginner_tutorials_generate_messages_lisp: beginner_tutorials/CMakeFiles/beginne
 
 # fast build rule for target.
 beginner_tutorials_generate_messages_lisp/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/build
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/build
 .PHONY : beginner_tutorials_generate_messages_lisp/fast
 
 # Convenience name for target.
-beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/rule
+beginner_tutorials/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
-_beginner_tutorials_generate_messages_check_deps_Num: beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/rule
+std_msgs_generate_messages_py: beginner_tutorials/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 
-.PHONY : _beginner_tutorials_generate_messages_check_deps_Num
+.PHONY : std_msgs_generate_messages_py
 
 # fast build rule for target.
-_beginner_tutorials_generate_messages_check_deps_Num/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/build.make beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/build
-.PHONY : _beginner_tutorials_generate_messages_check_deps_Num/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/rule
-
-# Convenience name for target.
-beginner_tutorials_geneus: beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/rule
-
-.PHONY : beginner_tutorials_geneus
-
-# fast build rule for target.
-beginner_tutorials_geneus/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/build
-.PHONY : beginner_tutorials_geneus/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule
-
-# Convenience name for target.
-beginner_tutorials_genlisp: beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule
-
-.PHONY : beginner_tutorials_genlisp
-
-# fast build rule for target.
-beginner_tutorials_genlisp/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/build
-.PHONY : beginner_tutorials_genlisp/fast
-
-# Convenience name for target.
-beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule
-.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule
-
-# Convenience name for target.
-beginner_tutorials_generate_messages: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule
-
-.PHONY : beginner_tutorials_generate_messages
-
-# fast build rule for target.
-beginner_tutorials_generate_messages/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/build
-.PHONY : beginner_tutorials_generate_messages/fast
+std_msgs_generate_messages_py/fast:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/std_msgs_generate_messages_py.dir/build.make beginner_tutorials/CMakeFiles/std_msgs_generate_messages_py.dir/build
+.PHONY : std_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/rule:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/rule
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/rule
 .PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -537,16 +361,546 @@ beginner_tutorials_generate_messages_py: beginner_tutorials/CMakeFiles/beginner_
 
 # fast build rule for target.
 beginner_tutorials_generate_messages_py/fast:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/build
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/build
 .PHONY : beginner_tutorials_generate_messages_py/fast
 
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_generate_messages: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule
+
+.PHONY : beginner_tutorials_generate_messages
+
+# fast build rule for target.
+beginner_tutorials_generate_messages/fast:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/build
+.PHONY : beginner_tutorials_generate_messages/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_py: beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+.PHONY : roscpp_generate_messages_py
+
+# fast build rule for target.
+roscpp_generate_messages_py/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : roscpp_generate_messages_py/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_eus: beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_eus
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_eus/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+.PHONY : rosgraph_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_gennodejs: beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/rule
+
+.PHONY : beginner_tutorials_gennodejs
+
+# fast build rule for target.
+beginner_tutorials_gennodejs/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_gennodejs.dir/build
+.PHONY : beginner_tutorials_gennodejs/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+.PHONY : rosgraph_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_nodejs: beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_nodejs/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_cpp: beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+.PHONY : roscpp_generate_messages_cpp
+
+# fast build rule for target.
+roscpp_generate_messages_cpp/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : roscpp_generate_messages_cpp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_cpp: beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_cpp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_cpp/fast:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_cpp: beginner_tutorials/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : std_msgs_generate_messages_cpp
+
+# fast build rule for target.
+std_msgs_generate_messages_cpp/fast:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make beginner_tutorials/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+.PHONY : std_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_eus: beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+
+.PHONY : roscpp_generate_messages_eus
+
+# fast build rule for target.
+roscpp_generate_messages_eus/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_eus.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : roscpp_generate_messages_eus/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_py: beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_py
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_py/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : rosgraph_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_lisp: beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_lisp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_lisp/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : rosgraph_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_nodejs: beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+
+.PHONY : roscpp_generate_messages_nodejs
+
+# fast build rule for target.
+roscpp_generate_messages_nodejs/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : roscpp_generate_messages_nodejs/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_nodejs: beginner_tutorials/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : std_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+std_msgs_generate_messages_nodejs/fast:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make beginner_tutorials/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+.PHONY : std_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_lisp: beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+
+.PHONY : roscpp_generate_messages_lisp
+
+# fast build rule for target.
+roscpp_generate_messages_lisp/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make beginner_tutorials/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : roscpp_generate_messages_lisp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_eus: beginner_tutorials/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+
+.PHONY : std_msgs_generate_messages_eus
+
+# fast build rule for target.
+std_msgs_generate_messages_eus/fast:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make beginner_tutorials/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+.PHONY : std_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_generate_messages_nodejs: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/rule
+
+.PHONY : beginner_tutorials_generate_messages_nodejs
+
+# fast build rule for target.
+beginner_tutorials_generate_messages_nodejs/fast:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/build
+.PHONY : beginner_tutorials_generate_messages_nodejs/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+std_msgs_generate_messages_lisp: beginner_tutorials/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : std_msgs_generate_messages_lisp
+
+# fast build rule for target.
+std_msgs_generate_messages_lisp/fast:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make beginner_tutorials/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+.PHONY : std_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/rule
+
+# Convenience name for target.
+_beginner_tutorials_generate_messages_check_deps_AddTwoInts: beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/rule
+
+.PHONY : _beginner_tutorials_generate_messages_check_deps_AddTwoInts
+
+# fast build rule for target.
+_beginner_tutorials_generate_messages_check_deps_AddTwoInts/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/build.make beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/build.make beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_AddTwoInts.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : _beginner_tutorials_generate_messages_check_deps_AddTwoInts/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_generate_messages_cpp: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/rule
+
+.PHONY : beginner_tutorials_generate_messages_cpp
+
+# fast build rule for target.
+beginner_tutorials_generate_messages_cpp/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_cpp.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials_generate_messages_cpp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_gencpp: beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/rule
+
+.PHONY : beginner_tutorials_gencpp
+
+# fast build rule for target.
+beginner_tutorials_gencpp/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_gencpp.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials_gencpp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_generate_messages_eus: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/rule
+
+.PHONY : beginner_tutorials_generate_messages_eus
+
+# fast build rule for target.
+beginner_tutorials_generate_messages_eus/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/build
+.PHONY : beginner_tutorials_generate_messages_eus/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_generate_messages_lisp: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/rule
+
+.PHONY : beginner_tutorials_generate_messages_lisp
+
+# fast build rule for target.
+beginner_tutorials_generate_messages_lisp/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_lisp.dir/build
+.PHONY : beginner_tutorials_generate_messages_lisp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_eus.dir/build
+.PHONY : beginner_tutorials_generate_messages_eus/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/rule:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/rule
+
+# Convenience name for target.
+_beginner_tutorials_generate_messages_check_deps_Num: beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/rule
+
+.PHONY : _beginner_tutorials_generate_messages_check_deps_Num
+
+# fast build rule for target.
+_beginner_tutorials_generate_messages_check_deps_Num/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/build.make beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/build
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/build.make beginner_tutorials/CMakeFiles/_beginner_tutorials_generate_messages_check_deps_Num.dir/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : _beginner_tutorials_generate_messages_check_deps_Num/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/rule:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/rule
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/rule
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_geneus: beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/rule
+
+.PHONY : beginner_tutorials_geneus
+
+# fast build rule for target.
+beginner_tutorials_geneus/fast:
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/build
+.PHONY : beginner_tutorials_geneus/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_genlisp: beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/rule
+
+.PHONY : beginner_tutorials_genlisp
+
+# fast build rule for target.
+beginner_tutorials_genlisp/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_genlisp.dir/build
+.PHONY : beginner_tutorials_genlisp/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_generate_messages: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/rule
+
+.PHONY : beginner_tutorials_generate_messages
+
+# fast build rule for target.
+beginner_tutorials_generate_messages/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages.dir/build
+.PHONY : beginner_tutorials_generate_messages/fast
+
+# Convenience name for target.
+beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/rule:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/rule
+.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/rule
+
+# Convenience name for target.
+beginner_tutorials_generate_messages_py: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/rule
+
+.PHONY : beginner_tutorials_generate_messages_py
+
+# fast build rule for target.
+beginner_tutorials_generate_messages_py/fast:
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_py.dir/build
+.PHONY : beginner_tutorials_generate_messages_py/fast
+
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/build.make beginner_tutorials/CMakeFiles/beginner_tutorials_geneus.dir/build
+.PHONY : beginner_tutorials_geneus/fast
+
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 src/listener.o: src/listener.cpp.o
 
 .PHONY : src/listener.o
 
 # target to build an object file
 src/listener.cpp.o:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/src/listener.cpp.o
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/src/listener.cpp.o
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/src/listener.cpp.o
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/listener.cpp.o
 
 src/listener.i: src/listener.cpp.i
@@ -555,7 +909,11 @@ src/listener.i: src/listener.cpp.i
 
 # target to preprocess a source file
 src/listener.cpp.i:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/src/listener.cpp.i
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/src/listener.cpp.i
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/src/listener.cpp.i
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/listener.cpp.i
 
 src/listener.s: src/listener.cpp.s
@@ -564,7 +922,11 @@ src/listener.s: src/listener.cpp.s
 
 # target to generate assembly for a file
 src/listener.cpp.s:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/src/listener.cpp.s
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/src/listener.cpp.s
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/listener.dir/build.make beginner_tutorials/CMakeFiles/listener.dir/src/listener.cpp.s
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/listener.cpp.s
 
 src/talker.o: src/talker.cpp.o
@@ -573,7 +935,11 @@ src/talker.o: src/talker.cpp.o
 
 # target to build an object file
 src/talker.cpp.o:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.o
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.o
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.o
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/talker.cpp.o
 
 src/talker.i: src/talker.cpp.i
@@ -582,7 +948,11 @@ src/talker.i: src/talker.cpp.i
 
 # target to preprocess a source file
 src/talker.cpp.i:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.i
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.i
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.i
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/talker.cpp.i
 
 src/talker.s: src/talker.cpp.s
@@ -591,7 +961,11 @@ src/talker.s: src/talker.cpp.s
 
 # target to generate assembly for a file
 src/talker.cpp.s:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.s
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.s
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f beginner_tutorials/CMakeFiles/talker.dir/build.make beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.s
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/talker.cpp.s
 
 # Help Target
@@ -608,30 +982,35 @@ help:
 	@echo "... listener"
 	@echo "... talker"
 	@echo "... beginner_tutorials_genpy"
-	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... beginner_tutorials_generate_messages_nodejs"
+	@echo "... beginner_tutorials_gennodejs"
+	@echo "... beginner_tutorials_genlisp"
+	@echo "... beginner_tutorials_generate_messages_lisp"
+	@echo "... std_msgs_generate_messages_py"
+	@echo "... beginner_tutorials_generate_messages_py"
+	@echo "... beginner_tutorials_generate_messages"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... beginner_tutorials_gennodejs"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_cpp"
+	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_nodejs"
+	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_lisp"
+	@echo "... std_msgs_generate_messages_eus"
+	@echo "... beginner_tutorials_generate_messages_nodejs"
+	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... rebuild_cache"
 	@echo "... _beginner_tutorials_generate_messages_check_deps_AddTwoInts"
 	@echo "... beginner_tutorials_generate_messages_cpp"
 	@echo "... beginner_tutorials_gencpp"
 	@echo "... beginner_tutorials_generate_messages_eus"
-	@echo "... beginner_tutorials_generate_messages_lisp"
 	@echo "... test"
 	@echo "... _beginner_tutorials_generate_messages_check_deps_Num"
 	@echo "... beginner_tutorials_geneus"
-	@echo "... beginner_tutorials_genlisp"
-	@echo "... beginner_tutorials_generate_messages"
-	@echo "... beginner_tutorials_generate_messages_py"
 	@echo "... src/listener.o"
 	@echo "... src/listener.i"
 	@echo "... src/listener.s"
@@ -649,6 +1028,10 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : cmake_check_build_system
 

@@ -67,14 +67,23 @@ set(face_recognition_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(face_recognition_SOURCE_PREFIX /home/patrick/projektarbeit/catkin_ws/src/face_recognition)
-  set(face_recognition_DEVEL_PREFIX /home/patrick/projektarbeit/catkin_ws/devel)
+<<<<<<< HEAD
+  set(face_recognition_SOURCE_PREFIX /home/basti/projektarbeit/catkin_ws/src/face_recognition)
+  set(face_recognition_DEVEL_PREFIX /home/basti/projektarbeit/catkin_ws/devel)
+=======
+  set(face_recognition_SOURCE_PREFIX /home/stefan/projektarbeit/catkin_ws/src/face_recognition)
+  set(face_recognition_DEVEL_PREFIX /home/stefan/projektarbeit/catkin_ws/devel)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   set(face_recognition_INSTALL_PREFIX "")
   set(face_recognition_PREFIX ${face_recognition_DEVEL_PREFIX})
 else()
   set(face_recognition_SOURCE_PREFIX "")
   set(face_recognition_DEVEL_PREFIX "")
-  set(face_recognition_INSTALL_PREFIX /home/patrick/projektarbeit/catkin_ws/install)
+<<<<<<< HEAD
+  set(face_recognition_INSTALL_PREFIX /home/basti/projektarbeit/catkin_ws/install)
+=======
+  set(face_recognition_INSTALL_PREFIX /home/stefan/projektarbeit/catkin_ws/install)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   set(face_recognition_PREFIX ${face_recognition_INSTALL_PREFIX})
 endif()
 
@@ -110,7 +119,11 @@ if(NOT " " STREQUAL " ")
         message(FATAL_ERROR "Project 'face_recognition' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'face_recognition' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/patrick/projektarbeit/catkin_ws/src/face_recognition/${idir}'.  ${_report}")
+<<<<<<< HEAD
+      message(FATAL_ERROR "Project 'face_recognition' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/basti/projektarbeit/catkin_ws/src/face_recognition/${idir}'.  ${_report}")
+=======
+      message(FATAL_ERROR "Project 'face_recognition' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/stefan/projektarbeit/catkin_ws/src/face_recognition/${idir}'.  ${_report}")
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
     endif()
     _list_append_unique(face_recognition_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +167,11 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/patrick/projektarbeit/catkin_ws/devel/lib;/home/patrick/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+<<<<<<< HEAD
+    foreach(path /home/basti/projektarbeit/catkin_ws/devel/lib;/home/basti/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+=======
+    foreach(path /home/stefan/projektarbeit/catkin_ws/devel/lib;/home/stefan/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

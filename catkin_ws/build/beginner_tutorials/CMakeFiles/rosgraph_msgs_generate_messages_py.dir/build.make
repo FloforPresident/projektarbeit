@@ -43,10 +43,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
+<<<<<<< HEAD
+CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
+=======
+CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Utility rule file for rosgraph_msgs_generate_messages_py.
 
@@ -63,10 +70,18 @@ beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build: rosg
 .PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 
 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean:
-	cd /home/patrick/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_py.dir/cmake_clean.cmake
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean
 
 beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/depend:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/patrick/projektarbeit/catkin_ws/src /home/patrick/projektarbeit/catkin_ws/src/beginner_tutorials /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build/beginner_tutorials /home/patrick/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/beginner_tutorials /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_py.dir/cmake_clean.cmake
+.PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean
+
+beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/depend:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : beginner_tutorials/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/depend
 

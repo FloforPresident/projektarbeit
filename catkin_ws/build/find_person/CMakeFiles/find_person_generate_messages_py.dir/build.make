@@ -43,33 +43,60 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/patrick/projektarbeit/catkin_ws/src
+<<<<<<< HEAD
+CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/patrick/projektarbeit/catkin_ws/build
+CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
+=======
+CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Utility rule file for find_person_generate_messages_py.
 
 # Include the progress variables for this target.
 include find_person/CMakeFiles/find_person_generate_messages_py.dir/progress.make
 
-find_person/CMakeFiles/find_person_generate_messages_py: /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py
-find_person/CMakeFiles/find_person_generate_messages_py: /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py
+<<<<<<< HEAD
+find_person/CMakeFiles/find_person_generate_messages_py: /home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py
+find_person/CMakeFiles/find_person_generate_messages_py: /home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py
 
 
-/home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
-/home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py: /home/patrick/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG find_person/person_info"
-	cd /home/patrick/projektarbeit/catkin_ws/build/find_person && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/patrick/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg -Ifind_person:/home/patrick/projektarbeit/catkin_ws/src/find_person/msg -Inav_msgs:/opt/ros/kinetic/share/nav_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -Iactionlib_msgs:/opt/ros/kinetic/share/actionlib_msgs/cmake/../msg -p find_person -o /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg
+/home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py: /home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/basti/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG find_person/person_info"
+	cd /home/basti/projektarbeit/catkin_ws/build/find_person && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/basti/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg -Ifind_person:/home/basti/projektarbeit/catkin_ws/src/find_person/msg -Inav_msgs:/opt/ros/kinetic/share/nav_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -Iactionlib_msgs:/opt/ros/kinetic/share/actionlib_msgs/cmake/../msg -p find_person -o /home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg
 
-/home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
-/home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py: /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python msg __init__.py for find_person"
-	cd /home/patrick/projektarbeit/catkin_ws/build/find_person && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg --initpy
+/home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py: /home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/basti/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python msg __init__.py for find_person"
+	cd /home/basti/projektarbeit/catkin_ws/build/find_person && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg --initpy
 
 find_person_generate_messages_py: find_person/CMakeFiles/find_person_generate_messages_py
-find_person_generate_messages_py: /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py
-find_person_generate_messages_py: /home/patrick/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py
+find_person_generate_messages_py: /home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py
+find_person_generate_messages_py: /home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py
+=======
+find_person/CMakeFiles/find_person_generate_messages_py: /home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py
+find_person/CMakeFiles/find_person_generate_messages_py: /home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py
+
+
+/home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py: /home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG find_person/person_info"
+	cd /home/stefan/projektarbeit/catkin_ws/build/find_person && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/stefan/projektarbeit/catkin_ws/src/find_person/msg/person_info.msg -Ifind_person:/home/stefan/projektarbeit/catkin_ws/src/find_person/msg -Inav_msgs:/opt/ros/kinetic/share/nav_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -Iactionlib_msgs:/opt/ros/kinetic/share/actionlib_msgs/cmake/../msg -p find_person -o /home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg
+
+/home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py: /home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python msg __init__.py for find_person"
+	cd /home/stefan/projektarbeit/catkin_ws/build/find_person && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg --initpy
+
+find_person_generate_messages_py: find_person/CMakeFiles/find_person_generate_messages_py
+find_person_generate_messages_py: /home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py
+find_person_generate_messages_py: /home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 find_person_generate_messages_py: find_person/CMakeFiles/find_person_generate_messages_py.dir/build.make
 
 .PHONY : find_person_generate_messages_py
@@ -80,10 +107,18 @@ find_person/CMakeFiles/find_person_generate_messages_py.dir/build: find_person_g
 .PHONY : find_person/CMakeFiles/find_person_generate_messages_py.dir/build
 
 find_person/CMakeFiles/find_person_generate_messages_py.dir/clean:
-	cd /home/patrick/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/find_person_generate_messages_py.dir/cmake_clean.cmake
+<<<<<<< HEAD
+	cd /home/basti/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/find_person_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : find_person/CMakeFiles/find_person_generate_messages_py.dir/clean
 
 find_person/CMakeFiles/find_person_generate_messages_py.dir/depend:
-	cd /home/patrick/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/patrick/projektarbeit/catkin_ws/src /home/patrick/projektarbeit/catkin_ws/src/find_person /home/patrick/projektarbeit/catkin_ws/build /home/patrick/projektarbeit/catkin_ws/build/find_person /home/patrick/projektarbeit/catkin_ws/build/find_person/CMakeFiles/find_person_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/find_person /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/find_person /home/basti/projektarbeit/catkin_ws/build/find_person/CMakeFiles/find_person_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+=======
+	cd /home/stefan/projektarbeit/catkin_ws/build/find_person && $(CMAKE_COMMAND) -P CMakeFiles/find_person_generate_messages_py.dir/cmake_clean.cmake
+.PHONY : find_person/CMakeFiles/find_person_generate_messages_py.dir/clean
+
+find_person/CMakeFiles/find_person_generate_messages_py.dir/depend:
+	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/src/find_person /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/find_person /home/stefan/projektarbeit/catkin_ws/build/find_person/CMakeFiles/find_person_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_generate_messages_py.dir/depend
 

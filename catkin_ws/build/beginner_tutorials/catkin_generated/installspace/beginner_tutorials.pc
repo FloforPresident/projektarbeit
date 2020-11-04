@@ -1,4 +1,8 @@
-prefix=/home/patrick/projektarbeit/catkin_ws/install
+<<<<<<< HEAD
+prefix=/home/basti/projektarbeit/catkin_ws/install
+=======
+prefix=/home/stefan/projektarbeit/catkin_ws/install
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 Name: beginner_tutorials
 Description: Description of beginner_tutorials

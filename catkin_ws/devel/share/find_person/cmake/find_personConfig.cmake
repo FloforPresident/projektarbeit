@@ -67,14 +67,23 @@ set(find_person_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(find_person_SOURCE_PREFIX /home/patrick/projektarbeit/catkin_ws/src/find_person)
-  set(find_person_DEVEL_PREFIX /home/patrick/projektarbeit/catkin_ws/devel)
+<<<<<<< HEAD
+  set(find_person_SOURCE_PREFIX /home/basti/projektarbeit/catkin_ws/src/find_person)
+  set(find_person_DEVEL_PREFIX /home/basti/projektarbeit/catkin_ws/devel)
+=======
+  set(find_person_SOURCE_PREFIX /home/stefan/projektarbeit/catkin_ws/src/find_person)
+  set(find_person_DEVEL_PREFIX /home/stefan/projektarbeit/catkin_ws/devel)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   set(find_person_INSTALL_PREFIX "")
   set(find_person_PREFIX ${find_person_DEVEL_PREFIX})
 else()
   set(find_person_SOURCE_PREFIX "")
   set(find_person_DEVEL_PREFIX "")
-  set(find_person_INSTALL_PREFIX /home/patrick/projektarbeit/catkin_ws/install)
+<<<<<<< HEAD
+  set(find_person_INSTALL_PREFIX /home/basti/projektarbeit/catkin_ws/install)
+=======
+  set(find_person_INSTALL_PREFIX /home/stefan/projektarbeit/catkin_ws/install)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   set(find_person_PREFIX ${find_person_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +100,15 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(find_person_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/patrick/projektarbeit/catkin_ws/devel/include " STREQUAL " ")
+<<<<<<< HEAD
+if(NOT "/home/basti/projektarbeit/catkin_ws/devel/include " STREQUAL " ")
   set(find_person_INCLUDE_DIRS "")
-  set(_include_dirs "/home/patrick/projektarbeit/catkin_ws/devel/include")
+  set(_include_dirs "/home/basti/projektarbeit/catkin_ws/devel/include")
+=======
+if(NOT "/home/stefan/projektarbeit/catkin_ws/devel/include " STREQUAL " ")
+  set(find_person_INCLUDE_DIRS "")
+  set(_include_dirs "/home/stefan/projektarbeit/catkin_ws/devel/include")
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -110,7 +125,11 @@ if(NOT "/home/patrick/projektarbeit/catkin_ws/devel/include " STREQUAL " ")
         message(FATAL_ERROR "Project 'find_person' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'find_person' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/patrick/projektarbeit/catkin_ws/src/find_person/${idir}'.  ${_report}")
+<<<<<<< HEAD
+      message(FATAL_ERROR "Project 'find_person' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/basti/projektarbeit/catkin_ws/src/find_person/${idir}'.  ${_report}")
+=======
+      message(FATAL_ERROR "Project 'find_person' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/stefan/projektarbeit/catkin_ws/src/find_person/${idir}'.  ${_report}")
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
     endif()
     _list_append_unique(find_person_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +173,11 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/patrick/projektarbeit/catkin_ws/devel/lib;/home/patrick/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+<<<<<<< HEAD
+    foreach(path /home/basti/projektarbeit/catkin_ws/devel/lib;/home/basti/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+=======
+    foreach(path /home/stefan/projektarbeit/catkin_ws/devel/lib;/home/stefan/projektarbeit/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+>>>>>>> 92f239d285461c11170bff33d44c46af98a92357
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
