@@ -1,41 +1,42 @@
 #!/usr/bin/env python
 # license removed for brevity
 import rospy
+import json
 from std_msgs.msg import String
 from geometry_msgs.msg import PoseStamped
 
 def callback(data):
-	person = data.data
+	jsonString = data.data
 	pub = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
 	#rate = rospy.Rate(10) # 10hz
 
-    	#while not rospy.is_shutdown():
+	#while not rospy.is_shutdown():
 	now = rospy.get_rostime()
 
-	answer = PoseStamped()
-	answer.header.stamp = now
+	dataArray = json.loads(jsonString)
 
-	if person == "Patrick":
-		x = -3.5
-		y = -3.0
-	elif person == "Johannes":
-		x = 2.0
-		y = 3.0
+	if dataArray["action"] == "find_person":
+		person = dataArray["name"]
+		x = float(dataArray["x"])
+		y = float(dataArray["y"])
+
+		answer = PoseStamped()
+		answer.header.stamp = now
+		answer.header.frame_id = "map"
+		
+		answer.pose.position.x = x
+		answer.pose.position.y = y
+		answer.pose.position.z = 0
+
+		answer.pose.orientation.w = 1.0
+
+		rospy.loginfo("Gehe ins Buero von: "+person)
+		pub.publish(answer)
+	elif dataArray["action"] == "stop":
+		pub.publish()
+		rospy.loginfo("stop moving")
 	else:
-		x = 0
-		y = 0
-		person = "no person selected"
-
-	answer.header.frame_id = "map"
-	answer.pose.position.x = x
-	answer.pose.position.y = y
-	answer.pose.position.z = 0
-
-	answer.pose.orientation.w = 1.0
-
-	rospy.loginfo("Gehe ins Buero von: "+person)
-	pub.publish(answer)
-	#rate.sleep()
+		rospy.loginfo("no action selected")
 
 	
 def letsGo():

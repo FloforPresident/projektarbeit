@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import rospy
 import json
@@ -8,7 +8,7 @@ def print_person():
 	pub = rospy.Publisher('chatter', String, queue_size=10)
 	rospy.init_node('print_person', anonymous=False)
 
-	datastring = '{"action": "find_person", "name": "Johannes", "x": "2.5", "y": "2.0"}'
+	datastring = '{"action": "stop", "name": "nobody"}'
 	dataArray = json.loads(datastring)
 
 	rospy.loginfo("Auf der Suche nach: " + dataArray["name"])
