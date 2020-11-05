@@ -74,7 +74,7 @@ class database:
 
 
 	#::::ROBO::::
-	def addRobo(self, robo_id, roboName, ip):
+	def addRobo(self, room_id, roboName, ip):
 		mycursor = self.mydb.cursor(prepared = True)
 		sql = "INSERT INTO Robo (room_id, name, ip) VALUES (%s, %s, %s)"
 		val = (room_id, roboName, ip)
