@@ -48,17 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,24 +135,14 @@ install/local/fast: install/local
 
 # The main all target
 all: cmake_check_build_system
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/basti/projektarbeit/catkin_ws/build/CMakeFiles /home/basti/projektarbeit/catkin_ws/build/gtest/CMakeFiles/progress.marks
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/basti/projektarbeit/catkin_ws/build/CMakeFiles 0
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles /home/stefan/projektarbeit/catkin_ws/build/gtest/CMakeFiles/progress.marks
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles 0
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : all
 
 # The main clean target
 clean:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/clean
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/clean
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : clean
 
 # The main clean target
@@ -169,38 +152,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/preinstall
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/preinstall
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/preinstall
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/preinstall
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : depend
 
 # Convenience name for target.
 gtest/CMakeFiles/gmock.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/CMakeFiles/gmock.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/CMakeFiles/gmock.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : gtest/CMakeFiles/gmock.dir/rule
 
 # Convenience name for target.
@@ -210,20 +177,12 @@ gmock: gtest/CMakeFiles/gmock.dir/rule
 
 # fast build rule for target.
 gmock/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : gmock/fast
 
 # Convenience name for target.
 gtest/CMakeFiles/gmock_main.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/CMakeFiles/gmock_main.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/CMakeFiles/gmock_main.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : gtest/CMakeFiles/gmock_main.dir/rule
 
 # Convenience name for target.
@@ -233,11 +192,7 @@ gmock_main: gtest/CMakeFiles/gmock_main.dir/rule
 
 # fast build rule for target.
 gmock_main/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : gmock_main/fast
 
 src/gmock-all.o: src/gmock-all.cc.o
@@ -246,13 +201,8 @@ src/gmock-all.o: src/gmock-all.cc.o
 
 # target to build an object file
 src/gmock-all.cc.o:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/src/gmock-all.cc.o
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/src/gmock-all.cc.o
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/gmock-all.cc.o
 
 src/gmock-all.i: src/gmock-all.cc.i
@@ -261,13 +211,8 @@ src/gmock-all.i: src/gmock-all.cc.i
 
 # target to preprocess a source file
 src/gmock-all.cc.i:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/src/gmock-all.cc.i
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.i
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/src/gmock-all.cc.i
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.i
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/gmock-all.cc.i
 
 src/gmock-all.s: src/gmock-all.cc.s
@@ -276,13 +221,8 @@ src/gmock-all.s: src/gmock-all.cc.s
 
 # target to generate assembly for a file
 src/gmock-all.cc.s:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/src/gmock-all.cc.s
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.s
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/src/gmock-all.cc.s
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock-all.cc.s
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/gmock-all.cc.s
 
 src/gmock_main.o: src/gmock_main.cc.o
@@ -291,11 +231,7 @@ src/gmock_main.o: src/gmock_main.cc.o
 
 # target to build an object file
 src/gmock_main.cc.o:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/gmock_main.cc.o
 
 src/gmock_main.i: src/gmock_main.cc.i
@@ -304,11 +240,7 @@ src/gmock_main.i: src/gmock_main.cc.i
 
 # target to preprocess a source file
 src/gmock_main.cc.i:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.i
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.i
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/gmock_main.cc.i
 
 src/gmock_main.s: src/gmock_main.cc.s
@@ -317,11 +249,7 @@ src/gmock_main.s: src/gmock_main.cc.s
 
 # target to generate assembly for a file
 src/gmock_main.cc.s:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.s
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/src/gmock_main.cc.s
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : src/gmock_main.cc.s
 
 usr/src/gtest/src/gtest-all.o: usr/src/gtest/src/gtest-all.cc.o
@@ -330,13 +258,8 @@ usr/src/gtest/src/gtest-all.o: usr/src/gtest/src/gtest-all.cc.o
 
 # target to build an object file
 usr/src/gtest/src/gtest-all.cc.o:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/usr/src/gtest/src/gtest-all.cc.o
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/usr/src/gtest/src/gtest-all.cc.o
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.o
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : usr/src/gtest/src/gtest-all.cc.o
 
 usr/src/gtest/src/gtest-all.i: usr/src/gtest/src/gtest-all.cc.i
@@ -345,13 +268,8 @@ usr/src/gtest/src/gtest-all.i: usr/src/gtest/src/gtest-all.cc.i
 
 # target to preprocess a source file
 usr/src/gtest/src/gtest-all.cc.i:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/usr/src/gtest/src/gtest-all.cc.i
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.i
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/usr/src/gtest/src/gtest-all.cc.i
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.i
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : usr/src/gtest/src/gtest-all.cc.i
 
 usr/src/gtest/src/gtest-all.s: usr/src/gtest/src/gtest-all.cc.s
@@ -360,13 +278,8 @@ usr/src/gtest/src/gtest-all.s: usr/src/gtest/src/gtest-all.cc.s
 
 # target to generate assembly for a file
 usr/src/gtest/src/gtest-all.cc.s:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/usr/src/gtest/src/gtest-all.cc.s
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.s
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/usr/src/gtest/src/gtest-all.cc.s
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/usr/src/gtest/src/gtest-all.cc.s
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : usr/src/gtest/src/gtest-all.cc.s
 
 # Help Target
@@ -404,10 +317,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : cmake_check_build_system
 

@@ -43,24 +43,16 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Utility rule file for beginner_tutorials_generate_messages_nodejs.
 
 # Include the progress variables for this target.
 include beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/progress.make
 
-<<<<<<< HEAD
 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs: /home/basti/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/msg/Num.js
 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs: /home/basti/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/srv/AddTwoInts.js
 
@@ -78,25 +70,6 @@ beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs: /home
 beginner_tutorials_generate_messages_nodejs: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs
 beginner_tutorials_generate_messages_nodejs: /home/basti/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/msg/Num.js
 beginner_tutorials_generate_messages_nodejs: /home/basti/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/srv/AddTwoInts.js
-=======
-beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs: /home/stefan/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/msg/Num.js
-beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs: /home/stefan/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/srv/AddTwoInts.js
-
-
-/home/stefan/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/msg/Num.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
-/home/stefan/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/msg/Num.js: /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/msg/Num.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from beginner_tutorials/Num.msg"
-	cd /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/msg/Num.msg -Ibeginner_tutorials:/home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p beginner_tutorials -o /home/stefan/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/msg
-
-/home/stefan/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/srv/AddTwoInts.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
-/home/stefan/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/srv/AddTwoInts.js: /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/srv/AddTwoInts.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/stefan/projektarbeit/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from beginner_tutorials/AddTwoInts.srv"
-	cd /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/srv/AddTwoInts.srv -Ibeginner_tutorials:/home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p beginner_tutorials -o /home/stefan/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/srv
-
-beginner_tutorials_generate_messages_nodejs: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs
-beginner_tutorials_generate_messages_nodejs: /home/stefan/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/msg/Num.js
-beginner_tutorials_generate_messages_nodejs: /home/stefan/projektarbeit/catkin_ws/devel/share/gennodejs/ros/beginner_tutorials/srv/AddTwoInts.js
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 beginner_tutorials_generate_messages_nodejs: beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/build.make
 
 .PHONY : beginner_tutorials_generate_messages_nodejs
@@ -107,18 +80,10 @@ beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/bu
 .PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/build
 
 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/clean:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/clean
 
 beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/depend:
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/beginner_tutorials /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials /home/basti/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/cmake_clean.cmake
-.PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/clean
-
-beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/depend:
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials /home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : beginner_tutorials/CMakeFiles/beginner_tutorials_generate_messages_nodejs.dir/depend
 

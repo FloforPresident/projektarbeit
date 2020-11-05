@@ -1,5 +1,6 @@
 # projektarbeit
 #----bei Änderung des benutzers-----
+
 cd ~/projektarbeit/catkin_ws/ && rm -r build devel && catkin_make
 
 #----push data from command line ----

@@ -43,17 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Utility rule file for run_tests.
 
@@ -74,10 +67,6 @@ CMakeFiles/run_tests.dir/clean:
 .PHONY : CMakeFiles/run_tests.dir/clean
 
 CMakeFiles/run_tests.dir/depend:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/CMakeFiles/run_tests.dir/DependInfo.cmake --color=$(COLOR)
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles/run_tests.dir/DependInfo.cmake --color=$(COLOR)
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : CMakeFiles/run_tests.dir/depend
 

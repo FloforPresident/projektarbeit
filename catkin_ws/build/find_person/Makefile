@@ -48,17 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,24 +135,14 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/basti/projektarbeit/catkin_ws/build/CMakeFiles /home/basti/projektarbeit/catkin_ws/build/find_person/CMakeFiles/progress.marks
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/basti/projektarbeit/catkin_ws/build/CMakeFiles 0
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles /home/stefan/projektarbeit/catkin_ws/build/find_person/CMakeFiles/progress.marks
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/stefan/projektarbeit/catkin_ws/build/CMakeFiles 0
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : all
 
 # The main clean target
 clean:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/clean
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/clean
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : clean
 
 # The main clean target
@@ -169,38 +152,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/preinstall
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/preinstall
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/preinstall
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/preinstall
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : depend
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_genpy.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_genpy.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_genpy.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_genpy.dir/rule
 
 # Convenience name for target.
@@ -210,20 +177,12 @@ find_person_genpy: find_person/CMakeFiles/find_person_genpy.dir/rule
 
 # fast build rule for target.
 find_person_genpy/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_genpy.dir/build.make find_person/CMakeFiles/find_person_genpy.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_genpy.dir/build.make find_person/CMakeFiles/find_person_genpy.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_genpy/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_generate_messages_py.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages_py.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages_py.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -233,20 +192,12 @@ find_person_generate_messages_py: find_person/CMakeFiles/find_person_generate_me
 
 # fast build rule for target.
 find_person_generate_messages_py/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages_py.dir/build.make find_person/CMakeFiles/find_person_generate_messages_py.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages_py.dir/build.make find_person/CMakeFiles/find_person_generate_messages_py.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_generate_messages_py/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_gencpp.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_gencpp.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_gencpp.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_gencpp.dir/rule
 
 # Convenience name for target.
@@ -256,20 +207,12 @@ find_person_gencpp: find_person/CMakeFiles/find_person_gencpp.dir/rule
 
 # fast build rule for target.
 find_person_gencpp/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_gencpp.dir/build.make find_person/CMakeFiles/find_person_gencpp.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_gencpp.dir/build.make find_person/CMakeFiles/find_person_gencpp.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_gencpp/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_generate_messages_eus.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages_eus.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages_eus.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -279,20 +222,12 @@ find_person_generate_messages_eus: find_person/CMakeFiles/find_person_generate_m
 
 # fast build rule for target.
 find_person_generate_messages_eus/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages_eus.dir/build.make find_person/CMakeFiles/find_person_generate_messages_eus.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages_eus.dir/build.make find_person/CMakeFiles/find_person_generate_messages_eus.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_generate_messages_eus/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_genlisp.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_genlisp.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_genlisp.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_genlisp.dir/rule
 
 # Convenience name for target.
@@ -302,20 +237,12 @@ find_person_genlisp: find_person/CMakeFiles/find_person_genlisp.dir/rule
 
 # fast build rule for target.
 find_person_genlisp/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_genlisp.dir/build.make find_person/CMakeFiles/find_person_genlisp.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_genlisp.dir/build.make find_person/CMakeFiles/find_person_genlisp.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_genlisp/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/_find_person_generate_messages_check_deps_person_info.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/_find_person_generate_messages_check_deps_person_info.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/_find_person_generate_messages_check_deps_person_info.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/_find_person_generate_messages_check_deps_person_info.dir/rule
 
 # Convenience name for target.
@@ -325,20 +252,12 @@ _find_person_generate_messages_check_deps_person_info: find_person/CMakeFiles/_f
 
 # fast build rule for target.
 _find_person_generate_messages_check_deps_person_info/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/_find_person_generate_messages_check_deps_person_info.dir/build.make find_person/CMakeFiles/_find_person_generate_messages_check_deps_person_info.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/_find_person_generate_messages_check_deps_person_info.dir/build.make find_person/CMakeFiles/_find_person_generate_messages_check_deps_person_info.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : _find_person_generate_messages_check_deps_person_info/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_gennodejs.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_gennodejs.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_gennodejs.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_gennodejs.dir/rule
 
 # Convenience name for target.
@@ -348,20 +267,12 @@ find_person_gennodejs: find_person/CMakeFiles/find_person_gennodejs.dir/rule
 
 # fast build rule for target.
 find_person_gennodejs/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_gennodejs.dir/build.make find_person/CMakeFiles/find_person_gennodejs.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_gennodejs.dir/build.make find_person/CMakeFiles/find_person_gennodejs.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_gennodejs/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_generate_messages_cpp.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages_cpp.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages_cpp.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -371,20 +282,12 @@ find_person_generate_messages_cpp: find_person/CMakeFiles/find_person_generate_m
 
 # fast build rule for target.
 find_person_generate_messages_cpp/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages_cpp.dir/build.make find_person/CMakeFiles/find_person_generate_messages_cpp.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages_cpp.dir/build.make find_person/CMakeFiles/find_person_generate_messages_cpp.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_generate_messages_cpp/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_generate_messages.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_generate_messages.dir/rule
 
 # Convenience name for target.
@@ -394,20 +297,12 @@ find_person_generate_messages: find_person/CMakeFiles/find_person_generate_messa
 
 # fast build rule for target.
 find_person_generate_messages/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages.dir/build.make find_person/CMakeFiles/find_person_generate_messages.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages.dir/build.make find_person/CMakeFiles/find_person_generate_messages.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_generate_messages/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_geneus.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_geneus.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_geneus.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_geneus.dir/rule
 
 # Convenience name for target.
@@ -417,20 +312,12 @@ find_person_geneus: find_person/CMakeFiles/find_person_geneus.dir/rule
 
 # fast build rule for target.
 find_person_geneus/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_geneus.dir/build.make find_person/CMakeFiles/find_person_geneus.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_geneus.dir/build.make find_person/CMakeFiles/find_person_geneus.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_geneus/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_generate_messages_lisp.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages_lisp.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages_lisp.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -440,20 +327,12 @@ find_person_generate_messages_lisp: find_person/CMakeFiles/find_person_generate_
 
 # fast build rule for target.
 find_person_generate_messages_lisp/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages_lisp.dir/build.make find_person/CMakeFiles/find_person_generate_messages_lisp.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages_lisp.dir/build.make find_person/CMakeFiles/find_person_generate_messages_lisp.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_generate_messages_lisp/fast
 
 # Convenience name for target.
 find_person/CMakeFiles/find_person_generate_messages_nodejs.dir/rule:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages_nodejs.dir/rule
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 find_person/CMakeFiles/find_person_generate_messages_nodejs.dir/rule
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person/CMakeFiles/find_person_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -463,11 +342,7 @@ find_person_generate_messages_nodejs: find_person/CMakeFiles/find_person_generat
 
 # fast build rule for target.
 find_person_generate_messages_nodejs/fast:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages_nodejs.dir/build.make find_person/CMakeFiles/find_person_generate_messages_nodejs.dir/build
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(MAKE) -f find_person/CMakeFiles/find_person_generate_messages_nodejs.dir/build.make find_person/CMakeFiles/find_person_generate_messages_nodejs.dir/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : find_person_generate_messages_nodejs/fast
 
 # Help Target
@@ -506,10 +381,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : cmake_check_build_system
 

@@ -6,9 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"beginner_tutorials\"
 
-<<<<<<< HEAD
 CXX_INCLUDES = -I/home/basti/projektarbeit/catkin_ws/devel/include -I/home/basti/projektarbeit/catkin_ws/src/beginner_tutorials/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp 
-=======
-CXX_INCLUDES = -I/home/stefan/projektarbeit/catkin_ws/devel/include -I/home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp 
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 

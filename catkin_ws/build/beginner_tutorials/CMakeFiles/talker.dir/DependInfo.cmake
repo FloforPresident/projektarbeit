@@ -4,11 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-<<<<<<< HEAD
   "/home/basti/projektarbeit/catkin_ws/src/beginner_tutorials/src/talker.cpp" "/home/basti/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.o"
-=======
-  "/home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/src/talker.cpp" "/home/stefan/projektarbeit/catkin_ws/build/beginner_tutorials/CMakeFiles/talker.dir/src/talker.cpp.o"
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -21,13 +17,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-<<<<<<< HEAD
   "/home/basti/projektarbeit/catkin_ws/devel/include"
   "/home/basti/projektarbeit/catkin_ws/src/beginner_tutorials/include"
-=======
-  "/home/stefan/projektarbeit/catkin_ws/devel/include"
-  "/home/stefan/projektarbeit/catkin_ws/src/beginner_tutorials/include"
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
   "/opt/ros/kinetic/include"
   "/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   )

@@ -43,17 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/basti/projektarbeit/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/basti/projektarbeit/catkin_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/stefan/projektarbeit/catkin_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/stefan/projektarbeit/catkin_ws/build
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 
 # Utility rule file for location_monitor_generate_messages_py.
 
@@ -70,18 +63,10 @@ location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/build: loc
 .PHONY : location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/build
 
 location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/clean:
-<<<<<<< HEAD
 	cd /home/basti/projektarbeit/catkin_ws/build/location_monitor && $(CMAKE_COMMAND) -P CMakeFiles/location_monitor_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/clean
 
 location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/depend:
 	cd /home/basti/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/basti/projektarbeit/catkin_ws/src /home/basti/projektarbeit/catkin_ws/src/location_monitor /home/basti/projektarbeit/catkin_ws/build /home/basti/projektarbeit/catkin_ws/build/location_monitor /home/basti/projektarbeit/catkin_ws/build/location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
-=======
-	cd /home/stefan/projektarbeit/catkin_ws/build/location_monitor && $(CMAKE_COMMAND) -P CMakeFiles/location_monitor_generate_messages_py.dir/cmake_clean.cmake
-.PHONY : location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/clean
-
-location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/depend:
-	cd /home/stefan/projektarbeit/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stefan/projektarbeit/catkin_ws/src /home/stefan/projektarbeit/catkin_ws/src/location_monitor /home/stefan/projektarbeit/catkin_ws/build /home/stefan/projektarbeit/catkin_ws/build/location_monitor /home/stefan/projektarbeit/catkin_ws/build/location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
->>>>>>> 92f239d285461c11170bff33d44c46af98a92357
 .PHONY : location_monitor/CMakeFiles/location_monitor_generate_messages_py.dir/depend
 
