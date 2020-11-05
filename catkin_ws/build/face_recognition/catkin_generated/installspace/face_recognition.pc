@@ -1,4 +1,4 @@
-prefix=/home/stefan/projektarbeit/catkin_ws/install
+prefix=/home/basti/projektarbeit/catkin_ws/install
 
 Name: face_recognition
 Description: Description of face_recognition

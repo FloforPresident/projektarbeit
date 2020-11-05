@@ -16,8 +16,10 @@ def database():
 	)
 
 	answer = mydb
-	rospy.loginfo(answer)
+	#rospy.loginfo(answer)
 	#pub.publish(answer)
+	print('hallo')
+	print(answer)
 
 
 if __name__ == '__main__':

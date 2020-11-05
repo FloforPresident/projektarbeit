@@ -1,13 +1,5 @@
 class SocketInfo {
-  //Patrick
-  // static const String hostAdress = '192.168.1.225';
-  // static const String port = ':8765';
-
-  //Flo
-  static const String hostAdress = '192.168.0.175';
+  //insert your current IP in 'hostAdress' and get controller on same IP running
+  static const String hostAdress = '192.168.188.143';
   static const String port = ':8765';
-
-  //echo
-  // static const String hostAdress = 'echo.websocket.org';
-  // static const String port = '';
 }

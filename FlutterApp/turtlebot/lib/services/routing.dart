@@ -8,7 +8,6 @@ import 'package:turtlebot/pages/friends.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/pages/messages.dart';
 import 'package:turtlebot/pages/locations.dart';
-import 'package:turtlebot/pages/login.dart';
 
 class RouteGenerator {
   // _RouteGenerator() {}
@@ -17,7 +16,6 @@ class RouteGenerator {
   static const String RouteRoboCommands = '/roboCommands';
   static const String RouteManualControl = '/manControl';
   static const String RouteHome = '/';
-  static const String RouteLogin = '/login';
   static const String RouteLocations = '/locations';
   static const String RouteRooms = '/rooms';
   static const String RouteRobos = '/robos';
@@ -28,46 +26,35 @@ class RouteGenerator {
     switch (settings.name) {
       case RouteHome:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => Home());
         }
 
       case RouteRobos:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => Robos());
         }
       case RouteFriends:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => Friends());
         }
       case RouteRooms:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => Rooms());
         }
       case RouteMessages:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => Messages());
         }
       case RouteRoboStatus:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => RoboStatus());
         }
       case RouteRoboCommands:
         {
-          MyApp.addChannel(settings.name);
           return MaterialPageRoute(builder: (_) => RoboCommands());
         }
       case RouteManualControl:
         return MaterialPageRoute(builder: (_) => RoboManControl());
-
-      case RouteLogin:
-        MyApp.addChannel(settings.name);
-        return MaterialPageRoute(builder: (_) => Login());
 
       case RouteLocations:
         return MaterialPageRoute(builder: (_) => Locations());
@@ -79,10 +66,6 @@ class RouteGenerator {
 
   static onTapToHome(BuildContext context) {
     Navigator.pushNamed(context, RouteGenerator.RouteHome);
-  }
-
-  static onTapToLogin(BuildContext context) {
-    Navigator.pushNamed(context, RouteGenerator.RouteLogin);
   }
 
   static onTapToRoboStatus(BuildContext context) {

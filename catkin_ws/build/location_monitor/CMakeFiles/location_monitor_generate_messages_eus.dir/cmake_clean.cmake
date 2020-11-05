@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/location_monitor_generate_messages_eus"
-  "/home/stefan/projektarbeit/catkin_ws/devel/share/roseus/ros/location_monitor/manifest.l"
+  "/home/basti/projektarbeit/catkin_ws/devel/share/roseus/ros/location_monitor/manifest.l"
 )
 
 # Per-language clean rules from dependency scanning.

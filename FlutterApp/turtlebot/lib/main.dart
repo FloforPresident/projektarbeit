@@ -1,26 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/services/navigation.dart';
 import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:turtlebot/services/socke_info.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  //Websocket connection logic
-  static Map<String, IOWebSocketChannel> channels = Map();
+  // static final IOWebSocketChannel channel = IOWebSocketChannel.connect(
+  //     'ws://' + SocketInfo.hostAdress + SocketInfo.port);
 
-  static IOWebSocketChannel addChannel(routeName) {
-    return channels[routeName] = IOWebSocketChannel.connect(
+  static IOWebSocketChannel con() {
+    return new IOWebSocketChannel.connect(
         'ws://' + SocketInfo.hostAdress + SocketInfo.port);
-    // return channels[routeName] = channel.stream.asBroadcastStream();
   }
-
-  static deleteChannel(routeName) {
-    channels[routeName].sink.close(0, "Closed by the client");
-    channels.removeWhere((name, channel) => name == routeName);
-  }
-  //
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +32,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'TurtleBot',
         theme: ThemeData(primarySwatch: Colors.orange),
-        initialRoute: '/login',
+        initialRoute: '/',
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
@@ -43,7 +40,12 @@ class MyApp extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
-  Home({Key key}) : super(key: key);
+  // final WebSocketChannel channel;
+  // final streamController = StreamController.broadcast();
+
+  Home({Key key}) : super(key: key) {
+    // streamController.addStream(this.channel.stream);
+  }
 
   @override
   _HomeState createState() {
@@ -52,15 +54,237 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  WebSocketChannel channel;
+  StreamController broadcast = StreamController.broadcast();
+
+  TextEditingController _name = new TextEditingController();
+  TextEditingController _password = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    channel = MyApp.con();
+    broadcast.addStream(channel.stream);
+    autoLogIn();
+    // streamController.addStream(widget.channel.stream);
+  }
+
+  // streamController.addStream(widget.streamController.stream)
+
+  bool isLoggedIn = false;
+  String name = '';
+
+  void autoLogIn() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String userName = prefs.getString('username');
+
+    if (userName != null) {
+      setState(() {
+        isLoggedIn = true;
+        name = userName;
+      });
+    }
+  }
+
+  Future<Null> logout() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', null);
+
+    setState(() {
+      name = '';
+      isLoggedIn = false;
+    });
+  }
+
+  Future<Null> loginUser() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', _name.text);
+
+    setState(() {
+      name = _name.text;
+      isLoggedIn = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Center(child: Text("Turtlebot Control App")),
-        backgroundColor: Colors.grey,
+        title: Center(
+            child: Text(isLoggedIn
+                ? (name + '-Bot Control App')
+                : 'Turtle-Bot Control App')),
+        backgroundColor: Colors.white,
+        actions: <Widget>[
+          RaisedButton(
+              color: Colors.grey,
+              child: Text(
+                isLoggedIn ? "LogOut" : "LogIn",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () {
+                isLoggedIn ? logout() : loginDialog(context);
+              })
+        ],
       ),
       body: AppNavBarController(),
     );
+  }
+
+  ////LOGIN////
+  ///
+  Color colorTheme = Colors.green;
+  Color secondaryTheme = Colors.white;
+
+  //Anmelden
+  Future<bool> loginDialog(BuildContext context) async {
+    bool _uploadedImage = true;
+
+    return await showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) => SingleChildScrollView(
+        child: AlertDialog(
+          title: Text("LogIn"),
+          content: Column(
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(labelText: "Name"),
+                controller: _name,
+                maxLines: null,
+                maxLength: 20,
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: "Password"),
+                controller: _password,
+                maxLines: null,
+                maxLength: 20,
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("SignUp"),
+              onPressed: () {
+                signupDialog(context);
+              },
+            ),
+            FlatButton(
+              child: Text("Exit"),
+              color: Colors.red,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text("LogIn"),
+              color: colorTheme,
+              onPressed: () {
+                if (_name.text.isNotEmpty && _password.text.isNotEmpty) {
+                  userAction("LOGIN USER", _name.text, _password.text);
+                  broadcast.stream.listen((data) {
+                    if (data == 'success') {
+                      loginUser();
+                    }
+                    RouteGenerator.onTapToHome(context);
+                  });
+                }
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  //Registrieren
+  Future<bool> signupDialog(BuildContext context) async {
+    bool _uploadedImage = true;
+
+    return await showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) => SingleChildScrollView(
+        child: AlertDialog(
+          title: Text("SignUp"),
+          content: Column(
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(labelText: "Name"),
+                controller: _name,
+                maxLines: null,
+                maxLength: 20,
+              ),
+              Container(
+                margin: EdgeInsets.all(15),
+                child: RaisedButton(
+                  child: Text("Picture Upload"),
+                  color: colorTheme,
+                  textColor: Colors.white,
+                  onPressed: () {},
+                ),
+              ),
+              CheckboxListTile(
+                title: Text("Picture uploaded"),
+                value: _uploadedImage,
+                // onChanged: (bool value) {
+                //   setState() {
+                //     _uploadedImage = value;
+                //   }
+                // }
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: "Password"),
+                controller: _password,
+                maxLines: null,
+                maxLength: 20,
+              )
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Exit"),
+              color: Colors.red,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text("SignUp"),
+              color: colorTheme,
+              onPressed: () {
+                if (_name.text.isNotEmpty &&
+                    _password.text.isNotEmpty &&
+                    _uploadedImage == true) {
+                  userAction("ADD USER", _name.text, _password.text);
+                  RouteGenerator.onTapToHome(context);
+                }
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void userAction(String action, [String name, String password]) {
+    String data;
+
+    if (name.isNotEmpty && password.isNotEmpty) {
+      data = '{"action": "$action", "name": "$name", "password": "$password"}';
+    } else {
+      data = '{"action": "$action"}';
+    }
+
+    channel.sink.add(data);
+  }
+
+  @override
+  void dispose() {
+    channel.sink.close();
+    super.dispose();
   }
 }

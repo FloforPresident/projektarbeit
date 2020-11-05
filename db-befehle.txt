@@ -2,6 +2,8 @@ Template:
 - ACTION (mitgegebene Parameter)
 ?steht zur Debatte?
 
+action : "addUser"
+
 ***DB COMMANDS***
 
 USER:

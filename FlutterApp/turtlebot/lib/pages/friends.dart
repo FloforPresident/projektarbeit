@@ -23,15 +23,6 @@ class Friends extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              // TextField(
-              //     controller: _controller,
-//              //     decoration: InputDecoration(labelText: 'Tryout Websocket')),
-              StreamBuilder(
-                stream: MyApp.channels[RouteGenerator.RouteFriends].stream,
-                builder: (context, snapshot) {
-                  return Text(snapshot.hasData ? '${snapshot.data}' : '');
-                },
-              ),
               AnimatedList(
                 shrinkWrap: true,
                 key: controller.key,
@@ -49,9 +40,6 @@ class Friends extends StatelessWidget {
         backgroundColor: controller.colorTheme,
         onPressed: () {
           controller.addItem(context);
-          // if (_controller.text.isNotEmpty) {
-          //   MyApp.channels['friends'].sink.add(_controller.text);
-          // }
         },
       ),
     );
@@ -200,13 +188,6 @@ class _ControllerFriends {
             ),
             FlatButton(
               child: Text("Yes"),
-              // onPressed: () {
-              //   if (_firstname.text.isNotEmpty &&
-              //       _lastname.text.isNotEmpty &&
-              //       uploadedImage == true) {
-              //     MyApp.channels['friends'].sink.add(_firstname.text);
-              //   }
-              // },
             ),
           ],
         ),

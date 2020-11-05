@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/find_person_generate_messages_py"
-  "/home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py"
-  "/home/stefan/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py"
+  "/home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/_person_info.py"
+  "/home/basti/projektarbeit/catkin_ws/devel/lib/python2.7/dist-packages/find_person/msg/__init__.py"
 )
 
 # Per-language clean rules from dependency scanning.
