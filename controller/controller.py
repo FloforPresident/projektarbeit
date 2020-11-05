@@ -12,6 +12,9 @@ Features:
 
 #import database_access as db
 import json
+import subprocess
+import multiprocessing
+import paramiko
 
 import rospy
 import roslaunch
@@ -48,19 +51,21 @@ def json_get_value_by_key(jsonObj, key):
 
 #------------- USER --------------
 
-def add_user_db(name, password, image, location):
-	db.add_user(name, password, image, location)
-
-def delete_user_db(name, password):
-	db.delete_user(name, password)
-
-def login_user_db(name, password):
-	db.login_user(name, password)
-
-def logout_user_db(name):
-	db.logout_user(name)
-
 '''
+
+def getUser_db(name, password, image, location):
+	db.getUser(name)
+
+def getAllUsers_db():
+	db.getAllUsers(name, password)
+
+def addUser_db(name, password):
+	db.addUser(name, password)
+
+def deleteUser_db(user_id):
+	db.deleteUser(user_id)
+
+
 #------------- ROBOS --------------
 
 def add_robo_db(name, ip, username):
@@ -129,17 +134,38 @@ def go_to_goal_action(pos_X, pos_Y, tolerance):
 
 '''
 
+def robo_ssh():
+	host = "192.168.1.124"
+	port = "22"
+	username = "pi"
+	password = "turtlebot"
+
+	#command = "cd BringupScripts && ./start_camera.sh"
+	#command = '/opt/ros/kinetic/bin/roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true'
+	#command = 'bash --login -c "roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true"'
+	#command = 'PATH="$PATH;/opt/ros/kinetic/bin/roslaunch" && roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true'
+	#command = "/sbin/ifconfig"
+	command = "echo $PATH"
+
+	ssh = paramiko.SSHClient()
+	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+	ssh.connect(host, port, username, password)
+	stdin, stdout, stderr = ssh.exec_command(command,timeout=None)
+	lines = stdout.readlines()
+	err = stderr.readlines()
+	print(lines)
+	print(err)
+
+
+	#chan=ssh.invoke_shell()
+	#chan.send('roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true')
+
+
+
+
 def launch_node():
-	package = 'find_person'
-	executable = 'print_patrick.py'
-	node = roslaunch.core.Node(package, executable)
-
-	launch = roslaunch.scriptapi.ROSLaunch()
-	launch.start()
-
-	process = launch.launch(node)
-	process.is_alive()
-#	process.stop()
+	print("launching node...")
+	subprocess.run(["rosrun", "find_person", "print_patrick.py"])
 
 ######################### WEBSOCKET ####################################################
 
@@ -158,7 +184,7 @@ def start_websocket():
 			await websocket.send("sucess")
 		print(msg)
 
-	start_server = websockets.serve(ws_recieve, "192.168.1.225", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
+	start_server = websockets.serve(ws_recieve, "localhost", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
 
 	asyncio.get_event_loop().run_until_complete(start_server)
 	asyncio.get_event_loop().run_forever()
@@ -180,5 +206,9 @@ testAction = json_get_action(dummyJson)
 
 if __name__ == '__main__':
 	#add_user_db("Patrick", "123", "Testimage", "TestLocation")
-	#launch_node()
-	start_websocket()
+	process = multiprocessing.Process(target=launch_node)
+	#process.start()
+	process2 = multiprocessing.Process(target=start_websocket)
+	process2.start()
+	process3 = multiprocessing.Process(target=robo_ssh)
+	process3.start()
