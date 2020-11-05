@@ -9,6 +9,7 @@ import rospy
 import dlib
 import face_recognition
 import cv2
+import numpy as np
 
 
 #For Google Text To Speach
@@ -25,12 +26,12 @@ from sensor_msgs.msg import Image
 import sensor_msgs
 import std_msgs
 
-import numpy as np
+from std_msgs.msg import String
+
 
 import argparse
 
 
-<<<<<<< HEAD
 
 ######     Get Image from Raspicam and convert to CV2_Image #################################################################################
 
@@ -40,15 +41,6 @@ class image_converter:
 		self.bridge = CvBridge()
 		self.image_sub = rospy.Subscriber("/raspicam_node/image", Image, self.callback_raspi_image)
 
-=======
-######     Get Image from Raspicam and convert to CV2_Image #################################################################################
-
-class image_converter:
-	def __init__(self):
-		self.bridge = CvBridge()
-		self.image_sub = rospy.Subscriber("/raspicam_node/image", Image, self.callback_raspi_image)
-
->>>>>>> 0c54ccd9bc8f7427326d5c6accae0e9c2ade5e7b
 	def callback_raspi_image(self, data):
 		try:
 			cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8") 
@@ -56,7 +48,6 @@ class image_converter:
 			print(e)
 			print("Fehler in 'self.bridge.imgmsg_to_cv2(data, 'bgr8')'")
 
-<<<<<<< HEAD
 
 		face_recognition(cv_image)
 		
@@ -68,17 +59,7 @@ class image_converter:
 ######     /Image Converter Class ###########################################################################################################
 
 
-=======
-		cv2.imshow("Image Window", cv_image)
-		cv2.waitKey(3)
-
-#		face_recognition(cv_image)
-
-######     /Image Converter Class ###########################################################################################################
-
-
->>>>>>> 0c54ccd9bc8f7427326d5c6accae0e9c2ade5e7b
-######     Get name, message and face encoding from db    #####################################################################################################################
+######     Get name, message and face encoding from db    ###################################################################################
 
 def callback_textdata():
 	person_name = msg.name
@@ -90,8 +71,8 @@ def callback_textdata():
 ######     Publish Message   ################################################################################################################
 
 def talker(tts):
-	pub = rospy.Publisher('chatter', String)
-	pub.publish(message)
+	pub = rospy.Publisher('Message_for_Speaker', std_msgs.msg.String, queue_size = 2)
+	pub.publish(tts)
 
 ######     /Publish Message   ################################################################################################################
 
@@ -114,25 +95,14 @@ def face_recognition(cv_image):
 
 	while True:
 
-<<<<<<< HEAD
 		# Grab a single frame of video
 #		ret, frame = video_capture.read()
 		
 #		image = cv2.imread(args[cv_image])
 		
-=======
-	while True:
->>>>>>> 0c54ccd9bc8f7427326d5c6accae0e9c2ade5e7b
 
-		# Grab a single frame of video
-		ret, frame = cap.read()
-	
 		# Resize frame of video to 1/4 size for faster face recognition processing
-<<<<<<< HEAD
 		small_frame = cv2.resize(cv_image, (0, 0), fx=0.25, fy=0.25)
-=======
-		small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
->>>>>>> 0c54ccd9bc8f7427326d5c6accae0e9c2ade5e7b
 
 		#Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
 		rgb_small_frame = small_frame[:, :, ::-1]
@@ -142,20 +112,15 @@ def face_recognition(cv_image):
 		# Only process every other frame of video to save time
 		if process_this_frame:
 			# Find all the faces and face encodings in the current frame of video
-<<<<<<< HEAD
 			face_locations = face_recognition.face_locations(rgb_small_frame)
 			face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
-=======
-			face_locations = face_recognition.face_locations(small_frame)
-			face_encodings = face_recognition.face_encodings(small_frame, face_locations)
->>>>>>> 0c54ccd9bc8f7427326d5c6accae0e9c2ade5e7b
 
 #		for face_encoding in face_encodings:
 			# See if the face is a match for the known face(s)
 #			matches = face_recognition.compare_faces(known_face_encoding, face_encoding)
 
 		# If a match was found in known_face_encodings, just use the first one
-#		if True in matches:
+#		if True in matches:	
 #			first_match_index = matches.index(True)
 #			recognised_name = known_face_name[first_match_index]
 			
@@ -211,8 +176,13 @@ def face_recognition(cv_image):
 
 if __name__=='__main__':
 #	try:
-		ic = image_converter()
 		rospy.init_node('image_converter', anonymous=True)
+		ic = image_converter()
+		
+#		gtts = "String fuer Text To Speach an Msg laeuft"
+#		talker(gtts)
+
+		
 		try:
 			rospy.spin()
 		except KeybooardInterrupt:
