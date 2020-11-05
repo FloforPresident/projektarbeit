@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 11, 2020 at 11:13 AM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.3.12
+-- Erstellungszeit: 05. Nov 2020 um 14:11
+-- Server-Version: 10.4.14-MariaDB
+-- PHP-Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,28 +18,34 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `turtlebot`
+-- Datenbank: `turtlebot`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Location`
+-- Tabellenstruktur für Tabelle `Location`
 --
 
 CREATE TABLE `Location` (
   `location_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `x` int(11) NOT NULL,
   `y` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Daten für Tabelle `Location`
+--
+
+INSERT INTO `Location` (`location_id`, `room_id`, `title`, `x`, `y`) VALUES
+(1, 9, 'Printer', 2, 3);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Message`
+-- Tabellenstruktur für Tabelle `Message`
 --
 
 CREATE TABLE `Message` (
@@ -56,7 +61,7 @@ CREATE TABLE `Message` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Robo`
+-- Tabellenstruktur für Tabelle `Robo`
 --
 
 CREATE TABLE `Robo` (
@@ -66,10 +71,17 @@ CREATE TABLE `Robo` (
   `ip` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Daten für Tabelle `Robo`
+--
+
+INSERT INTO `Robo` (`robo_id`, `room_id`, `name`, `ip`) VALUES
+(1, 9, 'bot_ross', '007');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `robo_room`
+-- Tabellenstruktur für Tabelle `robo_room`
 --
 
 CREATE TABLE `robo_room` (
@@ -80,19 +92,27 @@ CREATE TABLE `robo_room` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Room`
+-- Tabellenstruktur für Tabelle `Room`
 --
 
 CREATE TABLE `Room` (
   `room_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `map` blob NOT NULL
+  `pgm` blob DEFAULT NULL,
+  `yaml` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Daten für Tabelle `Room`
+--
+
+INSERT INTO `Room` (`room_id`, `title`, `pgm`, `yaml`) VALUES
+(9, 'Office', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `User`
+-- Tabellenstruktur für Tabelle `User`
 --
 
 CREATE TABLE `User` (
@@ -100,24 +120,23 @@ CREATE TABLE `User` (
   `location_id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `image` blob NOT NULL,
-  `embedding` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`embedding`))
+  `image` blob DEFAULT NULL,
+  `embedding` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for dumped tables
+-- Indizes der exportierten Tabellen
 --
 
 --
--- Indexes for table `Location`
+-- Indizes für die Tabelle `Location`
 --
 ALTER TABLE `Location`
   ADD PRIMARY KEY (`location_id`),
-  ADD KEY `user_id` (`user_id`),
   ADD KEY `room_id` (`room_id`);
 
 --
--- Indexes for table `Message`
+-- Indizes für die Tabelle `Message`
 --
 ALTER TABLE `Message`
   ADD PRIMARY KEY (`message_id`),
@@ -125,27 +144,27 @@ ALTER TABLE `Message`
   ADD KEY `to_user` (`to_user`);
 
 --
--- Indexes for table `Robo`
+-- Indizes für die Tabelle `Robo`
 --
 ALTER TABLE `Robo`
   ADD PRIMARY KEY (`robo_id`),
   ADD KEY `room_id` (`room_id`);
 
 --
--- Indexes for table `robo_room`
+-- Indizes für die Tabelle `robo_room`
 --
 ALTER TABLE `robo_room`
   ADD KEY `robo_id` (`robo_id`),
   ADD KEY `room_id` (`room_id`);
 
 --
--- Indexes for table `Room`
+-- Indizes für die Tabelle `Room`
 --
 ALTER TABLE `Room`
   ADD PRIMARY KEY (`room_id`);
 
 --
--- Indexes for table `User`
+-- Indizes für die Tabelle `User`
 --
 ALTER TABLE `User`
   ADD PRIMARY KEY (`user_id`),
@@ -153,72 +172,71 @@ ALTER TABLE `User`
   ADD KEY `User_ibfk_1` (`location_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT für exportierte Tabellen
 --
 
 --
--- AUTO_INCREMENT for table `Location`
+-- AUTO_INCREMENT für Tabelle `Location`
 --
 ALTER TABLE `Location`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `Message`
+-- AUTO_INCREMENT für Tabelle `Message`
 --
 ALTER TABLE `Message`
   MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Robo`
+-- AUTO_INCREMENT für Tabelle `Robo`
 --
 ALTER TABLE `Robo`
-  MODIFY `robo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `robo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `Room`
+-- AUTO_INCREMENT für Tabelle `Room`
 --
 ALTER TABLE `Room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `User`
+-- AUTO_INCREMENT für Tabelle `User`
 --
 ALTER TABLE `User`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Constraints der exportierten Tabellen
 --
 
 --
--- Constraints for table `Location`
+-- Constraints der Tabelle `Location`
 --
 ALTER TABLE `Location`
-  ADD CONSTRAINT `Location_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`),
   ADD CONSTRAINT `Location_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `Room` (`room_id`);
 
 --
--- Constraints for table `Message`
+-- Constraints der Tabelle `Message`
 --
 ALTER TABLE `Message`
   ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`from_user`) REFERENCES `User` (`user_id`),
   ADD CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`to_user`) REFERENCES `User` (`user_id`);
 
 --
--- Constraints for table `Robo`
+-- Constraints der Tabelle `Robo`
 --
 ALTER TABLE `Robo`
   ADD CONSTRAINT `Robo_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `Room` (`room_id`);
 
 --
--- Constraints for table `robo_room`
+-- Constraints der Tabelle `robo_room`
 --
 ALTER TABLE `robo_room`
   ADD CONSTRAINT `robo_room_ibfk_1` FOREIGN KEY (`robo_id`) REFERENCES `Robo` (`robo_id`),
   ADD CONSTRAINT `robo_room_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `Room` (`room_id`);
 
 --
--- Constraints for table `User`
+-- Constraints der Tabelle `User`
 --
 ALTER TABLE `User`
   ADD CONSTRAINT `User_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `Location` (`location_id`) ON DELETE CASCADE ON UPDATE CASCADE;
