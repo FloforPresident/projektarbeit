@@ -36,10 +36,10 @@ class database:
 		return myresult
 		
 
-	def addUser(self, name, password):
+	def addUser(self, location_id, name, password):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO User (username, password) VALUES (%s, %s)"
-		val = (name, password)
+		sql = "INSERT INTO User (location_id, username, password) VALUES (%s, %s, %s)"
+		val = (location_id, name, password)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
 		print(mycursor.rowcount, "record inserted.")
@@ -100,18 +100,24 @@ class database:
 
 
 	#::::ROOM::::
-	def addRoom(self, roomName, mapInformation):
+
+	# TODO yaml und pgm
+
+	def addRoom(self, roomName, pgm, yaml):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO Room (title, map) VALUES (%s, %s)"
-		val = (roomName, mapInformation)
-		mycursor.execute(sql, val)
+		# sql = "INSERT INTO Room (title, pgm, yaml) VALUES (%s, %s, %s)"
+		# val = (roomName, pgm, yaml)
+		# mycursor.execute(sql, val)
+
+		mycursor.execute("INSERT INTO Room (title) VALUES ('"+roomName+"')")
+
 		self.mydb.commit()
 		print(mycursor.rowcount, "record inserted.")
 
 
-	def deleteRoom(self, roomName):
+	def deleteRoom(self, room_id):
 		mycursor = self.mydb.cursor()
-		sql = "DELETE FROM Room WHERE robo_id = '"+roomName+"'"
+		sql = "DELETE FROM Room WHERE room_id = '"+room_id+"'"
 		mycursor.execute(sql)
 		self.mydb.commit()
 		print(mycursor.rowcount, "record(s) deleted")
@@ -119,17 +125,17 @@ class database:
 	def getRoom(self, roomName):
 		mycursor = self.mydb.cursor(prepared = True)
 		mycursor.execute("SELECT * FROM Room  WHERE title = '"+roomName+"'")
-		myresult = mycursor.fetchall()
+		myresult = mycursor.fetchone()
 		for x in myresult:
 			print(x)
 		return myresult
 
 
 	#::::LOCATION::::
-	def addLocation(self, user_id, room_id, locationName, x, y):
+	def addLocation(self, room_id, locationName, x, y):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO Location (user_id, room_id, title, x, y) VALUES (%s, %s, %s, %s, %s)"
-		val = (user_id, room_id, locationName, x, y)
+		sql = "INSERT INTO Location (room_id, title, x, y) VALUES (%s, %s, %s, %s)"
+		val = (room_id, locationName, x, y)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
 		print(mycursor.rowcount, "record inserted.")
@@ -146,7 +152,7 @@ class database:
 	def getLocation(self, title):
 		mycursor = self.mydb.cursor(prepared = True)
 		mycursor.execute("SELECT * FROM Location  WHERE title = '"+title+"'")
-		myresult = mycursor.fetchall()
+		myresult = mycursor.fetchone()
 		for x in myresult:
 			print(x)
 		return myresult
@@ -158,26 +164,4 @@ class database:
 	#def getMessages(username):
 	
 
-
-if __name__ == '__main__':
-    	#new database
-	db = database("localhost","root","","test")
-	
-	db.addUser('test', '1234')
-
-	print("----- user information: -----")
-	user = db.getUser('test')
-	print("User id: "+ str(user[0])) #get users id
-	print()
-	
-	
-	print("----- user login: -----")
-	db.loginUser('test','1234')
-	print()
-
-	print("----- all users: -----")
-	db.getAllUsers()
-	db.deleteUser(user[0])
-	db.getAllUsers()
-	
-	
+#::::::		code fuer controller skript:	db = database("localhost","root","","turtlebot")		:::::::::
