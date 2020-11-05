@@ -6,7 +6,7 @@ import 'package:turtlebot/objects/data_base_objects.dart';
 
 class Locations extends StatefulWidget {
   final LocationsController controller = LocationsController(Colors.pink);
-  final ControllerCustomDropdown<Room> dropdownCon = ControllerCustomDropdown();
+
 
   @override
   State<StatefulWidget> createState() {
@@ -44,7 +44,9 @@ class _LocationsState extends State<Locations> {
             child: CustomDropdownLabel(
               label: "Rooms",
               child: CustomDropdownMenu<Room>(
-                controller: widget.dropdownCon,
+                onChanged: () {widget.controller.updateLocations(widget.controller.dropdownCon.getValue().id);},
+                startValueId: 1,
+                controller: widget.controller.dropdownCon,
                 data: widget.controller._getRoomData(),
               ),
             ),
@@ -54,16 +56,17 @@ class _LocationsState extends State<Locations> {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               key: widget.controller.key,
-              initialItemCount: widget.controller.items.length,
+              initialItemCount: widget.controller.locations.length,
               itemBuilder: (context, index, animation) {
                 return widget.controller._buildItem(
-                    widget.controller.items[index], animation, index);
+                    widget.controller.locations[index], animation, index);
               },
             ),
-          )
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        onPressed: () {},
         backgroundColor: widget.controller.colorTheme,
         child: Icon(Icons.add, color: Colors.white),
       ),
@@ -72,40 +75,75 @@ class _LocationsState extends State<Locations> {
 }
 
 class LocationsController {
+  final ControllerCustomDropdown<Room> dropdownCon = ControllerCustomDropdown();
   Color _colorTheme;
   final GlobalKey<AnimatedListState> _key = GlobalKey();
-  List<Room> _items;
+  List<Room> _rooms;
+  List<LocationID> _locations;
 
-  List<Room> get items => _items;
+  set locations(List<LocationID> value) {
+    _locations = value;
+  }
+
+  List<LocationID> get locations => _locations;
+
+  List<Room> get rooms => _rooms;
 
   GlobalKey<AnimatedListState> get key => _key;
 
   Color get colorTheme => _colorTheme;
 
   LocationsController(this._colorTheme) {
-    _items = _getRoomData();
+    _rooms = _getRoomData();
+    _locations = _getLocationData();
   }
 
   List<Room> _getRoomData() {
     return [
-      Room(1, "living-room"),
-      Room(2, "dining-room"),
-      Room(3, "study-room"),
+      Room(1, "basement"),
+      Room(2, "1.floor"),
+      Room(3, "2.floor"),
       Room(4, "basement"),
       Room(5, "hiaf"),
       Room(6, "dfasf"),
       Room(7, "dafsdf"),
       Room(8, "dafsd"),
-      Room(5, "hiaf"),
-      Room(6, "dfasf"),
-      Room(7, "dafsdf"),
-      Room(8, "dafsd"),
+      Room(9, "hiaf"),
+      Room(10, "dfasf"),
+      Room(11, "dafsdf"),
+      Room(12, "dafsd"),
     ];
   }
 
-  Widget _buildItem(Room item, Animation animation, int index) {
-    Icon _selected =
-        (true) ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank);
+  List<LocationID> _getLocationData() {
+    return [
+      LocationID(1, 1,"Kitchen"),
+    LocationID(2,1,"Office"),
+    LocationID(3,1,"Bathroom"),
+    LocationID(4,2,"Bedroom"),
+    LocationID(5,2,"Bathroom"),
+    LocationID(6,2,"MomsOffice"),
+    LocationID(7,3,"bigshelf"),
+    LocationID(8,3,"tabletennis"),
+    LocationID(9,3,"chest"),
+    ];
+  }
+
+  updateLocations(int roomId)
+  {
+    List<LocationID> result = List<LocationID>();
+
+    locations.forEach((location)
+    {
+      if(location.roomId == roomId)
+        result.add(location);
+    });
+
+    locations = result;
+  }
+
+  Widget _buildItem(LocationID item, Animation animation, int index) {
+
 
     return SizeTransition(
       sizeFactor: animation,
@@ -148,7 +186,7 @@ class LocationsController {
   }
 
   void _removeItem(int index) {
-    Room removeItem = _items.removeAt(index);
+    LocationID removeItem = _locations.removeAt(index);
     AnimatedListRemovedItemBuilder build = (context, animation) {
       return _buildItem(removeItem, animation, index);
     };
@@ -156,11 +194,11 @@ class LocationsController {
     _key.currentState.removeItem(index, build);
   }
 
-  void _addItem(Room room) {
-    int end = _items.length;
-    _items.add(room);
+  void _addItem(LocationID location) {
+    int end = _locations.length;
+    _locations.add(location);
     AnimatedListItemBuilder build = (context, index, animation) {
-      return _buildItem(_items[index], animation, index);
+      return _buildItem(_locations[index], animation, index);
     };
 
     _key.currentState.insertItem(end);
@@ -191,6 +229,7 @@ class LocationsController {
                 ),
               ),
               CheckboxListTile(
+                onChanged: (bool) {},
                 title: Text("RoomScanned"),
                 value: false,
               )
@@ -206,7 +245,7 @@ class LocationsController {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                _addItem(Room(items.length + 1, controller.text));
+                _addItem(LocationID(rooms.length + 1, dropdownCon.getValue().id, "test"));
                 Navigator.of(context).pop();
               },
             ),

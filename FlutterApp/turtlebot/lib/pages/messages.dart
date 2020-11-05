@@ -105,7 +105,9 @@ class _MessagesState extends State<Messages> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.controller.getValue();
+                    },
                     child: Text("Send Message"),
                   ),
                 )
@@ -121,6 +123,14 @@ class ControllerMessages {
   ControllerCustomDropdown dropController = ControllerCustomDropdown<User>();
 
   Messages view;
+
+  getValue()
+  {
+    User u = dropController.getValue();
+    print(u.id);
+
+    print(dropController.getValue());
+  }
 
   ControllerMessages(this.view, this._colorTheme);
 

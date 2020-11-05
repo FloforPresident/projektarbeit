@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Robos extends StatelessWidget
@@ -31,7 +33,7 @@ class Robos extends StatelessWidget
         foregroundColor: Colors.white,
         backgroundColor: controller.colorTheme,
         onPressed: () {
-          controller.addItem(context);
+         controller.addItemDialog(context);
         },
       ),
     );
