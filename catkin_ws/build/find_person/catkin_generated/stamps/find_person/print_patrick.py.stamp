@@ -8,7 +8,7 @@ def print_person():
 	pub = rospy.Publisher('chatter', String, queue_size=10)
 	rospy.init_node('print_person', anonymous=False)
 
-	datastring = '{"action": "find_person", "name": "Patrick", "x": "-3.5", "y": "-3.0"}'
+	datastring = '{"action": "find_person", "name": "Patrick", "x": "0", "y": "0"}'
 	dataArray = json.loads(datastring)
 
 	rospy.loginfo("Auf der Suche nach: " + dataArray["name"])

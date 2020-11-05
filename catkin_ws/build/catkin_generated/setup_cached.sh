@@ -7,4 +7,5 @@
 # new environment variables
 
 # modified environment variables
-export PWD="/home/basti/projektarbeit/catkin_ws/build"
+export PATH="/opt/ros/kinetic/bin:/home/patrick/bin:/home/patrick/.local/bin:/home/patrick/bin:/home/patrick/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+export PWD="/home/patrick/projektarbeit/catkin_ws/build"
