@@ -1,6 +1,3 @@
-import 'package:password/password.dart';
-import 'package:turtlebot/pages/robos.dart';
-
 class DatabaseObject {
   String _name;
   int _id;
@@ -81,11 +78,9 @@ class User implements DatabaseObject {
   User(this._id, this._name, this._activeLocation);
 
   @override
-  // TODO: implement id
   get id => _id;
 
   @override
-  // TODO: implement name
   get name => _name;
 
   get activeLocation => _activeLocation;

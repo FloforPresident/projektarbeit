@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
-import rospy
+# import rospy
 import os
 import subprocess
+import json
 
 import mysql.connector
-import rospy
+
 
 class database:
 	def __init__(self, host, user, password, databasename):
@@ -42,7 +43,8 @@ class database:
 		val = (location_id, name, password)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
-		print(mycursor.rowcount, "record inserted.")
+		
+		return 'success'
 	
 	def deleteUser(self, user_id):
 		mycursor = self.mydb.cursor()
@@ -52,21 +54,30 @@ class database:
 		print(mycursor.rowcount, "record(s) deleted")
 
 	def loginUser(self, name, password):
-		getName = self.mydb.cursor(prepared = True)
-		getName.execute("SELECT username FROM User WHERE username = '"+name+"'")
-		username = getName.fetchone()
+		# getName = self.mydb.cursor(prepared = True)
+		# getName.execute("SELECT username FROM User WHERE username = '"+name+"'")
+		# username = getName.fetchone()
 	
-		getPw = self.mydb.cursor(prepared = True)
-		getPw.execute("SELECT password FROM User WHERE username = '"+name+"'")
-		pw = getPw.fetchone()
+		# getPw = self.mydb.cursor(prepared = True)
+		# getPw.execute("SELECT password FROM User WHERE username = '"+name+"'")
+		# pw = getPw.fetchone()
 
-		if(password == pw[0]):
-			print("login succesfull")
-			print("welcome "+username[0])
-			return 1
+		mycursor = self.mydb.cursor(prepared = True)
+		mycursor.execute("SELECT user_id, location_id, username FROM User WHERE username = '"+name+"' AND password = '" + password + "'")
+		myresult = mycursor.fetchall()
+
+		if(myresult):
+			myresult = myresult[0]
+			
+			data = {
+				"user_id": myresult[0],
+				"location_id": myresult[1],
+				"username": myresult[2].decode("utf-8"),
+			}
+
+			return json.dumps(data)
 		else:
-			print("wrong password")
-			return 0
+			return ""
 
 
 	#def logoutUser(name): TODO

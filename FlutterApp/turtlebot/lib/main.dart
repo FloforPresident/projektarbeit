@@ -72,7 +72,7 @@ class _HomeState extends State<Home> {
   // streamController.addStream(widget.streamController.stream)
 
   bool isLoggedIn = false;
-  String name = '';
+  static String name = '';
 
   void autoLogIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -96,7 +96,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  Future<Null> loginUser() async {
+  Future<Null> login() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('username', _name.text);
 
@@ -184,10 +184,10 @@ class _HomeState extends State<Home> {
               color: colorTheme,
               onPressed: () {
                 if (_name.text.isNotEmpty && _password.text.isNotEmpty) {
-                  userAction("LOGIN USER", _name.text, _password.text);
+                  loginUser(_name.text, _password.text);
                   broadcast.stream.listen((data) {
-                    if (data == 'success') {
-                      loginUser();
+                    if (data != '') {
+                      login();
                     }
                     RouteGenerator.onTapToHome(context);
                   });
@@ -259,7 +259,7 @@ class _HomeState extends State<Home> {
                 if (_name.text.isNotEmpty &&
                     _password.text.isNotEmpty &&
                     _uploadedImage == true) {
-                  userAction("ADD USER", _name.text, _password.text);
+                  addUser(1, _name.text, _password.text);
                   RouteGenerator.onTapToHome(context);
                 }
               },
@@ -270,15 +270,15 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void userAction(String action, [String name, String password]) {
-    String data;
+  void addUser(int location, String name, String password) {
+    String data =
+        '{"action": "ADD USER", "location": "$location", "name": "$name", "password": "$password"}';
+    channel.sink.add(data);
+  }
 
-    if (name.isNotEmpty && password.isNotEmpty) {
-      data = '{"action": "$action", "name": "$name", "password": "$password"}';
-    } else {
-      data = '{"action": "$action"}';
-    }
-
+  void loginUser(String name, String password) {
+    String data =
+        '{"action": "LOGIN USER", "name": "$name", "password": "$password"}';
     channel.sink.add(data);
   }
 
