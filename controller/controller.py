@@ -194,6 +194,7 @@ def start_websocket():
 # move_forward(3)
 
 dummyJson = '{ "action": "find_goal", "name":"bocklet", "room":1 }'
+dummyJson2 = '{"action": "save_face_encoding", "data":"Binärdaten"}'
 
 testRoom = json_get_value_by_key(dummyJson, "room")
 testName = json_get_value_by_key(dummyJson, "name")
