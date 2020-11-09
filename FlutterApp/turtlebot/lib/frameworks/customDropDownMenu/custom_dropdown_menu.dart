@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 
-class CustomDropdownMenu<T> extends StatefulWidget {
-  @override
-  T value;
-  int counter;
-  double fontSize;
-  List<DatabaseObject> data;
-  ControllerCustomDropdown<T> controller;
-  State<CustomDropdownMenu> version;
+class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
+
+  final double fontSize;
+  final ControllerCustomDropdown<T> controller;
 
   CustomDropdownMenu(
-      {this.counter,
+      {int startValueId,
       @required this.controller,
       this.fontSize = 18,
-      @required this.data});
+      List<T> data,
+      Function onChanged})
+  {
+    controller.initialize(startValueId, onChanged, data);
+  }
 
   State<StatefulWidget> createState() {
-    controller.initialize(this);
-
     return _StateCustomDropdownMenu();
   }
 }
@@ -32,15 +30,18 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
           Expanded(
             flex: 3,
             child: DropdownButton(
-              isExpanded: true,
-              value: widget.counter,
-              items: widget.controller._createDropdownMenuItem(widget.data),
-              onChanged: (value) {
-                setState(() {
-                  widget.controller.resetState(value);
-                });
-              },
-            ),
+                isExpanded: true,
+                value: widget.controller.startValueId,
+                items: widget.controller
+                    ._createDropdownMenuItem(widget.controller.data),
+                onChanged: (value) {
+                  setState(() {
+                    widget.controller.resetState(value);
+                    (widget.controller.onChanged != null) ? widget.controller.onChanged() : null;
+
+                  });
+
+                }),
           ),
           Spacer(
             flex: 2,
@@ -49,6 +50,48 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
         mainAxisAlignment: MainAxisAlignment.center,
       ),
     );
+  }
+}
+
+class ControllerCustomDropdown<T extends DatabaseObject> {
+  T _value;
+  int _startValueId;
+
+  set startValueId(int value) {
+    _startValueId = value;
+  }
+
+  int get startValueId => _startValueId;
+  List<DatabaseObject> data;
+  Function onChanged;
+
+
+
+  initialize(int startValueId, Function onChanged, List<DatabaseObject> data) {
+    this.startValueId = startValueId;
+    this.onChanged = onChanged;
+    this.data = data;
+  }
+
+  T getValue() {
+    if (_value != null)
+      return _value;
+    else
+      return null;
+  }
+
+  List<DropdownMenuItem> _createDropdownMenuItem(List<DatabaseObject> objects) {
+    return objects.map((item) {
+      return DropdownMenuItem(
+        value: item.id,
+        child: Text(item.name),
+      );
+    }).toList();
+  }
+
+  void resetState(int value) {
+    startValueId = value;
+    this._value = data[value - 1];
   }
 }
 
@@ -91,34 +134,5 @@ class CustomDropdownLabel extends StatelessWidget {
       ),
     );
     ;
-  }
-}
-
-class ControllerCustomDropdown<T> {
-  CustomDropdownMenu _widgetDrop;
-
-  initialize(CustomDropdownMenu child) {
-    this._widgetDrop = child;
-  }
-
-  T getValue() {
-    if (_widgetDrop.value != null)
-      return _widgetDrop.value;
-    else
-      return null;
-  }
-
-  List<DropdownMenuItem> _createDropdownMenuItem(List<DatabaseObject> objects) {
-    return objects.map((row) {
-      return DropdownMenuItem(
-        value: row.id,
-        child: Text(row.name),
-      );
-    }).toList();
-  }
-
-  void resetState(dynamic value) {
-    _widgetDrop.counter = value;
-    _widgetDrop.value = _widgetDrop.data[value - 1];
   }
 }
