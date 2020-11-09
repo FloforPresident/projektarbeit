@@ -24,7 +24,7 @@ class Robo implements DatabaseObject {
   String _iP;
   Room _activeRoom;
 
-  Robo(this._name, this._iP, this._id, this._activeRoom);
+  Robo(this._name, this._iP, this._id, [this._activeRoom = null]);
 
   @override
   // TODO: implement iD

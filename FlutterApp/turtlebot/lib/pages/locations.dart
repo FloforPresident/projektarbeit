@@ -46,7 +46,6 @@ class _LocationsState extends State<Locations> {
               child: CustomDropdownMenu<Room>(
                 onChanged: () {
                   widget.controller.updateLocations(widget.controller.dropdownCon.getValue().id);
-
                   },
                 startValueId: 1,
                 controller: widget.controller.dropdownCon,
@@ -69,7 +68,7 @@ class _LocationsState extends State<Locations> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {widget.controller.addItemDialog(context);},
         backgroundColor: widget.controller.colorTheme,
         child: Icon(Icons.add, color: Colors.white),
       ),
@@ -194,34 +193,30 @@ class LocationsController {
   }
 
   void addItemDialog(BuildContext context) {
-    TextEditingController controller = TextEditingController();
+    TextEditingController nameController = TextEditingController();
+    TextEditingController xController = TextEditingController();
+    TextEditingController yController = TextEditingController();
 
     showDialog(
       barrierDismissible: true,
       context: context,
       builder: (context) => SingleChildScrollView(
         child: AlertDialog(
-          title: Text("Add new Room"),
+          title: Text("Add new Location"),
           content: Column(
             children: <Widget>[
               TextField(
-                controller: controller,
+                controller: nameController,
                 decoration: InputDecoration(labelText: "Name"),
               ),
-              Container(
-                margin: EdgeInsets.all(15),
-                child: RaisedButton(
-                  child: Text("StartRoomScan"),
-                  color: _colorTheme,
-                  textColor: Colors.white,
-                  onPressed: () {},
-                ),
+              TextField(
+                controller: xController,
+                decoration: InputDecoration(labelText: "X-Coordinate"),
               ),
-              CheckboxListTile(
-                onChanged: (bool) {},
-                title: Text("RoomScanned"),
-                value: false,
-              )
+              TextField(
+                controller: yController,
+                decoration: InputDecoration(labelText: "Y-Coordinate"),
+              ),
             ],
           ),
           actions: <Widget>[
@@ -234,7 +229,8 @@ class LocationsController {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                _addItem(LocationID(locations.length + 1, dropdownCon.getValue().id, "test"));
+                LocationID newLoc = LocationID(locations.length + 1, dropdownCon.getValue().id, nameController.text);
+                _addItem(newLoc);
                 Navigator.of(context).pop();
               },
             ),
@@ -242,12 +238,6 @@ class LocationsController {
         ),
       ),
     );
-  }
-
-  int startValue()
-  {
-//    (dropdownCon.getValue() == null) ? startVal
-  return 0;
   }
 
 

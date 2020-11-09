@@ -12,6 +12,11 @@ class SocketModel {
     return _instance;
   }
 
+  test()
+  {
+    SocketModel sm = new SocketModel();
+  }
+
   SocketModel._internal() {
     userData = getUsers();
     roomData = getRooms();
@@ -26,4 +31,19 @@ class SocketModel {
   List<LocationID> getLocationsID() {}
 
   List<Robo> getRobos() {}
+
+  static int getNewId(String type)
+  {
+    if(type == "Robo")
+      {}
+    if(type == "Room")
+      {}
+    if(type == "LocationID")
+      {}
+    if(type == "User")
+      {}
+
+    return 10;
+
+  }
 }
