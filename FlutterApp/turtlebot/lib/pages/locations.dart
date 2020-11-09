@@ -44,7 +44,10 @@ class _LocationsState extends State<Locations> {
             child: CustomDropdownLabel(
               label: "Rooms",
               child: CustomDropdownMenu<Room>(
-                onChanged: () {widget.controller.updateLocations(widget.controller.dropdownCon.getValue().id);},
+                onChanged: () {
+                  widget.controller.updateLocations(widget.controller.dropdownCon.getValue().id);
+
+                  },
                 startValueId: 1,
                 controller: widget.controller.dropdownCon,
                 data: widget.controller._getRoomData(),
@@ -56,10 +59,10 @@ class _LocationsState extends State<Locations> {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               key: widget.controller.key,
-              initialItemCount: widget.controller.locations.length,
+              initialItemCount: widget.controller.currentLocations.length,
               itemBuilder: (context, index, animation) {
                 return widget.controller._buildItem(
-                    widget.controller.locations[index], animation, index);
+                    widget.controller.currentLocations[index], animation, index);
               },
             ),
           ),
@@ -78,8 +81,12 @@ class LocationsController {
   final ControllerCustomDropdown<Room> dropdownCon = ControllerCustomDropdown();
   Color _colorTheme;
   final GlobalKey<AnimatedListState> _key = GlobalKey();
-  List<Room> _rooms;
+
+  //_locations should be exchanged with fixed List of available Locations from Database
   List<LocationID> _locations;
+  List<LocationID> _currentLocations;
+
+  List<LocationID> get currentLocations => _currentLocations;
 
   set locations(List<LocationID> value) {
     _locations = value;
@@ -87,59 +94,41 @@ class LocationsController {
 
   List<LocationID> get locations => _locations;
 
-  List<Room> get rooms => _rooms;
 
   GlobalKey<AnimatedListState> get key => _key;
 
   Color get colorTheme => _colorTheme;
 
   LocationsController(this._colorTheme) {
-    _rooms = _getRoomData();
     _locations = _getLocationData();
-  }
-
-  List<Room> _getRoomData() {
-    return [
-      Room(1, "basement"),
-      Room(2, "1.floor"),
-      Room(3, "2.floor"),
-      Room(4, "basement"),
-      Room(5, "hiaf"),
-      Room(6, "dfasf"),
-      Room(7, "dafsdf"),
-      Room(8, "dafsd"),
-      Room(9, "hiaf"),
-      Room(10, "dfasf"),
-      Room(11, "dafsdf"),
-      Room(12, "dafsd"),
-    ];
-  }
-
-  List<LocationID> _getLocationData() {
-    return [
-      LocationID(1, 1,"Kitchen"),
-    LocationID(2,1,"Office"),
-    LocationID(3,1,"Bathroom"),
-    LocationID(4,2,"Bedroom"),
-    LocationID(5,2,"Bathroom"),
-    LocationID(6,2,"MomsOffice"),
-    LocationID(7,3,"bigshelf"),
-    LocationID(8,3,"tabletennis"),
-    LocationID(9,3,"chest"),
-    ];
+    _currentLocations = _getLocationData();
   }
 
   updateLocations(int roomId)
   {
     List<LocationID> result = List<LocationID>();
+    bool notInserted = true;
+    int indexRemoveableItem = 0;
 
-    locations.forEach((location)
-    {
-      if(location.roomId == roomId)
-        result.add(location);
-    });
+    for(int i = 0; i < locations.length; i++) {
+      for(int y = 0; y < currentLocations.length; y++)
+        {
+          if(locations[i].id == currentLocations[y].id)
+            {
+              notInserted = false;
+              indexRemoveableItem = y;
+            }
+        }
+      if (locations[i].roomId == roomId && notInserted)
+      {
+        _addItem(locations[i]);
+      }
+      else if(!notInserted && locations[i].roomId != roomId) {
+        _removeItem(indexRemoveableItem);
+      }
+      notInserted = true;
 
-    locations = result;
+    }
   }
 
   Widget _buildItem(LocationID item, Animation animation, int index) {
@@ -186,7 +175,7 @@ class LocationsController {
   }
 
   void _removeItem(int index) {
-    LocationID removeItem = _locations.removeAt(index);
+    LocationID removeItem = currentLocations.removeAt(index);
     AnimatedListRemovedItemBuilder build = (context, animation) {
       return _buildItem(removeItem, animation, index);
     };
@@ -195,10 +184,10 @@ class LocationsController {
   }
 
   void _addItem(LocationID location) {
-    int end = _locations.length;
-    _locations.add(location);
+    int end = currentLocations.length;
+    currentLocations.add(location);
     AnimatedListItemBuilder build = (context, index, animation) {
-      return _buildItem(_locations[index], animation, index);
+      return _buildItem(currentLocations[index], animation, index);
     };
 
     _key.currentState.insertItem(end);
@@ -245,7 +234,7 @@ class LocationsController {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                _addItem(LocationID(rooms.length + 1, dropdownCon.getValue().id, "test"));
+                _addItem(LocationID(locations.length + 1, dropdownCon.getValue().id, "test"));
                 Navigator.of(context).pop();
               },
             ),
@@ -254,4 +243,43 @@ class LocationsController {
       ),
     );
   }
+
+  int startValue()
+  {
+//    (dropdownCon.getValue() == null) ? startVal
+  return 0;
+  }
+
+
+  List<Room> _getRoomData() {
+    return [
+      Room(1, "basement"),
+      Room(2, "1.floor"),
+      Room(3, "2.floor"),
+      Room(4, "basement"),
+      Room(5, "hiaf"),
+      Room(6, "dfasf"),
+      Room(7, "dafsdf"),
+      Room(8, "dafsd"),
+      Room(9, "hiaf"),
+      Room(10, "dfasf"),
+      Room(11, "dafsdf"),
+      Room(12, "dafsd"),
+    ];
+  }
+
+  List<LocationID> _getLocationData() {
+    return [
+      LocationID(1, 1,"Kitchen"),
+      LocationID(2,1,"Office"),
+      LocationID(3,1,"Bathroom"),
+      LocationID(4,2,"Bedroom"),
+      LocationID(5,2,"Bathroom"),
+      LocationID(6,2,"MomsOffice"),
+      LocationID(7,3,"bigshelf"),
+      LocationID(8,3,"tabletennis"),
+      LocationID(9,3,"chest"),
+    ];
+  }
+
 }

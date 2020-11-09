@@ -38,6 +38,7 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
                   setState(() {
                     widget.controller.resetState(value);
                     (widget.controller.onChanged != null) ? widget.controller.onChanged() : null;
+
                   });
 
                 }),
