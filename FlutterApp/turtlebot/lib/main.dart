@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/services/navigation.dart';
 import 'package:web_socket_channel/io.dart';
@@ -72,36 +74,38 @@ class _HomeState extends State<Home> {
   // streamController.addStream(widget.streamController.stream)
 
   bool isLoggedIn = false;
-  static String name = '';
+
+  User sessionUser;
+  static int id;
 
   void autoLogIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String userName = prefs.getString('username');
+    final int userID = prefs.getInt('id');
 
-    if (userName != null) {
+    if (userID != null) {
       setState(() {
         isLoggedIn = true;
-        name = userName;
+        id = userID;
       });
     }
   }
 
   Future<Null> logout() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('username', null);
+    prefs.setInt('id', null);
 
     setState(() {
-      name = '';
+      id = null;
       isLoggedIn = false;
     });
   }
 
   Future<Null> login() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('username', _name.text);
+    prefs.setInt('id', sessionUser.id);
 
     setState(() {
-      name = _name.text;
+      id = sessionUser.id;
       isLoggedIn = true;
     });
   }
@@ -113,7 +117,7 @@ class _HomeState extends State<Home> {
         automaticallyImplyLeading: false,
         title: Center(
             child: Text(isLoggedIn
-                ? (name + '-Bot Control App')
+                ? (id.toString() + ' Turtle-Bot Control App')
                 : 'Turtle-Bot Control App')),
         backgroundColor: Colors.white,
         actions: <Widget>[
@@ -187,6 +191,13 @@ class _HomeState extends State<Home> {
                   loginUser(_name.text, _password.text);
                   broadcast.stream.listen((data) {
                     if (data != '') {
+                      String jsonDataString = data.toString();
+                      final jsonData = jsonDecode(jsonDataString);
+
+                      sessionUser = new User(
+                          jsonData['user_id'],
+                          jsonData['username'],
+                          jsonData['location_id'].toString());
                       login();
                     }
                     RouteGenerator.onTapToHome(context);
