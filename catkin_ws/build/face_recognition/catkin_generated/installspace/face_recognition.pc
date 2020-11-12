@@ -1,8 +1,0 @@
-prefix=/home/stefan/projektarbeit/catkin_ws/install
-
-Name: face_recognition
-Description: Description of face_recognition
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
