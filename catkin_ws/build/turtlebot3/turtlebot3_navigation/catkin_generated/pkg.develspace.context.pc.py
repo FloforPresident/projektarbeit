@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "turtlebot3_navigation"
-PROJECT_SPACE_DIR = "/home/patrick/projektarbeit/catkin_ws/devel"
+PROJECT_SPACE_DIR = "/home/stefan/projektarbeit/catkin_ws/devel"
 PROJECT_VERSION = "1.2.3"

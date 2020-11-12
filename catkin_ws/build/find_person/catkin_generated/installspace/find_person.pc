@@ -1,4 +1,4 @@
-prefix=/home/patrick/projektarbeit/catkin_ws/install
+prefix=/home/stefan/projektarbeit/catkin_ws/install
 
 Name: find_person
 Description: Description of find_person
