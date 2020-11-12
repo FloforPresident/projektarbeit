@@ -160,6 +160,9 @@ def robo_ssh():
 	#chan=ssh.invoke_shell()
 	#chan.send('roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true')
 
+def action_find_person(name, message):
+		user = db.getUser(name)
+
 
 
 
@@ -171,18 +174,21 @@ def launch_node():
 
 def start_websocket():
 	connected = set()
-	print("Websocket start")
+	print("Starting websocket")
 	async def ws_recieve(websocket, path):
 		connected.add(websocket)
 		print(websocket)
 		msg = await websocket.recv()
-		decoded = json.loads(msg)
-		#param1 = decoded["param1"]
-	
-		if(decoded["action"] == "move"):
+		data = json.loads(msg)
+		response = ''
+
+		action = data['action']
+
+		if(action == 'FIND PERSON'):
 			# move_forward(3,1)
 			await websocket.send("sucess")
-		print(msg)
+		
+		await websocket.send(response)
 
 	start_server = websockets.serve(ws_recieve, "localhost", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
 
@@ -191,25 +197,10 @@ def start_websocket():
 
 ######################### TEST ####################################################
 
-# move_forward(3)
-
-dummyJson = '{ "action": "find_goal", "name":"bocklet", "room":1 }'
-dummyJson2 = '{"action": "save_face_encoding", "data":"Binärdaten"}'
-
-testRoom = json_get_value_by_key(dummyJson, "room")
-testName = json_get_value_by_key(dummyJson, "name")
-testAction = json_get_action(dummyJson)
-# print(testRoom)
-# print(testName)
-# print(testAction)
-
-
-
 if __name__ == '__main__':
-	#add_user_db("Patrick", "123", "Testimage", "TestLocation")
 	process = multiprocessing.Process(target=launch_node)
 	#process.start()
-	process2 = multiprocessing.Process(target=start_websocket)
+	processWebsocket = multiprocessing.Process(target=start_websocket)
 	process2.start()
-	process3 = multiprocessing.Process(target=robo_ssh)
+	#process3 = multiprocessing.Process(target=robo_ssh)
 	process3.start()
