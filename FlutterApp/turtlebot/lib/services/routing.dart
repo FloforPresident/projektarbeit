@@ -8,7 +8,6 @@ import 'package:turtlebot/pages/friends.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/pages/messages.dart';
 import 'package:turtlebot/pages/locations.dart';
-import 'package:turtlebot/socket_model/socket_model.dart';
 
 class RouteGenerator {
   // _RouteGenerator() {}

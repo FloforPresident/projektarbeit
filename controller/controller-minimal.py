@@ -26,7 +26,12 @@ async def ws_recieve(websocket, path):
 		response = db.addUser(data['location'], data['name'], data['password'])
 	elif(action == 'LOGIN USER'):
 		response = db.loginUser(data['name'], data['password'])
-
+	elif(action == 'GET ROOMS'):
+		response = db.getAllRooms()
+	elif(action == 'ADD ROOM'):
+		db.addRoom(data['name'], None, None)
+	elif(action == 'DELETE ROOM'):
+		db.deleteRoom(data['id'])
 
 	await websocket.send(response)
 

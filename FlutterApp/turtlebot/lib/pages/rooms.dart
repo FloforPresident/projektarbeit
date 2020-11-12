@@ -1,13 +1,41 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
 import 'package:turtlebot/services/routing.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
-class Rooms extends StatelessWidget {
-  _ControllerRooms controller;
+class Rooms extends StatefulWidget {
+  final channel = MyApp.con();
 
-  Rooms({Key key}) : super(key: key) {
-    this.controller = _ControllerRooms(Colors.green);
+  Rooms({Key key}) : super(key: key);
+
+  @override
+  _RoomState createState() {
+    return _RoomState();
+  }
+}
+
+class _RoomState extends State<Rooms> {
+  List<Room> items = [];
+  final GlobalKey<AnimatedListState> key = GlobalKey();
+  final colorTheme = Colors.green;
+
+  @override
+  void initState() {
+    super.initState();
+    // broadcast = widget.channel.stream.asBroadcastStream();
+
+    getRooms();
+  }
+
+  void getRooms() {
+    int userID = MyApp.id;
+    String data = '{"action": "GET ROOMS", "userID": $userID}';
+    widget.channel.sink.add(data);
   }
 
   @override
@@ -34,61 +62,46 @@ class Rooms extends StatelessWidget {
           ],
           titleText: "Rooms",
         ),
-        backgroundColor: controller.colorTheme,
+        backgroundColor: colorTheme,
       ),
-      body: AnimatedList(
-        key: controller.key,
-        initialItemCount: controller.items.length,
-        itemBuilder: (context, index, animation) {
-          return controller._buildItem(
-              controller.items[index], animation, index);
-        },
-      ),
+      body: StreamBuilder(
+          stream: widget.channel.stream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              String jsonDataString = snapshot.data.toString();
+              var jsonData = jsonDecode(jsonDataString);
+
+              for (int i = 0; i < jsonData.length; i++) {
+                Room r = new Room(jsonData[i]['room_id'], jsonData[i]['title']);
+                items.add(r);
+              }
+
+              return AnimatedList(
+                key: key,
+                initialItemCount: items.length,
+                itemBuilder: (context, index, animation) {
+                  return buildItem(items[index], animation, index);
+                },
+              );
+            } else {
+              return Text('');
+            }
+          }),
       floatingActionButton: FloatingActionButton(
         child: Icon(
           Icons.add,
           color: Colors.white,
         ),
-        backgroundColor: controller.colorTheme,
+        backgroundColor: colorTheme,
         onPressed: () {
-          controller.addItemDialog(context);
+          _ControllerRooms addItemCon = _ControllerRooms(colorTheme);
+          addItemCon.addItemDialog(context);
         },
       ),
     );
   }
-}
 
-class _ControllerRooms {
-  final GlobalKey<AnimatedListState> _key = GlobalKey();
-  final Color _colorTheme;
-  List<Room> _items;
-
-  _ControllerRooms(this._colorTheme) {
-    _items = _getData();
-  }
-
-  List<Room> _getData() {
-    return [
-      Room(1, "living-room"),
-      Room(2, "dining-room"),
-      Room(3, "study-room"),
-      Room(4, "basement"),
-    ];
-  }
-
-  get colorTheme {
-    return Color(_colorTheme.value);
-  }
-
-  get items {
-    return _items;
-  }
-
-  get key {
-    return _key;
-  }
-
-  Widget _buildItem(Room item, Animation animation, int index) {
+  Widget buildItem(Room item, Animation animation, int index) {
     Icon _selected =
         (true) ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank);
 
@@ -129,7 +142,10 @@ class _ControllerRooms {
                     IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () {
-                        _removeItem(index);
+                        _ControllerRooms deleteItemCon =
+                            _ControllerRooms(colorTheme);
+                        deleteItemCon.removeItem(item);
+                        RouteGenerator.onTapToRooms(context);
                       },
                     )
                   ],
@@ -142,27 +158,35 @@ class _ControllerRooms {
     );
   }
 
-  void _removeItem(int index) {
-    Room removeItem = _items.removeAt(index);
-    AnimatedListRemovedItemBuilder build = (context, animation) {
-      return _buildItem(removeItem, animation, index);
-    };
+  @override
+  void dispose() {
+    widget.channel.sink.close();
+    super.dispose();
+  }
+}
 
-    _key.currentState.removeItem(index, build);
+class _ControllerRooms {
+  final Color colorTheme;
+  WebSocketChannel channel;
+
+  _ControllerRooms(this.colorTheme) {
+    channel = MyApp.con();
   }
 
-  void _addItem(Room room) {
-    int end = _items.length;
-    _items.add(room);
-    AnimatedListItemBuilder build = (context, index, animation) {
-      return _buildItem(_items[index], animation, index);
-    };
+  void removeItem(Room room) {
+    int id = room.id;
+    String data = '{"action": "DELETE ROOM", "id": "$id"}';
+    channel.sink.add(data);
+  }
 
-    _key.currentState.insertItem(end);
+  void addItem(String name) {
+    String data = '{"action": "ADD ROOM", "name": "$name"}';
+    channel.sink.add(data);
   }
 
   void addItemDialog(BuildContext context) {
     TextEditingController controller = TextEditingController();
+    bool _roomScanned = true;
 
     showDialog(
       barrierDismissible: true,
@@ -180,14 +204,15 @@ class _ControllerRooms {
                 margin: EdgeInsets.all(15),
                 child: RaisedButton(
                   child: Text("StartRoomScan"),
-                  color: _colorTheme,
+                  color: colorTheme,
                   textColor: Colors.white,
                   onPressed: () {},
                 ),
               ),
               CheckboxListTile(
                 title: Text("RoomScanned"),
-                value: false,
+                value: _roomScanned,
+                onChanged: (bool value) {},
               )
             ],
           ),
@@ -201,8 +226,10 @@ class _ControllerRooms {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                _addItem(Room(items.length + 1, controller.text));
-                Navigator.of(context).pop();
+                if (controller.text.isNotEmpty && _roomScanned == true) {
+                  addItem(controller.text);
+                  RouteGenerator.onTapToRooms(context);
+                }
               },
             ),
           ],

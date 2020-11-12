@@ -7,7 +7,6 @@ import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/services/navigation.dart';
 import 'package:web_socket_channel/io.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:turtlebot/services/socke_info.dart';
 
 void main() => runApp(MyApp());
@@ -15,6 +14,8 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   // static final IOWebSocketChannel channel = IOWebSocketChannel.connect(
   //     'ws://' + SocketInfo.hostAdress + SocketInfo.port);
+
+  static int id;
 
   static IOWebSocketChannel con() {
     return new IOWebSocketChannel.connect(
@@ -42,12 +43,9 @@ class MyApp extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
-  // final WebSocketChannel channel;
-  // final streamController = StreamController.broadcast();
+  final channel = MyApp.con();
 
-  Home({Key key}) : super(key: key) {
-    // streamController.addStream(this.channel.stream);
-  }
+  Home({Key key}) : super(key: key);
 
   @override
   _HomeState createState() {
@@ -56,8 +54,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  WebSocketChannel channel;
-  StreamController broadcast = StreamController.broadcast();
+  Stream broadcast;
 
   TextEditingController _name = new TextEditingController();
   TextEditingController _password = new TextEditingController();
@@ -65,18 +62,15 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    channel = MyApp.con();
-    broadcast.addStream(channel.stream);
-    autoLogIn();
-    // streamController.addStream(widget.channel.stream);
-  }
 
-  // streamController.addStream(widget.streamController.stream)
+    broadcast = widget.channel.stream.asBroadcastStream();
+
+    autoLogIn();
+  }
 
   bool isLoggedIn = false;
 
   User sessionUser;
-  static int id;
 
   void autoLogIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -85,7 +79,7 @@ class _HomeState extends State<Home> {
     if (userID != null) {
       setState(() {
         isLoggedIn = true;
-        id = userID;
+        MyApp.id = userID;
       });
     }
   }
@@ -95,7 +89,7 @@ class _HomeState extends State<Home> {
     prefs.setInt('id', null);
 
     setState(() {
-      id = null;
+      MyApp.id = null;
       isLoggedIn = false;
     });
   }
@@ -105,7 +99,7 @@ class _HomeState extends State<Home> {
     prefs.setInt('id', sessionUser.id);
 
     setState(() {
-      id = sessionUser.id;
+      MyApp.id = sessionUser.id;
       isLoggedIn = true;
     });
   }
@@ -113,29 +107,43 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Center(
-            child: Text(isLoggedIn
-                ? (id.toString() + ' Turtle-Bot Control App')
-                : 'Turtle-Bot Control App')),
-        backgroundColor: Colors.white,
-        actions: <Widget>[
-          RaisedButton(
-              color: Colors.grey,
-              child: Text(
-                isLoggedIn ? "LogOut" : "LogIn",
-                style: TextStyle(
-                  color: Colors.white,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Center(
+              child: Text(isLoggedIn
+                  ? (MyApp.id.toString() + ' Turtle-Bot Control App')
+                  : 'Turtle-Bot Control App')),
+          backgroundColor: Colors.white,
+          actions: <Widget>[
+            RaisedButton(
+                color: Colors.grey,
+                child: Text(
+                  isLoggedIn ? "LogOut" : "LogIn",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              onPressed: () {
-                isLoggedIn ? logout() : loginDialog(context);
-              })
-        ],
-      ),
-      body: AppNavBarController(),
-    );
+                onPressed: () {
+                  isLoggedIn ? logout() : loginDialog(context);
+                })
+          ],
+        ),
+        body: isLoggedIn
+            ? AppNavBarController()
+            : ButtonTheme(
+                minWidth: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: RaisedButton(
+                  color: Colors.cyan,
+                  child: Text('LogIn first',
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                  onPressed: () {
+                    loginDialog(context);
+                  },
+                ),
+              ));
   }
 
   ////LOGIN////
@@ -189,15 +197,16 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 if (_name.text.isNotEmpty && _password.text.isNotEmpty) {
                   loginUser(_name.text, _password.text);
-                  broadcast.stream.listen((data) {
-                    if (data != '') {
-                      String jsonDataString = data.toString();
+                  broadcast.listen((json) {
+                    if (json != '') {
+                      String jsonDataString = json.toString();
                       final jsonData = jsonDecode(jsonDataString);
 
                       sessionUser = new User(
                           jsonData['user_id'],
                           jsonData['username'],
                           jsonData['location_id'].toString());
+
                       login();
                     }
                     RouteGenerator.onTapToHome(context);
@@ -241,6 +250,7 @@ class _HomeState extends State<Home> {
               CheckboxListTile(
                 title: Text("Picture uploaded"),
                 value: _uploadedImage,
+                onChanged: (bool value) {},
                 // onChanged: (bool value) {
                 //   setState() {
                 //     _uploadedImage = value;
@@ -284,18 +294,18 @@ class _HomeState extends State<Home> {
   void addUser(int location, String name, String password) {
     String data =
         '{"action": "ADD USER", "location": "$location", "name": "$name", "password": "$password"}';
-    channel.sink.add(data);
+    widget.channel.sink.add(data);
   }
 
   void loginUser(String name, String password) {
     String data =
         '{"action": "LOGIN USER", "name": "$name", "password": "$password"}';
-    channel.sink.add(data);
+    widget.channel.sink.add(data);
   }
 
   @override
   void dispose() {
-    channel.sink.close();
+    widget.channel.sink.close();
     super.dispose();
   }
 }

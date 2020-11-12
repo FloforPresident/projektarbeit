@@ -54,13 +54,6 @@ class database:
 		print(mycursor.rowcount, "record(s) deleted")
 
 	def loginUser(self, name, password):
-		# getName = self.mydb.cursor(prepared = True)
-		# getName.execute("SELECT username FROM User WHERE username = '"+name+"'")
-		# username = getName.fetchone()
-	
-		# getPw = self.mydb.cursor(prepared = True)
-		# getPw.execute("SELECT password FROM User WHERE username = '"+name+"'")
-		# pw = getPw.fetchone()
 
 		mycursor = self.mydb.cursor(prepared = True)
 		mycursor.execute("SELECT user_id, location_id, username FROM User WHERE username = '"+name+"' AND password = '" + password + "'")
@@ -114,6 +107,29 @@ class database:
 
 	# TODO yaml und pgm
 
+	def getAllRooms(self):
+		mycursor = self.mydb.cursor(prepared = True)
+		mycursor.execute("SELECT * FROM Room")
+		myresult = mycursor.fetchall()
+
+		data = []
+
+		for i in range(len(myresult)):
+			myresult[i] = list(myresult[i])
+			for r in range(len(myresult[i])):
+				if isinstance(myresult[i][r], bytearray):
+					myresult[i][r] = myresult[i][r].decode("utf-8")
+				
+			dataEntity = {
+				"room_id": myresult[i][0],
+				"title": myresult[i][1],
+				"pgm": myresult[i][2],
+				"yaml": myresult[i][3]
+			}
+			data.append(dataEntity)
+
+		return json.dumps(data)
+
 	def addRoom(self, roomName, pgm, yaml):
 		mycursor = self.mydb.cursor(prepared = True)
 		# sql = "INSERT INTO Room (title, pgm, yaml) VALUES (%s, %s, %s)"
@@ -121,17 +137,13 @@ class database:
 		# mycursor.execute(sql, val)
 
 		mycursor.execute("INSERT INTO Room (title) VALUES ('"+roomName+"')")
-
 		self.mydb.commit()
-		print(mycursor.rowcount, "record inserted.")
-
 
 	def deleteRoom(self, room_id):
 		mycursor = self.mydb.cursor()
 		sql = "DELETE FROM Room WHERE room_id = '"+room_id+"'"
 		mycursor.execute(sql)
 		self.mydb.commit()
-		print(mycursor.rowcount, "record(s) deleted")
 
 	def getRoom(self, roomName):
 		mycursor = self.mydb.cursor(prepared = True)
