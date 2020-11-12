@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:turtlebot/socket_model/socket_model.dart';
 
-class Robos extends StatelessWidget {
+class Robos extends StatelessWidget
+{
   final WebSocketChannel channel;
   _RobosController controller;
 
@@ -30,7 +34,7 @@ class Robos extends StatelessWidget {
         foregroundColor: Colors.white,
         backgroundColor: controller.colorTheme,
         onPressed: () {
-          controller.addItem(context);
+         controller.addItemDialog(context);
         },
       ),
     );
@@ -40,18 +44,22 @@ class Robos extends StatelessWidget {
 class _RobosController {
   final GlobalKey<AnimatedListState> _key = GlobalKey();
   final Color _colorTheme;
-  List<List> _items;
+  List<Robo> _items;
+  String noRoomText = "noRoom";
+  TextEditingController nameCon = TextEditingController();
+  TextEditingController ipCon = TextEditingController();
+  ControllerCustomDropdown dropController = ControllerCustomDropdown<Room>();
 
   _RobosController(this._colorTheme) {
     this._items = _getData();
   }
 
-  List<List> _getData() {
+  List<Robo> _getData() {
     return [
-      ["Robob", "192.185.2.26"],
-      ["Number 5", "192.185.2.55"],
-      ["Robobross", "192.185.2.234"],
-      ["McFlurryMachine", "192.185.2.26"],
+      Robo("Robob", "192.185.2.26",1,Room(1,"living-room")),
+      Robo("Nummer5", "192.185.2.52",2,Room(2,"home")),
+      Robo("McSundae", "192.185.2.45",3,Room(3,"burgerkind")),
+      Robo("Mcflurry", "192.185.2.33",4,Room(4,"mcdonalds")),
     ];
   }
 
@@ -68,7 +76,11 @@ class _RobosController {
   }
 
   Widget buildItem(
-      BuildContext context, List _item, Animation animation, int index) {
+      BuildContext context, Robo robo, Animation animation, int index)
+  {
+
+
+    String roomText = (robo.activeRoom == null) ? "no room" : robo.activeRoom.name;
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -80,7 +92,7 @@ class _RobosController {
                 flex: 4,
                 child: Row(
                   children: <Widget>[
-                    Text(_item[0] + " "),
+                    Text(robo.name + " "),
                   ],
                 ),
               ),
@@ -88,7 +100,7 @@ class _RobosController {
                 flex: 3,
                 child: Row(
                   children: <Widget>[
-                    Text(_item[1] + " "),
+                    Text(robo.iP + " "),
                   ],
                 ),
               ),
@@ -98,14 +110,13 @@ class _RobosController {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.check_box_outline_blank),
-                      onPressed: () {},
-                    ),
-                    IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () async {
-                        bool delete = await OnDelete.onDelete(context);
-                        (delete) ? removeItem(index) : delete;
+                        if(await OnDelete.onDelete(context))
+                          {
+                            removeItem(index);
+                          }
+
                       },
                     )
                   ],
@@ -113,13 +124,21 @@ class _RobosController {
               ),
             ],
           ),
+          subtitle: Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: Text(roomText,
+                  style: TextStyle(
+                    color: Colors.indigo,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ))),
         ),
       ),
     );
   }
 
   void removeItem(int index) {
-    List removeItem = _items.removeAt(index);
+    Robo removeItem = _items.removeAt(index);
     AnimatedListRemovedItemBuilder build = (context, animation) {
       return buildItem(context, removeItem, animation, index);
     };
@@ -127,33 +146,45 @@ class _RobosController {
     _key.currentState.removeItem(index, build);
   }
 
-  void addItem(BuildContext context) {
-    showDialog(
+  void addItem(Robo newRobo)
+  {
+    int end = _items.length;
+    _items.add(newRobo);
+    AnimatedListItemBuilder build = (context,index,animation)
+    {
+      return buildItem(context, _items[index], animation, index);
+    };
+
+    _key.currentState.insertItem(end);
+  }
+
+  Future<bool> addItemDialog(BuildContext context) async {
+    return await showDialog(
       barrierDismissible: true,
       context: context,
       builder: (context) => SingleChildScrollView(
         child: AlertDialog(
-          title: Text("Add new User"),
+          title: Text("Add new Robo"),
           content: Column(
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(labelText: "Firstname"),
+                controller: nameCon,
+                decoration: InputDecoration(labelText: "Name"),
+                maxLines: null,
+                maxLength: 20,
               ),
               TextField(
-                decoration: InputDecoration(labelText: "Lastname"),
+                controller: ipCon,
+                decoration: InputDecoration(labelText: "IP-Address"),
+                maxLines: null,
+                maxLength: 20,
               ),
-              Container(
-                margin: EdgeInsets.all(15),
-                child: RaisedButton(
-                  child: Text("Add Faceembedding"),
-                  color: _colorTheme,
-                  textColor: Colors.white,
-                  onPressed: () {},
+              CustomDropdownLabel(
+                label: "Position",
+                child: CustomDropdownMenu<Room>(
+                  controller: dropController,
+                  data: [Room(1,"living-room"),Room(2, "dining-room")]
                 ),
-              ),
-              CheckboxListTile(
-                title: Text("Faceembedding uploaded"),
-                value: false,
               )
             ],
           ),
@@ -161,10 +192,16 @@ class _RobosController {
             FlatButton(
               child: Text("No"),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(false);
               },
             ),
-            FlatButton(child: Text("Yes")),
+            FlatButton(
+              child: Text("Yes"),
+              onPressed: () {
+                addItem(Robo(nameCon.text,ipCon.text, SocketModel.getNewId("Robo"),dropController.getValue()));
+                Navigator.of(context).pop(true);
+              },
+            ),
           ],
         ),
       ),

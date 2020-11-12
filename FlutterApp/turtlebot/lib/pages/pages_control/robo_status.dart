@@ -31,22 +31,11 @@ class _RoboStatusState extends State<RoboStatus> {
               RouteGenerator.onTapToHome(context);
             },
           ),
-          title: TopAppBar(navigationFields: [
-            TopBarImageIcon(Icon(Icons.format_list_bulleted,color: Colors.white),
-                RouteGenerator.onTapToRoboStatus),
-            TopBarImageIcon(Icon(Icons.computer, ),
-                RouteGenerator.onTapToRoboCommands),
-            TopBarImageIcon(
-                Icon(Icons.games), RouteGenerator.onTapToRoboManControl)
-          ],titleText: widget._titleText),
+          title: Text("Controlling"),
           backgroundColor: Colors.purple,
         ),
-        body: CustomDataTable(
-          columns: [
-            DataColumn(label: CustomColumnText(Text(""))),
-            DataColumn(label: CustomColumnText(Text(""))),
-          ],
-          rows: CustomDataTable.generateStatusRows(Colors.blue, ident),
+        body: Center(
+          child: Text("Videostream"),
         ));
   }
 }
