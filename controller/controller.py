@@ -18,6 +18,7 @@ import paramiko
 
 import rospy
 import roslaunch
+from std_msgs.msg import String
 
 # websocket imports
 
@@ -160,8 +161,28 @@ def robo_ssh():
 	#chan=ssh.invoke_shell()
 	#chan.send('roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true')
 
-def action_find_person(name, message):
-		user = db.getUser(name)
+def action_find_person(name, x, y, message):
+		#user = db.getUser(name)
+		#locationID = user[1]
+		#location = db.getLocation(locationID)
+		#x = location[3]
+		#y = location[4]
+		print(x)
+		print(y)
+		datastring = '{"action": "find_person", "name": "'+name+'", "x": "'+x+'", "y": "'+y+'"}'
+		dataArray = json.loads(datastring)
+
+		pub = rospy.Publisher('chatter', String, queue_size=10)
+		rospy.init_node('print_person', anonymous=False)
+		rospy.loginfo("Auf der Suche nach: " + dataArray["name"])
+
+		rate = rospy.Rate(1) # 10hz
+		i = 0
+		while i < 4:
+			pub.publish(datastring)
+			i += 1
+			rate.sleep()
+
 
 
 
@@ -180,17 +201,18 @@ def start_websocket():
 		print(websocket)
 		msg = await websocket.recv()
 		data = json.loads(msg)
+		print(msg)
 		response = ''
 
 		action = data['action']
 
 		if(action == 'FIND PERSON'):
-			# move_forward(3,1)
-			await websocket.send("sucess")
+			action_find_person(data['name'],data['x'], data['y'], data['message'])
+			#await websocket.send("sucess")
 		
-		await websocket.send(response)
+		#await websocket.send(response)
 
-	start_server = websockets.serve(ws_recieve, "localhost", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
+	start_server = websockets.serve(ws_recieve, "192.168.1.116", 8762, close_timeout=1000) # IP has to be IP of ROS-Computer
 
 	asyncio.get_event_loop().run_until_complete(start_server)
 	asyncio.get_event_loop().run_forever()
@@ -201,6 +223,6 @@ if __name__ == '__main__':
 	process = multiprocessing.Process(target=launch_node)
 	#process.start()
 	processWebsocket = multiprocessing.Process(target=start_websocket)
-	process2.start()
-	#process3 = multiprocessing.Process(target=robo_ssh)
-	process3.start()
+	processWebsocket.start()
+	process3 = multiprocessing.Process(target=robo_ssh)
+	#process3.start()

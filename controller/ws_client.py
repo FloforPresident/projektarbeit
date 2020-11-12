@@ -3,11 +3,11 @@ import websockets
 import json
 
 async def ws_send():
-	uri = "ws://192.168.1.225:8765"
+	uri = "ws://192.168.1.116:8762"
 	async with websockets.connect(uri) as websocket:
 	
-		#msg = json.dumps({'action':'goToGoal','param1':'1.0', 'param2':'1.0', #'param3':'0.5'})
-		msg="hello"
+		msg = json.dumps({"action":"FIND PERSON","name":"Patrick", "message":"Hallo", "x":"0","y":"0"})
+		#msg="hello"
 		await websocket.send(msg)
 		print(msg)
 

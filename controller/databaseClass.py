@@ -160,9 +160,9 @@ class database:
 
 	#def changeActiveLocation(locationNameNew, username):
 	
-	def getLocation(self, title):
+	def getLocation(self, id):
 		mycursor = self.mydb.cursor(prepared = True)
-		mycursor.execute("SELECT * FROM Location  WHERE title = '"+title+"'")
+		mycursor.execute("SELECT * FROM Location  WHERE location_id = '"+id+"'")
 		myresult = mycursor.fetchone()
 		for x in myresult:
 			print(x)
