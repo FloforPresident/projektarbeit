@@ -129,7 +129,6 @@ class database:
 	# TODO yaml und pgm
 
 	def getAllRooms(self):
-		
 		mycursor = self.mydb.cursor(prepared = True)
 		
 		#Get Rooms
@@ -172,12 +171,11 @@ class database:
 
 		return json.dumps(data)
 
-	def addRoom(self, roomName, robo_id, pgm, yaml):
+	def addRoom(self, robo_id, roomName, pgm, yaml):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO Room (title, robo_id, pgm, yaml) VALUES (%s, %s, %s, %s)"
-		val = (roomName, robo_id, pgm, yaml)
+		sql = "INSERT INTO Room (robo_id, title, pgm, yaml) VALUES (%s, %s, %s, %s)"
+		val = (robo_id, roomName, pgm, yaml)
 		mycursor.execute(sql, val)
-
 		self.mydb.commit()
 
 	def deleteRoom(self, room_id):
@@ -196,20 +194,63 @@ class database:
 
 
 	#::::LOCATION::::
-	def addLocation(self, room_id, locationName, x, y):
+	def getAllLocations(self):
+		mycursor = self.mydb.cursor(prepared = True)
+		
+		#Get Rooms
+		mycursor.execute("SELECT * FROM Room")
+		rooms = mycursor.fetchall()
+
+		data = {"locations": [], "rooms": []}
+
+		for i in range(len(rooms)):
+			rooms[i] = list(rooms[i])
+			for r in range(len(rooms[i])):
+				if isinstance(rooms[i][r], bytearray):
+					rooms[i][r] = rooms[i][r].decode("utf-8")
+				
+			dataEntity = {
+				"room_id": rooms[i][0],
+				"robo_id": rooms[i][1],
+				"title": rooms[i][2],
+				"pgm": rooms[i][3],
+				"yaml": rooms[i][4]
+			}
+			data["rooms"].append(dataEntity)
+
+		#Get Locations
+		mycursor.execute("SELECT * FROM Location")
+		locations = mycursor.fetchall()
+
+		for i in range(len(locations)):
+			locations[i] = list(locations[i])
+			for r in range(len(locations[i])):
+				if isinstance(locations[i][r], bytearray):
+					locations[i][r] = locations[i][r].decode("utf-8")
+				
+			dataEntity = {
+				"location_id": locations[i][0],
+				"room_id": locations[i][1],
+				"title": locations[i][2],
+				"x": locations[i][3],
+				"y": locations[i][4],
+			}
+			data["locations"].append(dataEntity)
+
+		return json.dumps(data)
+	
+	def addLocation(self, room_id, title, x, y):
 		mycursor = self.mydb.cursor(prepared = True)
 		sql = "INSERT INTO Location (room_id, title, x, y) VALUES (%s, %s, %s, %s)"
-		val = (room_id, locationName, x, y)
+		val = (room_id, title, x, y)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
-		print(mycursor.rowcount, "record inserted.")
 
-	def deleteLocation(self, locationId):
+	def deleteLocation(self, location_id):
 		mycursor = self.mydb.cursor()
-		sql = "DELETE FROM Location WHERE location_id = '"+locationId+"'"
+		sql = "DELETE FROM Location WHERE location_id = '"+location_id+"'"
 		mycursor.execute(sql)
 		self.mydb.commit()
-		print(mycursor.rowcount, "record(s) deleted")
 
 	#def changeActiveLocation(locationNameNew, username):
 	

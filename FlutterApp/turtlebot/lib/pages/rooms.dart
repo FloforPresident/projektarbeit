@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
@@ -21,7 +22,7 @@ class Rooms extends StatefulWidget {
 
 class _RoomState extends State<Rooms> {
   List<Room> items = [];
-  static List<Robo> roboItems = [];
+  List<Robo> roboItems = [];
   final GlobalKey<AnimatedListState> key = GlobalKey();
   final colorTheme = Colors.green;
 
@@ -104,7 +105,7 @@ class _RoomState extends State<Rooms> {
         backgroundColor: colorTheme,
         onPressed: () {
           _RoomsController addItemCon = _RoomsController(colorTheme);
-          addItemCon.addItemDialog(context);
+          addItemCon.addItemDialog(context, roboItems);
         },
       ),
     );
@@ -157,11 +158,14 @@ class _RoomState extends State<Rooms> {
                     ),
                     IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () {
-                        _RoomsController deleteItemCon =
-                            _RoomsController(colorTheme);
-                        deleteItemCon.removeItem(item);
-                        RouteGenerator.onTapToRooms(context);
+                      onPressed: () async {
+                        bool delete = await OnDelete.onDelete(context);
+                        if (delete) {
+                          _RoomsController deleteItemCon =
+                              _RoomsController(colorTheme);
+                          deleteItemCon.removeItem(item);
+                          RouteGenerator.onTapToRooms(context);
+                        }
                       },
                     )
                   ],
@@ -192,6 +196,7 @@ class _RoomState extends State<Rooms> {
 class _RoomsController {
   final Color colorTheme;
   WebSocketChannel channel;
+  ControllerCustomDropdown dropController = ControllerCustomDropdown<Robo>();
 
   _RoomsController(this.colorTheme) {
     channel = MyApp.con();
@@ -209,9 +214,8 @@ class _RoomsController {
     channel.sink.add(data);
   }
 
-  void addItemDialog(BuildContext context) {
+  void addItemDialog(BuildContext context, List<Robo> roboItems) {
     TextEditingController controller = TextEditingController();
-    ControllerCustomDropdown dropController = ControllerCustomDropdown<Robo>();
     bool _roomScanned = true;
 
     showDialog(
@@ -229,7 +233,7 @@ class _RoomsController {
               CustomDropdownLabel(
                 label: "Robo",
                 child: CustomDropdownMenu<Robo>(
-                    controller: dropController, data: _RoomState.roboItems),
+                    controller: dropController, data: roboItems),
               ),
               Container(
                 margin: EdgeInsets.all(15),

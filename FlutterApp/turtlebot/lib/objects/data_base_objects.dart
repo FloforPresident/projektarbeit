@@ -42,6 +42,7 @@ class Room implements DatabaseObject {
 
   get roboID => _roboID;
 
+  @override
   get name => _name;
 }
 
@@ -60,24 +61,28 @@ class User implements DatabaseObject {
 
   @override
   get name => _name;
-
-  // void set activeLocation(String locationID) {
-  //   _activeLocation = locationID;
-  // }
 }
 
-class LocationID implements DatabaseObject {
+class Location implements DatabaseObject {
   int _id;
   int _roomID;
   String _name;
+  double _x;
+  double _y;
 
-  LocationID(this._id, this._roomID, this._name);
+  Location(this._id, this._roomID, this._name, this._x, this._y);
 
+  @override
   get id => _id;
 
+  @override
   get name => _name;
 
   get roomId => _roomID;
+
+  get x => _x;
+
+  get y => _y;
 }
 
 class Message {

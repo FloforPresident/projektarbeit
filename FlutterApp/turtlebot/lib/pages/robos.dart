@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/routing.dart';
@@ -113,11 +114,14 @@ class _RoboState extends State<Robos> {
                   children: <Widget>[
                     IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () {
-                        _RobosController deleteItemCon =
-                            _RobosController(colorTheme);
-                        deleteItemCon.removeItem(item);
-                        RouteGenerator.onTapToRobos(context);
+                      onPressed: () async {
+                        bool delete = await OnDelete.onDelete(context);
+                        if (delete) {
+                          _RobosController deleteItemCon =
+                              _RobosController(colorTheme);
+                          deleteItemCon.removeItem(item);
+                          RouteGenerator.onTapToRobos(context);
+                        }
                       },
                     )
                   ],

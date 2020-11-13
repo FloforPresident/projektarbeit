@@ -77,9 +77,10 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
   }
 
   List<DropdownMenuItem> _createDropdownMenuItem(List<DatabaseObject> objects) {
+    int counter = 0;
     return objects.map((item) {
       return DropdownMenuItem(
-        value: item.id,
+        value: counter++,
         child: Text(item.name),
       );
     }).toList();
@@ -87,7 +88,7 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
 
   void resetState(int value) {
     startValueId = value;
-    this._value = data[value - 1];
+    this._value = data[value];
   }
 }
 
