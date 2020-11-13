@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 
-import 'package:turtlebot/main.dart';
-import 'package:turtlebot/services/routing.dart';
-
 class Friends extends StatelessWidget {
   _ControllerFriends controller;
 
@@ -129,9 +126,5 @@ class _ControllerFriends {
     };
 
     _key.currentState.removeItem(index, build);
-
-
-
   }
-
 }

@@ -78,20 +78,41 @@ class database:
 
 
 	#::::ROBO::::
-	def addRobo(self, room_id, roboName, ip):
+	def getAllRobos(self):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO Robo (room_id, name, ip) VALUES (%s, %s, %s)"
-		val = (room_id, roboName, ip)
+		mycursor.execute("SELECT * FROM Robo")
+		myresult = mycursor.fetchall()
+
+		data = []
+
+		for i in range(len(myresult)):
+			myresult[i] = list(myresult[i])
+			for r in range(len(myresult[i])):
+				if isinstance(myresult[i][r], bytearray):
+					myresult[i][r] = myresult[i][r].decode("utf-8")
+				
+			dataEntity = {
+				"robo_id": myresult[i][0],
+				"name": myresult[i][1],
+				"ip": myresult[i][2]
+			}
+			data.append(dataEntity)
+
+		return json.dumps(data)
+	
+	def addRobo(self, roboName, ip):
+		mycursor = self.mydb.cursor(prepared = True)
+		sql = "INSERT INTO Robo (name, ip) VALUES (%s, %s)"
+		val = (roboName, ip)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
-		print(mycursor.rowcount, "record inserted.")
+		
 
 	def deleteRobo(self, robo_id):
 		mycursor = self.mydb.cursor()
 		sql = "DELETE FROM Robo WHERE robo_id = '"+robo_id+"'"
 		mycursor.execute(sql)
 		self.mydb.commit()
-		print(mycursor.rowcount, "record(s) deleted")
 
 
 	def getRobo(self, name):
@@ -108,35 +129,55 @@ class database:
 	# TODO yaml und pgm
 
 	def getAllRooms(self):
+		
 		mycursor = self.mydb.cursor(prepared = True)
+		
+		#Get Rooms
 		mycursor.execute("SELECT * FROM Room")
-		myresult = mycursor.fetchall()
+		rooms = mycursor.fetchall()
 
-		data = []
+		data = {"rooms": [], "robos": []}
 
-		for i in range(len(myresult)):
-			myresult[i] = list(myresult[i])
-			for r in range(len(myresult[i])):
-				if isinstance(myresult[i][r], bytearray):
-					myresult[i][r] = myresult[i][r].decode("utf-8")
+		for i in range(len(rooms)):
+			rooms[i] = list(rooms[i])
+			for r in range(len(rooms[i])):
+				if isinstance(rooms[i][r], bytearray):
+					rooms[i][r] = rooms[i][r].decode("utf-8")
 				
 			dataEntity = {
-				"room_id": myresult[i][0],
-				"title": myresult[i][1],
-				"pgm": myresult[i][2],
-				"yaml": myresult[i][3]
+				"room_id": rooms[i][0],
+				"robo_id": rooms[i][1],
+				"title": rooms[i][2],
+				"pgm": rooms[i][3],
+				"yaml": rooms[i][4]
 			}
-			data.append(dataEntity)
+			data["rooms"].append(dataEntity)
+
+		#Get Robos
+		mycursor.execute("SELECT * FROM Robo")
+		robos = mycursor.fetchall()
+
+		for i in range(len(robos)):
+			robos[i] = list(robos[i])
+			for r in range(len(robos[i])):
+				if isinstance(robos[i][r], bytearray):
+					robos[i][r] = robos[i][r].decode("utf-8")
+				
+			dataEntity = {
+				"robo_id": robos[i][0],
+				"name": robos[i][1],
+				"ip": robos[i][2],
+			}
+			data["robos"].append(dataEntity)
 
 		return json.dumps(data)
 
-	def addRoom(self, roomName, pgm, yaml):
+	def addRoom(self, roomName, robo_id, pgm, yaml):
 		mycursor = self.mydb.cursor(prepared = True)
-		# sql = "INSERT INTO Room (title, pgm, yaml) VALUES (%s, %s, %s)"
-		# val = (roomName, pgm, yaml)
-		# mycursor.execute(sql, val)
+		sql = "INSERT INTO Room (title, robo_id, pgm, yaml) VALUES (%s, %s, %s, %s)"
+		val = (roomName, robo_id, pgm, yaml)
+		mycursor.execute(sql, val)
 
-		mycursor.execute("INSERT INTO Room (title) VALUES ('"+roomName+"')")
 		self.mydb.commit()
 
 	def deleteRoom(self, room_id):

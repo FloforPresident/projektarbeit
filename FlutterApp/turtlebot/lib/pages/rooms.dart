@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
@@ -21,6 +21,7 @@ class Rooms extends StatefulWidget {
 
 class _RoomState extends State<Rooms> {
   List<Room> items = [];
+  static List<Robo> roboItems = [];
   final GlobalKey<AnimatedListState> key = GlobalKey();
   final colorTheme = Colors.green;
 
@@ -70,10 +71,18 @@ class _RoomState extends State<Rooms> {
             if (snapshot.hasData) {
               String jsonDataString = snapshot.data.toString();
               var jsonData = jsonDecode(jsonDataString);
+              var rooms = jsonData['rooms'];
+              var robos = jsonData['robos'];
 
-              for (int i = 0; i < jsonData.length; i++) {
-                Room r = new Room(jsonData[i]['room_id'], jsonData[i]['title']);
+              for (int i = 0; i < rooms.length; i++) {
+                Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
+                    rooms[i]['title']);
                 items.add(r);
+              }
+              for (int i = 0; i < robos.length; i++) {
+                Robo r = new Robo(
+                    robos[i]['robo_id'], robos[i]['name'], robos[i]['ip']);
+                roboItems.add(r);
               }
 
               return AnimatedList(
@@ -94,7 +103,7 @@ class _RoomState extends State<Rooms> {
         ),
         backgroundColor: colorTheme,
         onPressed: () {
-          _ControllerRooms addItemCon = _ControllerRooms(colorTheme);
+          _RoomsController addItemCon = _RoomsController(colorTheme);
           addItemCon.addItemDialog(context);
         },
       ),
@@ -102,6 +111,13 @@ class _RoomState extends State<Rooms> {
   }
 
   Widget buildItem(Room item, Animation animation, int index) {
+    String roboName = '';
+    for (int i = 0; i < roboItems.length; i++) {
+      if (item.roboID == roboItems[i].id) {
+        roboName = roboItems[i].name;
+      }
+    }
+
     Icon _selected =
         (true) ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank);
 
@@ -142,8 +158,8 @@ class _RoomState extends State<Rooms> {
                     IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () {
-                        _ControllerRooms deleteItemCon =
-                            _ControllerRooms(colorTheme);
+                        _RoomsController deleteItemCon =
+                            _RoomsController(colorTheme);
                         deleteItemCon.removeItem(item);
                         RouteGenerator.onTapToRooms(context);
                       },
@@ -153,6 +169,14 @@ class _RoomState extends State<Rooms> {
               ),
             ],
           ),
+          subtitle: Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: Text(roboName,
+                  style: TextStyle(
+                    color: Colors.indigo,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ))),
         ),
       ),
     );
@@ -165,11 +189,11 @@ class _RoomState extends State<Rooms> {
   }
 }
 
-class _ControllerRooms {
+class _RoomsController {
   final Color colorTheme;
   WebSocketChannel channel;
 
-  _ControllerRooms(this.colorTheme) {
+  _RoomsController(this.colorTheme) {
     channel = MyApp.con();
   }
 
@@ -179,13 +203,15 @@ class _ControllerRooms {
     channel.sink.add(data);
   }
 
-  void addItem(String name) {
-    String data = '{"action": "ADD ROOM", "name": "$name"}';
+  void addItem(int roboID, String name) {
+    String data =
+        '{"action": "ADD ROOM", "roboID": "$roboID", "name": "$name"}';
     channel.sink.add(data);
   }
 
   void addItemDialog(BuildContext context) {
     TextEditingController controller = TextEditingController();
+    ControllerCustomDropdown dropController = ControllerCustomDropdown<Robo>();
     bool _roomScanned = true;
 
     showDialog(
@@ -199,6 +225,11 @@ class _ControllerRooms {
               TextField(
                 controller: controller,
                 decoration: InputDecoration(labelText: "Name"),
+              ),
+              CustomDropdownLabel(
+                label: "Robo",
+                child: CustomDropdownMenu<Robo>(
+                    controller: dropController, data: _RoomState.roboItems),
               ),
               Container(
                 margin: EdgeInsets.all(15),
@@ -226,8 +257,10 @@ class _ControllerRooms {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                if (controller.text.isNotEmpty && _roomScanned == true) {
-                  addItem(controller.text);
+                if (controller.text.isNotEmpty &&
+                    _roomScanned == true &&
+                    dropController.getValue() != null) {
+                  addItem(dropController.getValue().id, controller.text);
                   RouteGenerator.onTapToRooms(context);
                 }
               },

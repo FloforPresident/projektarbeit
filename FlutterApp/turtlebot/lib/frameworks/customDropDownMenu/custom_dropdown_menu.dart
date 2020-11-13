@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 
 class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
-
   final double fontSize;
   final ControllerCustomDropdown<T> controller;
 
@@ -11,8 +10,7 @@ class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
       @required this.controller,
       this.fontSize = 18,
       List<T> data,
-      Function onChanged})
-  {
+      Function onChanged}) {
     controller.initialize(startValueId, onChanged, data);
   }
 
@@ -37,10 +35,10 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
                 onChanged: (value) {
                   setState(() {
                     widget.controller.resetState(value);
-                    (widget.controller.onChanged != null) ? widget.controller.onChanged() : null;
-
+                    (widget.controller.onChanged != null)
+                        ? widget.controller.onChanged()
+                        : null;
                   });
-
                 }),
           ),
           Spacer(
@@ -64,8 +62,6 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
   int get startValueId => _startValueId;
   List<DatabaseObject> data;
   Function onChanged;
-
-
 
   initialize(int startValueId, Function onChanged, List<DatabaseObject> data) {
     this.startValueId = startValueId;
@@ -96,12 +92,12 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
 }
 
 class CustomDropdownLabel extends StatelessWidget {
-  CustomDropdownMenu child;
-  double fontSize;
-  double leftStart;
-  String label;
-  double labelRightSpace;
-  double topSpace;
+  final CustomDropdownMenu child;
+  final double fontSize;
+  final double leftStart;
+  final String label;
+  final double labelRightSpace;
+  final double topSpace;
 
   CustomDropdownLabel(
       {@required this.child,
@@ -113,7 +109,6 @@ class CustomDropdownLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       margin: EdgeInsets.fromLTRB(0, topSpace, 0, 0),
       child: Row(
@@ -133,6 +128,5 @@ class CustomDropdownLabel extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
       ),
     );
-    ;
   }
 }

@@ -7,7 +7,6 @@ import 'package:turtlebot/objects/data_base_objects.dart';
 class Locations extends StatefulWidget {
   final LocationsController controller = LocationsController(Colors.pink);
 
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -45,8 +44,9 @@ class _LocationsState extends State<Locations> {
               label: "Rooms",
               child: CustomDropdownMenu<Room>(
                 onChanged: () {
-                  widget.controller.updateLocations(widget.controller.dropdownCon.getValue().id);
-                  },
+                  widget.controller.updateLocations(
+                      widget.controller.dropdownCon.getValue().id);
+                },
                 startValueId: 1,
                 controller: widget.controller.dropdownCon,
                 data: widget.controller._getRoomData(),
@@ -61,14 +61,18 @@ class _LocationsState extends State<Locations> {
               initialItemCount: widget.controller.currentLocations.length,
               itemBuilder: (context, index, animation) {
                 return widget.controller._buildItem(
-                    widget.controller.currentLocations[index], animation, index);
+                    widget.controller.currentLocations[index],
+                    animation,
+                    index);
               },
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {widget.controller.addItemDialog(context);},
+        onPressed: () {
+          widget.controller.addItemDialog(context);
+        },
         backgroundColor: widget.controller.colorTheme,
         child: Icon(Icons.add, color: Colors.white),
       ),
@@ -93,7 +97,6 @@ class LocationsController {
 
   List<LocationID> get locations => _locations;
 
-
   GlobalKey<AnimatedListState> get key => _key;
 
   Color get colorTheme => _colorTheme;
@@ -103,36 +106,28 @@ class LocationsController {
     _currentLocations = _getLocationData();
   }
 
-  updateLocations(int roomId)
-  {
+  updateLocations(int roomId) {
     List<LocationID> result = List<LocationID>();
     bool notInserted = true;
     int indexRemoveableItem = 0;
 
-    for(int i = 0; i < locations.length; i++) {
-      for(int y = 0; y < currentLocations.length; y++)
-        {
-          if(locations[i].id == currentLocations[y].id)
-            {
-              notInserted = false;
-              indexRemoveableItem = y;
-            }
+    for (int i = 0; i < locations.length; i++) {
+      for (int y = 0; y < currentLocations.length; y++) {
+        if (locations[i].id == currentLocations[y].id) {
+          notInserted = false;
+          indexRemoveableItem = y;
         }
-      if (locations[i].roomId == roomId && notInserted)
-      {
-        _addItem(locations[i]);
       }
-      else if(!notInserted && locations[i].roomId != roomId) {
+      if (locations[i].roomId == roomId && notInserted) {
+        _addItem(locations[i]);
+      } else if (!notInserted && locations[i].roomId != roomId) {
         _removeItem(indexRemoveableItem);
       }
       notInserted = true;
-
     }
   }
 
   Widget _buildItem(LocationID item, Animation animation, int index) {
-
-
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -229,7 +224,8 @@ class LocationsController {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                LocationID newLoc = LocationID(locations.length + 1, dropdownCon.getValue().id, nameController.text);
+                LocationID newLoc = LocationID(locations.length + 1,
+                    dropdownCon.getValue().id, nameController.text);
                 _addItem(newLoc);
                 Navigator.of(context).pop();
               },
@@ -240,36 +236,34 @@ class LocationsController {
     );
   }
 
-
   List<Room> _getRoomData() {
     return [
-      Room(1, "basement"),
-      Room(2, "1.floor"),
-      Room(3, "2.floor"),
-      Room(4, "basement"),
-      Room(5, "hiaf"),
-      Room(6, "dfasf"),
-      Room(7, "dafsdf"),
-      Room(8, "dafsd"),
-      Room(9, "hiaf"),
-      Room(10, "dfasf"),
-      Room(11, "dafsdf"),
-      Room(12, "dafsd"),
+      Room(1, 1, "basement"),
+      Room(2, 2, "1.floor"),
+      Room(3, 3, "2.floor"),
+      Room(4, 4, "basement"),
+      Room(5, 5, "hiaf"),
+      Room(6, 6, "dfasf"),
+      Room(7, 7, "dafsdf"),
+      Room(8, 8, "dafsd"),
+      Room(9, 9, "hiaf"),
+      Room(10, 1, "dfasf"),
+      Room(11, 1, "dafsdf"),
+      Room(12, 1, "dafsd"),
     ];
   }
 
   List<LocationID> _getLocationData() {
     return [
-      LocationID(1, 1,"Kitchen"),
-      LocationID(2,1,"Office"),
-      LocationID(3,1,"Bathroom"),
-      LocationID(4,2,"Bedroom"),
-      LocationID(5,2,"Bathroom"),
-      LocationID(6,2,"MomsOffice"),
-      LocationID(7,3,"bigshelf"),
-      LocationID(8,3,"tabletennis"),
-      LocationID(9,3,"chest"),
+      LocationID(1, 1, "Kitchen"),
+      LocationID(2, 1, "Office"),
+      LocationID(3, 1, "Bathroom"),
+      LocationID(4, 2, "Bedroom"),
+      LocationID(5, 2, "Bathroom"),
+      LocationID(6, 2, "MomsOffice"),
+      LocationID(7, 3, "bigshelf"),
+      LocationID(8, 3, "tabletennis"),
+      LocationID(9, 3, "chest"),
     ];
   }
-
 }

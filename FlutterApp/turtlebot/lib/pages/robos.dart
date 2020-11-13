@@ -1,86 +1,88 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
-import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
+import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:turtlebot/socket_model/socket_model.dart';
 
-class Robos extends StatelessWidget
-{
-  final WebSocketChannel channel;
-  _RobosController controller;
+class Robos extends StatefulWidget {
+  final channel = MyApp.con();
 
-  Robos({Key key, @required this.channel}) : super(key: key) {
-    this.controller = _RobosController(Colors.blue);
+  Robos({Key key}) : super(key: key);
+
+  @override
+  _RoboState createState() {
+    return _RoboState();
+  }
+}
+
+class _RoboState extends State<Robos> {
+  List<Robo> items = [];
+  final GlobalKey<AnimatedListState> key = GlobalKey();
+  final colorTheme = Colors.blue;
+
+  @override
+  void initState() {
+    super.initState();
+    getRobos();
+  }
+
+  void getRobos() {
+    int userID = MyApp.id;
+    String data = '{"action": "GET ROBOS", "userID": $userID}';
+    widget.channel.sink.add(data);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              RouteGenerator.onTapToHome(context);
+            }),
         title: Text("Connected Robos"),
-        backgroundColor: controller.colorTheme,
+        backgroundColor: colorTheme,
       ),
-      body: AnimatedList(
-        key: controller._key,
-        initialItemCount: controller.items.length,
-        itemBuilder: (context, index, animation) {
-          return controller.buildItem(
-              context, controller.items[index], animation, index);
-        },
-      ),
+      body: StreamBuilder(
+          stream: widget.channel.stream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              String jsonDataString = snapshot.data.toString();
+              var jsonData = jsonDecode(jsonDataString);
+
+              for (int i = 0; i < jsonData.length; i++) {
+                Robo r = new Robo(jsonData[i]['robo_id'], jsonData[i]['name'],
+                    jsonData[i]['ip']);
+                items.add(r);
+              }
+
+              return AnimatedList(
+                key: key,
+                initialItemCount: items.length,
+                itemBuilder: (context, index, animation) {
+                  return buildItem(items[index], animation, index);
+                },
+              );
+            } else {
+              return Text('');
+            }
+          }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         foregroundColor: Colors.white,
-        backgroundColor: controller.colorTheme,
+        backgroundColor: colorTheme,
         onPressed: () {
-         controller.addItemDialog(context);
+          _RobosController addItemCon = _RobosController(colorTheme);
+          addItemCon.addItemDialog(context);
         },
       ),
     );
   }
-}
 
-class _RobosController {
-  final GlobalKey<AnimatedListState> _key = GlobalKey();
-  final Color _colorTheme;
-  List<Robo> _items;
-  String noRoomText = "noRoom";
-  TextEditingController nameCon = TextEditingController();
-  TextEditingController ipCon = TextEditingController();
-  ControllerCustomDropdown dropController = ControllerCustomDropdown<Room>();
-
-  _RobosController(this._colorTheme) {
-    this._items = _getData();
-  }
-
-  List<Robo> _getData() {
-    return [
-      Robo("Robob", "192.185.2.26",1,Room(1,"living-room")),
-      Robo("Nummer5", "192.185.2.52",2,Room(2,"home")),
-      Robo("McSundae", "192.185.2.45",3,Room(3,"burgerkind")),
-      Robo("Mcflurry", "192.185.2.33",4,Room(4,"mcdonalds")),
-    ];
-  }
-
-  get colorTheme {
-    return Color(_colorTheme.value);
-  }
-
-  get items {
-    return _items;
-  }
-
-  get key {
-    return _key;
-  }
-
-  Widget buildItem(
-      BuildContext context, Robo robo, Animation animation, int index)
-  {
-
-
-    String roomText = (robo.activeRoom == null) ? "no room" : robo.activeRoom.name;
+  Widget buildItem(Robo item, Animation animation, int index) {
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -92,7 +94,7 @@ class _RobosController {
                 flex: 4,
                 child: Row(
                   children: <Widget>[
-                    Text(robo.name + " "),
+                    Text(item.name),
                   ],
                 ),
               ),
@@ -100,7 +102,7 @@ class _RobosController {
                 flex: 3,
                 child: Row(
                   children: <Widget>[
-                    Text(robo.iP + " "),
+                    Text(item.iP),
                   ],
                 ),
               ),
@@ -111,12 +113,11 @@ class _RobosController {
                   children: <Widget>[
                     IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () async {
-                        if(await OnDelete.onDelete(context))
-                          {
-                            removeItem(index);
-                          }
-
+                      onPressed: () {
+                        _RobosController deleteItemCon =
+                            _RobosController(colorTheme);
+                        deleteItemCon.removeItem(item);
+                        RouteGenerator.onTapToRobos(context);
                       },
                     )
                   ],
@@ -124,42 +125,42 @@ class _RobosController {
               ),
             ],
           ),
-          subtitle: Container(
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Text(roomText,
-                  style: TextStyle(
-                    color: Colors.indigo,
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                  ))),
         ),
       ),
     );
   }
 
-  void removeItem(int index) {
-    Robo removeItem = _items.removeAt(index);
-    AnimatedListRemovedItemBuilder build = (context, animation) {
-      return buildItem(context, removeItem, animation, index);
-    };
+  @override
+  void dispose() {
+    widget.channel.sink.close();
+    super.dispose();
+  }
+}
 
-    _key.currentState.removeItem(index, build);
+class _RobosController {
+  final Color colorTheme;
+  WebSocketChannel channel;
+
+  _RobosController(this.colorTheme) {
+    channel = MyApp.con();
   }
 
-  void addItem(Robo newRobo)
-  {
-    int end = _items.length;
-    _items.add(newRobo);
-    AnimatedListItemBuilder build = (context,index,animation)
-    {
-      return buildItem(context, _items[index], animation, index);
-    };
-
-    _key.currentState.insertItem(end);
+  void removeItem(Robo robo) {
+    int id = robo.id;
+    String data = '{"action": "DELETE ROBO", "id": "$id"}';
+    channel.sink.add(data);
   }
 
-  Future<bool> addItemDialog(BuildContext context) async {
-    return await showDialog(
+  void addItem(String name, String ip) {
+    String data = '{"action": "ADD ROBO", "name": "$name", "ip": "$ip"}';
+    channel.sink.add(data);
+  }
+
+  void addItemDialog(BuildContext context) {
+    TextEditingController _name = TextEditingController();
+    TextEditingController _ip = TextEditingController();
+
+    showDialog(
       barrierDismissible: true,
       context: context,
       builder: (context) => SingleChildScrollView(
@@ -168,24 +169,17 @@ class _RobosController {
           content: Column(
             children: <Widget>[
               TextField(
-                controller: nameCon,
+                controller: _name,
                 decoration: InputDecoration(labelText: "Name"),
                 maxLines: null,
                 maxLength: 20,
               ),
               TextField(
-                controller: ipCon,
+                controller: _ip,
                 decoration: InputDecoration(labelText: "IP-Address"),
                 maxLines: null,
                 maxLength: 20,
               ),
-              CustomDropdownLabel(
-                label: "Position",
-                child: CustomDropdownMenu<Room>(
-                  controller: dropController,
-                  data: [Room(1,"living-room"),Room(2, "dining-room")]
-                ),
-              )
             ],
           ),
           actions: <Widget>[
@@ -198,8 +192,10 @@ class _RobosController {
             FlatButton(
               child: Text("Yes"),
               onPressed: () {
-                addItem(Robo(nameCon.text,ipCon.text, SocketModel.getNewId("Robo"),dropController.getValue()));
-                Navigator.of(context).pop(true);
+                if (_name.text.isNotEmpty && _ip.text.isNotEmpty) {
+                  addItem(_name.text, _ip.text);
+                  RouteGenerator.onTapToRobos(context);
+                }
               },
             ),
           ],

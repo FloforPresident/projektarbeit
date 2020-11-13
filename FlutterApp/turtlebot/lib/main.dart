@@ -8,6 +8,7 @@ import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/services/navigation.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:turtlebot/services/socke_info.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 void main() => runApp(MyApp());
 
@@ -43,8 +44,6 @@ class MyApp extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
-  final channel = MyApp.con();
-
   Home({Key key}) : super(key: key);
 
   @override
@@ -54,23 +53,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Stream broadcast;
-
-  TextEditingController _name = new TextEditingController();
-  TextEditingController _password = new TextEditingController();
-
   @override
   void initState() {
     super.initState();
 
-    broadcast = widget.channel.stream.asBroadcastStream();
-
     autoLogIn();
   }
 
-  bool isLoggedIn = false;
-
-  User sessionUser;
+  static bool isLoggedIn = false;
 
   void autoLogIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -94,15 +84,15 @@ class _HomeState extends State<Home> {
     });
   }
 
-  Future<Null> login() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('id', sessionUser.id);
+  // Future<Null> login() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setInt('id', sessionUser.id);
 
-    setState(() {
-      MyApp.id = sessionUser.id;
-      isLoggedIn = true;
-    });
-  }
+  //   setState(() {
+  //     MyApp.id = sessionUser.id;
+  //     isLoggedIn = true;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -134,11 +124,8 @@ class _HomeState extends State<Home> {
                 minWidth: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 child: RaisedButton(
-                  color: Colors.cyan,
-                  child: Text('LogIn first',
-                      style: TextStyle(
-                        color: Colors.white,
-                      )),
+                  color: Colors.white,
+                  child: Text('LogIn first'),
                   onPressed: () {
                     loginDialog(context);
                   },
@@ -146,16 +133,42 @@ class _HomeState extends State<Home> {
               ));
   }
 
-  ////LOGIN////
-  ///
-  Color colorTheme = Colors.green;
-  Color secondaryTheme = Colors.white;
+  void loginDialog(context) {
+    _LoginController loginUserCon = _LoginController();
+    loginUserCon.loginDialog(context);
+  }
+}
+
+class _LoginController {
+  User sessionUser;
+
+  final Color colorTheme = Colors.green;
+  final Color secondaryTheme = Colors.white;
+
+  TextEditingController _name = new TextEditingController();
+  TextEditingController _password = new TextEditingController();
+
+  WebSocketChannel channel;
+
+  _LoginController() {
+    channel = MyApp.con();
+  }
+
+  void addUser(int location, String name, String password) {
+    String data =
+        '{"action": "ADD USER", "location": "$location", "name": "$name", "password": "$password"}';
+    channel.sink.add(data);
+  }
+
+  void loginUser(String name, String password) {
+    String data =
+        '{"action": "LOGIN USER", "name": "$name", "password": "$password"}';
+    channel.sink.add(data);
+  }
 
   //Anmelden
-  Future<bool> loginDialog(BuildContext context) async {
-    bool _uploadedImage = true;
-
-    return await showDialog(
+  void loginDialog(BuildContext context) {
+    showDialog(
       barrierDismissible: true,
       context: context,
       builder: (context) => SingleChildScrollView(
@@ -197,17 +210,20 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 if (_name.text.isNotEmpty && _password.text.isNotEmpty) {
                   loginUser(_name.text, _password.text);
-                  broadcast.listen((json) {
+                  channel.stream.listen((json) async {
                     if (json != '') {
                       String jsonDataString = json.toString();
                       final jsonData = jsonDecode(jsonDataString);
 
-                      sessionUser = new User(
-                          jsonData['user_id'],
-                          jsonData['username'],
-                          jsonData['location_id'].toString());
+                      sessionUser = new User(jsonData['user_id'],
+                          jsonData['location_id'], jsonData['username']);
 
-                      login();
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setInt('id', sessionUser.id);
+
+                      MyApp.id = sessionUser.id;
+                      _HomeState.isLoggedIn = true;
                     }
                     RouteGenerator.onTapToHome(context);
                   });
@@ -221,10 +237,10 @@ class _HomeState extends State<Home> {
   }
 
   //Registrieren
-  Future<bool> signupDialog(BuildContext context) async {
+  void signupDialog(BuildContext context) {
     bool _uploadedImage = true;
 
-    return await showDialog(
+    showDialog(
       barrierDismissible: true,
       context: context,
       builder: (context) => SingleChildScrollView(
@@ -280,7 +296,7 @@ class _HomeState extends State<Home> {
                 if (_name.text.isNotEmpty &&
                     _password.text.isNotEmpty &&
                     _uploadedImage == true) {
-                  addUser(1, _name.text, _password.text);
+                  addUser(2, _name.text, _password.text);
                   RouteGenerator.onTapToHome(context);
                 }
               },
@@ -289,23 +305,5 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
-  }
-
-  void addUser(int location, String name, String password) {
-    String data =
-        '{"action": "ADD USER", "location": "$location", "name": "$name", "password": "$password"}';
-    widget.channel.sink.add(data);
-  }
-
-  void loginUser(String name, String password) {
-    String data =
-        '{"action": "LOGIN USER", "name": "$name", "password": "$password"}';
-    widget.channel.sink.add(data);
-  }
-
-  @override
-  void dispose() {
-    widget.channel.sink.close();
-    super.dispose();
   }
 }

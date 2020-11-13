@@ -87,4 +87,8 @@ class RouteGenerator {
   static onTapToRooms(BuildContext context) {
     Navigator.pushNamed(context, RouteGenerator.RouteRooms);
   }
+
+  static onTapToRobos(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteRobos);
+  }
 }

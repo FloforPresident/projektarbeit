@@ -55,8 +55,8 @@ class _MessagesState extends State<Messages> {
                   child: CustomDropdownMenu(
                     controller: widget.controller.dropController,
                     data: <User>[
-                      User(1, "Hans", "living-room"),
-                      User(2, "Verena", "dining-room")
+                      User(1, 2, "living-room"),
+                      User(2, 2, "dining-room")
                     ],
                   ),
                 ),
@@ -124,8 +124,7 @@ class ControllerMessages {
 
   Messages view;
 
-  getValue()
-  {
+  getValue() {
     User u = dropController.getValue();
     print(u.id);
 
