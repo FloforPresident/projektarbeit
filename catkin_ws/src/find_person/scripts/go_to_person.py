@@ -8,7 +8,7 @@ from move_base_msgs.msg import MoveBaseActionGoal, MoveBaseActionFeedback
 from actionlib_msgs.msg import GoalID
 
 
-def simpleCallback(data):
+def callback_simple_goal(data):
 	pubBase = rospy.Publisher('/move_base/goal', MoveBaseActionGoal, queue_size=10)
 	now = rospy.get_rostime()
 
@@ -27,7 +27,7 @@ def simpleCallback(data):
 
 
 
-def callback(data):
+def callback_action(data):
 	jsonString = data.data
 
 	pubBase = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
@@ -55,44 +55,56 @@ def callback(data):
 		pubBase.publish(answer)
 
 	elif dataArray["action"] == "stop":
-		#get current location
-		def getLocation(locationData):
-			currentX = locationData.feedback.base_position.pose.position.x
-			currentY = locationData.feedback.base_position.pose.position.y
-
-			print( currentX)
-			print( currentY)
-
-			answerBase = PoseStamped()
-			answerBase.header.stamp = now
-			answerBase.header.frame_id = "map"
-
-			answerBase.pose.position.x = currentX
-			answerBase.pose.position.y = currentY
-			answerBase.pose.position.z = 0
-
-			answerBase.pose.orientation.w = 1.0
-
-			pubBase.publish(answerBase)
-
-
+		print(currentX)
+		print(currentY)
+		rospy.loginfo("Stop movement")
 		pubCancel = rospy.Publisher('/move_base/cancel', GoalID, queue_size=10)
 		answerCancel = GoalID()
 		answerCancel.stamp = now
 		answerCancel.id = "map"
 		pubCancel.publish(answerCancel)
 
-		rospy.Subscriber("move_base/feedback", MoveBaseActionFeedback, getLocation)
+		answerBase = PoseStamped()
+		answerBase.header.stamp = now
+		answerBase.header.frame_id = "map"
 
+		answerBase.pose.position.x = currentX
+		answerBase.pose.position.y = currentY
+		answerBase.pose.position.z = 0
+
+		answerBase.pose.orientation.w = 1.0
+
+		pubBase.publish(answerBase)
 
 	else:
 		rospy.loginfo("no action selected")
 
+
+#get current location
+def getLocation(locationData):
+	global currentX
+	global currentY
+	currentX = locationData.feedback.base_position.pose.position.x
+	currentY = locationData.feedback.base_position.pose.position.y
+
+	#print("X: "+str(currentX))
+	#print("Y: "+str(currentY))
+
 	
 def letsGo():
+	#current coordinates
+	global currentX
+	global currentY
+	currentX = 0
+	currentY = 0
+	#get current location
+	rospy.Subscriber("move_base/feedback", MoveBaseActionFeedback, getLocation)
+
 	rospy.init_node('find_person', anonymous=True)
-	rospy.Subscriber("chatter", String, callback)
-	rospy.Subscriber("move_base_simple/goal", PoseStamped, simpleCallback)
+	rospy.Subscriber("chatter", String, callback_action)
+
+	#subscribed to simple goal and writes location in move_base/goal
+	rospy.Subscriber("move_base_simple/goal", PoseStamped, callback_simple_goal)
 	rospy.spin()
 
 
