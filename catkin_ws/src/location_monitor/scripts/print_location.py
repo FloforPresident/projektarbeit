@@ -20,7 +20,9 @@ def letsGo():
 
 	rate = rospy.Rate(10) # 10hz
 	while not rospy.is_shutdown():
+		locationPub= rospy.Publisher('/move_base/goal', PoseStamped, queue_size=10)
 		rospy.Subscriber("move_base/feedback", MoveBaseActionFeedback, printLocation)
+		locationPub.publish()
 		rate.sleep()
 		rospy.spin()
 

@@ -13,6 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   geometry_msgs
+  move_base_msgs
+  actionlib_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -40,7 +42,7 @@ find_package(catkin REQUIRED COMPONENTS
 ##     * add a exec_depend tag for "message_runtime"
 ## * In this file (CMakeLists.txt):
 ##   * add "message_generation" and every package in MSG_DEP_SET to
-     find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs nav_msgs geometry_msgs message_generation)
+     find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs nav_msgs geometry_msgs move_base_msgs actionlib_msgs message_generation)
 ##   * add "message_runtime" and every package in MSG_DEP_SET to
 ##     catkin_package(CATKIN_DEPENDS ...)
 ##   * uncomment the add_*_files sections below as needed
@@ -72,7 +74,7 @@ add_message_files(
 ## Generate added messages and services with any dependencies listed here
  generate_messages(
    DEPENDENCIES
-   nav_msgs  geometry_msgs  std_msgs
+   nav_msgs  geometry_msgs move_base_msgs actionlib_msgs  std_msgs
  )
 
 ################################################
@@ -107,7 +109,7 @@ add_message_files(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES find_person
-  CATKIN_DEPENDS nav_msgs geometry_msgs roscpp rospy std_msgs message_runtime
+  CATKIN_DEPENDS nav_msgs geometry_msgs move_base_msgs actionlib_msgs roscpp rospy std_msgs message_runtime
 #  DEPENDS system_lib
 )
 
