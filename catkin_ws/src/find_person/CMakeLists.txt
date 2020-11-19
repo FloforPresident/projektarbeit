@@ -166,8 +166,9 @@ include_directories(
 	scripts/print_patrick.py
 	scripts/print_johannes.py
 	scripts/go_to_person.py
+  scripts/stop_moving.py
+  scripts/found_person.py
 	scripts/say_name.py
-	scripts/datenbank_test.py
 	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

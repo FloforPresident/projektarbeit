@@ -13,7 +13,7 @@ def print_person():
 
 	rospy.loginfo("Auf der Suche nach: " + dataArray["name"])
 	
-	rate = rospy.Rate(1) # 10hz
+	rate = rospy.Rate(10) # 10hz
 	i = 0
 	while i < 4:
 		pub.publish(datastring)

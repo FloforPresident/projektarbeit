@@ -1,29 +1,22 @@
 #!/usr/bin/env python
-import mysql.connector
 
 import rospy
+import json
 from std_msgs.msg import String
 
-def database():
+def print_person():
 	pub = rospy.Publisher('chatter', String, queue_size=10)
 	rospy.init_node('print_person', anonymous=False)
 
-	mydb = mysql.connector.connect(
-	  host="localhost",
-	  user="root",
-	  password="",
-	  database="test"
-	)
+	datastring = '{"action": "found_person"}'
 
-	answer = mydb
-	#rospy.loginfo(answer)
-	#pub.publish(answer)
-	print('hallo')
-	print(answer)
+	rospy.loginfo("Found Person!")
+	
+	pub.publish(datastring)
 
 
 if __name__ == '__main__':
     try:
-        database()
+        print_person()
     except rospy.ROSInterruptException:
         pass
