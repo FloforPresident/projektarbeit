@@ -7,7 +7,6 @@ from geometry_msgs.msg import PoseStamped, Twist
 from move_base_msgs.msg import MoveBaseActionGoal, MoveBaseActionFeedback
 from actionlib_msgs.msg import GoalID
 
-
 #writes move_base_simple/goal to move_base/goal
 def callback_simple_goal(data):
 	pubBase = rospy.Publisher('/move_base/goal', MoveBaseActionGoal, queue_size=10)
@@ -26,9 +25,7 @@ def callback_simple_goal(data):
 
 #standard callback if chatter data received
 def callback_action(data):
-	global goalX
-	global goalY
-
+	global goalX, goalY, currentX, currentY
 	jsonString = data.data
 	dataArray = json.loads(jsonString)
 	pubBase = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
@@ -93,8 +90,7 @@ def cancel_move_base():
 
 #get current location constantaniously
 def getLocation(locationData):
-	global currentX
-	global currentY
+	global goalX, goalY, currentX, currentY
 	currentX = locationData.feedback.base_position.pose.position.x
 	currentY = locationData.feedback.base_position.pose.position.y
 
@@ -112,8 +108,8 @@ def reachedGoal():
 	#rotate and go home
 	print("GOOOOOOOAL!!!!")
 	rotate()
-	go_home()
 	cancel_move_base()
+	go_home()
 	print("Finished my business. Awaiting more commands.")
 
 PI = 3.1415926535897
@@ -123,7 +119,7 @@ def rotate():
 
     # Receiveing the user's input
     print("I am looking for the person.")
-    speed = 40	#degrees/second
+    speed = 120	#degrees/second
     angle = 360	#degrees
     clockwise = True #True or false
 
@@ -170,8 +166,7 @@ def go_home():
 	gohome.pose.orientation.w = 1.0
 
 	#hat nun kein Ziel mehr
-	global goalX
-	global goalY
+	global goalX, goalY
 	goalX = None
 	goalY = None
 
@@ -196,6 +191,13 @@ def letsGo():
 
 if __name__ == '__main__':
     try:
-        letsGo()
+		#coordinates
+		goalX = None
+		goalY = None
+
+		currentX = None
+		currentY = None
+		letsGo()
+
     except rospy.ROSInterruptException:
         pass
