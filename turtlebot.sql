@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 13, 2020 at 02:10 PM
+-- Generation Time: Nov 20, 2020 at 04:25 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -32,8 +32,8 @@ CREATE TABLE `Location` (
   `location_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `x` int(11) NOT NULL,
-  `y` int(11) NOT NULL
+  `x` double NOT NULL,
+  `y` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -41,7 +41,12 @@ CREATE TABLE `Location` (
 --
 
 INSERT INTO `Location` (`location_id`, `room_id`, `title`, `x`, `y`) VALUES
-(2, 10, 'Flos Desk', 1, 1);
+(3, 10, 'Flos Desk', 1.2, 1.5),
+(6, 14, 'Table', 1, 2),
+(7, 13, 'Kitchen', 2.3, 1.2),
+(8, 13, 'Washing Machine', 1.2, 2.4),
+(9, 17, 'Liebesschaukel', 1, 1),
+(10, 15, 'Porno Ecke', 0.69, 0.69);
 
 -- --------------------------------------------------------
 
@@ -83,17 +88,6 @@ INSERT INTO `Robo` (`robo_id`, `name`, `ip`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `robo_room`
---
-
-CREATE TABLE `robo_room` (
-  `robo_id` int(11) NOT NULL,
-  `room_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `Room`
 --
 
@@ -110,7 +104,12 @@ CREATE TABLE `Room` (
 --
 
 INSERT INTO `Room` (`room_id`, `robo_id`, `title`, `pgm`, `yaml`) VALUES
-(10, 4, 'Office', NULL, NULL);
+(10, 4, 'Office', NULL, NULL),
+(13, 6, 'Bathroom', NULL, NULL),
+(14, 5, 'Kitchen', NULL, NULL),
+(15, 4, 'Living Room', NULL, NULL),
+(16, 5, 'Stefan\'s Zimmer', NULL, NULL),
+(17, 5, 'Stefan\'s Darkroom', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -132,7 +131,10 @@ CREATE TABLE `User` (
 --
 
 INSERT INTO `User` (`user_id`, `location_id`, `username`, `password`, `image`, `embedding`) VALUES
-(6, 2, 'Flo', '123', NULL, NULL);
+(7, 3, 'Flo', '123', NULL, NULL),
+(8, 3, 'Basti', '123', NULL, NULL),
+(9, 3, 'StefanKSuperstar', '123', NULL, NULL),
+(10, 3, 'Coach', '123', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -160,13 +162,6 @@ ALTER TABLE `Robo`
   ADD PRIMARY KEY (`robo_id`);
 
 --
--- Indexes for table `robo_room`
---
-ALTER TABLE `robo_room`
-  ADD KEY `robo_id` (`robo_id`),
-  ADD KEY `room_id` (`room_id`);
-
---
 -- Indexes for table `Room`
 --
 ALTER TABLE `Room`
@@ -188,7 +183,7 @@ ALTER TABLE `User`
 -- AUTO_INCREMENT for table `Location`
 --
 ALTER TABLE `Location`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `Message`
@@ -200,19 +195,19 @@ ALTER TABLE `Message`
 -- AUTO_INCREMENT for table `Robo`
 --
 ALTER TABLE `Robo`
-  MODIFY `robo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `robo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `Room`
 --
 ALTER TABLE `Room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `User`
 --
 ALTER TABLE `User`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -230,13 +225,6 @@ ALTER TABLE `Location`
 ALTER TABLE `Message`
   ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`from_user`) REFERENCES `User` (`user_id`),
   ADD CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`to_user`) REFERENCES `User` (`user_id`);
-
---
--- Constraints for table `robo_room`
---
-ALTER TABLE `robo_room`
-  ADD CONSTRAINT `robo_room_ibfk_1` FOREIGN KEY (`robo_id`) REFERENCES `Robo` (`robo_id`),
-  ADD CONSTRAINT `robo_room_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `Room` (`room_id`);
 
 --
 -- Constraints for table `Room`
