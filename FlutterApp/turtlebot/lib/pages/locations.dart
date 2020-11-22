@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
@@ -12,6 +13,8 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 class Locations extends StatefulWidget {
   final channel = MyApp.con();
 
+  Locations({Key key}) : super(key: key);
+
   @override
   _LocationsState createState() {
     return _LocationsState();
@@ -22,6 +25,11 @@ class _LocationsState extends State<Locations> {
   List<Location> items = [];
   List<Location> activeItems = [];
   List<Room> roomItems = [];
+
+  //Coming Soon, keep selected Dropdown room on reload (shared preferences)
+  // Location selectedRoom;
+  // Location activeLocation;
+
   final GlobalKey<AnimatedListState> key = GlobalKey();
   final colorTheme = Colors.pink;
   ControllerCustomDropdown dropController = ControllerCustomDropdown<Room>();
@@ -38,12 +46,35 @@ class _LocationsState extends State<Locations> {
     widget.channel.sink.add(data);
   }
 
-  void getActiveLocations(int roomId) {
-    activeItems = [];
-    for (int i = 0; i < items.length; i++) {
-      if (items[i].roomId == roomId) {
-        activeItems.add(items[i]);
+  void updateLocations(int roomId) {
+    bool inserted = false;
+    int indexRemoveableItem = 0;
+
+    for(int i = 0; i < items.length; i++) {
+      for(int y = 0; y < activeItems.length; y++) {
+        if(items[i].id == activeItems[y].id) {
+          inserted = true;
+          indexRemoveableItem = y;
+        }
       }
+      if(items[i].roomId == roomId && !inserted){
+        int end = activeItems.length;
+        activeItems.add(items[i]);
+
+        AnimatedListItemBuilder build = (context, index, animation) {
+          return buildItem(activeItems[index], animation, index);
+        };
+        key.currentState.insertItem(end);
+      }
+      else if(items[i].roomId != roomId && inserted) {
+        Location removeItem = activeItems.removeAt(indexRemoveableItem);
+        AnimatedListRemovedItemBuilder build = (context, animation) {
+          return buildItem(removeItem, animation, indexRemoveableItem);
+        };
+
+        key.currentState.removeItem(indexRemoveableItem, build);
+      }
+      inserted = false;
     }
   }
 
@@ -85,6 +116,7 @@ class _LocationsState extends State<Locations> {
                     locations[i]['x'],
                     locations[i]['y']);
                 items.add(l);
+                activeItems.add(l);
               }
               for (int i = 0; i < rooms.length; i++) {
                 Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
@@ -99,7 +131,7 @@ class _LocationsState extends State<Locations> {
                     label: "Room",
                     child: CustomDropdownMenu<Room>(
                       onChanged: () {
-                        // getActiveLocations(dropController.getValue().id);
+                        updateLocations(dropController.getValue().id);
                       },
                       controller: dropController,
                       data: roomItems,
@@ -110,9 +142,9 @@ class _LocationsState extends State<Locations> {
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   key: key,
-                  initialItemCount: items.length,
+                  initialItemCount: activeItems.length,
                   itemBuilder: (context, index, animation) {
-                    return buildItem(items[index], animation, index);
+                    return buildItem(activeItems[index], animation, index);
                   },
                 )
               ]);

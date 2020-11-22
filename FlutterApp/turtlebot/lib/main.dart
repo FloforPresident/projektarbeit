@@ -84,16 +84,6 @@ class _HomeState extends State<Home> {
     });
   }
 
-  // Future<Null> login() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setInt('id', sessionUser.id);
-
-  //   setState(() {
-  //     MyApp.id = sessionUser.id;
-  //     isLoggedIn = true;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
