@@ -50,6 +50,15 @@ async def ws_recieve(websocket, path):
 		db.deleteLocation(data['id'])
 	elif(action == 'SET LOCATION'):
 		response = db.setActiveLocation(data['userID'], data['locationID'])
+	#CONTROL
+	elif(action == "UP"):
+		response = action
+	elif(action == "DOWN"):
+		response = action
+	elif(action == "RIGHT"):
+		response = action
+	elif(action == "LEFT"):
+		response = action
 
 	print(response)
 
@@ -57,7 +66,7 @@ async def ws_recieve(websocket, path):
 
 	
 
-start_server = websockets.serve(ws_recieve, "192.168.178.33", 8765, close_timeout=1000)
+start_server = websockets.serve(ws_recieve, "192.168.188.143", 8765, close_timeout=1000)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
