@@ -3,7 +3,7 @@ import 'package:turtlebot/objects/data_base_objects.dart';
 class SocketModel {
   List<User> userData;
   List<Room> roomData;
-  List<LocationID> locationData;
+  List<Location> locationData;
   List<Robo> roboData;
 
   static final SocketModel _instance = SocketModel._internal();
@@ -28,7 +28,7 @@ class SocketModel {
 
   List<Room> getRooms() {}
 
-  List<LocationID> getLocationsID() {}
+  List<Location> getLocationsID() {}
 
   List<Robo> getRobos() {}
 
