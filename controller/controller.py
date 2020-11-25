@@ -31,6 +31,7 @@ import time
 #import go_to_goal
 import init_position
 import move_forward
+import teleop_keyboard as teleop
 #import move_to_goal
 
 ACTION_KEY = "action"
@@ -45,95 +46,6 @@ def json_get_action(jsonObj):
 def json_get_value_by_key(jsonObj, key):
 	data = json.loads(jsonObj)
 	return data[key]
-
-######################### DATABASE ACTIONS ##############################################
-
-# implementation in DB script
-
-#------------- USER --------------
-
-'''
-
-def getUser_db(name, password, image, location):
-	db.getUser(name)
-
-def getAllUsers_db():
-	db.getAllUsers(name, password)
-
-def addUser_db(name, password):
-	db.addUser(name, password)
-
-def deleteUser_db(user_id):
-	db.deleteUser(user_id)
-
-
-#------------- ROBOS --------------
-
-def add_robo_db(name, ip, username):
-	db.add_robo(name, ip, username)
-
-def delete_robo_db(name, username):
-	db.delete_robo(name, username)
-
-def get_robos():
-	db.get_robos()
-
-#------------- ROOM --------------
-
-def add_room_db(name, roboname, username):
-	db.add_room(name, roboname, username)
-
-def delete_room_db(name, username):
-	db.delete_room(name, username)
-
-def get_rooms_db():
-	db.get_rooms()
-
-#------------- LOCATION --------------	
-
-def add_location_db(name, x, y, username, room):
-	db.add_location(name, x, y, username, room)
-
-def delete_location_db(name, username):
-	db.delete_location(name, username)
-
-def change_active_location_db(locationname, username):
-	db.change_active_location(locationname, username)
-
-def get_locations_db(username):
-	db.get_locations(username)
-
-#------------- LOCATION --------------	
-
-def send_message_db(usernameSender, usernameReceiver, text):
-	db.send_message(usernameSender, usernameReceiver, text)
-
-def get_messages_db():
-	db.get_messages()
-
-'''
-
-'''
-######################### ROBOT ACTIONS ##############################################
-
-
-
-def init_position_action(x,y):
-	
-	#init_position.init_position(x,y)
-	
-# dummy Twist action for moving forward
-def move_forward_action(seconds, direction):
-
-	#move_forward.move_forward(seconds, direction)
-
-# go to goal example with import -----------------------------------------------------------
-def go_to_goal_action(pos_X, pos_Y, tolerance):
-	
-	#TODO implement
-	#go_to_goal.move_to_goal(pos_X, pos_Y, tolerance)
-
-'''
 
 def robo_ssh():
 	host = "192.168.1.124"
@@ -184,7 +96,12 @@ def action_find_person(name, x, y, message):
 			rate.sleep()
 
 
+def action_teleop_start():
+	teleop.startTeleop()
 
+def action_teleop_set_key(key):
+	teleop.setKey(key)
+	
 
 
 def launch_node():
@@ -209,10 +126,16 @@ def start_websocket():
 		if(action == 'FIND PERSON'):
 			action_find_person(data['name'],data['x'], data['y'], data['message'])
 			#await websocket.send("sucess")
+		elif(action == 'TELEOP'):
+			key = data['key']
+			if(key == 'start'):
+				action_teleop_start()
+			else:
+				action_teleop_set_key(key)
 		
 		#await websocket.send(response)
 
-	start_server = websockets.serve(ws_recieve, "192.168.1.116", 8762, close_timeout=1000) # IP has to be IP of ROS-Computer
+	start_server = websockets.serve(ws_recieve, "192.168.1.225", 8783, close_timeout=1000) # IP has to be IP of ROS-Computer
 
 	asyncio.get_event_loop().run_until_complete(start_server)
 	asyncio.get_event_loop().run_forever()
@@ -222,7 +145,9 @@ def start_websocket():
 if __name__ == '__main__':
 	process = multiprocessing.Process(target=launch_node)
 	#process.start()
-	processWebsocket = multiprocessing.Process(target=start_websocket)
-	processWebsocket.start()
+	process_websocket = multiprocessing.Process(target=start_websocket)
+	process_websocket.start()
+	process_teleop = multiprocessing.Process(target=action_teleop_start)
+	process_teleop.start()
 	process3 = multiprocessing.Process(target=robo_ssh)
 	#process3.start()
