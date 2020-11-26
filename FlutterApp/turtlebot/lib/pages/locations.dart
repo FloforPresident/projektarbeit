@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
@@ -12,6 +13,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Locations extends StatefulWidget {
   final channel = MyApp.con();
+  int dropDownRoomId;
 
   Locations({Key key}) : super(key: key);
 
@@ -39,11 +41,23 @@ class _LocationsState extends State<Locations> {
     super.initState();
 
     getLocations();
+    getSelectedRoom();
   }
 
   void getLocations() {
     String data = '{"action": "GET LOCATIONS"}';
     widget.channel.sink.add(data);
+  }
+
+  void getSelectedRoom() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final int roomID = prefs.getInt('id');
+
+    if(roomID != null) {
+      setState(() {
+        widget.dropDownRoomId = roomID;
+      });
+    }
   }
 
   void updateLocations(int roomId) {
@@ -64,15 +78,18 @@ class _LocationsState extends State<Locations> {
         AnimatedListItemBuilder build = (context, index, animation) {
           return buildItem(activeItems[index], animation, index);
         };
-        key.currentState.insertItem(end);
+        if(key.currentState != null) {
+          key.currentState.insertItem(end);
+        }
       }
       else if(items[i].roomId != roomId && inserted) {
         Location removeItem = activeItems.removeAt(indexRemoveableItem);
         AnimatedListRemovedItemBuilder build = (context, animation) {
           return buildItem(removeItem, animation, indexRemoveableItem);
         };
-
-        key.currentState.removeItem(indexRemoveableItem, build);
+        if(key.currentState != null) {
+          key.currentState.removeItem(indexRemoveableItem, build);
+        }
       }
       inserted = false;
     }
@@ -124,15 +141,23 @@ class _LocationsState extends State<Locations> {
                 roomItems.add(r);
               }
 
+              if(widget.dropDownRoomId != null) {
+                updateLocations(roomItems[widget.dropDownRoomId].id);
+              }
+
               return Column(children: <Widget>[
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
                   child: CustomDropdownLabel(
                     label: "Room",
                     child: CustomDropdownMenu<Room>(
-                      onChanged: () {
+                      onChanged: () async {
+                        final SharedPreferences prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('id', dropController.getCurrentIndex());
+
                         updateLocations(dropController.getValue().id);
                       },
+                      startValueId: widget.dropDownRoomId,
                       controller: dropController,
                       data: roomItems,
                     ),
