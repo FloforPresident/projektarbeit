@@ -298,11 +298,6 @@ class database:
 			}
 			data["rooms"].append(dataEntity)
 
-
-		#Get active location
-		# mycursor.execute("SELECT location_id FROM User WHERE user_id = " + userID)
-		# active = mycursor.fetchall()
-
 		#Get Locations
 		mycursor.execute("SELECT * FROM Location")
 		locations = mycursor.fetchall()
@@ -360,6 +355,92 @@ class database:
 		mycursor.execute(sql, val)
 		self.mydb.commit()
 
+		data = {"user": [], "location": [], "room": [], "robo": []}
+
+		user_id = str(to_user)
+
+		#Get User
+		mycursor.execute("SELECT * FROM User WHERE user_id = '"+user_id+"'")
+		user = list(mycursor.fetchall()[0])
+
+		for i in range(len(user)):
+			if isinstance(user[i], bytearray):
+				user[i] = user[i].decode("utf-8")
+
+		dataEntity = {
+			"user_id": user[0],
+			"location_id": user[1],
+			"username": user[2]
+		}
+		data["user"].append(dataEntity)
+
+		#Get Location
+		location_id = str(dataEntity['location_id'])
+
+		mycursor.execute("SELECT * FROM Location WHERE location_id = '"+location_id+"'")
+		location = list(mycursor.fetchall()[0])
+
+		for i in range(len(location)):
+			if isinstance(location[i], bytearray):
+				location[i] = location[i].decode("utf-8")
+
+		dataEntity = {
+			"location_id": location[0],
+			"room_id": location[1],
+			"title": location[2],
+			"x": location[3],
+			"y": location[4],
+		}
+		data["location"].append(dataEntity)
+
+		#Get Room
+		room_id = str(dataEntity['room_id'])
+
+		mycursor.execute("SELECT * FROM Room WHERE room_id = '"+room_id+"'")
+		room = list(mycursor.fetchall()[0])
+
+		for i in range(len(room)):
+			if isinstance(room[i], bytearray):
+				room[i] = room[i].decode("utf-8")
+
+		dataEntity = {
+			"room_id": room[0],
+			"robo_id": room[1],
+			"title": room[2],
+			"pgm": room[3],
+			"yaml": room[4]
+		}
+		data["room"].append(dataEntity)
+
+		#Get Robo
+		robo_id = str(dataEntity['robo_id'])
+
+		mycursor.execute("SELECT * FROM Robo WHERE robo_id = '"+robo_id+"'")
+		robo = list(mycursor.fetchall()[0])
+
+		for i in range(len(robo)):
+			if isinstance(robo[i], bytearray):
+				robo[i] = robo[i].decode("utf-8")
+
+		dataEntity = {
+			"robo_id": robo[0],
+			"name": robo[1],
+			"ip": robo[2]
+		}
+		data["robo"].append(dataEntity)
+
+		return json.dumps(data)
 
 
-#::::::		code fuer controller skript:	db = database("localhost","root","","turtlebot")		:::::::::
+
+
+
+
+
+
+
+
+
+
+
+

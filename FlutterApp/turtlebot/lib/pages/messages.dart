@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
+import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 
@@ -66,6 +67,11 @@ class _MessageState extends State<Messages> {
 
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                RouteGenerator.onTapToHome(context);
+              }),
           title: Text("Send Message"),
           backgroundColor: widget.controller.colorTheme,
         ),
@@ -171,12 +177,16 @@ class _MessageState extends State<Messages> {
         return AlertDialog(
           title: success ? Text('Success'): Text('Error'),
           content: success ? Text(
-              'You started a Job for ${widget.controller.dropController.getValue().name}: Subject: ${_message.text}'
+              'You started a Job for ${widget.controller.dropController.getValue().name}: \n\n  ${_message.text}'
           ) : Text('Fill in all Fields'),
           actions: <Widget> [
               FlatButton(
                 onPressed: (){
-                  Navigator.of(context).pop();
+                  if(success) {
+                    RouteGenerator.onTapToMessages(context);
+                  } else {
+                    Navigator.of(context).pop();
+                  }
                 },
                 child: Text('Ok'))
           ]

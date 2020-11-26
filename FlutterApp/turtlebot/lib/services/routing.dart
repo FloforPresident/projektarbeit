@@ -92,6 +92,10 @@ class RouteGenerator {
     Navigator.pushNamed(context, RouteGenerator.RouteFriends);
   }
 
+  static onTapToMessages(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteMessages);
+  }
+
   static onTapToRobos(BuildContext context) {
     Navigator.pushNamed(context, RouteGenerator.RouteRobos);
   }

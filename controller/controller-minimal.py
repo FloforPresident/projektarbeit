@@ -59,7 +59,8 @@ async def ws_recieve(websocket, path):
 		response = db.setActiveLocation(data['userID'], data['locationID'])
 	#MESSAGE
 	elif(action == 'SEND MESSAGE'):
-		db.sendMessage(data['from_user'], data['to_user'], data['subject'], data['message'])
+		response = db.sendMessage(data['from_user'], data['to_user'], data['subject'], data['message'])
+		# Hier dann Funkionalität von Roboter aufrufen
 	#CONTROL
 	elif(action == "UP"):
 		response = action
