@@ -177,7 +177,7 @@ class _MessageState extends State<Messages> {
         return AlertDialog(
           title: success ? Text('Success'): Text('Error'),
           content: success ? Text(
-              'You started a Job for ${widget.controller.dropController.getValue().name}: \n\n  ${_message.text}'
+              'You started a Job for ${widget.controller.dropController.getValue().name}:\n\n${_message.text}'
           ) : Text('Fill in all Fields'),
           actions: <Widget> [
               FlatButton(

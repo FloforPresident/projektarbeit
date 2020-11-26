@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
@@ -134,7 +136,9 @@ class _FriendState extends State<Friends> {
                 flex: 2,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+                  children:
+                  MyApp.id != item.id
+                  ? <Widget>[
                     IconButton(
                       icon: Icon(Icons.email),
                       onPressed: () {},
@@ -150,7 +154,8 @@ class _FriendState extends State<Friends> {
                         }
                       },
                     )
-                  ],
+                  ]
+                  : <Widget> [Icon(Icons.assignment_ind_rounded)]
                 ),
               ),
             ],
