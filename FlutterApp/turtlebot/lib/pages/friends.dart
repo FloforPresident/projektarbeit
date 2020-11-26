@@ -169,7 +169,7 @@ class _FriendState extends State<Friends> {
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,
                     )),
-                Text(locationName)
+                Text(locationName != '' ? locationName : "No active location set")
               ])),
         ),
       ),

@@ -286,7 +286,7 @@ class _LoginController {
                 if (_name.text.isNotEmpty &&
                     _password.text.isNotEmpty &&
                     _uploadedImage == true) {
-                  addUser(9, _name.text, _password.text);
+                  addUser(11, _name.text, _password.text);
                   RouteGenerator.onTapToHome(context);
                 }
               },

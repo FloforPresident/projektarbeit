@@ -175,7 +175,7 @@ class _RoomState extends State<Rooms> {
           ),
           subtitle: Container(
               margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Text(roboName,
+              child: Text(roboName != '' ? roboName : 'No Robo selected',
                   style: TextStyle(
                     color: Colors.indigo,
                     fontSize: 15.0,

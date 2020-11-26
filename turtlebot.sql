@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 26, 2020 at 04:50 PM
+-- Generation Time: Nov 26, 2020 at 07:42 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -44,12 +44,11 @@ INSERT INTO `Location` (`location_id`, `room_id`, `title`, `x`, `y`) VALUES
 (3, 10, 'Flos Desk', 1.2, 1.5),
 (6, 14, 'Table', 1, 2),
 (8, 13, 'Washing Machine', 1.2, 2.4),
-(9, 17, 'Liebesschaukel', 1, 1),
-(10, 15, 'Porno Ecke', 0.69, 0.69),
 (11, 10, 'Printer', 2.2, 1.9),
 (14, 18, 'Car', 1, 1),
 (15, 18, 'Door', 3, 3),
-(16, 17, 'Saftpresse', 2.2, 1);
+(20, 16, 'Folterecke', 1.1, 1.4),
+(21, 16, 'Porno Regal', 0.87, 1.2);
 
 -- --------------------------------------------------------
 
@@ -72,9 +71,7 @@ CREATE TABLE `Message` (
 --
 
 INSERT INTO `Message` (`message_id`, `from_user`, `to_user`, `subject`, `message`, `datetime`, `received`) VALUES
-(3, 7, 10, 'Test', 'Test', '2020-11-26 14:42:18', NULL),
-(4, 7, 7, 'Selber schicken', 'Man kann sich selber nachrichten Schicken', '2020-11-26 15:01:18', NULL),
-(5, 7, 9, 'Pornokeller', 'Wieso hast du nen Pornokeller?', '2020-11-26 15:04:25', NULL);
+(22, 28, 37, 'WTF', 'Warum hast du n Folter Regal?', '2020-11-26 19:42:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -105,7 +102,7 @@ INSERT INTO `Robo` (`robo_id`, `name`, `ip`) VALUES
 
 CREATE TABLE `Room` (
   `room_id` int(11) NOT NULL,
-  `robo_id` int(11) NOT NULL,
+  `robo_id` int(11) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `pgm` blob DEFAULT NULL,
   `yaml` text DEFAULT NULL
@@ -119,9 +116,7 @@ INSERT INTO `Room` (`room_id`, `robo_id`, `title`, `pgm`, `yaml`) VALUES
 (10, 4, 'Office', NULL, NULL),
 (13, 6, 'Bathroom', NULL, NULL),
 (14, 5, 'Kitchen', NULL, NULL),
-(15, 4, 'Living Room', NULL, NULL),
 (16, 5, 'Stefan\'s Zimmer', NULL, NULL),
-(17, 5, 'Stefan\'s Darkroom', NULL, NULL),
 (18, 5, 'Garage', NULL, NULL),
 (19, 4, 'Basement', NULL, NULL);
 
@@ -133,7 +128,7 @@ INSERT INTO `Room` (`room_id`, `robo_id`, `title`, `pgm`, `yaml`) VALUES
 
 CREATE TABLE `User` (
   `user_id` int(11) NOT NULL,
-  `location_id` int(11) NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `image` blob DEFAULT NULL,
@@ -145,10 +140,11 @@ CREATE TABLE `User` (
 --
 
 INSERT INTO `User` (`user_id`, `location_id`, `username`, `password`, `image`, `embedding`) VALUES
-(7, 3, 'Flo', '123', NULL, NULL),
-(9, 3, 'StefanKSuperstar', '123', NULL, NULL),
-(10, 3, 'Coach', '123', NULL, NULL),
-(11, 3, 'Basti', '123', NULL, NULL);
+(28, NULL, 'Flo', '123', NULL, NULL),
+(35, 11, 'Basti', '123', NULL, NULL),
+(36, 11, 'Patrick', '123', NULL, NULL),
+(37, 11, 'Stefan', '123', NULL, NULL),
+(38, 11, 'Coach', '123', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -180,7 +176,7 @@ ALTER TABLE `Robo`
 --
 ALTER TABLE `Room`
   ADD PRIMARY KEY (`room_id`),
-  ADD KEY `robo_id` (`robo_id`);
+  ADD KEY `Room_ibfk_1` (`robo_id`);
 
 --
 -- Indexes for table `User`
@@ -197,31 +193,31 @@ ALTER TABLE `User`
 -- AUTO_INCREMENT for table `Location`
 --
 ALTER TABLE `Location`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `Message`
 --
 ALTER TABLE `Message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `Robo`
 --
 ALTER TABLE `Robo`
-  MODIFY `robo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `robo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `Room`
 --
 ALTER TABLE `Room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `User`
 --
 ALTER TABLE `User`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables
@@ -231,26 +227,26 @@ ALTER TABLE `User`
 -- Constraints for table `Location`
 --
 ALTER TABLE `Location`
-  ADD CONSTRAINT `Location_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `Room` (`room_id`);
+  ADD CONSTRAINT `Location_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `Room` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Message`
 --
 ALTER TABLE `Message`
-  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`from_user`) REFERENCES `User` (`user_id`),
-  ADD CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`to_user`) REFERENCES `User` (`user_id`);
+  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`from_user`) REFERENCES `User` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`to_user`) REFERENCES `User` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `Room`
 --
 ALTER TABLE `Room`
-  ADD CONSTRAINT `Room_ibfk_1` FOREIGN KEY (`robo_id`) REFERENCES `Robo` (`robo_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Room_ibfk_1` FOREIGN KEY (`robo_id`) REFERENCES `Robo` (`robo_id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `User`
 --
 ALTER TABLE `User`
-  ADD CONSTRAINT `User_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `Location` (`location_id`);
+  ADD CONSTRAINT `User_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `Location` (`location_id`) ON DELETE SET NULL ON UPDATE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -28,10 +28,6 @@ class _LocationsState extends State<Locations> {
   List<Location> activeItems = [];
   List<Room> roomItems = [];
 
-  //Coming Soon, keep selected Dropdown room on reload (shared preferences)
-  // Location selectedRoom;
-  // Location activeLocation;
-
   final GlobalKey<AnimatedListState> key = GlobalKey();
   final colorTheme = Colors.pink;
   ControllerCustomDropdown dropController = ControllerCustomDropdown<Room>();
@@ -51,7 +47,7 @@ class _LocationsState extends State<Locations> {
 
   void getSelectedRoom() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final int roomID = prefs.getInt('id');
+    final int roomID = prefs.getInt('room_id');
 
     if(roomID != null) {
       setState(() {
@@ -153,7 +149,7 @@ class _LocationsState extends State<Locations> {
                     child: CustomDropdownMenu<Room>(
                       onChanged: () async {
                         final SharedPreferences prefs = await SharedPreferences.getInstance();
-                        prefs.setInt('id', dropController.getCurrentIndex());
+                        prefs.setInt('room_id', dropController.getCurrentIndex());
 
                         updateLocations(dropController.getValue().id);
                       },
