@@ -34,6 +34,7 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
                     ._createDropdownMenuItem(widget.controller.data),
                 onChanged: (value) {
                   setState(() {
+                    widget.controller.currentIndexValue = value;
                     widget.controller.resetState(value);
                     (widget.controller.onChanged != null)
                         ? widget.controller.onChanged()
@@ -54,6 +55,21 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
 class ControllerCustomDropdown<T extends DatabaseObject> {
   T _value;
   int _startValueId;
+  int _currentIndexValue;
+
+  int get currentIndexValue => _currentIndexValue;
+
+  int getCurrentIndex()
+  {
+    if(currentIndexValue == null)
+      return null;
+    else
+      return currentIndexValue;
+  }
+
+  set currentIndexValue(int value) {
+    _currentIndexValue = value;
+  }
 
   set startValueId(int value) {
     _startValueId = value;
@@ -65,6 +81,7 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
 
   initialize(int startValueId, Function onChanged, List<DatabaseObject> data) {
     this.startValueId = startValueId;
+    currentIndexValue = startValueId;
     this.onChanged = onChanged;
     this.data = data;
   }
