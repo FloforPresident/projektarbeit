@@ -86,11 +86,20 @@ class Location implements DatabaseObject {
 }
 
 class Message {
-  int id;
-  User recipient;
-  User sender;
-  String content;
-  DateTime dateTime;
+  int _id;
+  User _sender;
+  User _recipient;
+  String _content;
 
-  Message(this.id, this.recipient, this.sender, this.content, this.dateTime);
+  Message(this._id, this._sender, this._recipient, this._content);
+
+  get id => _id;
+
+  get sender => _sender;
+
+  get recipient => _recipient;
+
+  get content => _content;
+
+
 }

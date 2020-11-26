@@ -52,11 +52,11 @@ class _RoboState extends State<Robos> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               String jsonDataString = snapshot.data.toString();
-              var jsonData = jsonDecode(jsonDataString);
+              var robos = jsonDecode(jsonDataString);
 
-              for (int i = 0; i < jsonData.length; i++) {
-                Robo r = new Robo(jsonData[i]['robo_id'], jsonData[i]['name'],
-                    jsonData[i]['ip']);
+              for (int i = 0; i < robos.length; i++) {
+                Robo r = new Robo(robos[i]['robo_id'], robos[i]['name'],
+                    robos[i]['ip']);
                 items.add(r);
               }
 

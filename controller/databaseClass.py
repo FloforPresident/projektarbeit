@@ -18,23 +18,27 @@ class database:
 		)
 
 	#::::USER::::
-	def getUser(self, name):
-		mycursor = self.mydb.cursor(prepared = True)
-		mycursor.execute("SELECT * FROM User WHERE username = '"+name+"'")
-		myresult = mycursor.fetchone()
-		print(myresult)
-
-		return myresult
-
 	def getAllUsers(self):
 		mycursor = self.mydb.cursor(prepared = True)
 		mycursor.execute("SELECT * FROM User")
-		myresult = mycursor.fetchall()
-		for x in myresult:
-			print(x)
-		
-		#beispiel abfrage: print(myresult[0][3])
-		return myresult
+		users = mycursor.fetchall()
+
+		data = []
+
+		for i in range(len(users)):
+			users[i] = list(users[i])
+			for r in range(len(users[i])):
+				if isinstance(users[i][r], bytearray):
+					users[i][r] = users[i][r].decode("utf-8")
+
+			dataEntity = {
+				"user_id": users[i][0],
+				"location_id": users[i][1],
+				"username": users[i][2]
+			}
+			data.append(dataEntity)
+
+		return json.dumps(data)
 		
 
 	def addUser(self, location_id, name, password):
@@ -349,9 +353,13 @@ class database:
 
 
 	#::::MESSAGE::::
-	#def sendMessage(senderName,receiverName, text):
-	#TODO
-	#def getMessages(username):
-	
+	def sendMessage(self, from_user, to_user, subject, message):
+		mycursor = self.mydb.cursor(prepared = True)
+		sql = "INSERT INTO Message (from_user, to_user, subject, message) VALUES (%s, %s, %s, %s)"
+		val = (from_user, to_user, subject, message)
+		mycursor.execute(sql, val)
+		self.mydb.commit()
+
+
 
 #::::::		code fuer controller skript:	db = database("localhost","root","","turtlebot")		:::::::::
