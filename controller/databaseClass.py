@@ -65,7 +65,7 @@ class database:
 			data = {
 				"user_id": myresult[0],
 				"location_id": myresult[1],
-				"username": myresult[2],
+				"username": myresult[2].decode("utf-8"),
 			}
 
 			return json.dumps(data)
