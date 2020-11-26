@@ -1,72 +1,120 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:turtlebot/main.dart';
+import 'package:turtlebot/objects/data_base_objects.dart';
+import 'package:turtlebot/services/routing.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
-class Friends extends StatelessWidget {
-  _ControllerFriends controller;
+class Friends extends StatefulWidget {
+  final channel = MyApp.con();
 
-  Friends({Key key}) : super(key: key) {
-    this.controller = _ControllerFriends(Colors.red);
+  Friends({Key key}) : super(key: key);
+
+  @override
+  _FriendState createState() {
+    return _FriendState();
+  }
+}
+
+class _FriendState extends State<Friends> {
+  List<User> items = [];
+  List<Location> locationItems = [];
+  List<Room> roomItems = [];
+
+  final GlobalKey<AnimatedListState> key = GlobalKey();
+  final colorTheme = Colors.red;
+
+  @override
+  void initState() {
+    super.initState();
+    // broadcast = widget.channel.stream.asBroadcastStream();
+
+    getUsers();
+  }
+
+  void getUsers() {
+    String data = '{"action": "GET FRIENDS"}';
+    widget.channel.sink.add(data);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              RouteGenerator.onTapToHome(context);
+            }),
         title: Text("Robo Friends"),
-        backgroundColor: controller.colorTheme,
+        backgroundColor: colorTheme,
       ),
-      body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              AnimatedList(
+      body: StreamBuilder(
+        stream: widget.channel.stream,
+        builder: (context, snapshot) {
+          if(snapshot.hasData) {
+            String jsonDataString = snapshot.data.toString();
+            var jsonData = jsonDecode(jsonDataString);
+            var users = jsonData['users'];
+            var locations = jsonData['locations'];
+            var rooms = jsonData['rooms'];
+
+            for(int i = 0; i < users.length; i++) {
+              User u = new User(users[i]['user_id'], users[i]['location_id'],
+                  users[i]['username']);
+              items.add(u);
+            }
+            for (int i = 0; i < locations.length; i++) {
+              Location l = new Location(
+                  locations[i]['location_id'],
+                  locations[i]['room_id'],
+                  locations[i]['title'],
+                  locations[i]['x'],
+                  locations[i]['y']);
+              locationItems.add(l);
+            }
+            for (int i = 0; i < rooms.length; i++) {
+              Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
+                  rooms[i]['title']);
+              roomItems.add(r);
+            }
+
+            return AnimatedList(
                 shrinkWrap: true,
-                key: controller.key,
-                initialItemCount: controller.items.length,
+                key: key,
+                initialItemCount: items.length,
                 itemBuilder: (context, index, animation) {
-                  return controller.buildItem(
-                      context, controller.items[index], animation, index);
+                  return buildItem(items[index], animation, index);
                 },
-              ),
-            ],
-          )),
+              );
+          } else {
+            return Text('');
+          }
+
+        }
+      )
     );
   }
-}
 
-class _ControllerFriends {
-  final GlobalKey<AnimatedListState> _key = GlobalKey();
-  final Color _colorTheme;
-  List<List> _items;
+  Widget buildItem(User item, Animation animation, int index) {
+    String locationName = '';
+    String roomName = '';
+    for(int i = 0; i < locationItems.length; i++) {
+      if(item.locationID == locationItems[i].id) {
+        Location location = locationItems[i];
+        locationName = location.name;
 
-  _ControllerFriends(this._colorTheme) {
-    this._items = _getData();
-  }
+        for(int y = 0; y < roomItems.length; y++) {
+          if(location.roomId == roomItems[y].id) {
+            roomName = roomItems[y].name;
 
-  List<List> _getData() {
-    return [
-      [1, "Sabrina", "1.floor", "living-room"],
-      [2, "Sebastian", "2.floor", "Sebastians-room"],
-      [3, "Elisabeth", "1.floor", "kitchen"],
-      [4, "Mark", "Basement", "Storage"]
-    ];
-  }
+          }
+        }
+      }
+    }
 
-  get colorTheme {
-    return Color(_colorTheme.value);
-  }
-
-  get items {
-    return _items;
-  }
-
-  get key {
-    return _key;
-  }
-
-  Widget buildItem(
-      BuildContext context, List _item, Animation animation, int index) {
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -78,7 +126,7 @@ class _ControllerFriends {
                 flex: 4,
                 child: Row(
                   children: <Widget>[
-                    Text(_item[1] + " "),
+                    Text(item.name),
                   ],
                 ),
               ),
@@ -95,7 +143,11 @@ class _ControllerFriends {
                       icon: Icon(Icons.delete),
                       onPressed: () async {
                         bool delete = await OnDelete.onDelete(context);
-                        (delete) ? removeItem(index) : delete;
+                        if(delete) {
+                          _FriendsController deleteItemCon = _FriendsController(colorTheme);
+                          deleteItemCon.removeItem(item);
+                          RouteGenerator.onTapToFriends(context);
+                        }
                       },
                     )
                   ],
@@ -106,25 +158,37 @@ class _ControllerFriends {
           subtitle: Container(
               margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: Row(children: <Widget>[
-                Text(_item[2] + " - ",
+                Text(roomName + " - ",
                     style: TextStyle(
                       color: Colors.indigo,
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,
                     )),
-                Text(_item[3])
+                Text(locationName)
               ])),
         ),
       ),
     );
   }
 
-  void removeItem(int index) {
-    List removeItem = _items.removeAt(index);
-    AnimatedListRemovedItemBuilder build = (context, animation) {
-      return buildItem(context, removeItem, animation, index);
-    };
+  @override
+  void dispose() {
+    widget.channel.sink.close();
+    super.dispose();
+  }
+}
 
-    _key.currentState.removeItem(index, build);
+class _FriendsController {
+  final Color colorTheme;
+  WebSocketChannel channel;
+
+  _FriendsController(this.colorTheme) {
+    channel = MyApp.con();
+  }
+
+  void removeItem(User user) {
+    int id = user.id;
+    String data = '{"action": "DELETE FRIEND", "id": "$id"}';
+    channel.sink.add(data);
   }
 }

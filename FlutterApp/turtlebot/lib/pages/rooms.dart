@@ -36,7 +36,7 @@ class _RoomState extends State<Rooms> {
 
   void getRooms() {
     int userID = MyApp.id;
-    String data = '{"action": "GET ROOMS", "userID": $userID}';
+    String data = '{"action": "GET ROOMS"}';
     widget.channel.sink.add(data);
   }
 
