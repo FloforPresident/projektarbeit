@@ -10,11 +10,13 @@ Features:
 
 """
 
-#import database_access as db
+# import database_access as db
 import json
 import subprocess
 import multiprocessing
 import paramiko
+import sys
+import signal
 
 import rospy
 import roslaunch
@@ -28,11 +30,11 @@ import websockets
 import time
 
 # robot action imports
-#import go_to_goal
+# import go_to_goal
 import init_position
 import move_forward
 import teleop_keyboard as teleop
-#import move_to_goal
+# import move_to_goal
 
 ACTION_KEY = "action"
 
@@ -110,8 +112,10 @@ def launch_node():
 
 ######################### WEBSOCKET ####################################################
 
+connected = set()
+
 def start_websocket():
-	connected = set()
+	
 	print("Starting websocket")
 	async def ws_recieve(websocket, path):
 		connected.add(websocket)
@@ -132,22 +136,59 @@ def start_websocket():
 				action_teleop_start()
 			else:
 				action_teleop_set_key(key)
+		else:
+			print("unknown action")
 		
 		#await websocket.send(response)
 
-	start_server = websockets.serve(ws_recieve, "192.168.1.225", 8783, close_timeout=1000) # IP has to be IP of ROS-Computer
+	start_server = websockets.serve(ws_recieve, "192.168.1.225", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
 
 	asyncio.get_event_loop().run_until_complete(start_server)
 	asyncio.get_event_loop().run_forever()
 
+######################### CLEANUP ####################################################
+def cleanup_on_exit(signal, frame):
+	print("cleanup...")
+
+	# terminate websocket connections
+	for ws in connected:
+		ws.close()
+		print("closed websocket connection: " + str(ws))
+	
+	for proc in activeProcesses:
+		proc.terminate()
+		print("terminated process: " + str(proc))
+	exit(0)
+
 ######################### TEST ####################################################
+activeProcesses = set()
+
+def main():
+
+	try:
+		# register KeyboardInterrupt handler
+		signal.signal(signal.SIGINT, cleanup_on_exit)
+
+		# -- launch node process --
+		process = multiprocessing.Process(target=launch_node)
+		#process.start()
+
+		# -- websocket process --
+		p_websocket = multiprocessing.Process(target=start_websocket)
+		p_websocket.start()
+		activeProcesses.add(p_websocket)
+
+		# -- teleop process --
+		p_teleop = multiprocessing.Process(target=action_teleop_start)
+		#process_teleop.start()
+
+		# -- robot ssh process --
+		process3 = multiprocessing.Process(target=robo_ssh)
+		#process3.start()
+	except Exception:
+		cleanup_on_exit()
+
 
 if __name__ == '__main__':
-	process = multiprocessing.Process(target=launch_node)
-	#process.start()
-	process_websocket = multiprocessing.Process(target=start_websocket)
-	process_websocket.start()
-	process_teleop = multiprocessing.Process(target=action_teleop_start)
-	process_teleop.start()
-	process3 = multiprocessing.Process(target=robo_ssh)
-	#process3.start()
+	main()
+	
