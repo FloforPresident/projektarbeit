@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2020 at 04:25 PM
+-- Generation Time: Nov 26, 2020 at 04:50 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -43,10 +43,13 @@ CREATE TABLE `Location` (
 INSERT INTO `Location` (`location_id`, `room_id`, `title`, `x`, `y`) VALUES
 (3, 10, 'Flos Desk', 1.2, 1.5),
 (6, 14, 'Table', 1, 2),
-(7, 13, 'Kitchen', 2.3, 1.2),
 (8, 13, 'Washing Machine', 1.2, 2.4),
 (9, 17, 'Liebesschaukel', 1, 1),
-(10, 15, 'Porno Ecke', 0.69, 0.69);
+(10, 15, 'Porno Ecke', 0.69, 0.69),
+(11, 10, 'Printer', 2.2, 1.9),
+(14, 18, 'Car', 1, 1),
+(15, 18, 'Door', 3, 3),
+(16, 17, 'Saftpresse', 2.2, 1);
 
 -- --------------------------------------------------------
 
@@ -58,11 +61,20 @@ CREATE TABLE `Message` (
   `message_id` int(11) NOT NULL,
   `from_user` int(11) NOT NULL,
   `to_user` int(11) NOT NULL,
-  `text` varchar(255) NOT NULL,
-  `datetime` datetime NOT NULL,
-  `sent` tinyint(1) NOT NULL,
-  `received` tinyint(1) NOT NULL
+  `subject` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `datetime` datetime NOT NULL DEFAULT current_timestamp(),
+  `received` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Message`
+--
+
+INSERT INTO `Message` (`message_id`, `from_user`, `to_user`, `subject`, `message`, `datetime`, `received`) VALUES
+(3, 7, 10, 'Test', 'Test', '2020-11-26 14:42:18', NULL),
+(4, 7, 7, 'Selber schicken', 'Man kann sich selber nachrichten Schicken', '2020-11-26 15:01:18', NULL),
+(5, 7, 9, 'Pornokeller', 'Wieso hast du nen Pornokeller?', '2020-11-26 15:04:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -109,7 +121,9 @@ INSERT INTO `Room` (`room_id`, `robo_id`, `title`, `pgm`, `yaml`) VALUES
 (14, 5, 'Kitchen', NULL, NULL),
 (15, 4, 'Living Room', NULL, NULL),
 (16, 5, 'Stefan\'s Zimmer', NULL, NULL),
-(17, 5, 'Stefan\'s Darkroom', NULL, NULL);
+(17, 5, 'Stefan\'s Darkroom', NULL, NULL),
+(18, 5, 'Garage', NULL, NULL),
+(19, 4, 'Basement', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -132,9 +146,9 @@ CREATE TABLE `User` (
 
 INSERT INTO `User` (`user_id`, `location_id`, `username`, `password`, `image`, `embedding`) VALUES
 (7, 3, 'Flo', '123', NULL, NULL),
-(8, 3, 'Basti', '123', NULL, NULL),
 (9, 3, 'StefanKSuperstar', '123', NULL, NULL),
-(10, 3, 'Coach', '123', NULL, NULL);
+(10, 3, 'Coach', '123', NULL, NULL),
+(11, 3, 'Basti', '123', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -183,13 +197,13 @@ ALTER TABLE `User`
 -- AUTO_INCREMENT for table `Location`
 --
 ALTER TABLE `Location`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `Message`
 --
 ALTER TABLE `Message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `Robo`
@@ -201,13 +215,13 @@ ALTER TABLE `Robo`
 -- AUTO_INCREMENT for table `Room`
 --
 ALTER TABLE `Room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `User`
 --
 ALTER TABLE `User`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
