@@ -1,9 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+
 
 class Messages extends StatefulWidget {
+  final channel = MyApp.con();
+
   Messages({Key key}) : super(key: key) {
     controller = ControllerMessages(this, Colors.orange);
   }
@@ -32,13 +39,31 @@ class Messages extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _MessagesState();
+    return _MessageState();
   }
 }
 
-class _MessagesState extends State<Messages> {
+class _MessageState extends State<Messages> {
+  List<User> items = [];
+  TextEditingController _subject = new TextEditingController();
+  TextEditingController _message = new TextEditingController();
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    getUsers();
+  }
+
+  void getUsers() {
+    String data = '{"action": "GET USERS"}';
+    widget.channel.sink.add(data);
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Send Message"),
@@ -50,15 +75,27 @@ class _MessagesState extends State<Messages> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CustomDropdownLabel(
-                  label: "Recipient",
-                  child: CustomDropdownMenu(
-                    controller: widget.controller.dropController,
-                    data: <User>[
-                      User(1, 2, "living-room"),
-                      User(2, 2, "dining-room")
-                    ],
-                  ),
+                StreamBuilder(
+                    stream: widget.channel.stream,
+                    builder: (context, snapshot) {
+                      String jsonDataString = snapshot.data.toString();
+                      var users = jsonDecode(jsonDataString);
+
+                      for (int i = 0; i < users.length; i++) {
+                        User u = new User(
+                            users[i]['user_id'], users[i]['location_id'],
+                            users[i]['username']);
+                        items.add(u);
+                      }
+
+                      return CustomDropdownLabel(
+                        label: "Recipient",
+                        child: CustomDropdownMenu<User>(
+                          controller: widget.controller.dropController,
+                          data: items
+                        ),
+                      );
+                    }
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(widget.leftStart, 15, 20, 0),
@@ -75,6 +112,7 @@ class _MessagesState extends State<Messages> {
                       Expanded(
                         flex: 3,
                         child: TextFormField(
+                          controller: _subject,
                           maxLines: null,
                           textAlignVertical: TextAlignVertical.bottom,
                           decoration: InputDecoration(),
@@ -99,6 +137,7 @@ class _MessagesState extends State<Messages> {
                     padding: EdgeInsets.fromLTRB(
                         widget.leftStart, widget.topSpace, widget.leftStart, 0),
                     child: TextFormField(
+                      controller: _message,
                       maxLines: null,
                       maxLength: 300,
                     )),
@@ -106,7 +145,14 @@ class _MessagesState extends State<Messages> {
                   margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
                   child: RaisedButton(
                     onPressed: () {
-                      widget.controller.getValue();
+
+                      if(widget.controller.dropController.getValue() != null && _subject.text.isNotEmpty && _message.text.isNotEmpty) {
+                        widget.controller.sendMessage(widget.controller.dropController.getValue(), _subject.text, _message.text);
+                        _showAlertDialog(true);
+                      }
+                      else {
+                        _showAlertDialog(false);
+                      }
                     },
                     child: Text("Send Message"),
                   ),
@@ -116,6 +162,28 @@ class _MessagesState extends State<Messages> {
           ),
         ));
   }
+
+
+  void _showAlertDialog(bool success) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: success ? Text('Success'): Text('Error'),
+          content: success ? Text(
+              'You started a Job for ${widget.controller.dropController.getValue().name}: Subject: ${_message.text}'
+          ) : Text('Fill in all Fields'),
+          actions: <Widget> [
+              FlatButton(
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+                child: Text('Ok'))
+          ]
+        );
+      }
+    );
+  }
 }
 
 class ControllerMessages {
@@ -124,11 +192,11 @@ class ControllerMessages {
 
   Messages view;
 
-  getValue() {
-    User u = dropController.getValue();
-    print(u.id);
+  sendMessage(User user, String subject, String message) {
+    WebSocketChannel channel = MyApp.con();
 
-    print(dropController.getValue());
+    String data = '{"action": "SEND MESSAGE", "from_user": ${MyApp.id}, "to_user": ${user.id}, "subject": "$subject", "message": "$message"}';
+    channel.sink.add(data);
   }
 
   ControllerMessages(this.view, this._colorTheme);

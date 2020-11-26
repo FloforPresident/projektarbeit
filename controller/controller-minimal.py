@@ -27,6 +27,8 @@ async def ws_recieve(websocket, path):
 		response = db.addUser(data['location'], data['name'], data['password'])
 	elif(action == 'LOGIN USER'):
 		response = db.loginUser(data['name'], data['password'])
+	elif(action == 'GET USERS'):
+		response = db.getAllUsers()
 	#ROOM
 	elif(action == 'GET ROOMS'):
 		response = db.getAllRooms()
@@ -55,6 +57,9 @@ async def ws_recieve(websocket, path):
 		db.deleteLocation(data['id'])
 	elif(action == 'SET LOCATION'):
 		response = db.setActiveLocation(data['userID'], data['locationID'])
+	#MESSAGE
+	elif(action == 'SEND MESSAGE'):
+		db.sendMessage(data['from_user'], data['to_user'], data['subject'], data['message'])
 	#CONTROL
 	elif(action == "UP"):
 		response = action
