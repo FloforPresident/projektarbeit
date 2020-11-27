@@ -86,6 +86,10 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
     this.data = data;
   }
 
+  void setValue(T value) {
+    _value = value;
+  }
+
   T getValue() {
     if (_value != null)
       return _value;

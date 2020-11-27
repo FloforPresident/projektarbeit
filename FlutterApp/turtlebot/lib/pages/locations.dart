@@ -139,6 +139,7 @@ class _LocationsState extends State<Locations> {
 
               if(widget.dropDownRoomId != null) {
                 updateLocations(roomItems[widget.dropDownRoomId].id);
+                dropController.setValue(roomItems[widget.dropDownRoomId]);
               }
 
               return Column(children: <Widget>[
