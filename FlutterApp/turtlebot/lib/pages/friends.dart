@@ -10,7 +10,12 @@ import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Friends extends StatefulWidget {
-  final channel = MyApp.con();
+  final FriendController controller = new FriendController();
+  final WebSocketChannel channel = MyApp.con();
+
+  static List<User> items = [];
+  static List<Location> locationItems = [];
+  static List<Room> roomItems = [];
 
   Friends({Key key}) : super(key: key);
 
@@ -21,10 +26,6 @@ class Friends extends StatefulWidget {
 }
 
 class _FriendState extends State<Friends> {
-  List<User> items = [];
-  List<Location> locationItems = [];
-  List<Room> roomItems = [];
-
   final GlobalKey<AnimatedListState> key = GlobalKey();
   final colorTheme = Colors.red;
 
@@ -35,14 +36,7 @@ class _FriendState extends State<Friends> {
   @override
   void initState() {
     super.initState();
-    // broadcast = widget.channel.stream.asBroadcastStream();
-
-    getUsers();
-  }
-
-  void getUsers() {
-    String data = '{"action": "GET FRIENDS"}';
-    widget.channel.sink.add(data);
+    widget.controller.getData(widget.channel);
   }
 
   @override
@@ -61,44 +55,20 @@ class _FriendState extends State<Friends> {
         stream: widget.channel.stream,
         builder: (context, snapshot) {
           if(snapshot.hasData) {
-            String jsonDataString = snapshot.data.toString();
-            var jsonData = jsonDecode(jsonDataString);
-            var users = jsonData['users'];
-            var locations = jsonData['locations'];
-            var rooms = jsonData['rooms'];
 
-            for(int i = 0; i < users.length; i++) {
-              User u = new User(users[i]['user_id'], users[i]['location_id'],
-                  users[i]['username']);
-              items.add(u);
-            }
-            for (int i = 0; i < locations.length; i++) {
-              Location l = new Location(
-                  locations[i]['location_id'],
-                  locations[i]['room_id'],
-                  locations[i]['title'],
-                  locations[i]['x'],
-                  locations[i]['y']);
-              locationItems.add(l);
-            }
-            for (int i = 0; i < rooms.length; i++) {
-              Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-                  rooms[i]['title']);
-              roomItems.add(r);
-            }
+            widget.controller.setData(snapshot.data);
 
             return AnimatedList(
                 shrinkWrap: true,
                 key: key,
-                initialItemCount: items.length,
+                initialItemCount: Friends.items.length,
                 itemBuilder: (context, index, animation) {
-                  return buildItem(items[index], animation, index);
+                  return buildItem(Friends.items[index], animation, index);
                 },
               );
           } else {
             return Text('');
           }
-
         }
       )
     );
@@ -107,20 +77,18 @@ class _FriendState extends State<Friends> {
   Widget buildItem(User item, Animation animation, int index) {
     String locationName = '';
     String roomName = '';
-    for(int i = 0; i < locationItems.length; i++) {
-      if(item.locationID == locationItems[i].id) {
-        Location location = locationItems[i];
+    for(int i = 0; i < Friends.locationItems.length; i++) {
+      if(item.locationID == Friends.locationItems[i].id) {
+        Location location = Friends.locationItems[i];
         locationName = location.name;
 
-        for(int y = 0; y < roomItems.length; y++) {
-          if(location.roomId == roomItems[y].id) {
-            roomName = roomItems[y].name;
-
+        for(int y = 0; y < Friends.roomItems.length; y++) {
+          if(location.roomId == Friends.roomItems[y].id) {
+            roomName = Friends.roomItems[y].name;
           }
         }
       }
     }
-
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -154,8 +122,7 @@ class _FriendState extends State<Friends> {
                       onPressed: () async {
                         bool delete = await OnDelete.onDelete(context);
                         if(delete) {
-                          _FriendsController deleteItemCon = _FriendsController(colorTheme);
-                          deleteItemCon.removeItem(item);
+                          widget.controller.removeItem(item);
                           RouteGenerator.onTapToFriends(context);
                         }
                       },
@@ -165,7 +132,7 @@ class _FriendState extends State<Friends> {
                     IconButton(
                       icon: Icon(Icons.create),
                       onPressed: (){
-                        editItemDialog(context, item, roomItems, locationItems);
+                        editItemDialog(context, item);
                       },
                     ),
                     IconButton(
@@ -178,22 +145,22 @@ class _FriendState extends State<Friends> {
             ],
           ),
           subtitle: Container(
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Row(children: <Widget>[
-                Text(roomName + " - ",
-                    style: TextStyle(
-                      color: Colors.indigo,
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold,
-                    )),
-                Text(locationName != '' ? locationName : "No active location set")
-              ])),
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+            child: Row(children: <Widget>[
+              Text(roomName + " - ",
+                style: TextStyle(
+                  color: Colors.indigo,
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold,
+                )),
+              Text(locationName != '' ? locationName : "No active location set")
+            ])),
         ),
       ),
     );
   }
 
-  void editItemDialog(BuildContext context, User user, List<Room> roomItems, List<Location> locationItems) {
+  void editItemDialog(BuildContext context, User user) {
     showDialog(
       barrierDismissible: true,
       context: context,
@@ -211,9 +178,9 @@ class _FriendState extends State<Friends> {
                       child: CustomDropdownMenu<Room>(
                         onChanged: () {
                           List<Location> buffer = [];
-                          for(int i = 0; i < locationItems.length; i++) {
-                            if(locationItems[i].roomId == roomDropController.getValue().id) {
-                              buffer.add(locationItems[i]);
+                          for(int i = 0; i < Friends.locationItems.length; i++) {
+                            if(Friends.locationItems[i].roomId == roomDropController.getValue().id) {
+                              buffer.add(Friends.locationItems[i]);
                             }
                           }
                           setState(() {
@@ -221,7 +188,7 @@ class _FriendState extends State<Friends> {
                             selectedLocations.addAll(buffer);
                           });
                         },
-                        controller: roomDropController, data: roomItems),
+                        controller: roomDropController, data: Friends.roomItems),
                     ),
                     CustomDropdownLabel(
                       label: "Location",
@@ -243,10 +210,7 @@ class _FriendState extends State<Friends> {
                     onPressed: () {
                       if (roomDropController.getValue() != null &&
                           locationDropController.getValue() != null) {
-                        _FriendsController updateItemCon = new _FriendsController(
-                            colorTheme);
-                        updateItemCon.updateItem(
-                            user, locationDropController.getValue());
+                        widget.controller.updateItem(user, locationDropController.getValue());
                         RouteGenerator.onTapToFriends(context);
                       }
                     },
@@ -259,29 +223,55 @@ class _FriendState extends State<Friends> {
       }
     );
   }
-
-  @override
-  void dispose() {
-    widget.channel.sink.close();
-    super.dispose();
-  }
 }
 
-class _FriendsController {
-  final Color colorTheme;
-  WebSocketChannel channel;
+class FriendController {
 
-  _FriendsController(this.colorTheme) {
-    channel = MyApp.con();
+  void getData(WebSocketChannel channel) {
+    String data = '{"action": "GET FRIENDS"}';
+    channel.sink.add(data);
+  }
+
+  void setData(json) {
+    Friends.items = [];
+    Friends.roomItems = [];
+    Friends.locationItems = [];
+
+    String jsonDataString = json.toString();
+    var jsonData = jsonDecode(jsonDataString);
+    var users = jsonData['users'];
+    var locations = jsonData['locations'];
+    var rooms = jsonData['rooms'];
+
+    for(int i = 0; i < users.length; i++) {
+      User u = new User(users[i]['user_id'], users[i]['location_id'],
+          users[i]['username']);
+      Friends.items.add(u);
+    }
+    for (int i = 0; i < locations.length; i++) {
+      Location l = new Location(
+          locations[i]['location_id'],
+          locations[i]['room_id'],
+          locations[i]['title'],
+          locations[i]['x'],
+          locations[i]['y']);
+      Friends.locationItems.add(l);
+    }
+    for (int i = 0; i < rooms.length; i++) {
+      Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
+          rooms[i]['title']);
+      Friends.roomItems.add(r);
+    }
   }
 
   void removeItem(User user) {
-    int id = user.id;
-    String data = '{"action": "DELETE FRIEND", "id": "$id"}';
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "DELETE FRIEND", "id": "${user.id}"}';
     channel.sink.add(data);
   }
 
   void updateItem(User user, Location location) {
+    WebSocketChannel channel = MyApp.con();
     String data = '{"action": "UPDATE FRIEND", "user_id": "${user.id}", "location_id": ${location.id}}';
     channel.sink.add(data);
   }
