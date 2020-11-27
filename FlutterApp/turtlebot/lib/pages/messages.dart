@@ -11,10 +11,9 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Messages extends StatefulWidget {
   final channel = MyApp.con();
-  User selectedUser;
+  final User selectedUser;
 
-  Messages(User selectedUser, {Key key}) : super(key: key) {
-    this.selectedUser = selectedUser;
+  Messages(this.selectedUser, {Key key}) : super(key: key) {
     controller = ControllerMessages(this, Colors.orange);
   }
 

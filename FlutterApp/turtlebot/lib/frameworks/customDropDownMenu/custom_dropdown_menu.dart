@@ -124,7 +124,7 @@ class CustomDropdownLabel extends StatelessWidget {
   CustomDropdownLabel(
       {@required this.child,
       this.fontSize = 18,
-      this.leftStart = 40,
+      this.leftStart = 30,
       @required this.label,
       this.labelRightSpace = 20,
       this.topSpace = 15});

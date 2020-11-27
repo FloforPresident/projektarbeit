@@ -151,50 +151,113 @@ class database:
 			}
 			data["users"].append(dataEntity)
 
-			#Get Locations
-			location_id = str(dataEntity["location_id"])
+		#Get Locations
+		mycursor.execute("SELECT * FROM Location")
+		locations = mycursor.fetchall()
 
-			mycursor.execute("SELECT * FROM Location WHERE location_id = '"+location_id+"'")
-			locations = mycursor.fetchall()
+		for i in range(len(locations)):
+			locations[i] = list(locations[i])
+			for r in range(len(locations[i])):
+				if isinstance(locations[i][r], bytearray):
+					locations[i][r] = locations[i][r].decode("utf-8")
 
-			for i in range(len(locations)):
-				locations[i] = list(locations[i])
-				for r in range(len(locations[i])):
-					if isinstance(locations[i][r], bytearray):
-						locations[i][r] = locations[i][r].decode("utf-8")
+			dataEntity = {
+				"location_id": locations[i][0],
+				"room_id": locations[i][1],
+				"title": locations[i][2],
+				"x": locations[i][3],
+				"y": locations[i][4],
+			}
 
-				dataEntity = {
-					"location_id": locations[i][0],
-					"room_id": locations[i][1],
-					"title": locations[i][2],
-					"x": locations[i][3],
-					"y": locations[i][4],
-				}
+			data["locations"].append(dataEntity)
 
-				data["locations"].append(dataEntity)
+		#Get Rooms
+		mycursor.execute("SELECT * FROM Room")
+		rooms = mycursor.fetchall()
 
-				#Get Rooms
-				room_id = str(dataEntity['room_id'])
+		for i in range(len(rooms)):
+			rooms[i] = list(rooms[i])
+			for r in range(len(rooms[i])):
+				if isinstance(rooms[i][r], bytearray):
+					rooms[i][r] = rooms[i][r].decode("utf-8")
 
-				mycursor.execute("SELECT * FROM Room WHERE room_id = '"+room_id+"'")
-				rooms = mycursor.fetchall()
-
-				for i in range(len(rooms)):
-					rooms[i] = list(rooms[i])
-					for r in range(len(rooms[i])):
-						if isinstance(rooms[i][r], bytearray):
-							rooms[i][r] = rooms[i][r].decode("utf-8")
-
-					dataEntity = {
-						"room_id": rooms[i][0],
-						"robo_id": rooms[i][1],
-						"title": rooms[i][2],
-						"pgm": rooms[i][3],
-						"yaml": rooms[i][4]
-					}
-					data["rooms"].append(dataEntity)
+			dataEntity = {
+				"room_id": rooms[i][0],
+				"robo_id": rooms[i][1],
+				"title": rooms[i][2],
+				"pgm": rooms[i][3],
+				"yaml": rooms[i][4]
+			}
+			data["rooms"].append(dataEntity)
 
 		return json.dumps(data)
+
+	# def getAllFriends(self):
+	# 	mycursor = self.mydb.cursor(prepared = True)
+	#
+	# 	#Get Users
+	# 	mycursor.execute("SELECT * FROM User")
+	# 	users = mycursor.fetchall()
+	#
+	# 	data = {"users": [], "locations": [], "rooms": []}
+	#
+	# 	for i in range(len(users)):
+	# 		users[i] = list(users[i])
+	# 		for r in range(len(users[i])):
+	# 			if isinstance(users[i][r], bytearray):
+	# 				users[i][r] = users[i][r].decode("utf-8")
+	#
+	# 		dataEntity = {
+	# 			"user_id": users[i][0],
+	# 			"location_id": users[i][1],
+	# 			"username": users[i][2]
+	# 		}
+	# 		data["users"].append(dataEntity)
+	#
+	# 		#Get Locations
+	# 		location_id = str(dataEntity["location_id"])
+	#
+	# 		mycursor.execute("SELECT * FROM Location WHERE location_id = '"+location_id+"'")
+	# 		locations = mycursor.fetchall()
+	#
+	# 		for i in range(len(locations)):
+	# 			locations[i] = list(locations[i])
+	# 			for r in range(len(locations[i])):
+	# 				if isinstance(locations[i][r], bytearray):
+	# 					locations[i][r] = locations[i][r].decode("utf-8")
+	#
+	# 			dataEntity = {
+	# 				"location_id": locations[i][0],
+	# 				"room_id": locations[i][1],
+	# 				"title": locations[i][2],
+	# 				"x": locations[i][3],
+	# 				"y": locations[i][4],
+	# 			}
+	#
+	# 			data["locations"].append(dataEntity)
+	#
+	# 			#Get Rooms
+	# 			room_id = str(dataEntity['room_id'])
+	#
+	# 			mycursor.execute("SELECT * FROM Room WHERE room_id = '"+room_id+"'")
+	# 			rooms = mycursor.fetchall()
+	#
+	# 			for i in range(len(rooms)):
+	# 				rooms[i] = list(rooms[i])
+	# 				for r in range(len(rooms[i])):
+	# 					if isinstance(rooms[i][r], bytearray):
+	# 						rooms[i][r] = rooms[i][r].decode("utf-8")
+	#
+	# 				dataEntity = {
+	# 					"room_id": rooms[i][0],
+	# 					"robo_id": rooms[i][1],
+	# 					"title": rooms[i][2],
+	# 					"pgm": rooms[i][3],
+	# 					"yaml": rooms[i][4]
+	# 				}
+	# 				data["rooms"].append(dataEntity)
+	#
+	# 	return json.dumps(data)
 
 
 	def deleteFriend(self, user_id):
@@ -336,11 +399,17 @@ class database:
 		mycursor.execute(sql)
 		self.mydb.commit()
 
-	#def changeActiveLocation(locationNameNew, username):
+	def updateLocation(self, user_id, location_id):
+		mycursor = self.mydb.cursor(prepared = True)
+		sql = "UPDATE User SET location_id = %s WHERE User.user_id = %s"
+		val = (location_id, user_id)
+		mycursor.execute(sql, val)
+		self.mydb.commit()
+
 	
 	def getLocation(self, id):
 		mycursor = self.mydb.cursor(prepared = True)
-		mycursor.execute("SELECT * FROM Location  WHERE location_id = '"+id+"'")
+		mycursor.execute("SELECT * FROM Location WHERE location_id = '"+id+"'")
 		myresult = mycursor.fetchone()
 		for x in myresult:
 			print(x)

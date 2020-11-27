@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
@@ -27,6 +27,10 @@ class _FriendState extends State<Friends> {
 
   final GlobalKey<AnimatedListState> key = GlobalKey();
   final colorTheme = Colors.red;
+
+  ControllerCustomDropdown roomDropController = ControllerCustomDropdown<Room>();
+  ControllerCustomDropdown locationDropController = ControllerCustomDropdown<Location>();
+
 
   @override
   void initState() {
@@ -157,7 +161,18 @@ class _FriendState extends State<Friends> {
                       },
                     )
                   ]
-                  : <Widget> [Icon(Icons.assignment_ind_rounded)]
+                  : <Widget> [
+                    IconButton(
+                      icon: Icon(Icons.create),
+                      onPressed: (){
+                        editItemDialog(context, item, roomItems, locationItems);
+                      },
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.assignment_ind_rounded),
+                        onPressed: (){},
+                    )
+                  ]
                 ),
               ),
             ],
@@ -175,6 +190,73 @@ class _FriendState extends State<Friends> {
               ])),
         ),
       ),
+    );
+  }
+
+  void editItemDialog(BuildContext context, User user, List<Room> roomItems, List<Location> locationItems) {
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        List<Location> selectedLocations = [];
+        return StatefulBuilder(
+            builder: (context, setState) {
+              return SingleChildScrollView(
+                  child: AlertDialog(
+                    title: Text("Update your settings"),
+                    content: Column(
+                      children: <Widget>[
+                        CustomDropdownLabel(
+                          label: "Room",
+                          child: CustomDropdownMenu<Room>(
+                              onChanged: () {
+                                List<Location> buffer = [];
+                                for(int i = 0; i < locationItems.length; i++) {
+                                  if(locationItems[i].roomId == roomDropController.getValue().id) {
+                                    buffer.add(locationItems[i]);
+                                  }
+                                }
+                                setState(() {
+                                  selectedLocations = [];
+                                  selectedLocations.addAll(buffer);
+                                });
+                              },
+                              controller: roomDropController, data: roomItems),
+                        ),
+                        CustomDropdownLabel(
+                          label: "Location",
+                          child: CustomDropdownMenu<Location>(
+                              controller: locationDropController,
+                              data: selectedLocations),
+                        ),
+                      ],
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text("No"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      FlatButton(
+                        child: Text("Update"),
+                        onPressed: () {
+                          if (roomDropController.getValue() != null &&
+                              locationDropController.getValue() != null) {
+                            _FriendsController updateItemCon = new _FriendsController(
+                                colorTheme);
+                            updateItemCon.updateItem(
+                                user, locationDropController.getValue());
+                            RouteGenerator.onTapToFriends(context);
+                          }
+                        },
+                      ),
+                    ],
+                  )
+              );
+            }
+        );
+      }
     );
   }
 
@@ -196,6 +278,11 @@ class _FriendsController {
   void removeItem(User user) {
     int id = user.id;
     String data = '{"action": "DELETE FRIEND", "id": "$id"}';
+    channel.sink.add(data);
+  }
+
+  void updateItem(User user, Location location) {
+    String data = '{"action": "UPDATE FRIEND", "user_id": "${user.id}", "location_id": ${location.id}}';
     channel.sink.add(data);
   }
 }

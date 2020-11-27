@@ -55,8 +55,8 @@ async def ws_recieve(websocket, path):
 		db.addLocation(data['roomID'], data['title'], data['x'], data['y'])
 	elif(action == 'DELETE LOCATION'):
 		db.deleteLocation(data['id'])
-	elif(action == 'SET LOCATION'):
-		response = db.setActiveLocation(data['userID'], data['locationID'])
+	elif(action == 'UPDATE FRIEND'):
+		db.updateLocation(data['user_id'], data['location_id'])
 	#MESSAGE
 	elif(action == 'SEND MESSAGE'):
 		response = db.sendMessage(data['from_user'], data['to_user'], data['subject'], data['message'])
