@@ -208,10 +208,10 @@ class _LocationsState extends State<Locations> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.create),
-                      onPressed: () {},
-                    ),
+                    // IconButton(
+                    //   icon: Icon(Icons.create),
+                    //   onPressed: () {},
+                    // ),
                     IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () async {

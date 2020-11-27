@@ -43,6 +43,8 @@ async def ws_recieve(websocket, path):
 		db.addRobo(data['name'], data['ip'])
 	elif(action == 'DELETE ROBO'):
 		db.deleteRobo(data['id'])
+	elif(action == 'UPDATE ROBO'):
+		db.updateRobo(data['room_id'], data['robo_id'])
 	#Friend
 	elif(action == 'GET FRIENDS'):
 		response = db.getAllFriends()

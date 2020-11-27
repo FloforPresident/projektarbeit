@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
@@ -154,7 +155,10 @@ class _RoomState extends State<Rooms> {
                   children: <Widget>[
                     IconButton(
                       icon: Icon(Icons.create),
-                      onPressed: () {},
+                      onPressed: () {
+                        _RoomsController updateItemCon = _RoomsController(colorTheme);
+                        updateItemCon.editItemDialog(context, item, roboItems);
+                      },
                     ),
                     IconButton(
                       icon: Icon(Icons.delete),
@@ -212,6 +216,58 @@ class _RoomsController {
     String data =
         '{"action": "ADD ROOM", "roboID": "$roboID", "name": "$name"}';
     channel.sink.add(data);
+  }
+
+  void updateItem(Room room, Robo robo) {
+    String data =
+        '{"action": "UPDATE ROBO", "room_id": ${room.id}, "robo_id": ${robo.id}}';
+    channel.sink.add(data);
+  }
+
+  void editItemDialog(BuildContext context, Room room, List<Robo> roboItems) {
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          List<Location> selectedLocations = [];
+          return StatefulBuilder(
+              builder: (context, setState) {
+                return SingleChildScrollView(
+                    child: AlertDialog(
+                      title: Text("Update your settings"),
+                      content: Column(
+                        children: <Widget>[
+                          CustomDropdownLabel(
+                            label: "Robo",
+                            child: CustomDropdownMenu<Robo>(
+                                controller: dropController,
+                                data: roboItems),
+                          ),
+                        ],
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text("No"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        FlatButton(
+                          child: Text("Update"),
+                          onPressed: () {
+                            if(dropController.getValue() != null) {
+                              updateItem(room, dropController.getValue());
+                              RouteGenerator.onTapToRooms(context);
+                            }
+                          },
+                        ),
+                      ],
+                    )
+                );
+              }
+          );
+        }
+    );
   }
 
   void addItemDialog(BuildContext context, List<Robo> roboItems) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 26, 2020 at 07:42 PM
+-- Generation Time: Nov 27, 2020 at 05:02 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -48,7 +48,10 @@ INSERT INTO `Location` (`location_id`, `room_id`, `title`, `x`, `y`) VALUES
 (14, 18, 'Car', 1, 1),
 (15, 18, 'Door', 3, 3),
 (20, 16, 'Folterecke', 1.1, 1.4),
-(21, 16, 'Porno Regal', 0.87, 1.2);
+(21, 16, 'Porno Regal', 0.87, 1.2),
+(22, 10, 'Patrick\'s Chair', 0.1, 0.2),
+(23, 16, 'Bett', 0.69, 0.69),
+(25, 16, 'Sockenschrank', 1.2, 3.1);
 
 -- --------------------------------------------------------
 
@@ -71,7 +74,9 @@ CREATE TABLE `Message` (
 --
 
 INSERT INTO `Message` (`message_id`, `from_user`, `to_user`, `subject`, `message`, `datetime`, `received`) VALUES
-(22, 28, 37, 'WTF', 'Warum hast du n Folter Regal?', '2020-11-26 19:42:04', NULL);
+(22, 28, 37, 'WTF', 'Warum hast du n Folter Regal?', '2020-11-26 19:42:04', NULL),
+(23, 28, 36, 'Hi', 'Was geht ab?', '2020-11-27 11:52:58', NULL),
+(24, 28, 38, 'Hi', 'Ich brauch Hilfe', '2020-11-27 16:38:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -140,7 +145,7 @@ CREATE TABLE `User` (
 --
 
 INSERT INTO `User` (`user_id`, `location_id`, `username`, `password`, `image`, `embedding`) VALUES
-(28, NULL, 'Flo', '123', NULL, NULL),
+(28, 3, 'Flo', '123', NULL, NULL),
 (35, 11, 'Basti', '123', NULL, NULL),
 (36, 11, 'Patrick', '123', NULL, NULL),
 (37, 11, 'Stefan', '123', NULL, NULL),
@@ -193,13 +198,13 @@ ALTER TABLE `User`
 -- AUTO_INCREMENT for table `Location`
 --
 ALTER TABLE `Location`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `Message`
 --
 ALTER TABLE `Message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `Robo`
@@ -240,13 +245,13 @@ ALTER TABLE `Message`
 -- Constraints for table `Room`
 --
 ALTER TABLE `Room`
-  ADD CONSTRAINT `Room_ibfk_1` FOREIGN KEY (`robo_id`) REFERENCES `Robo` (`robo_id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `Room_ibfk_1` FOREIGN KEY (`robo_id`) REFERENCES `Robo` (`robo_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `User`
 --
 ALTER TABLE `User`
-  ADD CONSTRAINT `User_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `Location` (`location_id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `User_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `Location` (`location_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

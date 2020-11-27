@@ -118,6 +118,12 @@ class database:
 		mycursor.execute(sql)
 		self.mydb.commit()
 
+	def updateRobo(self, room_id, robo_id):
+		mycursor = self.mydb.cursor(prepared = True)
+		sql = "UPDATE Room SET robo_id = %s WHERE Room.room_id = %s"
+		val = (robo_id, room_id)
+		mycursor.execute(sql, val)
+		self.mydb.commit()
 
 	def getRobo(self, name):
 		mycursor = self.mydb.cursor(prepared = True)
