@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/pages/pages_control/robo_commands.dart';
 import 'package:turtlebot/pages/pages_control/robo_man_control.dart';
-import 'package:turtlebot/pages/pages_control/robo_status.dart';
+import 'package:turtlebot/pages/pages_control/controls.dart';
 import 'package:turtlebot/pages/robos.dart';
 import 'package:turtlebot/pages/rooms.dart';
 import 'package:turtlebot/pages/friends.dart';
