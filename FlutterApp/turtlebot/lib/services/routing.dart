@@ -54,7 +54,7 @@ class RouteGenerator {
         }
       case RouteRoboStatus:
         {
-          return MaterialPageRoute(builder: (_) => RoboStatus());
+          return MaterialPageRoute(builder: (_) => Controls());
         }
       case RouteRoboCommands:
         {
