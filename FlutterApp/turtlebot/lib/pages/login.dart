@@ -14,6 +14,7 @@ class Login extends StatefulWidget {
 
   static List<Room> roomItems = [];
   static List<Location> locationItems = [];
+  static User sessionUser;
 
   Login({Key key}) : super(key: key);
 
@@ -39,7 +40,6 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
 
-    LoginController.autoLogin();
     widget.controller.getData();
   }
 
@@ -106,6 +106,7 @@ class _LoginState extends State<Login> {
                 onPressed: () {
                   if(_name.text.isNotEmpty && _password.text.isNotEmpty) {
                     widget.controller.loginUser(context, _name.text, _password.text);
+                    login();
                   }
                 },
               ),
@@ -274,15 +275,6 @@ class _LoginState extends State<Login> {
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Add new Location"),
-                    color: colorTheme,
-                    textColor: Colors.white,
-                    onPressed: () {
-                      widget.controller.addUser(context, _name.text, _password.text, null);
-                      RouteGenerator.onTapToLocations(context);
-                    },
-                  ),
-                  FlatButton(
                     child: Text("Exit",
                         style: TextStyle(color: secondaryTheme)
                     ),
@@ -303,7 +295,7 @@ class _LoginState extends State<Login> {
                       else {
                         widget.controller.addUser(context, _name.text, _password.text, null);
                       }
-                      RouteGenerator.onTapToHome(context);
+                      login();
                     },
                   ),
                 ],
@@ -314,39 +306,24 @@ class _LoginState extends State<Login> {
       }
     );
   }
+
+  // Shared Preference
+  Future<Null> login() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('id', Login.sessionUser.id);
+    prefs.setString('name', Login.sessionUser.name);
+
+    setState(() {
+      MyApp.id = Login.sessionUser.id;
+      MyApp.name = Login.sessionUser.name;
+    });
+
+    RouteGenerator.onTapToHome(context);
+  }
 }
 
 class LoginController {
 
-  //Shared Preferences
-  static void autoLogin() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final int userID = prefs.getInt('id');
-    final String userName = prefs.getString('name');
-
-    if (userID != null) {
-      MyApp.id = userID;
-      MyApp.name = userName;
-    }
-  }
-
-  static Future<Null> login(User user) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('id', user.id);
-    prefs.setString('name', user.name);
-    MyApp.id = user.id;
-    MyApp.name = user.name;
-  }
-
-  static Future<Null> logout() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('id', null);
-    prefs.setString('name', null);
-    MyApp.id = null;
-    MyApp.name = null;
-  }
-
-  // Login Controller Action
   void getData() {
     Login.locationItems = [];
     Login.roomItems = [];
@@ -411,8 +388,6 @@ class LoginController {
         String jsonDataString = json.toString();
 
         loginHelper(jsonDataString);
-
-        RouteGenerator.onTapToHome(context);
       }
       else {
         RouteGenerator.onTapToLogin(context);
@@ -420,12 +395,10 @@ class LoginController {
     });
   }
 
-  static void loginHelper(String jsonDataString) {
+  void loginHelper(String jsonDataString) {
     final jsonData = jsonDecode(jsonDataString);
 
-    User user = new User(jsonData['user_id'],
+    Login.sessionUser = new User(jsonData['user_id'],
         jsonData['location_id'], jsonData['username']);
-
-    login(user);
   }
 }
