@@ -10,21 +10,20 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 
 class Login extends StatefulWidget {
-  LoginController controller = new LoginController();
-
-  Login({Key key}) : super(key: key);
-
-  @override
-  LoginState createState() {
-    return LoginState();
-  }
-}
-
-class LoginState extends State<Login> {
+  final LoginController controller = new LoginController();
 
   static List<Room> roomItems = [];
   static List<Location> locationItems = [];
 
+  Login({Key key}) : super(key: key);
+
+  @override
+  _LoginState createState() {
+    return _LoginState();
+  }
+}
+
+class _LoginState extends State<Login> {
   double _leftStart = 40;
   double _rightEnd = 40;
   double _topSpace = 20;
@@ -252,9 +251,9 @@ class LoginState extends State<Login> {
                       child: CustomDropdownMenu<Room>(
                         onChanged: () {
                           List<Location> buffer = [];
-                          for(int i = 0; i < locationItems.length; i++) {
-                            if(locationItems[i].roomId == roomDropController.getValue().id) {
-                              buffer.add(locationItems[i]);
+                          for(int i = 0; i < Login.locationItems.length; i++) {
+                            if(Login.locationItems[i].roomId == roomDropController.getValue().id) {
+                              buffer.add(Login.locationItems[i]);
                             }
                           }
                           setState(() {
@@ -263,7 +262,7 @@ class LoginState extends State<Login> {
                           }
                         );
                       },
-                      controller: roomDropController, data: roomItems),
+                      controller: roomDropController, data: Login.roomItems),
                     ),
                     CustomDropdownLabel(
                       label: "Location",
@@ -275,12 +274,21 @@ class LoginState extends State<Login> {
                 ),
                 actions: <Widget>[
                   FlatButton(
+                    child: Text("Add new Location"),
+                    color: colorTheme,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      widget.controller.addUser(context, _name.text, _password.text, null);
+                      RouteGenerator.onTapToLocations(context);
+                    },
+                  ),
+                  FlatButton(
                     child: Text("Exit",
                         style: TextStyle(color: secondaryTheme)
                     ),
                     color: Colors.grey,
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      RouteGenerator.onTapToLogin(context);
                     },
                   ),
                   FlatButton(
@@ -292,6 +300,10 @@ class LoginState extends State<Login> {
                       if (locationDropController.getValue() != null) {
                         widget.controller.addUser(context, _name.text, _password.text, locationDropController.getValue().id);
                       }
+                      else {
+                        widget.controller.addUser(context, _name.text, _password.text, null);
+                      }
+                      RouteGenerator.onTapToHome(context);
                     },
                   ),
                 ],
@@ -336,6 +348,9 @@ class LoginController {
 
   // Login Controller Action
   void getData() {
+    Login.locationItems = [];
+    Login.roomItems = [];
+
     WebSocketChannel channel = MyApp.con();
     String data = '{"action": "GET FRIENDS"}';
     channel.sink.add(data);
@@ -355,12 +370,12 @@ class LoginController {
               locations[i]['title'],
               locations[i]['x'],
               locations[i]['y']);
-          LoginState.locationItems.add(l);
+          Login.locationItems.add(l);
         }
         for (int i = 0; i < rooms.length; i++) {
           Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
               rooms[i]['title']);
-          LoginState.roomItems.add(r);
+          Login.roomItems.add(r);
         }
       }
     });
@@ -377,8 +392,6 @@ class LoginController {
         String jsonDataString = json.toString();
 
         loginHelper(jsonDataString);
-
-        RouteGenerator.onTapToHome(context);
       }
       else {
         RouteGenerator.onTapToLogin(context);
