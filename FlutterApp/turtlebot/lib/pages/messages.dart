@@ -11,8 +11,10 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Messages extends StatefulWidget {
   final channel = MyApp.con();
+  User selectedUser;
 
-  Messages({Key key}) : super(key: key) {
+  Messages(User selectedUser, {Key key}) : super(key: key) {
+    this.selectedUser = selectedUser;
     controller = ControllerMessages(this, Colors.orange);
   }
 
@@ -94,11 +96,23 @@ class _MessageState extends State<Messages> {
                         items.add(u);
                       }
 
+                      // Logic for Send Message directly Button on Friends Page
+                      int startValueIndex;
+                      if(widget.selectedUser != null) {
+                        for(int i = 0; i < items.length; i++) {
+                          if(widget.selectedUser.id == items[i].id) {
+                            widget.controller.dropController.setValue(widget.selectedUser);
+                            startValueIndex = i;
+                          }
+                        }
+                      }
+
                       return CustomDropdownLabel(
                         label: "Recipient",
                         child: CustomDropdownMenu<User>(
                           controller: widget.controller.dropController,
-                          data: items
+                          data: items,
+                          startValueId: startValueIndex,
                         ),
                       );
                     }

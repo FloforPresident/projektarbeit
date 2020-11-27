@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/pages/pages_control/robo_commands.dart';
 import 'package:turtlebot/pages/pages_control/robo_man_control.dart';
 import 'package:turtlebot/pages/pages_control/robo_status.dart';
@@ -43,7 +44,7 @@ class RouteGenerator {
         }
       case RouteMessages:
         {
-          return MaterialPageRoute(builder: (_) => Messages());
+          return MaterialPageRoute(builder: (_) => Messages(settings.arguments));
         }
       case RouteRoboStatus:
         {
@@ -92,8 +93,8 @@ class RouteGenerator {
     Navigator.pushNamed(context, RouteGenerator.RouteFriends);
   }
 
-  static onTapToMessages(BuildContext context) {
-    Navigator.pushNamed(context, RouteGenerator.RouteMessages);
+  static onTapToMessages(BuildContext context, {User selectedUser}) {
+    Navigator.pushNamed(context, RouteGenerator.RouteMessages, arguments: selectedUser);
   }
 
   static onTapToRobos(BuildContext context) {

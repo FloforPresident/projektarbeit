@@ -141,7 +141,9 @@ class _FriendState extends State<Friends> {
                   ? <Widget>[
                     IconButton(
                       icon: Icon(Icons.email),
-                      onPressed: () {},
+                      onPressed: () {
+                        RouteGenerator.onTapToMessages(context, selectedUser: item);
+                      },
                     ),
                     IconButton(
                       icon: Icon(Icons.delete),
