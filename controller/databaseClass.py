@@ -41,10 +41,10 @@ class database:
 		return json.dumps(data)
 		
 
-	def addUser(self, name, password):
+	def addUser(self, location_id, name, password):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO User (username, password) VALUES (%s, %s)"
-		val = (name, password)
+		sql = "INSERT INTO User (location_id, username, password) VALUES (%s, %s, %s)"
+		val = (location_id, name, password)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
 	

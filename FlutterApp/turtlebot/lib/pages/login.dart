@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/routing.dart';
@@ -9,15 +10,20 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 
 class Login extends StatefulWidget {
+  LoginController controller = new LoginController();
+
   Login({Key key}) : super(key: key);
 
   @override
-  _LoginState createState() {
-    return _LoginState();
+  LoginState createState() {
+    return LoginState();
   }
 }
 
-class _LoginState extends State<Login> {
+class LoginState extends State<Login> {
+
+  static List<Room> roomItems = [];
+  static List<Location> locationItems = [];
 
   double _leftStart = 40;
   double _rightEnd = 40;
@@ -27,12 +33,15 @@ class _LoginState extends State<Login> {
 
   TextEditingController _name = new TextEditingController();
   TextEditingController _password = new TextEditingController();
+  ControllerCustomDropdown roomDropController = ControllerCustomDropdown<Room>();
+  ControllerCustomDropdown locationDropController = ControllerCustomDropdown<Location>();
 
   @override
   void initState() {
     super.initState();
 
     LoginController.autoLogin();
+    widget.controller.getData();
   }
 
   @override
@@ -97,7 +106,7 @@ class _LoginState extends State<Login> {
                 ),
                 onPressed: () {
                   if(_name.text.isNotEmpty && _password.text.isNotEmpty) {
-                    LoginController.loginUser(context, _name.text, _password.text);
+                    widget.controller.loginUser(context, _name.text, _password.text);
                   }
                 },
               ),
@@ -112,7 +121,7 @@ class _LoginState extends State<Login> {
                 onPressed: () {
                   signupDialog(context);
                 },
-              ),
+              )
             ]
           )
         )
@@ -121,8 +130,6 @@ class _LoginState extends State<Login> {
   }
 
   void signupDialog(BuildContext context) {
-    bool _uploadedImage = true;
-
     showDialog(
       barrierDismissible: true,
       context: context,
@@ -137,6 +144,53 @@ class _LoginState extends State<Login> {
                 maxLines: null,
                 maxLength: 20,
               ),
+              TextField(
+                decoration: InputDecoration(labelText: "Password"),
+                controller: _password,
+                maxLines: null,
+                maxLength: 20,
+              )
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Exit",
+                style: TextStyle(color: secondaryTheme)
+              ),
+              color: Colors.grey,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text("Next",
+              style: TextStyle(color: secondaryTheme)
+              ),
+              color: Colors.blueGrey,
+              onPressed: () {
+                if (_name.text.isNotEmpty &&
+                    _password.text.isNotEmpty) {
+                  pictureDialog(context);
+                }
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void pictureDialog(BuildContext context) {
+    bool _uploadedImage = true;
+
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) => SingleChildScrollView(
+        child: AlertDialog(
+          title: Text("SignUp"),
+          content: Column(
+            children: <Widget>[
               Container(
                 margin: EdgeInsets.all(15),
                 child: RaisedButton(
@@ -151,38 +205,101 @@ class _LoginState extends State<Login> {
                 value: _uploadedImage,
                 onChanged: (bool value) {},
               ),
-              TextField(
-                decoration: InputDecoration(labelText: "Password"),
-                controller: _password,
-                maxLines: null,
-                maxLength: 20,
-              )
             ],
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text("Exit"),
-              color: Colors.red,
+              child: Text("Exit",
+                  style: TextStyle(color: secondaryTheme)
+              ),
+              color: Colors.grey,
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             FlatButton(
-              child: Text("SignUp",
-              style: TextStyle(color: secondaryTheme)
+              child: Text("Next",
+                  style: TextStyle(color: secondaryTheme)
               ),
               color: Colors.blueGrey,
               onPressed: () {
-                if (_name.text.isNotEmpty &&
-                    _password.text.isNotEmpty &&
-                    _uploadedImage == true) {
-                  LoginController.addUser(context, _name.text, _password.text);
+                if (_uploadedImage == true) {
+                  editItemDialog(context);
                 }
               },
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void editItemDialog(BuildContext context) {
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        List<Location> selectedLocations = [];
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return SingleChildScrollView(
+              child: AlertDialog(
+                title: Text("Where can we find you?"),
+                content: Column(
+                  children: <Widget>[
+                    CustomDropdownLabel(
+                      label: "Room",
+                      child: CustomDropdownMenu<Room>(
+                        onChanged: () {
+                          List<Location> buffer = [];
+                          for(int i = 0; i < locationItems.length; i++) {
+                            if(locationItems[i].roomId == roomDropController.getValue().id) {
+                              buffer.add(locationItems[i]);
+                            }
+                          }
+                          setState(() {
+                            selectedLocations = [];
+                            selectedLocations.addAll(buffer);
+                          }
+                        );
+                      },
+                      controller: roomDropController, data: roomItems),
+                    ),
+                    CustomDropdownLabel(
+                      label: "Location",
+                      child: CustomDropdownMenu<Location>(
+                        controller: locationDropController,
+                        data: selectedLocations),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Exit",
+                        style: TextStyle(color: secondaryTheme)
+                    ),
+                    color: Colors.grey,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Signup",
+                        style: TextStyle(color: secondaryTheme)
+                    ),
+                    color: Colors.blueGrey,
+                    onPressed: () {
+                      if (locationDropController.getValue() != null) {
+                        widget.controller.addUser(context, _name.text, _password.text, locationDropController.getValue().id);
+                      }
+                    },
+                  ),
+                ],
+              )
+            );
+          }
+        );
+      }
     );
   }
 }
@@ -218,10 +335,41 @@ class LoginController {
   }
 
   // Login Controller Action
-  static void addUser(BuildContext context, String name, String password) {
+  void getData() {
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "GET FRIENDS"}';
+    channel.sink.add(data);
+
+    channel.stream.listen((json) async {
+      if (json != '') {
+        String jsonDataString = json.toString();
+
+        var jsonData = jsonDecode(jsonDataString);
+        var locations = jsonData['locations'];
+        var rooms = jsonData['rooms'];
+
+        for (int i = 0; i < locations.length; i++) {
+          Location l = new Location(
+              locations[i]['location_id'],
+              locations[i]['room_id'],
+              locations[i]['title'],
+              locations[i]['x'],
+              locations[i]['y']);
+          LoginState.locationItems.add(l);
+        }
+        for (int i = 0; i < rooms.length; i++) {
+          Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
+              rooms[i]['title']);
+          LoginState.roomItems.add(r);
+        }
+      }
+    });
+  }
+
+  void addUser(BuildContext context, String name, String password, int locationID) {
     WebSocketChannel channel = MyApp.con();
     String data =
-        '{"action": "ADD USER", "name": "$name", "password": "$password"}';
+        '{"action": "ADD USER", "name": "$name", "password": "$password", "location_id": $locationID}';
     channel.sink.add(data);
 
     channel.stream.listen((json) async {
@@ -230,7 +378,7 @@ class LoginController {
 
         loginHelper(jsonDataString);
 
-        RouteGenerator.onTapToLocations(context);
+        RouteGenerator.onTapToHome(context);
       }
       else {
         RouteGenerator.onTapToLogin(context);
@@ -238,7 +386,7 @@ class LoginController {
     });
   }
 
-  static void loginUser(BuildContext context, String name, String password) {
+  void loginUser(BuildContext context, String name, String password) {
     WebSocketChannel channel = MyApp.con();
     String data =
         '{"action": "LOGIN USER", "name": "$name", "password": "$password"}';

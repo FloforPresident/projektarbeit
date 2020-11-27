@@ -45,8 +45,8 @@ class Home extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text(MyApp.name != ''
-            ? (MyApp.name)
+          title: Text(MyApp.name != null
+            ? MyApp.name
             : ''
           ),
           backgroundColor: Colors.white,

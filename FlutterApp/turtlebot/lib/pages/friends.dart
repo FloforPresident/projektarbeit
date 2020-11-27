@@ -200,61 +200,61 @@ class _FriendState extends State<Friends> {
       builder: (context) {
         List<Location> selectedLocations = [];
         return StatefulBuilder(
-            builder: (context, setState) {
-              return SingleChildScrollView(
-                  child: AlertDialog(
-                    title: Text("Update your settings"),
-                    content: Column(
-                      children: <Widget>[
-                        CustomDropdownLabel(
-                          label: "Room",
-                          child: CustomDropdownMenu<Room>(
-                              onChanged: () {
-                                List<Location> buffer = [];
-                                for(int i = 0; i < locationItems.length; i++) {
-                                  if(locationItems[i].roomId == roomDropController.getValue().id) {
-                                    buffer.add(locationItems[i]);
-                                  }
-                                }
-                                setState(() {
-                                  selectedLocations = [];
-                                  selectedLocations.addAll(buffer);
-                                });
-                              },
-                              controller: roomDropController, data: roomItems),
-                        ),
-                        CustomDropdownLabel(
-                          label: "Location",
-                          child: CustomDropdownMenu<Location>(
-                              controller: locationDropController,
-                              data: selectedLocations),
-                        ),
-                      ],
-                    ),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text("No"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      FlatButton(
-                        child: Text("Update"),
-                        onPressed: () {
-                          if (roomDropController.getValue() != null &&
-                              locationDropController.getValue() != null) {
-                            _FriendsController updateItemCon = new _FriendsController(
-                                colorTheme);
-                            updateItemCon.updateItem(
-                                user, locationDropController.getValue());
-                            RouteGenerator.onTapToFriends(context);
+          builder: (context, setState) {
+            return SingleChildScrollView(
+              child: AlertDialog(
+                title: Text("Update your settings"),
+                content: Column(
+                  children: <Widget>[
+                    CustomDropdownLabel(
+                      label: "Room",
+                      child: CustomDropdownMenu<Room>(
+                        onChanged: () {
+                          List<Location> buffer = [];
+                          for(int i = 0; i < locationItems.length; i++) {
+                            if(locationItems[i].roomId == roomDropController.getValue().id) {
+                              buffer.add(locationItems[i]);
+                            }
                           }
+                          setState(() {
+                            selectedLocations = [];
+                            selectedLocations.addAll(buffer);
+                          });
                         },
-                      ),
-                    ],
-                  )
-              );
-            }
+                        controller: roomDropController, data: roomItems),
+                    ),
+                    CustomDropdownLabel(
+                      label: "Location",
+                      child: CustomDropdownMenu<Location>(
+                        controller: locationDropController,
+                        data: selectedLocations),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("No"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Update"),
+                    onPressed: () {
+                      if (roomDropController.getValue() != null &&
+                          locationDropController.getValue() != null) {
+                        _FriendsController updateItemCon = new _FriendsController(
+                            colorTheme);
+                        updateItemCon.updateItem(
+                            user, locationDropController.getValue());
+                        RouteGenerator.onTapToFriends(context);
+                      }
+                    },
+                  ),
+                ],
+              )
+            );
+          }
         );
       }
     );

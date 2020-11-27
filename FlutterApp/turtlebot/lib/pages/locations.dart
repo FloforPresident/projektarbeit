@@ -139,7 +139,6 @@ class _LocationsState extends State<Locations> {
 
               if(widget.dropDownRoomId != null) {
                 updateLocations(roomItems[widget.dropDownRoomId].id);
-                dropController.setValue(roomItems[widget.dropDownRoomId]);
               }
 
               return Column(children: <Widget>[
@@ -208,10 +207,10 @@ class _LocationsState extends State<Locations> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    // IconButton(
-                    //   icon: Icon(Icons.create),
-                    //   onPressed: () {},
-                    // ),
+                    IconButton(
+                      icon: Icon(Icons.create),
+                      onPressed: () {},
+                    ),
                     IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () async {
