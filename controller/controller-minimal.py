@@ -24,7 +24,8 @@ async def ws_recieve(websocket, path):
 
 	#USER
 	if(action == 'ADD USER'):
-		response = db.addUser(data['location'], data['name'], data['password'])
+		db.addUser(data['name'], data['password'])
+		response = db.loginUser(data['name'], data['password'])
 	elif(action == 'LOGIN USER'):
 		response = db.loginUser(data['name'], data['password'])
 	elif(action == 'GET USERS'):

@@ -41,14 +41,12 @@ class database:
 		return json.dumps(data)
 		
 
-	def addUser(self, location_id, name, password):
+	def addUser(self, name, password):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO User (location_id, username, password) VALUES (%s, %s, %s)"
-		val = (location_id, name, password)
+		sql = "INSERT INTO User (username, password) VALUES (%s, %s)"
+		val = (name, password)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
-		
-		return 'success'
 	
 	def deleteUser(self, user_id):
 		mycursor = self.mydb.cursor()
@@ -58,7 +56,6 @@ class database:
 		print(mycursor.rowcount, "record(s) deleted")
 
 	def loginUser(self, name, password):
-
 		mycursor = self.mydb.cursor(prepared = True)
 		mycursor.execute("SELECT user_id, location_id, username FROM User WHERE username = '"+name+"' AND password = '" + password + "'")
 		myresult = mycursor.fetchall()

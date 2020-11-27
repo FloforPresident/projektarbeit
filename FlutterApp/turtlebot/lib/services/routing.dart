@@ -9,6 +9,8 @@ import 'package:turtlebot/pages/friends.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/pages/messages.dart';
 import 'package:turtlebot/pages/locations.dart';
+import 'package:turtlebot/pages/login.dart';
+
 
 class RouteGenerator {
   // _RouteGenerator() {}
@@ -17,6 +19,7 @@ class RouteGenerator {
   static const String RouteRoboCommands = '/roboCommands';
   static const String RouteManualControl = '/manControl';
   static const String RouteHome = '/';
+  static const String RouteLogin = '/login';
   static const String RouteLocations = '/locations';
   static const String RouteRooms = '/rooms';
   static const String RouteRobos = '/robos';
@@ -25,11 +28,14 @@ class RouteGenerator {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case RouteLogin:
+        {
+          return MaterialPageRoute(builder: (_) => Login());
+        }
       case RouteHome:
         {
           return MaterialPageRoute(builder: (_) => Home());
         }
-
       case RouteRobos:
         {
           return MaterialPageRoute(builder: (_) => Robos());
@@ -67,6 +73,10 @@ class RouteGenerator {
 
   static onTapToHome(BuildContext context) {
     Navigator.pushNamed(context, RouteGenerator.RouteHome);
+  }
+
+  static onTapToLogin(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteLogin);
   }
 
   static onTapToRoboStatus(BuildContext context) {
