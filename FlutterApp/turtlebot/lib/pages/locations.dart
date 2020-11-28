@@ -126,6 +126,32 @@ class _LocationsState extends State<Locations> {
 
               return Column(children: <Widget>[
                 Container(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text("CurrentLocation", style: TextStyle(
+
+                    ),),
+                  ),
+                ),
+                Card(
+                 elevation: 2,
+                 child: ListTile(
+                   title: Container(
+                     child: Align(
+                       alignment: Alignment.topLeft,
+                         child: Text("Here hast to be the current Location")),
+                   ),
+                   subtitle: Container(
+                       margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                       child: Text("Here has to be to room to the Location",
+                           style: TextStyle(
+                             color: Colors.indigo,
+                             fontSize: 15.0,
+                             fontWeight: FontWeight.bold,
+                           ))),
+                 ),
+                ),
+                Container(
                   margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
                   child: CustomDropdownLabel(
                     label: "Room",
