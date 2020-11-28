@@ -82,7 +82,7 @@ class _LoginState extends State<Login> {
               RaisedButton(
                 color: Colors.blueGrey,
                 child: Text(
-                  "Login",
+                  "Anmelden",
                   style: TextStyle(
                     color: secondaryTheme,
                   ),
@@ -96,7 +96,7 @@ class _LoginState extends State<Login> {
               RaisedButton(
                 color: Colors.grey,
                 child: Text(
-                  "Signup",
+                  "Registrieren",
                   style: TextStyle(
                     color: secondaryTheme,
                   ),
@@ -121,7 +121,7 @@ class _LoginState extends State<Login> {
           borderRadius:
             BorderRadius.all(
               Radius.circular(10.0))),
-        title: Text("SignUp"),
+        title: Text("Registrieren"),
         content: Builder(
           builder: (context) {
             var height = MediaQuery.of(context).size.height;
@@ -145,7 +145,7 @@ class _LoginState extends State<Login> {
         ),
         actions: <Widget>[
           FlatButton(
-            child: Text("Exit",
+            child: Text("Schließen",
                 style: TextStyle(color: secondaryTheme)
             ),
             color: Colors.grey,
@@ -154,7 +154,7 @@ class _LoginState extends State<Login> {
             },
           ),
           FlatButton(
-            child: Text("Next",
+            child: Text("Weiter",
                 style: TextStyle(color: secondaryTheme)
             ),
             color: Colors.blueGrey,
@@ -180,7 +180,7 @@ class _LoginState extends State<Login> {
           borderRadius:
           BorderRadius.all(
               Radius.circular(10.0))),
-        title: Text("SignUp"),
+        title: Text("Registrieren"),
         content: Builder(
             builder: (context) {
               var height = MediaQuery.of(context).size.height;
@@ -191,17 +191,18 @@ class _LoginState extends State<Login> {
                 width: width,
                 child: Column(
                   children: <Widget>[
+                    Text("Wir brauchen ein frontales Bild von dir, damit die Roboter dich automatisch wiedererkennen"),
                     Container(
                       margin: EdgeInsets.all(15),
                       child: RaisedButton(
-                        child: Text("Picture Upload"),
+                        child: Text("Bild schießen"),
                         color: colorTheme,
                         textColor: Colors.white,
                         onPressed: () {},
                       ),
                     ),
                     CheckboxListTile(
-                      title: Text("Picture uploaded"),
+                      title: Text("Bild hochgeladen"),
                       value: _uploadedImage,
                       onChanged: (bool value) {},
                     ),
@@ -212,7 +213,7 @@ class _LoginState extends State<Login> {
         ),
         actions: <Widget>[
           FlatButton(
-            child: Text("Exit",
+            child: Text("Schließen",
                 style: TextStyle(color: secondaryTheme)
             ),
             color: Colors.grey,
@@ -221,7 +222,7 @@ class _LoginState extends State<Login> {
             },
           ),
           FlatButton(
-            child: Text("Next",
+            child: Text("Weiter",
                 style: TextStyle(color: secondaryTheme)
             ),
             color: Colors.blueGrey,
@@ -249,7 +250,7 @@ class _LoginState extends State<Login> {
                 borderRadius:
                 BorderRadius.all(
                     Radius.circular(10.0))),
-              title: Text("Where can we find you?"),
+              title: Text("Registrieren"),
               content: Builder(
                 builder: (context) {
                   var height = MediaQuery.of(context).size.height;
@@ -260,8 +261,9 @@ class _LoginState extends State<Login> {
                     width: width,
                     child: Column(
                       children: <Widget>[
+                        Text("Hier kannst du den Raum und deinen Platz auswählen, in dem man dich in der Regel findet.\n\nDiese Einstellung kannst du auch später nochmal aktualisieren oder einen neuen Platz hinzufügen."),
                         CustomDropdownLabel(
-                          label: "Room",
+                          label: "Raum",
                           child: CustomDropdownMenu<Room>(
                             onChanged: () {
                               List<Location> buffer = [];
@@ -279,7 +281,7 @@ class _LoginState extends State<Login> {
                             controller: roomDropController, data: Login.roomItems),
                         ),
                         CustomDropdownLabel(
-                          label: "Location",
+                          label: "Platz",
                           child: CustomDropdownMenu<Location>(
                               controller: locationDropController,
                               data: selectedLocations),
@@ -291,7 +293,7 @@ class _LoginState extends State<Login> {
               ),
               actions: <Widget>[
                 FlatButton(
-                  child: Text("Exit",
+                  child: Text("Schließen",
                       style: TextStyle(color: secondaryTheme)
                   ),
                   color: Colors.grey,
@@ -300,7 +302,7 @@ class _LoginState extends State<Login> {
                   },
                 ),
                 FlatButton(
-                  child: Text("Signup",
+                  child: Text("Registrieren",
                       style: TextStyle(color: secondaryTheme)
                   ),
                   color: Colors.blueGrey,

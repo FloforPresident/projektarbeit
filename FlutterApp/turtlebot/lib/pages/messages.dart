@@ -69,7 +69,7 @@ class _MessageState extends State<Messages> {
             onPressed: () {
               RouteGenerator.onTapToHome(context);
             }),
-        title: Text("Send Message"),
+        title: Text("Nachricht senden"),
         backgroundColor: colorTheme,
       ),
       body: SingleChildScrollView(
@@ -96,7 +96,7 @@ class _MessageState extends State<Messages> {
                     }
 
                     return CustomDropdownLabel(
-                      label: "Recipient",
+                      label: "Empfänger",
                       child: CustomDropdownMenu<User>(
                         controller: dropController,
                         data: Messages.items,
@@ -113,7 +113,7 @@ class _MessageState extends State<Messages> {
                       flex: 5,
                       child: Container(
                           child: Text(
-                        "Subject:",
+                        "Betreff:",
                         style: TextStyle(fontSize: widget.fontsize),
                       )),
                     ),
@@ -138,7 +138,7 @@ class _MessageState extends State<Messages> {
                 child: Container(
                     margin: EdgeInsets.fromLTRB(
                         widget.leftStart, widget.topSpace, 0, 0),
-                    child: Text("Message: ",
+                    child: Text("Nachricht: ",
                         style: TextStyle(fontSize: widget.fontsize))),
               ),
               Container(
@@ -162,7 +162,7 @@ class _MessageState extends State<Messages> {
                       _showAlertDialog(false);
                     }
                   },
-                  child: Text("Send Message"),
+                  child: Text("Auftrag starten"),
                 ),
               )
             ],
@@ -177,10 +177,10 @@ class _MessageState extends State<Messages> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: success ? Text('Success'): Text('Error'),
+          title: success ? Text('Geklappt!'): Text('Fehler'),
           content: success ? Text(
-              'You started a Job for ${dropController.getValue().name}:\n\n${_message.text}'
-          ) : Text('Fill in all Fields'),
+              'Du hast den Auftrag für ${dropController.getValue().name} gestartet:\n\n${_message.text}'
+          ) : Text('Alle Felder ausfüllen'),
           actions: <Widget> [
               FlatButton(
                 onPressed: (){

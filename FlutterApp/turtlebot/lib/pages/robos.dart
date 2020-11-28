@@ -40,7 +40,7 @@ class _RoboState extends State<Robos>{
             onPressed: () {
               RouteGenerator.onTapToHome(context);
             }),
-        title: Text("Connected Robos"),
+        title: Text("Robos"),
         backgroundColor: colorTheme,
       ),
       body: StreamBuilder(
@@ -130,7 +130,7 @@ class _RoboState extends State<Robos>{
       context: context,
       builder: (context) => SingleChildScrollView(
         child: AlertDialog(
-          title: Text("Add new Robo"),
+          title: Text("Neuen Robo hinzufügen"),
           content: Column(
             children: <Widget>[
               TextField(
@@ -141,7 +141,7 @@ class _RoboState extends State<Robos>{
               ),
               TextField(
                 controller: _ip,
-                decoration: InputDecoration(labelText: "IP-Address"),
+                decoration: InputDecoration(labelText: "IP-Addresse"),
                 maxLines: null,
                 maxLength: 20,
               ),
@@ -149,13 +149,13 @@ class _RoboState extends State<Robos>{
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text("No"),
+              child: Text("Schließen"),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
             FlatButton(
-              child: Text("Yes"),
+              child: Text("Hinzufügen"),
               onPressed: () {
                 if (_name.text.isNotEmpty && _ip.text.isNotEmpty) {
                   widget.controller.addItem(_name.text, _ip.text);

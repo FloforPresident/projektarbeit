@@ -140,7 +140,7 @@ class _LocationsState extends State<Locations> {
       context: context,
       builder: (context) => SingleChildScrollView(
         child: AlertDialog(
-          title: Text("Add Location to $roomString"),
+          title: Text("Neuen Platz in $roomString hinzufügen"),
           content: Column(
             children: <Widget>[
               TextField(
@@ -149,17 +149,23 @@ class _LocationsState extends State<Locations> {
               ),
               TextField(
                 controller: xController,
-                decoration: InputDecoration(labelText: "X-Coordinate"),
+                decoration: InputDecoration(labelText: "X-Koordinate"),
               ),
               TextField(
                 controller: yController,
-                decoration: InputDecoration(labelText: "Y-Coordinate"),
+                decoration: InputDecoration(labelText: "Y-Koordinate"),
               ),
             ],
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text("Yes"),
+              child: Text("Schließen"),
+              onPressed: () {
+                RouteGenerator.onTapToLocations(context);
+              },
+            ),
+            FlatButton(
+              child: Text("Hinzufügen"),
               onPressed: () {
                 if (titleController.text.isNotEmpty &&
                     xController.text.isNotEmpty &&
@@ -323,16 +329,16 @@ class LocationController {
       barrierDismissible: true,
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Set $locationString as your active Location?"),
+        title: Text("Willst du $locationString zu deinem aktuellen Platz machen?"),
         actions: <Widget>[
           FlatButton(
-            child: Text("No"),
+            child: Text("Nein"),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
-            child: Text("Yes"),
+            child: Text("Ja"),
             onPressed: () {
               updateItem(MyApp.id, location);
               Navigator.of(context).pop();

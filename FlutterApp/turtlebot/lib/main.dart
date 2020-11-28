@@ -4,7 +4,6 @@ import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/services/navigation.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:turtlebot/services/socke_info.dart';
-import 'package:turtlebot/pages/login.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 
 
@@ -111,14 +110,14 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(MyApp.name != null
-            ? MyApp.name
+            ? "Hi " + MyApp.name
             : ''
           ),
           backgroundColor: Colors.white,
           actions: <Widget>[
             RaisedButton(
                 color: Colors.grey,
-                child: Text("Logout",
+                child: Text("Abmelden",
                   style: TextStyle(
                     color: Colors.white,
                   ),
