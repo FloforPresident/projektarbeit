@@ -81,6 +81,7 @@ class _LocationsState extends State<Locations> {
 
               if(widget.dropDownRoomId != null) {
                 widget.controller.updateLocations(context, Locations.roomItems[widget.dropDownRoomId].id);
+                dropController.setValue(Locations.roomItems[widget.dropDownRoomId]);
               }
 
               return Column(children: <Widget>[
@@ -157,12 +158,6 @@ class _LocationsState extends State<Locations> {
             ],
           ),
           actions: <Widget>[
-            FlatButton(
-              child: Text("No"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
             FlatButton(
               child: Text("Yes"),
               onPressed: () {

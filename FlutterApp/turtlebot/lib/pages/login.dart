@@ -116,42 +116,55 @@ class _LoginState extends State<Login> {
     showDialog(
       barrierDismissible: true,
       context: context,
-      builder: (context) => SingleChildScrollView(
-        child: AlertDialog(
-          title: Text("SignUp"),
-          content: Column(
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: "Name"),
-                controller: _name,
-                maxLines: null,
-                maxLength: 20,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius:
+            BorderRadius.all(
+              Radius.circular(10.0))),
+        title: Text("SignUp"),
+        content: Builder(
+          builder: (context) {
+            var height = MediaQuery.of(context).size.height;
+            var width = MediaQuery.of(context).size.width;
+
+            return Container(
+              height: height,
+              width: width,
+              child: Column(
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(labelText: "Name"),
+                    controller: _name,
+                    maxLines: null,
+                    maxLength: 20,
+                  ),
+                ],
               ),
-            ],
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Exit",
-                style: TextStyle(color: secondaryTheme)
-              ),
-              color: Colors.grey,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: Text("Next",
-              style: TextStyle(color: secondaryTheme)
-              ),
-              color: Colors.blueGrey,
-              onPressed: () {
-                if (_name.text.isNotEmpty) {
-                  pictureDialog(context);
-                }
-              },
-            ),
-          ],
+            );
+          }
         ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Exit",
+                style: TextStyle(color: secondaryTheme)
+            ),
+            color: Colors.grey,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          FlatButton(
+            child: Text("Next",
+                style: TextStyle(color: secondaryTheme)
+            ),
+            color: Colors.blueGrey,
+            onPressed: () {
+              if (_name.text.isNotEmpty) {
+                pictureDialog(context);
+              }
+            },
+          ),
+        ],
       ),
     );
   }
@@ -162,50 +175,63 @@ class _LoginState extends State<Login> {
     showDialog(
       barrierDismissible: true,
       context: context,
-      builder: (context) => SingleChildScrollView(
-        child: AlertDialog(
-          title: Text("SignUp"),
-          content: Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(15),
-                child: RaisedButton(
-                  child: Text("Picture Upload"),
-                  color: colorTheme,
-                  textColor: Colors.white,
-                  onPressed: () {},
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius:
+          BorderRadius.all(
+              Radius.circular(10.0))),
+        title: Text("SignUp"),
+        content: Builder(
+            builder: (context) {
+              var height = MediaQuery.of(context).size.height;
+              var width = MediaQuery.of(context).size.width;
+
+              return Container(
+                height: height,
+                width: width,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.all(15),
+                      child: RaisedButton(
+                        child: Text("Picture Upload"),
+                        color: colorTheme,
+                        textColor: Colors.white,
+                        onPressed: () {},
+                      ),
+                    ),
+                    CheckboxListTile(
+                      title: Text("Picture uploaded"),
+                      value: _uploadedImage,
+                      onChanged: (bool value) {},
+                    ),
+                  ],
                 ),
-              ),
-              CheckboxListTile(
-                title: Text("Picture uploaded"),
-                value: _uploadedImage,
-                onChanged: (bool value) {},
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Exit",
-                  style: TextStyle(color: secondaryTheme)
-              ),
-              color: Colors.grey,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: Text("Next",
-                  style: TextStyle(color: secondaryTheme)
-              ),
-              color: Colors.blueGrey,
-              onPressed: () {
-                if (_uploadedImage == true) {
-                  editItemDialog(context);
-                }
-              },
-            ),
-          ],
+              );
+            }
         ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Exit",
+                style: TextStyle(color: secondaryTheme)
+            ),
+            color: Colors.grey,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          FlatButton(
+            child: Text("Next",
+                style: TextStyle(color: secondaryTheme)
+            ),
+            color: Colors.blueGrey,
+            onPressed: () {
+              if (_uploadedImage == true) {
+                editItemDialog(context);
+              }
+            },
+          ),
+        ],
       ),
     );
   }
@@ -218,63 +244,76 @@ class _LoginState extends State<Login> {
         List<Location> selectedLocations = [];
         return StatefulBuilder(
           builder: (context, setState) {
-            return SingleChildScrollView(
-              child: AlertDialog(
-                title: Text("Where can we find you?"),
-                content: Column(
-                  children: <Widget>[
-                    CustomDropdownLabel(
-                      label: "Room",
-                      child: CustomDropdownMenu<Room>(
-                        onChanged: () {
-                          List<Location> buffer = [];
-                          for(int i = 0; i < Login.locationItems.length; i++) {
-                            if(Login.locationItems[i].roomId == roomDropController.getValue().id) {
-                              buffer.add(Login.locationItems[i]);
-                            }
-                          }
-                          setState(() {
-                            selectedLocations = [];
-                            selectedLocations.addAll(buffer);
-                          }
-                        );
-                      },
-                      controller: roomDropController, data: Login.roomItems),
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.all(
+                    Radius.circular(10.0))),
+              title: Text("Where can we find you?"),
+              content: Builder(
+                builder: (context) {
+                  var height = MediaQuery.of(context).size.height;
+                  var width = MediaQuery.of(context).size.width;
+
+                  return Container(
+                    height: height,
+                    width: width,
+                    child: Column(
+                      children: <Widget>[
+                        CustomDropdownLabel(
+                          label: "Room",
+                          child: CustomDropdownMenu<Room>(
+                            onChanged: () {
+                              List<Location> buffer = [];
+                              for(int i = 0; i < Login.locationItems.length; i++) {
+                                if(Login.locationItems[i].roomId == roomDropController.getValue().id) {
+                                  buffer.add(Login.locationItems[i]);
+                                }
+                              }
+                              setState(() {
+                                selectedLocations = [];
+                                selectedLocations.addAll(buffer);
+                              }
+                              );
+                            },
+                            controller: roomDropController, data: Login.roomItems),
+                        ),
+                        CustomDropdownLabel(
+                          label: "Location",
+                          child: CustomDropdownMenu<Location>(
+                              controller: locationDropController,
+                              data: selectedLocations),
+                        ),
+                      ],
                     ),
-                    CustomDropdownLabel(
-                      label: "Location",
-                      child: CustomDropdownMenu<Location>(
-                        controller: locationDropController,
-                        data: selectedLocations),
-                    ),
-                  ],
+                  );
+                }
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Exit",
+                      style: TextStyle(color: secondaryTheme)
+                  ),
+                  color: Colors.grey,
+                  onPressed: () {
+                    RouteGenerator.onTapToLogin(context);
+                  },
                 ),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text("Exit",
-                        style: TextStyle(color: secondaryTheme)
-                    ),
-                    color: Colors.grey,
-                    onPressed: () {
-                      RouteGenerator.onTapToLogin(context);
-                    },
+                FlatButton(
+                  child: Text("Signup",
+                      style: TextStyle(color: secondaryTheme)
                   ),
-                  FlatButton(
-                    child: Text("Signup",
-                        style: TextStyle(color: secondaryTheme)
-                    ),
-                    color: Colors.blueGrey,
-                    onPressed: () async {
-                      if (locationDropController.getValue() != null) {
-                        widget.controller.addUser(context, _name.text, locationDropController.getValue().id);
-                      }
-                      else {
-                        widget.controller.addUser(context, _name.text, null);
-                      }
-                    },
-                  ),
-                ],
-              )
+                  color: Colors.blueGrey,
+                  onPressed: () async {
+                    if (locationDropController.getValue() != null) {
+                      widget.controller.addUser(context, _name.text, locationDropController.getValue().id);
+                    }
+                    else {
+                      widget.controller.addUser(context, _name.text, null);
+                    }
+                  },
+                ),
+              ],
             );
           }
         );
