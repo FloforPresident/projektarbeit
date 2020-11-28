@@ -24,10 +24,10 @@ async def ws_recieve(websocket, path):
 
 	#USER
 	if(action == 'ADD USER'):
-		db.addUser(data['location_id'], data['name'], data['password'])
-		response = db.loginUser(data['name'], data['password'])
+		db.addUser(data['location_id'], data['name'])
+		response = db.loginUser(data['name'])
 	elif(action == 'LOGIN USER'):
-		response = db.loginUser(data['name'], data['password'])
+		response = db.loginUser(data['name'])
 	elif(action == 'GET USERS'):
 		response = db.getAllUsers()
 	#ROOM

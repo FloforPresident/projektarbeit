@@ -14,7 +14,6 @@ class Login extends StatefulWidget {
 
   static List<Room> roomItems = [];
   static List<Location> locationItems = [];
-  static User sessionUser;
 
   Login({Key key}) : super(key: key);
 
@@ -32,7 +31,6 @@ class _LoginState extends State<Login> {
   Color secondaryTheme = Colors.white;
 
   TextEditingController _name = new TextEditingController();
-  TextEditingController _password = new TextEditingController();
   ControllerCustomDropdown roomDropController = ControllerCustomDropdown<Room>();
   ControllerCustomDropdown locationDropController = ControllerCustomDropdown<Location>();
 
@@ -81,20 +79,6 @@ class _LoginState extends State<Login> {
                   maxLines: null,
                 )
               ),
-              Container(
-                padding:
-                    EdgeInsets.fromLTRB(_leftStart, _topSpace, _rightEnd, 40),
-                child: TextFormField(
-                  controller: _password,
-                  decoration: InputDecoration(
-                      labelText: "Password",
-                      labelStyle: TextStyle(
-                        color: colorTheme,
-                      )),
-                  maxLength: 20,
-                  maxLines: null,
-                ),
-              ),
               RaisedButton(
                 color: Colors.blueGrey,
                 child: Text(
@@ -103,10 +87,9 @@ class _LoginState extends State<Login> {
                     color: secondaryTheme,
                   ),
                 ),
-                onPressed: () {
-                  if(_name.text.isNotEmpty && _password.text.isNotEmpty) {
-                    widget.controller.loginUser(context, _name.text, _password.text);
-                    login();
+                onPressed: () async {
+                  if(_name.text.isNotEmpty) {
+                    widget.controller.loginUser(context, _name.text);
                   }
                 },
               ),
@@ -144,12 +127,6 @@ class _LoginState extends State<Login> {
                 maxLines: null,
                 maxLength: 20,
               ),
-              TextField(
-                decoration: InputDecoration(labelText: "Password"),
-                controller: _password,
-                maxLines: null,
-                maxLength: 20,
-              )
             ],
           ),
           actions: <Widget>[
@@ -168,8 +145,7 @@ class _LoginState extends State<Login> {
               ),
               color: Colors.blueGrey,
               onPressed: () {
-                if (_name.text.isNotEmpty &&
-                    _password.text.isNotEmpty) {
+                if (_name.text.isNotEmpty) {
                   pictureDialog(context);
                 }
               },
@@ -288,14 +264,13 @@ class _LoginState extends State<Login> {
                         style: TextStyle(color: secondaryTheme)
                     ),
                     color: Colors.blueGrey,
-                    onPressed: () {
+                    onPressed: () async {
                       if (locationDropController.getValue() != null) {
-                        widget.controller.addUser(context, _name.text, _password.text, locationDropController.getValue().id);
+                        widget.controller.addUser(context, _name.text, locationDropController.getValue().id);
                       }
                       else {
-                        widget.controller.addUser(context, _name.text, _password.text, null);
+                        widget.controller.addUser(context, _name.text, null);
                       }
-                      login();
                     },
                   ),
                 ],
@@ -305,20 +280,6 @@ class _LoginState extends State<Login> {
         );
       }
     );
-  }
-
-  // Shared Preference
-  Future<Null> login() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('id', Login.sessionUser.id);
-    prefs.setString('name', Login.sessionUser.name);
-
-    setState(() {
-      MyApp.id = Login.sessionUser.id;
-      MyApp.name = Login.sessionUser.name;
-    });
-
-    RouteGenerator.onTapToHome(context);
   }
 }
 
@@ -358,17 +319,17 @@ class LoginController {
     });
   }
 
-  void addUser(BuildContext context, String name, String password, int locationID) {
+  void addUser(BuildContext context, String name, int locationID) {
     WebSocketChannel channel = MyApp.con();
     String data =
-        '{"action": "ADD USER", "name": "$name", "password": "$password", "location_id": $locationID}';
+        '{"action": "ADD USER", "name": "$name", "location_id": $locationID}';
     channel.sink.add(data);
 
     channel.stream.listen((json) async {
       if (json != '') {
         String jsonDataString = json.toString();
 
-        loginHelper(jsonDataString);
+        loginHelper(context, jsonDataString);
       }
       else {
         RouteGenerator.onTapToLogin(context);
@@ -376,10 +337,10 @@ class LoginController {
     });
   }
 
-  void loginUser(BuildContext context, String name, String password) {
+  void loginUser(BuildContext context, String name) {
     WebSocketChannel channel = MyApp.con();
     String data =
-        '{"action": "LOGIN USER", "name": "$name", "password": "$password"}';
+        '{"action": "LOGIN USER", "name": "$name"}';
     channel.sink.add(data);
 
 
@@ -387,7 +348,7 @@ class LoginController {
       if (json != '') {
         String jsonDataString = json.toString();
 
-        loginHelper(jsonDataString);
+        loginHelper(context, jsonDataString);
       }
       else {
         RouteGenerator.onTapToLogin(context);
@@ -395,10 +356,12 @@ class LoginController {
     });
   }
 
-  void loginHelper(String jsonDataString) {
+  void loginHelper(BuildContext context, String jsonDataString) {
     final jsonData = jsonDecode(jsonDataString);
 
-    Login.sessionUser = new User(jsonData['user_id'],
+    User sessionUser = new User(jsonData['user_id'],
         jsonData['location_id'], jsonData['username']);
+
+    RouteGenerator.onTapToHome(context, sessionUser: sessionUser);
   }
 }
