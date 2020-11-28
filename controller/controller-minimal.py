@@ -34,7 +34,8 @@ async def ws_recieve(websocket, path):
 	elif(action == 'GET ROOMS'):
 		response = db.getAllRooms()
 	elif(action == 'ADD ROOM'):
-		db.addRoom(data['roboID'], data['name'], None, None)
+		db.addRoom(data['roboID'], data['name'])
+		response = db.getRoom(data['name'])
 	elif(action == 'DELETE ROOM'):
 		db.deleteRoom(data['id'])
 	#ROBO

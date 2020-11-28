@@ -382,7 +382,6 @@ class LoginController {
         '{"action": "LOGIN USER", "name": "$name"}';
     channel.sink.add(data);
 
-
     channel.stream.listen((json) async {
       if (json != '') {
         String jsonDataString = json.toString();

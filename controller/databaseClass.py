@@ -317,10 +317,10 @@ class database:
 
 		return json.dumps(data)
 
-	def addRoom(self, robo_id, roomName, pgm, yaml):
+	def addRoom(self, robo_id, roomName):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO Room (robo_id, title, pgm, yaml) VALUES (%s, %s, %s, %s)"
-		val = (robo_id, roomName, pgm, yaml)
+		sql = "INSERT INTO Room (robo_id, title) VALUES (%s, %s)"
+		val = (robo_id, roomName)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
 
@@ -334,9 +334,13 @@ class database:
 		mycursor = self.mydb.cursor(prepared = True)
 		mycursor.execute("SELECT * FROM Room  WHERE title = '"+roomName+"'")
 		myresult = mycursor.fetchone()
-		for x in myresult:
-			print(x)
-		return myresult
+
+		data = {
+			"room_id": myresult[0],
+			"robo_id": myresult[1],
+			"title": myresult[2].decode("utf-8")
+		}
+		return json.dumps(data)
 
 
 	#::::LOCATION::::

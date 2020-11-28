@@ -16,6 +16,7 @@ class Rooms extends StatefulWidget {
 
   static List<Room> items = [];
   static List<Robo> roboItems = [];
+  static Room newRoom;
 
   Rooms({Key key}) : super(key: key);
 
@@ -158,7 +159,7 @@ class _RoomState extends State<Rooms> {
           ),
           subtitle: Container(
               margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Text(roboName != '' ? roboName : 'No Robo selected',
+              child: Text(roboName != '' ? roboName : 'Kein Roboter ausgewählt',
                   style: TextStyle(
                     color: Colors.indigo,
                     fontSize: 15.0,
@@ -192,9 +193,9 @@ class _RoomState extends State<Rooms> {
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("No"),
+                    child: Text("Schließen"),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      RouteGenerator.onTapToRooms(context);
                     },
                   ),
                   FlatButton(
@@ -217,62 +218,130 @@ class _RoomState extends State<Rooms> {
 
   void addItemDialog(BuildContext context) {
     TextEditingController controller = TextEditingController();
-    bool _roomScanned = true;
 
     showDialog(
       barrierDismissible: true,
       context: context,
-      builder: (context) => SingleChildScrollView(
-        child: AlertDialog(
-          title: Text("Add new Room"),
-          content: Column(
-            children: <Widget>[
-              TextField(
-                controller: controller,
-                decoration: InputDecoration(labelText: "Name"),
-              ),
-              CustomDropdownLabel(
-                label: "Robo",
-                child: CustomDropdownMenu<Robo>(
-                    controller: dropController, data: Rooms.roboItems),
-              ),
-              Container(
-                margin: EdgeInsets.all(15),
-                child: RaisedButton(
-                  child: Text("StartRoomScan"),
-                  color: colorTheme,
-                  textColor: Colors.white,
-                  onPressed: () {},
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius:
+              BorderRadius.all(
+                  Radius.circular(10.0))),
+          title: Text("Neuen Raum hinzufügen"),
+          content: Builder(
+            builder: (context) {
+              var height = MediaQuery.of(context).size.height;
+              var width = MediaQuery.of(context).size.width;
+
+              return Container(
+                height: height,
+                width: width,
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      controller: controller,
+                      decoration: InputDecoration(labelText: "Name"),
+                    ),
+                    CustomDropdownLabel(
+                      label: "Robo",
+                      child: CustomDropdownMenu<Robo>(
+                          controller: dropController, data: Rooms.roboItems),
+                    ),
+                  ],
                 ),
-              ),
-              CheckboxListTile(
-                title: Text("RoomScanned"),
-                value: _roomScanned,
-                onChanged: (bool value) {},
-              )
-            ],
+              );
+            }
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text("No"),
+              child: Text("Schließen"),
               onPressed: () {
-                Navigator.of(context).pop();
+                RouteGenerator.onTapToRooms(context);
               },
             ),
             FlatButton(
-              child: Text("Yes"),
+              child: Text("Weiter"),
               onPressed: () {
-                if (controller.text.isNotEmpty &&
-                    _roomScanned == true &&
-                    dropController.getValue() != null) {
+                if (controller.text.isNotEmpty && dropController.getValue() != null) {
                   widget.controller.addItem(dropController.getValue().id, controller.text);
-                  RouteGenerator.onTapToRooms(context);
+
+                  scanMapDialog(context);
                 }
               },
             ),
           ],
-        ),
-      ),
+        );
+      }
+    );
+  }
+
+  void scanMapDialog(BuildContext context) {
+    bool _startScan = false;
+
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.all(
+                    Radius.circular(10.0))),
+            title: Text("Raum scannen"),
+            content: Builder(
+                builder: (context) {
+                  var height = MediaQuery.of(context).size.height;
+                  var width = MediaQuery.of(context).size.width;
+
+                  return Container(
+                    height: height,
+                    width: width,
+                    child: Column(
+                      children: <Widget>[
+                        Text("Dieser Vorgang kann einige Zeit dauern, sobald er abgeschlossen ist wird der Raum abgehakt in der Raum-Liste erscheinen."),
+                        Container(
+                          margin: EdgeInsets.all(15),
+                          child: RaisedButton(
+                            child: Text("Start"),
+                            color: colorTheme,
+                            textColor: Colors.white,
+                            onPressed: () {
+                              setState(() {
+                                _startScan = true;
+                              });
+                              widget.controller.startScan();
+                            },
+                          ),
+                        ),
+                        CheckboxListTile(
+                          title: Text("Scan gestartet"),
+                          value: _startScan,
+                          onChanged: (bool value) {},
+                        )
+                      ],
+                    ),
+                  );
+                }
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Schließen"),
+                onPressed: () {
+                  RouteGenerator.onTapToRooms(context);
+                },
+              ),
+              FlatButton(
+                child: Text("Fertig"),
+                onPressed: () {
+                  if (_startScan) {
+                    RouteGenerator.onTapToRooms(context);
+                  }
+                },
+              ),
+            ],
+          );
+        }
     );
   }
 }
@@ -316,12 +385,28 @@ class RoomController {
     String data =
         '{"action": "ADD ROOM", "roboID": "$roboID", "name": "$name"}';
     channel.sink.add(data);
+
+    channel.stream.listen((json) async {
+      if (json != '') {
+        String jsonDataString = json.toString();
+        final jsonData = jsonDecode(jsonDataString);
+
+        Rooms.newRoom = new Room(jsonData['room_id'], jsonData['robo_id'], jsonData['title']);
+      }
+    });
   }
 
   void updateItem(Room room, Robo robo) {
     WebSocketChannel channel = MyApp.con();
     String data =
         '{"action": "UPDATE ROBO", "room_id": ${room.id}, "robo_id": ${robo.id}}';
+    channel.sink.add(data);
+  }
+
+  void startScan() {
+    WebSocketChannel channel = MyApp.con();
+    String data =
+        '{"action": "SCAN ROOM", "room_id" = ${Rooms.newRoom.id}';
     channel.sink.add(data);
   }
 }
