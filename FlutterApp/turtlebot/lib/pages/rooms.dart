@@ -103,8 +103,10 @@ class _RoomState extends State<Rooms> {
         roboName = Rooms.roboItems[i].name;
       }
     }
-    Icon _selected =
-        (true) ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank);
+    bool _selected = false;
+    if(item.scanned == 1){
+      _selected = true;
+    }
 
     return SizeTransition(
       sizeFactor: animation,
@@ -125,7 +127,7 @@ class _RoomState extends State<Rooms> {
                 flex: 1,
                 child: Align(
                   child: Padding(
-                    child: _selected,
+                    child: _selected ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank),
                     padding: EdgeInsets.fromLTRB(5, 0, 15, 0),
                   ),
                   alignment: Alignment.centerRight,
@@ -289,8 +291,8 @@ class _RoomState extends State<Rooms> {
                 BorderRadius.all(
                     Radius.circular(10.0))),
             title: Text("Raum scannen"),
-            content: Builder(
-                builder: (context) {
+            content: StatefulBuilder(
+                builder: (context, setState) {
                   var height = MediaQuery.of(context).size.height;
                   var width = MediaQuery.of(context).size.width;
 
@@ -364,7 +366,7 @@ class RoomController {
 
     for (int i = 0; i < rooms.length; i++) {
       Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-          rooms[i]['title']);
+          rooms[i]['title'], rooms[i]['scanned']);
       Rooms.items.add(r);
     }
     for (int i = 0; i < robos.length; i++) {
@@ -391,7 +393,7 @@ class RoomController {
         String jsonDataString = json.toString();
         final jsonData = jsonDecode(jsonDataString);
 
-        Rooms.newRoom = new Room(jsonData['room_id'], jsonData['robo_id'], jsonData['title']);
+        Rooms.newRoom = new Room(jsonData['room_id'], jsonData['robo_id'], jsonData['title'], jsonData['scanned']);
       }
     });
   }
@@ -406,7 +408,7 @@ class RoomController {
   void startScan() {
     WebSocketChannel channel = MyApp.con();
     String data =
-        '{"action": "SCAN ROOM", "room_id" = ${Rooms.newRoom.id}';
+        '{"action": "SCAN ROOM", "room_id": ${Rooms.newRoom.id}}';
     channel.sink.add(data);
   }
 }

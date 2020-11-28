@@ -294,7 +294,8 @@ class database:
 				"robo_id": rooms[i][1],
 				"title": rooms[i][2],
 				"pgm": rooms[i][3],
-				"yaml": rooms[i][4]
+				"yaml": rooms[i][4],
+				"scanned": rooms[i][5]
 			}
 			data["rooms"].append(dataEntity)
 

@@ -210,7 +210,7 @@ class LocationController {
     }
     for (int i = 0; i < rooms.length; i++) {
       Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-          rooms[i]['title']);
+          rooms[i]['title'], rooms[i]['scanned']);
       Locations.roomItems.add(r);
     }
   }
