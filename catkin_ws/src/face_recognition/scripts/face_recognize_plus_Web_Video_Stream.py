@@ -92,7 +92,7 @@ def face_recognition_(cv_image):
 
 
 	# Resize frame of video to 1/4 size for faster face recognition processing
-	small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
+	small_frame = cv2.resize(cv_image, (0, 0), fx=0.25, fy=0.25)
 
 	#Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
 	rgb_small_frame = small_frame[:, :, ::-1]
@@ -167,7 +167,7 @@ if __name__=='__main__':
 #	try:
 		rospy.init_node('face_recognition', anonymous=True)
 		
-		pub = rospy.Publisher('Video_Stream_Topic', Image, queue_size=10)
+		pub = rospy.Publisher('Face_Recognition_Stream', Image, queue_size=10)
 		
 
 		
@@ -185,8 +185,8 @@ if __name__=='__main__':
 
 
 ######   Video Stream of Raspi Cam works hopefully		
-		while True:
-			ic = image_converter()
+#		while True:
+		ic = image_converter()
 		
 	
 
