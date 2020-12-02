@@ -33,9 +33,10 @@ class Room implements DatabaseObject {
   int _id;
   int _roboID;
   String _name;
+  int _scanned;
 //  List<Robo> _whoHasThisMap; //
 
-  Room(this._id, this._roboID, this._name);
+  Room(this._id, this._roboID, this._name, this._scanned);
 
   @override
   get id => _id;
@@ -44,6 +45,8 @@ class Room implements DatabaseObject {
 
   @override
   get name => _name;
+
+  get scanned => _scanned;
 }
 
 class User implements DatabaseObject {

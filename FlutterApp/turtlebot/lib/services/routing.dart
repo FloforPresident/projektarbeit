@@ -34,7 +34,7 @@ class RouteGenerator {
         }
       case RouteHome:
         {
-          return MaterialPageRoute(builder: (_) => Home());
+          return MaterialPageRoute(builder: (_) => Home(settings.arguments));
         }
       case RouteRobos:
         {
@@ -71,8 +71,8 @@ class RouteGenerator {
     }
   }
 
-  static onTapToHome(BuildContext context) {
-    Navigator.pushNamed(context, RouteGenerator.RouteHome);
+  static onTapToHome(BuildContext context, {User sessionUser}) {
+    Navigator.pushNamed(context, RouteGenerator.RouteHome, arguments: sessionUser);
   }
 
   static onTapToLogin(BuildContext context) {

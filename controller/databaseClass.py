@@ -41,10 +41,10 @@ class database:
 		return json.dumps(data)
 		
 
-	def addUser(self, location_id, name, password):
+	def addUser(self, location_id, name):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO User (location_id, username, password) VALUES (%s, %s, %s)"
-		val = (location_id, name, password)
+		sql = "INSERT INTO User (location_id, username) VALUES (%s, %s)"
+		val = (location_id, name)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
 	
@@ -55,9 +55,9 @@ class database:
 		self.mydb.commit()
 		print(mycursor.rowcount, "record(s) deleted")
 
-	def loginUser(self, name, password):
+	def loginUser(self, name):
 		mycursor = self.mydb.cursor(prepared = True)
-		mycursor.execute("SELECT user_id, location_id, username FROM User WHERE username = '"+name+"' AND password = '" + password + "'")
+		mycursor.execute("SELECT user_id, location_id, username FROM User WHERE username = '"+name+"'")
 		myresult = mycursor.fetchall()
 
 		if(myresult):
@@ -294,7 +294,8 @@ class database:
 				"robo_id": rooms[i][1],
 				"title": rooms[i][2],
 				"pgm": rooms[i][3],
-				"yaml": rooms[i][4]
+				"yaml": rooms[i][4],
+				"scanned": rooms[i][5]
 			}
 			data["rooms"].append(dataEntity)
 
@@ -317,10 +318,10 @@ class database:
 
 		return json.dumps(data)
 
-	def addRoom(self, robo_id, roomName, pgm, yaml):
+	def addRoom(self, robo_id, roomName):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO Room (robo_id, title, pgm, yaml) VALUES (%s, %s, %s, %s)"
-		val = (robo_id, roomName, pgm, yaml)
+		sql = "INSERT INTO Room (robo_id, title) VALUES (%s, %s)"
+		val = (robo_id, roomName)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
 
@@ -334,9 +335,13 @@ class database:
 		mycursor = self.mydb.cursor(prepared = True)
 		mycursor.execute("SELECT * FROM Room  WHERE title = '"+roomName+"'")
 		myresult = mycursor.fetchone()
-		for x in myresult:
-			print(x)
-		return myresult
+
+		data = {
+			"room_id": myresult[0],
+			"robo_id": myresult[1],
+			"title": myresult[2].decode("utf-8")
+		}
+		return json.dumps(data)
 
 
 	#::::LOCATION::::

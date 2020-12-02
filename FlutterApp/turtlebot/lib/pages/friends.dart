@@ -48,7 +48,7 @@ class _FriendState extends State<Friends> {
             onPressed: () {
               RouteGenerator.onTapToHome(context);
             }),
-        title: Text("Robo Friends"),
+        title: Text("Friends"),
         backgroundColor: colorTheme,
       ),
       body: StreamBuilder(
@@ -170,11 +170,11 @@ class _FriendState extends State<Friends> {
           builder: (context, setState) {
             return SingleChildScrollView(
               child: AlertDialog(
-                title: Text("Update your settings"),
+                title: Text("Deinen aktuellen Platz ändern"),
                 content: Column(
                   children: <Widget>[
                     CustomDropdownLabel(
-                      label: "Room",
+                      label: "Raum",
                       child: CustomDropdownMenu<Room>(
                         onChanged: () {
                           List<Location> buffer = [];
@@ -191,7 +191,7 @@ class _FriendState extends State<Friends> {
                         controller: roomDropController, data: Friends.roomItems),
                     ),
                     CustomDropdownLabel(
-                      label: "Location",
+                      label: "Platz",
                       child: CustomDropdownMenu<Location>(
                         controller: locationDropController,
                         data: selectedLocations),
@@ -200,13 +200,13 @@ class _FriendState extends State<Friends> {
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("No"),
+                    child: Text("Schließen"),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   FlatButton(
-                    child: Text("Update"),
+                    child: Text("Ändern"),
                     onPressed: () {
                       if (roomDropController.getValue() != null &&
                           locationDropController.getValue() != null) {
@@ -259,7 +259,7 @@ class FriendController {
     }
     for (int i = 0; i < rooms.length; i++) {
       Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-          rooms[i]['title']);
+          rooms[i]['title'], rooms[i]['scanned']);
       Friends.roomItems.add(r);
     }
   }

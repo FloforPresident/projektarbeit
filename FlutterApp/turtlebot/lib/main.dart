@@ -4,7 +4,6 @@ import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/services/navigation.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:turtlebot/services/socke_info.dart';
-import 'package:turtlebot/pages/login.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 
 
@@ -42,6 +41,10 @@ class MyApp extends StatelessWidget {
 }
 
 class Home extends StatefulWidget{
+  final User sessionUser;
+
+  Home(this.sessionUser);
+
   @override
   _HomeState createState() {
     return _HomeState();
@@ -54,7 +57,12 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    autoLogin();
+    if(widget.sessionUser != null) {
+      login();
+    }
+    else {
+      autoLogin();
+    }
   }
 
   //Shared Preferences
@@ -71,6 +79,18 @@ class _HomeState extends State<Home> {
     } else{
       RouteGenerator.onTapToLogin(context);
     }
+  }
+
+  // Shared Preference
+  Future<Null> login() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('id', widget.sessionUser.id);
+    prefs.setString('name', widget.sessionUser.name);
+
+    setState(() {
+      MyApp.id = widget.sessionUser.id;
+      MyApp.name = widget.sessionUser.name;
+    });
   }
 
   Future<Null> logout() async {
@@ -90,14 +110,14 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(MyApp.name != null
-            ? MyApp.name
+            ? "Hi " + MyApp.name
             : ''
           ),
           backgroundColor: Colors.white,
           actions: <Widget>[
             RaisedButton(
                 color: Colors.grey,
-                child: Text("Logout",
+                child: Text("Abmelden",
                   style: TextStyle(
                     color: Colors.white,
                   ),

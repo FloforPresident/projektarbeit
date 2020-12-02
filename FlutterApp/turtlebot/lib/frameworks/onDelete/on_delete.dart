@@ -7,14 +7,14 @@ class OnDelete {
      return await showDialog(
        context: context,
       builder: (context) => AlertDialog(
-        title: Text("Sure to delete ?"),
+        title: Text("Bist du sicher?"),
         actions: <Widget>[
           FlatButton(
-            child: Text("No"),
+            child: Text("Nein"),
             onPressed: () => Navigator.of(context).pop(false),
           ),
           FlatButton(
-              child: Text("Yes"),
+              child: Text("Löschen"),
               onPressed: () => Navigator.of(context).pop(true))
         ],
       ),

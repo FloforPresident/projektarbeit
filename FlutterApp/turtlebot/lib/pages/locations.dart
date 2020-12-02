@@ -81,6 +81,7 @@ class _LocationsState extends State<Locations> {
 
               if(widget.dropDownRoomId != null) {
                 widget.controller.updateLocations(context, Locations.roomItems[widget.dropDownRoomId].id);
+                dropController.setValue(Locations.roomItems[widget.dropDownRoomId]);
               }
 
               return Column(children: <Widget>[
@@ -139,7 +140,7 @@ class _LocationsState extends State<Locations> {
       context: context,
       builder: (context) => SingleChildScrollView(
         child: AlertDialog(
-          title: Text("Add Location to $roomString"),
+          title: Text("Neuen Platz in $roomString hinzufügen"),
           content: Column(
             children: <Widget>[
               TextField(
@@ -148,23 +149,23 @@ class _LocationsState extends State<Locations> {
               ),
               TextField(
                 controller: xController,
-                decoration: InputDecoration(labelText: "X-Coordinate"),
+                decoration: InputDecoration(labelText: "X-Koordinate"),
               ),
               TextField(
                 controller: yController,
-                decoration: InputDecoration(labelText: "Y-Coordinate"),
+                decoration: InputDecoration(labelText: "Y-Koordinate"),
               ),
             ],
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text("No"),
+              child: Text("Schließen"),
               onPressed: () {
-                Navigator.of(context).pop();
+                RouteGenerator.onTapToLocations(context);
               },
             ),
             FlatButton(
-              child: Text("Yes"),
+              child: Text("Hinzufügen"),
               onPressed: () {
                 if (titleController.text.isNotEmpty &&
                     xController.text.isNotEmpty &&
@@ -215,7 +216,7 @@ class LocationController {
     }
     for (int i = 0; i < rooms.length; i++) {
       Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-          rooms[i]['title']);
+          rooms[i]['title'], rooms[i]['scanned']);
       Locations.roomItems.add(r);
     }
   }
@@ -328,16 +329,16 @@ class LocationController {
       barrierDismissible: true,
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Set $locationString as your active Location?"),
+        title: Text("Willst du $locationString zu deinem aktuellen Platz machen?"),
         actions: <Widget>[
           FlatButton(
-            child: Text("No"),
+            child: Text("Nein"),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
-            child: Text("Yes"),
+            child: Text("Ja"),
             onPressed: () {
               updateItem(MyApp.id, location);
               Navigator.of(context).pop();
