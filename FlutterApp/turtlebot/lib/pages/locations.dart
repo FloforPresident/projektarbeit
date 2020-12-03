@@ -44,7 +44,7 @@ class _LocationsState extends State<Locations> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final int roomID = prefs.getInt('room_id');
 
-    if(roomID != null) {
+    if (roomID != null) {
       setState(() {
         widget.dropDownRoomId = roomID;
       });
@@ -76,68 +76,102 @@ class _LocationsState extends State<Locations> {
           stream: widget.channel.stream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-
               widget.controller.setData(snapshot.data);
 
-              if(widget.dropDownRoomId != null) {
-                widget.controller.updateLocations(context, Locations.roomItems[widget.dropDownRoomId].id);
-                dropController.setValue(Locations.roomItems[widget.dropDownRoomId]);
+              if (widget.dropDownRoomId != null) {
+                widget.controller.updateLocations(
+                    context, Locations.roomItems[widget.dropDownRoomId].id);
+                dropController
+                    .setValue(Locations.roomItems[widget.dropDownRoomId]);
               }
 
-              return Column(children: <Widget>[
-                Container(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("CurrentLocation", style: TextStyle(
-
-                    ),),
-                  ),
-                ),
-                Card(
-                 elevation: 2,
-                 child: ListTile(
-                   title: Container(
-                     child: Align(
-                       alignment: Alignment.topLeft,
-                         child: Text("Here hast to be the current Location")),
-                   ),
-                   subtitle: Container(
-                       margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                       child: Text("Here has to be to room to the Location",
-                           style: TextStyle(
-                             color: Colors.indigo,
-                             fontSize: 15.0,
-                             fontWeight: FontWeight.bold,
-                           ))),
-                 ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                  child: CustomDropdownLabel(
-                    label: "Room",
-                    child: CustomDropdownMenu<Room>(
-                      onChanged: () async {
-                        final SharedPreferences prefs = await SharedPreferences.getInstance();
-                        prefs.setInt('room_id', dropController.getCurrentIndex());
-
-                        widget.controller.updateLocations(context, dropController.getValue().id);
-                      },
-                      startValueId: widget.dropDownRoomId,
-                      controller: dropController,
-                      data: Locations.roomItems,
+              return SingleChildScrollView(
+                child: Column(children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(6),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          offset: Offset(4,7),
+                          spreadRadius: 5,
+                          blurRadius: 3,
+                        )
+                      ]
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(15, 30, 0, 15),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("CurrentLocation",
+                                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.white)),
+                          ),
+                        ),                  
+                        Card(
+                          margin: EdgeInsets.fromLTRB(10, 10, 10, 20),
+                          elevation: 2,
+                          child: ListTile(
+                            title: Container(
+                              child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child:
+                                  Text("Here hast to be the current Location")),
+                            ),
+                            subtitle: Container(
+                                margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                child: Text("Here has to be to room to the Location",
+                                    style: TextStyle(
+                                      color: Colors.indigo,
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                    ))),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                AnimatedList(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  key: widget.controller.key,
-                  initialItemCount: Locations.activeItems.length,
-                  itemBuilder: (context, index, animation) {
-                    return widget.controller.buildItem(context, Locations.activeItems[index], animation, index);
-                  },
-                )
-              ]);
+                  Container(
+                      margin: EdgeInsets.fromLTRB(15, 30, 0, 15),
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Verfügbare Locations",
+                              style: TextStyle(fontSize: 20.0)))),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(15, 15, 0, 15),
+                    child: CustomDropdownLabel(
+                      label: "Room",
+                      child: CustomDropdownMenu<Room>(
+                        onChanged: () async {
+                          final SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.setInt(
+                              'room_id', dropController.getCurrentIndex());
+
+                          widget.controller.updateLocations(
+                              context, dropController.getValue().id);
+                        },
+                        startValueId: widget.dropDownRoomId,
+                        controller: dropController,
+                        data: Locations.roomItems,
+                      ),
+                    ),
+                  ),
+                  AnimatedList(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    key: widget.controller.key,
+                    initialItemCount: Locations.activeItems.length,
+                    itemBuilder: (context, index, animation) {
+                      return widget.controller.buildItem(context,
+                          Locations.activeItems[index], animation, index);
+                    },
+                  )
+                ]),
+              );
             } else {
               return Text('');
             }
@@ -262,7 +296,8 @@ class LocationController {
 
   void updateItem(int userID, Location location) {
     WebSocketChannel channel = MyApp.con();
-    String data = '{"action": "UPDATE FRIEND", "user_id": "$userID", "location_id": ${location.id}}';
+    String data =
+        '{"action": "UPDATE FRIEND", "user_id": "$userID", "location_id": ${location.id}}';
     channel.sink.add(data);
   }
 
@@ -270,30 +305,31 @@ class LocationController {
     bool inserted = false;
     int indexRemoveableItem = 0;
 
-    for(int i = 0; i < Locations.items.length; i++) {
-      for(int y = 0; y < Locations.activeItems.length; y++) {
-        if(Locations.items[i].id == Locations.activeItems[y].id) {
+    for (int i = 0; i < Locations.items.length; i++) {
+      for (int y = 0; y < Locations.activeItems.length; y++) {
+        if (Locations.items[i].id == Locations.activeItems[y].id) {
           inserted = true;
           indexRemoveableItem = y;
         }
       }
-      if(Locations.items[i].roomId == roomId && !inserted){
+      if (Locations.items[i].roomId == roomId && !inserted) {
         int end = Locations.activeItems.length;
         Locations.activeItems.add(Locations.items[i]);
 
         AnimatedListItemBuilder build = (context, index, animation) {
-          return buildItem(context, Locations.activeItems[index], animation, index);
+          return buildItem(
+              context, Locations.activeItems[index], animation, index);
         };
-        if(key.currentState != null) {
+        if (key.currentState != null) {
           key.currentState.insertItem(end);
         }
-      }
-      else if(Locations.items[i].roomId != roomId && inserted) {
-        Location removeItem = Locations.activeItems.removeAt(indexRemoveableItem);
+      } else if (Locations.items[i].roomId != roomId && inserted) {
+        Location removeItem =
+            Locations.activeItems.removeAt(indexRemoveableItem);
         AnimatedListRemovedItemBuilder build = (context, animation) {
           return buildItem(context, removeItem, animation, indexRemoveableItem);
         };
-        if(key.currentState != null) {
+        if (key.currentState != null) {
           key.currentState.removeItem(indexRemoveableItem, build);
         }
       }
@@ -301,7 +337,8 @@ class LocationController {
     }
   }
 
-  Widget buildItem(BuildContext context, Location item, Animation animation, int index) {
+  Widget buildItem(
+      BuildContext context, Location item, Animation animation, int index) {
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -355,7 +392,8 @@ class LocationController {
       barrierDismissible: true,
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Willst du $locationString zu deinem aktuellen Platz machen?"),
+        title:
+            Text("Willst du $locationString zu deinem aktuellen Platz machen?"),
         actions: <Widget>[
           FlatButton(
             child: Text("Nein"),

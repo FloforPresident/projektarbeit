@@ -82,7 +82,7 @@ async def ws_recieve(websocket, path):
     await websocket.send(response)
 
 
-start_server = websockets.serve(ws_recieve, "192.168.188.145", 8765, close_timeout=1000)
+start_server = websockets.serve(ws_recieve, "141.75.226.249", 8765, close_timeout=1000)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
