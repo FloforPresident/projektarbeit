@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2020 at 04:25 PM
+-- Generation Time: Nov 28, 2020 at 12:30 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -43,10 +43,15 @@ CREATE TABLE `Location` (
 INSERT INTO `Location` (`location_id`, `room_id`, `title`, `x`, `y`) VALUES
 (3, 10, 'Flos Desk', 1.2, 1.5),
 (6, 14, 'Table', 1, 2),
-(7, 13, 'Kitchen', 2.3, 1.2),
 (8, 13, 'Washing Machine', 1.2, 2.4),
-(9, 17, 'Liebesschaukel', 1, 1),
-(10, 15, 'Porno Ecke', 0.69, 0.69);
+(11, 10, 'Printer', 2.2, 1.9),
+(14, 18, 'Car', 1, 1),
+(15, 18, 'Door', 3, 3),
+(20, 16, 'Folterecke', 1.1, 1.4),
+(21, 16, 'Porno Regal', 0.87, 1.2),
+(22, 10, 'Patrick\'s Chair', 0.1, 0.2),
+(23, 16, 'Bett', 0.69, 0.69),
+(25, 16, 'Sockenschrank', 1.2, 3.1);
 
 -- --------------------------------------------------------
 
@@ -58,11 +63,21 @@ CREATE TABLE `Message` (
   `message_id` int(11) NOT NULL,
   `from_user` int(11) NOT NULL,
   `to_user` int(11) NOT NULL,
-  `text` varchar(255) NOT NULL,
-  `datetime` datetime NOT NULL,
-  `sent` tinyint(1) NOT NULL,
-  `received` tinyint(1) NOT NULL
+  `subject` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `datetime` datetime NOT NULL DEFAULT current_timestamp(),
+  `received` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Message`
+--
+
+INSERT INTO `Message` (`message_id`, `from_user`, `to_user`, `subject`, `message`, `datetime`, `received`) VALUES
+(22, 28, 37, 'WTF', 'Warum hast du n Folter Regal?', '2020-11-26 19:42:04', NULL),
+(23, 28, 36, 'Hi', 'Was geht ab?', '2020-11-27 11:52:58', NULL),
+(24, 28, 38, 'Hi', 'Ich brauch Hilfe', '2020-11-27 16:38:34', NULL),
+(25, 28, 37, 'Test', 'Test', '2020-11-28 00:37:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -93,7 +108,7 @@ INSERT INTO `Robo` (`robo_id`, `name`, `ip`) VALUES
 
 CREATE TABLE `Room` (
   `room_id` int(11) NOT NULL,
-  `robo_id` int(11) NOT NULL,
+  `robo_id` int(11) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `pgm` blob DEFAULT NULL,
   `yaml` text DEFAULT NULL
@@ -107,9 +122,9 @@ INSERT INTO `Room` (`room_id`, `robo_id`, `title`, `pgm`, `yaml`) VALUES
 (10, 4, 'Office', NULL, NULL),
 (13, 6, 'Bathroom', NULL, NULL),
 (14, 5, 'Kitchen', NULL, NULL),
-(15, 4, 'Living Room', NULL, NULL),
 (16, 5, 'Stefan\'s Zimmer', NULL, NULL),
-(17, 5, 'Stefan\'s Darkroom', NULL, NULL);
+(18, 5, 'Garage', NULL, NULL),
+(19, 4, 'Basement', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -119,9 +134,9 @@ INSERT INTO `Room` (`room_id`, `robo_id`, `title`, `pgm`, `yaml`) VALUES
 
 CREATE TABLE `User` (
   `user_id` int(11) NOT NULL,
-  `location_id` int(11) NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `image` blob DEFAULT NULL,
   `embedding` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -131,10 +146,11 @@ CREATE TABLE `User` (
 --
 
 INSERT INTO `User` (`user_id`, `location_id`, `username`, `password`, `image`, `embedding`) VALUES
-(7, 3, 'Flo', '123', NULL, NULL),
-(8, 3, 'Basti', '123', NULL, NULL),
-(9, 3, 'StefanKSuperstar', '123', NULL, NULL),
-(10, 3, 'Coach', '123', NULL, NULL);
+(28, 3, 'Flo', '123', NULL, NULL),
+(35, 11, 'Basti', '123', NULL, NULL),
+(36, 11, 'Patrick', '123', NULL, NULL),
+(37, 11, 'Stefan', '123', NULL, NULL),
+(38, 11, 'Coach', '123', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -166,7 +182,7 @@ ALTER TABLE `Robo`
 --
 ALTER TABLE `Room`
   ADD PRIMARY KEY (`room_id`),
-  ADD KEY `robo_id` (`robo_id`);
+  ADD KEY `Room_ibfk_1` (`robo_id`);
 
 --
 -- Indexes for table `User`
@@ -183,31 +199,31 @@ ALTER TABLE `User`
 -- AUTO_INCREMENT for table `Location`
 --
 ALTER TABLE `Location`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `Message`
 --
 ALTER TABLE `Message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `Robo`
 --
 ALTER TABLE `Robo`
-  MODIFY `robo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `robo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `Room`
 --
 ALTER TABLE `Room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `User`
 --
 ALTER TABLE `User`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Constraints for dumped tables
@@ -217,26 +233,26 @@ ALTER TABLE `User`
 -- Constraints for table `Location`
 --
 ALTER TABLE `Location`
-  ADD CONSTRAINT `Location_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `Room` (`room_id`);
+  ADD CONSTRAINT `Location_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `Room` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Message`
 --
 ALTER TABLE `Message`
-  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`from_user`) REFERENCES `User` (`user_id`),
-  ADD CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`to_user`) REFERENCES `User` (`user_id`);
+  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`from_user`) REFERENCES `User` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`to_user`) REFERENCES `User` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `Room`
 --
 ALTER TABLE `Room`
-  ADD CONSTRAINT `Room_ibfk_1` FOREIGN KEY (`robo_id`) REFERENCES `Robo` (`robo_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Room_ibfk_1` FOREIGN KEY (`robo_id`) REFERENCES `Robo` (`robo_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `User`
 --
 ALTER TABLE `User`
-  ADD CONSTRAINT `User_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `Location` (`location_id`);
+  ADD CONSTRAINT `User_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `Location` (`location_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

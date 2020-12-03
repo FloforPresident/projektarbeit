@@ -1,35 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/services/routing.dart';
-
 import 'package:turtlebot/main.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
-class RoboStatus extends StatefulWidget {
-  final channel = MyApp.con();
 
-  RoboStatus({Key key}) : super(key: key);
+class Controls extends StatefulWidget {
+  final ControlController controller = new ControlController();
 
-  _RoboStatusState createState() => _RoboStatusState();
+  Controls({Key key}) : super(key: key);
+
+  _ControlsState createState() => _ControlsState();
 }
 
-class _RoboStatusState extends State<RoboStatus> {
-
-  void up() {
-    String data = '{"action": "UP"}';
-    widget.channel.sink.add(data);
-  }
-  void down() {
-    String data = '{"action": "DOWN"}';
-    widget.channel.sink.add(data);
-  }
-  void right() {
-    String data = '{"action": "RIGHT"}';
-    widget.channel.sink.add(data);
-  }
-  void left() {
-    String data = '{"action": "LEFT"}';
-    widget.channel.sink.add(data);
-  }
-
+class _ControlsState extends State<Controls> {
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +38,7 @@ class _RoboStatusState extends State<RoboStatus> {
                     height: 100,
                     child: FlatButton.icon(
                       onPressed: () {
-                        up();
+                        widget.controller.up();
                         RouteGenerator.onTapToRoboStatus(context);
                       },
                       label: Text(''),
@@ -68,7 +51,7 @@ class _RoboStatusState extends State<RoboStatus> {
                     height: 100,
                     child: FlatButton.icon(
                       onPressed: () {
-                        left();
+                        widget.controller.left();
                         RouteGenerator.onTapToRoboStatus(context);
                       },
                       label: Text(''),
@@ -81,7 +64,7 @@ class _RoboStatusState extends State<RoboStatus> {
                     height: 100,
                     child: FlatButton.icon(
                       onPressed: () {
-                        right();
+                        widget.controller.right();
                         RouteGenerator.onTapToRoboStatus(context);
                       },
                       label: Text(''),
@@ -94,7 +77,7 @@ class _RoboStatusState extends State<RoboStatus> {
                     height: 100,
                     child: FlatButton.icon(
                       onPressed: () {
-                        down();
+                        widget.controller.down();
                         RouteGenerator.onTapToRoboStatus(context);
                       },
                       label: Text(''),
@@ -109,38 +92,25 @@ class _RoboStatusState extends State<RoboStatus> {
   }
 }
 
-// class RoboStatus extends StatefulWidget {
-//   final String _titleText = "RoboStatus";
-//
-//   _RoboStatusState createState() => _RoboStatusState();
-// }
-//
-// class _RoboStatusState extends State<RoboStatus> {
-//   var ident = [
-//     ["Status", "Connected"],
-//     ["RoboName", "Robob"],
-//     ["IP", "192.168.2.44"],
-//     ["Controller", "PS4"],
-//     ["Recipient", "Bastian Brunsch"],
-//     ["Message", "Hallo"],
-//     ["Room", "Living Room"],
-//   ];
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//           leading: IconButton(
-//             icon: Icon(Icons.arrow_back),
-//             onPressed: () {
-//               RouteGenerator.onTapToHome(context);
-//             },
-//           ),
-//           title: Text("Controlling"),
-//           backgroundColor: Colors.purple,
-//         ),
-//         body: Center(
-//           child: Text("Videostream"),
-//         ));
-//   }
-// }
+class ControlController {
+  void up() {
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "UP"}';
+    channel.sink.add(data);
+  }
+  void down() {
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "DOWN"}';
+    channel.sink.add(data);
+  }
+  void right() {
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "RIGHT"}';
+    channel.sink.add(data);
+  }
+  void left() {
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "LEFT"}';
+    channel.sink.add(data);
+  }
+}

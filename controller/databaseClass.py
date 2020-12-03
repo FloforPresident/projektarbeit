@@ -18,33 +18,35 @@ class database:
 		)
 
 	#::::USER::::
-	def getUser(self, name):
-		mycursor = self.mydb.cursor(prepared = True)
-		mycursor.execute("SELECT * FROM User WHERE username = '"+name+"'")
-		myresult = mycursor.fetchone()
-		print(myresult)
-
-		return myresult
-
 	def getAllUsers(self):
 		mycursor = self.mydb.cursor(prepared = True)
 		mycursor.execute("SELECT * FROM User")
-		myresult = mycursor.fetchall()
-		for x in myresult:
-			print(x)
-		
-		#beispiel abfrage: print(myresult[0][3])
-		return myresult
+		users = mycursor.fetchall()
+
+		data = []
+
+		for i in range(len(users)):
+			users[i] = list(users[i])
+			for r in range(len(users[i])):
+				if isinstance(users[i][r], bytearray):
+					users[i][r] = users[i][r].decode("utf-8")
+
+			dataEntity = {
+				"user_id": users[i][0],
+				"location_id": users[i][1],
+				"username": users[i][2]
+			}
+			data.append(dataEntity)
+
+		return json.dumps(data)
 		
 
-	def addUser(self, location_id, name, password):
+	def addUser(self, location_id, name):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO User (location_id, username, password) VALUES (%s, %s, %s)"
-		val = (location_id, name, password)
+		sql = "INSERT INTO User (location_id, username) VALUES (%s, %s)"
+		val = (location_id, name)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
-		
-		return 'success'
 	
 	def deleteUser(self, user_id):
 		mycursor = self.mydb.cursor()
@@ -53,10 +55,9 @@ class database:
 		self.mydb.commit()
 		print(mycursor.rowcount, "record(s) deleted")
 
-	def loginUser(self, name, password):
-
+	def loginUser(self, name):
 		mycursor = self.mydb.cursor(prepared = True)
-		mycursor.execute("SELECT user_id, location_id, username FROM User WHERE username = '"+name+"' AND password = '" + password + "'")
+		mycursor.execute("SELECT user_id, location_id, username FROM User WHERE username = '"+name+"'")
 		myresult = mycursor.fetchall()
 
 		if(myresult):
@@ -65,7 +66,7 @@ class database:
 			data = {
 				"user_id": myresult[0],
 				"location_id": myresult[1],
-				"username": myresult[2],
+				"username": myresult[2].decode("utf-8"),
 			}
 
 			return json.dumps(data)
@@ -114,6 +115,12 @@ class database:
 		mycursor.execute(sql)
 		self.mydb.commit()
 
+	def updateRobo(self, room_id, robo_id):
+		mycursor = self.mydb.cursor(prepared = True)
+		sql = "UPDATE Room SET robo_id = %s WHERE Room.room_id = %s"
+		val = (robo_id, room_id)
+		mycursor.execute(sql, val)
+		self.mydb.commit()
 
 	def getRobo(self, name):
 		mycursor = self.mydb.cursor(prepared = True)
@@ -147,50 +154,113 @@ class database:
 			}
 			data["users"].append(dataEntity)
 
-			#Get Locations
-			location_id = str(dataEntity["location_id"])
+		#Get Locations
+		mycursor.execute("SELECT * FROM Location")
+		locations = mycursor.fetchall()
 
-			mycursor.execute("SELECT * FROM Location WHERE location_id = '"+location_id+"'")
-			locations = mycursor.fetchall()
+		for i in range(len(locations)):
+			locations[i] = list(locations[i])
+			for r in range(len(locations[i])):
+				if isinstance(locations[i][r], bytearray):
+					locations[i][r] = locations[i][r].decode("utf-8")
 
-			for i in range(len(locations)):
-				locations[i] = list(locations[i])
-				for r in range(len(locations[i])):
-					if isinstance(locations[i][r], bytearray):
-						locations[i][r] = locations[i][r].decode("utf-8")
+			dataEntity = {
+				"location_id": locations[i][0],
+				"room_id": locations[i][1],
+				"title": locations[i][2],
+				"x": locations[i][3],
+				"y": locations[i][4],
+			}
 
-				dataEntity = {
-					"location_id": locations[i][0],
-					"room_id": locations[i][1],
-					"title": locations[i][2],
-					"x": locations[i][3],
-					"y": locations[i][4],
-				}
+			data["locations"].append(dataEntity)
 
-				data["locations"].append(dataEntity)
+		#Get Rooms
+		mycursor.execute("SELECT * FROM Room")
+		rooms = mycursor.fetchall()
 
-				#Get Rooms
-				room_id = str(dataEntity['room_id'])
+		for i in range(len(rooms)):
+			rooms[i] = list(rooms[i])
+			for r in range(len(rooms[i])):
+				if isinstance(rooms[i][r], bytearray):
+					rooms[i][r] = rooms[i][r].decode("utf-8")
 
-				mycursor.execute("SELECT * FROM Room WHERE room_id = '"+room_id+"'")
-				rooms = mycursor.fetchall()
-
-				for i in range(len(rooms)):
-					rooms[i] = list(rooms[i])
-					for r in range(len(rooms[i])):
-						if isinstance(rooms[i][r], bytearray):
-							rooms[i][r] = rooms[i][r].decode("utf-8")
-
-					dataEntity = {
-						"room_id": rooms[i][0],
-						"robo_id": rooms[i][1],
-						"title": rooms[i][2],
-						"pgm": rooms[i][3],
-						"yaml": rooms[i][4]
-					}
-					data["rooms"].append(dataEntity)
+			dataEntity = {
+				"room_id": rooms[i][0],
+				"robo_id": rooms[i][1],
+				"title": rooms[i][2],
+				"pgm": rooms[i][3],
+				"yaml": rooms[i][4]
+			}
+			data["rooms"].append(dataEntity)
 
 		return json.dumps(data)
+
+	# def getAllFriends(self):
+	# 	mycursor = self.mydb.cursor(prepared = True)
+	#
+	# 	#Get Users
+	# 	mycursor.execute("SELECT * FROM User")
+	# 	users = mycursor.fetchall()
+	#
+	# 	data = {"users": [], "locations": [], "rooms": []}
+	#
+	# 	for i in range(len(users)):
+	# 		users[i] = list(users[i])
+	# 		for r in range(len(users[i])):
+	# 			if isinstance(users[i][r], bytearray):
+	# 				users[i][r] = users[i][r].decode("utf-8")
+	#
+	# 		dataEntity = {
+	# 			"user_id": users[i][0],
+	# 			"location_id": users[i][1],
+	# 			"username": users[i][2]
+	# 		}
+	# 		data["users"].append(dataEntity)
+	#
+	# 		#Get Locations
+	# 		location_id = str(dataEntity["location_id"])
+	#
+	# 		mycursor.execute("SELECT * FROM Location WHERE location_id = '"+location_id+"'")
+	# 		locations = mycursor.fetchall()
+	#
+	# 		for i in range(len(locations)):
+	# 			locations[i] = list(locations[i])
+	# 			for r in range(len(locations[i])):
+	# 				if isinstance(locations[i][r], bytearray):
+	# 					locations[i][r] = locations[i][r].decode("utf-8")
+	#
+	# 			dataEntity = {
+	# 				"location_id": locations[i][0],
+	# 				"room_id": locations[i][1],
+	# 				"title": locations[i][2],
+	# 				"x": locations[i][3],
+	# 				"y": locations[i][4],
+	# 			}
+	#
+	# 			data["locations"].append(dataEntity)
+	#
+	# 			#Get Rooms
+	# 			room_id = str(dataEntity['room_id'])
+	#
+	# 			mycursor.execute("SELECT * FROM Room WHERE room_id = '"+room_id+"'")
+	# 			rooms = mycursor.fetchall()
+	#
+	# 			for i in range(len(rooms)):
+	# 				rooms[i] = list(rooms[i])
+	# 				for r in range(len(rooms[i])):
+	# 					if isinstance(rooms[i][r], bytearray):
+	# 						rooms[i][r] = rooms[i][r].decode("utf-8")
+	#
+	# 				dataEntity = {
+	# 					"room_id": rooms[i][0],
+	# 					"robo_id": rooms[i][1],
+	# 					"title": rooms[i][2],
+	# 					"pgm": rooms[i][3],
+	# 					"yaml": rooms[i][4]
+	# 				}
+	# 				data["rooms"].append(dataEntity)
+	#
+	# 	return json.dumps(data)
 
 
 	def deleteFriend(self, user_id):
@@ -224,7 +294,8 @@ class database:
 				"robo_id": rooms[i][1],
 				"title": rooms[i][2],
 				"pgm": rooms[i][3],
-				"yaml": rooms[i][4]
+				"yaml": rooms[i][4],
+				"scanned": rooms[i][5]
 			}
 			data["rooms"].append(dataEntity)
 
@@ -247,10 +318,10 @@ class database:
 
 		return json.dumps(data)
 
-	def addRoom(self, robo_id, roomName, pgm, yaml):
+	def addRoom(self, robo_id, roomName):
 		mycursor = self.mydb.cursor(prepared = True)
-		sql = "INSERT INTO Room (robo_id, title, pgm, yaml) VALUES (%s, %s, %s, %s)"
-		val = (robo_id, roomName, pgm, yaml)
+		sql = "INSERT INTO Room (robo_id, title) VALUES (%s, %s)"
+		val = (robo_id, roomName)
 		mycursor.execute(sql, val)
 		self.mydb.commit()
 
@@ -264,9 +335,13 @@ class database:
 		mycursor = self.mydb.cursor(prepared = True)
 		mycursor.execute("SELECT * FROM Room  WHERE title = '"+roomName+"'")
 		myresult = mycursor.fetchone()
-		for x in myresult:
-			print(x)
-		return myresult
+
+		data = {
+			"room_id": myresult[0],
+			"robo_id": myresult[1],
+			"title": myresult[2].decode("utf-8")
+		}
+		return json.dumps(data)
 
 
 	#::::LOCATION::::
@@ -293,11 +368,6 @@ class database:
 				"yaml": rooms[i][4]
 			}
 			data["rooms"].append(dataEntity)
-
-
-		#Get active location
-		# mycursor.execute("SELECT location_id FROM User WHERE user_id = " + userID)
-		# active = mycursor.fetchall()
 
 		#Get Locations
 		mycursor.execute("SELECT * FROM Location")
@@ -337,11 +407,17 @@ class database:
 		mycursor.execute(sql)
 		self.mydb.commit()
 
-	#def changeActiveLocation(locationNameNew, username):
+	def updateLocation(self, user_id, location_id):
+		mycursor = self.mydb.cursor(prepared = True)
+		sql = "UPDATE User SET location_id = %s WHERE User.user_id = %s"
+		val = (location_id, user_id)
+		mycursor.execute(sql, val)
+		self.mydb.commit()
+
 	
 	def getLocation(self, id):
 		mycursor = self.mydb.cursor(prepared = True)
-		mycursor.execute("SELECT * FROM Location  WHERE location_id = '"+id+"'")
+		mycursor.execute("SELECT * FROM Location WHERE location_id = '"+id+"'")
 		myresult = mycursor.fetchone()
 		for x in myresult:
 			print(x)
@@ -349,9 +425,99 @@ class database:
 
 
 	#::::MESSAGE::::
-	#def sendMessage(senderName,receiverName, text):
-	#TODO
-	#def getMessages(username):
-	
+	def sendMessage(self, from_user, to_user, subject, message):
+		mycursor = self.mydb.cursor(prepared = True)
+		sql = "INSERT INTO Message (from_user, to_user, subject, message) VALUES (%s, %s, %s, %s)"
+		val = (from_user, to_user, subject, message)
+		mycursor.execute(sql, val)
+		self.mydb.commit()
 
-#::::::		code fuer controller skript:	db = database("localhost","root","","turtlebot")		:::::::::
+		data = {"user": [], "location": [], "room": [], "robo": []}
+
+		user_id = str(to_user)
+
+		#Get User
+		mycursor.execute("SELECT * FROM User WHERE user_id = '"+user_id+"'")
+		user = list(mycursor.fetchall()[0])
+
+		for i in range(len(user)):
+			if isinstance(user[i], bytearray):
+				user[i] = user[i].decode("utf-8")
+
+		dataEntity = {
+			"user_id": user[0],
+			"location_id": user[1],
+			"username": user[2]
+		}
+		data["user"].append(dataEntity)
+
+		#Get Location
+		location_id = str(dataEntity['location_id'])
+
+		mycursor.execute("SELECT * FROM Location WHERE location_id = '"+location_id+"'")
+		location = list(mycursor.fetchall()[0])
+
+		for i in range(len(location)):
+			if isinstance(location[i], bytearray):
+				location[i] = location[i].decode("utf-8")
+
+		dataEntity = {
+			"location_id": location[0],
+			"room_id": location[1],
+			"title": location[2],
+			"x": location[3],
+			"y": location[4],
+		}
+		data["location"].append(dataEntity)
+
+		#Get Room
+		room_id = str(dataEntity['room_id'])
+
+		mycursor.execute("SELECT * FROM Room WHERE room_id = '"+room_id+"'")
+		room = list(mycursor.fetchall()[0])
+
+		for i in range(len(room)):
+			if isinstance(room[i], bytearray):
+				room[i] = room[i].decode("utf-8")
+
+		dataEntity = {
+			"room_id": room[0],
+			"robo_id": room[1],
+			"title": room[2],
+			"pgm": room[3],
+			"yaml": room[4]
+		}
+		data["room"].append(dataEntity)
+
+		#Get Robo
+		robo_id = str(dataEntity['robo_id'])
+
+		mycursor.execute("SELECT * FROM Robo WHERE robo_id = '"+robo_id+"'")
+		robo = list(mycursor.fetchall()[0])
+
+		for i in range(len(robo)):
+			if isinstance(robo[i], bytearray):
+				robo[i] = robo[i].decode("utf-8")
+
+		dataEntity = {
+			"robo_id": robo[0],
+			"name": robo[1],
+			"ip": robo[2]
+		}
+		data["robo"].append(dataEntity)
+
+		return json.dumps(data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

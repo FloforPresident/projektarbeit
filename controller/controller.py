@@ -97,25 +97,32 @@ def action_find_person(name, x, y, message):
 			i += 1
 			rate.sleep()
 
+teleopInstance = teleop.Teleop()
 
 def action_teleop_start():
-	teleop.startTeleop()
+	print("Start**********")
+	print(teleopInstance)
+	teleopInstance.startTeleop()
+	
+	print("Starting teleop....")
 
 def action_teleop_set_key(key):
-	teleop.setKey(key)
+	print("Teleop set key...")
+	teleopInstance.setKey(key)
+	print(teleopInstance)
 	
 
 
 def launch_node():
 	print("launching node...")
-	subprocess.run(["rosrun", "find_person", "print_patrick.py"])
+	subprocess.run(["rosrun", "find_person", "go_to_person.py"])
 
 ######################### WEBSOCKET ####################################################
 
-connected = set()
+
 
 def start_websocket():
-	
+	connected = set()
 	print("Starting websocket")
 	async def ws_recieve(websocket, path):
 		connected.add(websocket)
@@ -141,7 +148,7 @@ def start_websocket():
 		
 		#await websocket.send(response)
 
-	start_server = websockets.serve(ws_recieve, "192.168.1.225", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
+	start_server = websockets.serve(ws_recieve, "192.168.1.116", 8897, close_timeout=1000) # IP has to be IP of ROS-Computer
 
 	asyncio.get_event_loop().run_until_complete(start_server)
 	asyncio.get_event_loop().run_forever()
@@ -149,12 +156,12 @@ def start_websocket():
 ######################### CLEANUP ####################################################
 def cleanup_on_exit(signal, frame):
 	print("cleanup...")
-
+	'''
 	# terminate websocket connections
 	for ws in connected:
 		ws.close()
 		print("closed websocket connection: " + str(ws))
-	
+	'''
 	for proc in activeProcesses:
 		proc.terminate()
 		print("terminated process: " + str(proc))
@@ -170,8 +177,9 @@ def main():
 		signal.signal(signal.SIGINT, cleanup_on_exit)
 
 		# -- launch node process --
-		process = multiprocessing.Process(target=launch_node)
-		#process.start()
+		p_launchNode = multiprocessing.Process(target=launch_node)
+		p_launchNode.start()
+		activeProcesses.add(p_launchNode)
 
 		# -- websocket process --
 		p_websocket = multiprocessing.Process(target=start_websocket)
@@ -180,15 +188,14 @@ def main():
 
 		# -- teleop process --
 		p_teleop = multiprocessing.Process(target=action_teleop_start)
-		#process_teleop.start()
+		#p_teleop.start()
 
 		# -- robot ssh process --
 		process3 = multiprocessing.Process(target=robo_ssh)
 		#process3.start()
-	except Exception:
-		cleanup_on_exit()
-
-
+	finally:
+		print("...")
+		
 if __name__ == '__main__':
 	main()
 	

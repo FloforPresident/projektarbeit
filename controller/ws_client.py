@@ -4,17 +4,19 @@ import json
 import time
 
 async def ws_send():
-	uri = "ws://192.168.1.225:8783"
+	uri = "ws://192.168.1.116:8897"
 	async with websockets.connect(uri) as websocket:
 		'''
-		#msg = json.dumps({"action":"FIND PERSON","name":"Patrick", "message":"Hallo", "x":"1.723","y":"0.087"})
 		msg = json.dumps({"action":"TELEOP","key":"UP"})
 		#msg="hello"
 		await websocket.send(msg)
 		print(msg)
 		'''
 
-		msg = json.dumps({"action":"TELEOP","key":"w"})
+		#msg = json.dumps({"action":"TELEOP","key":"w"})
+
+		msg = json.dumps({"action":"FIND PERSON","name":"Patrick", "message":"Hallo", "x":"0.723","y":"0.087"})
+
 		await websocket.send(msg)
 
 

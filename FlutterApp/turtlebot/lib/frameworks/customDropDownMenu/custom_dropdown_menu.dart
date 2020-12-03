@@ -86,6 +86,10 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
     this.data = data;
   }
 
+  void setValue(T value) {
+    _value = value;
+  }
+
   T getValue() {
     if (_value != null)
       return _value;
@@ -120,7 +124,7 @@ class CustomDropdownLabel extends StatelessWidget {
   CustomDropdownLabel(
       {@required this.child,
       this.fontSize = 18,
-      this.leftStart = 40,
+      this.leftStart = 30,
       @required this.label,
       this.labelRightSpace = 20,
       this.topSpace = 15});

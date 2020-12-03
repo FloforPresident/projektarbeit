@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/pages/pages_control/robo_commands.dart';
 import 'package:turtlebot/pages/pages_control/robo_man_control.dart';
-import 'package:turtlebot/pages/pages_control/robo_status.dart';
+import 'package:turtlebot/pages/pages_control/controls.dart';
 import 'package:turtlebot/pages/robos.dart';
 import 'package:turtlebot/pages/rooms.dart';
 import 'package:turtlebot/pages/friends.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/pages/messages.dart';
 import 'package:turtlebot/pages/locations.dart';
+import 'package:turtlebot/pages/login.dart';
+
 
 class RouteGenerator {
   // _RouteGenerator() {}
@@ -16,6 +19,7 @@ class RouteGenerator {
   static const String RouteRoboCommands = '/roboCommands';
   static const String RouteManualControl = '/manControl';
   static const String RouteHome = '/';
+  static const String RouteLogin = '/login';
   static const String RouteLocations = '/locations';
   static const String RouteRooms = '/rooms';
   static const String RouteRobos = '/robos';
@@ -24,11 +28,14 @@ class RouteGenerator {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case RouteLogin:
+        {
+          return MaterialPageRoute(builder: (_) => Login());
+        }
       case RouteHome:
         {
-          return MaterialPageRoute(builder: (_) => Home());
+          return MaterialPageRoute(builder: (_) => Home(settings.arguments));
         }
-
       case RouteRobos:
         {
           return MaterialPageRoute(builder: (_) => Robos());
@@ -43,11 +50,11 @@ class RouteGenerator {
         }
       case RouteMessages:
         {
-          return MaterialPageRoute(builder: (_) => Messages());
+          return MaterialPageRoute(builder: (_) => Messages(settings.arguments));
         }
       case RouteRoboStatus:
         {
-          return MaterialPageRoute(builder: (_) => RoboStatus());
+          return MaterialPageRoute(builder: (_) => Controls());
         }
       case RouteRoboCommands:
         {
@@ -64,8 +71,12 @@ class RouteGenerator {
     }
   }
 
-  static onTapToHome(BuildContext context) {
-    Navigator.pushNamed(context, RouteGenerator.RouteHome);
+  static onTapToHome(BuildContext context, {User sessionUser}) {
+    Navigator.pushNamed(context, RouteGenerator.RouteHome, arguments: sessionUser);
+  }
+
+  static onTapToLogin(BuildContext context) {
+    Navigator.pushNamed(context, RouteGenerator.RouteLogin);
   }
 
   static onTapToRoboStatus(BuildContext context) {
@@ -90,6 +101,10 @@ class RouteGenerator {
 
   static onTapToFriends(BuildContext context) {
     Navigator.pushNamed(context, RouteGenerator.RouteFriends);
+  }
+
+  static onTapToMessages(BuildContext context, {User selectedUser}) {
+    Navigator.pushNamed(context, RouteGenerator.RouteMessages, arguments: selectedUser);
   }
 
   static onTapToRobos(BuildContext context) {

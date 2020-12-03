@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
@@ -8,7 +10,12 @@ import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Friends extends StatefulWidget {
-  final channel = MyApp.con();
+  final FriendController controller = new FriendController();
+  final WebSocketChannel channel = MyApp.con();
+
+  static List<User> items = [];
+  static List<Location> locationItems = [];
+  static List<Room> roomItems = [];
 
   Friends({Key key}) : super(key: key);
 
@@ -19,24 +26,17 @@ class Friends extends StatefulWidget {
 }
 
 class _FriendState extends State<Friends> {
-  List<User> items = [];
-  List<Location> locationItems = [];
-  List<Room> roomItems = [];
-
   final GlobalKey<AnimatedListState> key = GlobalKey();
   final colorTheme = Colors.red;
+
+  ControllerCustomDropdown roomDropController = ControllerCustomDropdown<Room>();
+  ControllerCustomDropdown locationDropController = ControllerCustomDropdown<Location>();
+
 
   @override
   void initState() {
     super.initState();
-    // broadcast = widget.channel.stream.asBroadcastStream();
-
-    getUsers();
-  }
-
-  void getUsers() {
-    String data = '{"action": "GET FRIENDS"}';
-    widget.channel.sink.add(data);
+    widget.controller.getData(widget.channel);
   }
 
   @override
@@ -48,51 +48,27 @@ class _FriendState extends State<Friends> {
             onPressed: () {
               RouteGenerator.onTapToHome(context);
             }),
-        title: Text("Robo Friends"),
+        title: Text("Friends"),
         backgroundColor: colorTheme,
       ),
       body: StreamBuilder(
         stream: widget.channel.stream,
         builder: (context, snapshot) {
           if(snapshot.hasData) {
-            String jsonDataString = snapshot.data.toString();
-            var jsonData = jsonDecode(jsonDataString);
-            var users = jsonData['users'];
-            var locations = jsonData['locations'];
-            var rooms = jsonData['rooms'];
 
-            for(int i = 0; i < users.length; i++) {
-              User u = new User(users[i]['user_id'], users[i]['location_id'],
-                  users[i]['username']);
-              items.add(u);
-            }
-            for (int i = 0; i < locations.length; i++) {
-              Location l = new Location(
-                  locations[i]['location_id'],
-                  locations[i]['room_id'],
-                  locations[i]['title'],
-                  locations[i]['x'],
-                  locations[i]['y']);
-              locationItems.add(l);
-            }
-            for (int i = 0; i < rooms.length; i++) {
-              Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-                  rooms[i]['title']);
-              roomItems.add(r);
-            }
+            widget.controller.setData(snapshot.data);
 
             return AnimatedList(
                 shrinkWrap: true,
                 key: key,
-                initialItemCount: items.length,
+                initialItemCount: Friends.items.length,
                 itemBuilder: (context, index, animation) {
-                  return buildItem(items[index], animation, index);
+                  return buildItem(Friends.items[index], animation, index);
                 },
               );
           } else {
             return Text('');
           }
-
         }
       )
     );
@@ -101,20 +77,18 @@ class _FriendState extends State<Friends> {
   Widget buildItem(User item, Animation animation, int index) {
     String locationName = '';
     String roomName = '';
-    for(int i = 0; i < locationItems.length; i++) {
-      if(item.locationID == locationItems[i].id) {
-        Location location = locationItems[i];
+    for(int i = 0; i < Friends.locationItems.length; i++) {
+      if(item.locationID == Friends.locationItems[i].id) {
+        Location location = Friends.locationItems[i];
         locationName = location.name;
 
-        for(int y = 0; y < roomItems.length; y++) {
-          if(location.roomId == roomItems[y].id) {
-            roomName = roomItems[y].name;
-
+        for(int y = 0; y < Friends.roomItems.length; y++) {
+          if(location.roomId == Friends.roomItems[y].id) {
+            roomName = Friends.roomItems[y].name;
           }
         }
       }
     }
-
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -134,61 +108,171 @@ class _FriendState extends State<Friends> {
                 flex: 2,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+                  children:
+                  MyApp.id != item.id
+                  ? <Widget>[
                     IconButton(
                       icon: Icon(Icons.email),
-                      onPressed: () {},
+                      onPressed: () {
+                        RouteGenerator.onTapToMessages(context, selectedUser: item);
+                      },
                     ),
                     IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () async {
                         bool delete = await OnDelete.onDelete(context);
                         if(delete) {
-                          _FriendsController deleteItemCon = _FriendsController(colorTheme);
-                          deleteItemCon.removeItem(item);
+                          widget.controller.removeItem(item);
                           RouteGenerator.onTapToFriends(context);
                         }
                       },
                     )
-                  ],
+                  ]
+                  : <Widget> [
+                    IconButton(
+                      icon: Icon(Icons.create),
+                      onPressed: (){
+                        editItemDialog(context, item);
+                      },
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.assignment_ind_rounded),
+                        onPressed: (){},
+                    )
+                  ]
                 ),
               ),
             ],
           ),
           subtitle: Container(
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Row(children: <Widget>[
-                Text(roomName + " - ",
-                    style: TextStyle(
-                      color: Colors.indigo,
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold,
-                    )),
-                Text(locationName)
-              ])),
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+            child: Row(children: <Widget>[
+              Text(roomName + " - ",
+                style: TextStyle(
+                  color: Colors.indigo,
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold,
+                )),
+              Text(locationName != '' ? locationName : "No active location set")
+            ])),
         ),
       ),
     );
   }
 
-  @override
-  void dispose() {
-    widget.channel.sink.close();
-    super.dispose();
+  void editItemDialog(BuildContext context, User user) {
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        List<Location> selectedLocations = [];
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return SingleChildScrollView(
+              child: AlertDialog(
+                title: Text("Deinen aktuellen Platz ändern"),
+                content: Column(
+                  children: <Widget>[
+                    CustomDropdownLabel(
+                      label: "Raum",
+                      child: CustomDropdownMenu<Room>(
+                        onChanged: () {
+                          List<Location> buffer = [];
+                          for(int i = 0; i < Friends.locationItems.length; i++) {
+                            if(Friends.locationItems[i].roomId == roomDropController.getValue().id) {
+                              buffer.add(Friends.locationItems[i]);
+                            }
+                          }
+                          setState(() {
+                            selectedLocations = [];
+                            selectedLocations.addAll(buffer);
+                          });
+                        },
+                        controller: roomDropController, data: Friends.roomItems),
+                    ),
+                    CustomDropdownLabel(
+                      label: "Platz",
+                      child: CustomDropdownMenu<Location>(
+                        controller: locationDropController,
+                        data: selectedLocations),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Schließen"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Ändern"),
+                    onPressed: () {
+                      if (roomDropController.getValue() != null &&
+                          locationDropController.getValue() != null) {
+                        widget.controller.updateItem(user, locationDropController.getValue());
+                        RouteGenerator.onTapToFriends(context);
+                      }
+                    },
+                  ),
+                ],
+              )
+            );
+          }
+        );
+      }
+    );
   }
 }
 
-class _FriendsController {
-  final Color colorTheme;
-  WebSocketChannel channel;
+class FriendController {
 
-  _FriendsController(this.colorTheme) {
-    channel = MyApp.con();
+  void getData(WebSocketChannel channel) {
+    String data = '{"action": "GET FRIENDS"}';
+    channel.sink.add(data);
+  }
+
+  void setData(json) {
+    Friends.items = [];
+    Friends.roomItems = [];
+    Friends.locationItems = [];
+
+    String jsonDataString = json.toString();
+    var jsonData = jsonDecode(jsonDataString);
+    var users = jsonData['users'];
+    var locations = jsonData['locations'];
+    var rooms = jsonData['rooms'];
+
+    for(int i = 0; i < users.length; i++) {
+      User u = new User(users[i]['user_id'], users[i]['location_id'],
+          users[i]['username']);
+      Friends.items.add(u);
+    }
+    for (int i = 0; i < locations.length; i++) {
+      Location l = new Location(
+          locations[i]['location_id'],
+          locations[i]['room_id'],
+          locations[i]['title'],
+          locations[i]['x'],
+          locations[i]['y']);
+      Friends.locationItems.add(l);
+    }
+    for (int i = 0; i < rooms.length; i++) {
+      Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
+          rooms[i]['title'], rooms[i]['scanned']);
+      Friends.roomItems.add(r);
+    }
   }
 
   void removeItem(User user) {
-    int id = user.id;
-    String data = '{"action": "DELETE FRIEND", "id": "$id"}';
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "DELETE FRIEND", "id": "${user.id}"}';
+    channel.sink.add(data);
+  }
+
+  void updateItem(User user, Location location) {
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "UPDATE FRIEND", "user_id": "${user.id}", "location_id": ${location.id}}';
     channel.sink.add(data);
   }
 }

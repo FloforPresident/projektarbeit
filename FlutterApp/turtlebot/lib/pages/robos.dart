@@ -8,7 +8,10 @@ import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Robos extends StatefulWidget {
-  final channel = MyApp.con();
+  final RoboController controller = new RoboController();
+  final WebSocketChannel channel = MyApp.con();
+
+  static List<Robo> items = [];
 
   Robos({Key key}) : super(key: key);
 
@@ -18,21 +21,14 @@ class Robos extends StatefulWidget {
   }
 }
 
-class _RoboState extends State<Robos> {
-  List<Robo> items = [];
+class _RoboState extends State<Robos>{
   final GlobalKey<AnimatedListState> key = GlobalKey();
   final colorTheme = Colors.blue;
 
   @override
   void initState() {
     super.initState();
-    getRobos();
-  }
-
-  void getRobos() {
-    int userID = MyApp.id;
-    String data = '{"action": "GET ROBOS", "userID": $userID}';
-    widget.channel.sink.add(data);
+    widget.controller.getData(widget.channel);
   }
 
   @override
@@ -44,40 +40,33 @@ class _RoboState extends State<Robos> {
             onPressed: () {
               RouteGenerator.onTapToHome(context);
             }),
-        title: Text("Connected Robos"),
+        title: Text("Robos"),
         backgroundColor: colorTheme,
       ),
       body: StreamBuilder(
-          stream: widget.channel.stream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              String jsonDataString = snapshot.data.toString();
-              var jsonData = jsonDecode(jsonDataString);
+        stream: widget.channel.stream,
+        builder: (context, snapshot) {
+          if(snapshot.hasData) {
+            widget.controller.setData(snapshot.data);
 
-              for (int i = 0; i < jsonData.length; i++) {
-                Robo r = new Robo(jsonData[i]['robo_id'], jsonData[i]['name'],
-                    jsonData[i]['ip']);
-                items.add(r);
-              }
-
-              return AnimatedList(
-                key: key,
-                initialItemCount: items.length,
-                itemBuilder: (context, index, animation) {
-                  return buildItem(items[index], animation, index);
-                },
-              );
-            } else {
-              return Text('');
-            }
-          }),
+            return AnimatedList(
+              key: key,
+              initialItemCount: Robos.items.length,
+              itemBuilder: (context, index, animation) {
+                return buildItem(Robos.items[index], animation, index);
+              },
+            );
+          } else {
+            return Text('');
+          }
+        }
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         foregroundColor: Colors.white,
         backgroundColor: colorTheme,
         onPressed: () {
-          _RobosController addItemCon = _RobosController(colorTheme);
-          addItemCon.addItemDialog(context);
+          addItemDialog(context);
         },
       ),
     );
@@ -117,9 +106,7 @@ class _RoboState extends State<Robos> {
                       onPressed: () async {
                         bool delete = await OnDelete.onDelete(context);
                         if (delete) {
-                          _RobosController deleteItemCon =
-                              _RobosController(colorTheme);
-                          deleteItemCon.removeItem(item);
+                          widget.controller.removeItem(item);
                           RouteGenerator.onTapToRobos(context);
                         }
                       },
@@ -134,32 +121,6 @@ class _RoboState extends State<Robos> {
     );
   }
 
-  @override
-  void dispose() {
-    widget.channel.sink.close();
-    super.dispose();
-  }
-}
-
-class _RobosController {
-  final Color colorTheme;
-  WebSocketChannel channel;
-
-  _RobosController(this.colorTheme) {
-    channel = MyApp.con();
-  }
-
-  void removeItem(Robo robo) {
-    int id = robo.id;
-    String data = '{"action": "DELETE ROBO", "id": "$id"}';
-    channel.sink.add(data);
-  }
-
-  void addItem(String name, String ip) {
-    String data = '{"action": "ADD ROBO", "name": "$name", "ip": "$ip"}';
-    channel.sink.add(data);
-  }
-
   void addItemDialog(BuildContext context) {
     TextEditingController _name = TextEditingController();
     TextEditingController _ip = TextEditingController();
@@ -169,7 +130,7 @@ class _RobosController {
       context: context,
       builder: (context) => SingleChildScrollView(
         child: AlertDialog(
-          title: Text("Add new Robo"),
+          title: Text("Neuen Robo hinzufügen"),
           content: Column(
             children: <Widget>[
               TextField(
@@ -180,7 +141,7 @@ class _RobosController {
               ),
               TextField(
                 controller: _ip,
-                decoration: InputDecoration(labelText: "IP-Address"),
+                decoration: InputDecoration(labelText: "IP-Addresse"),
                 maxLines: null,
                 maxLength: 20,
               ),
@@ -188,16 +149,16 @@ class _RobosController {
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text("No"),
+              child: Text("Schließen"),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
             FlatButton(
-              child: Text("Yes"),
+              child: Text("Hinzufügen"),
               onPressed: () {
                 if (_name.text.isNotEmpty && _ip.text.isNotEmpty) {
-                  addItem(_name.text, _ip.text);
+                  widget.controller.addItem(_name.text, _ip.text);
                   RouteGenerator.onTapToRobos(context);
                 }
               },
@@ -206,5 +167,38 @@ class _RobosController {
         ),
       ),
     );
+  }
+}
+
+class RoboController {
+
+  void getData(WebSocketChannel channel) {
+    String data = '{"action": "GET ROBOS"}';
+    channel.sink.add(data);
+  }
+
+  void setData(json) {
+    Robos.items = [];
+
+    String jsonDataString = json.toString();
+    var robos = jsonDecode(jsonDataString);
+
+    for (int i = 0; i < robos.length; i++) {
+      Robo r = new Robo(robos[i]['robo_id'], robos[i]['name'],
+          robos[i]['ip']);
+      Robos.items.add(r);
+    }
+  }
+
+  void removeItem(Robo robo) {
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "DELETE ROBO", "id": "${robo.id}"}';
+    channel.sink.add(data);
+  }
+
+  void addItem(String name, String ip) {
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "ADD ROBO", "name": "$name", "ip": "$ip"}';
+    channel.sink.add(data);
   }
 }

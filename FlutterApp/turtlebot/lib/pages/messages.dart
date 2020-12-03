@@ -1,14 +1,23 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
+import 'package:turtlebot/services/routing.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+
 
 class Messages extends StatefulWidget {
-  Messages({Key key}) : super(key: key) {
-    controller = ControllerMessages(this, Colors.orange);
-  }
+  final MessageController controller = new MessageController();
+  final channel = MyApp.con();
+  final User selectedUser;
 
-  ControllerMessages controller;
+  static List<User> items = [];
+
+  Messages(this.selectedUser, {Key key}) : super(key: key);
+
   double _fontsize = 18;
   double _leftStart = 40;
   double _topSpace = 15;
@@ -32,108 +41,188 @@ class Messages extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _MessagesState();
+    return _MessageState();
   }
 }
 
-class _MessagesState extends State<Messages> {
+class _MessageState extends State<Messages> {
+  TextEditingController _subject = new TextEditingController();
+  TextEditingController _message = new TextEditingController();
+
+  ControllerCustomDropdown dropController = ControllerCustomDropdown<User>();
+
+  final colorTheme = Colors.orange;
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.controller.getData(widget.channel);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Send Message"),
-          backgroundColor: widget.controller.colorTheme,
-        ),
-        body: SingleChildScrollView(
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CustomDropdownLabel(
-                  label: "Recipient",
-                  child: CustomDropdownMenu(
-                    controller: widget.controller.dropController,
-                    data: <User>[
-                      User(1, 2, "living-room"),
-                      User(2, 2, "dining-room")
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(widget.leftStart, 15, 20, 0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        flex: 5,
-                        child: Container(
-                            child: Text(
-                          "Subject:",
-                          style: TextStyle(fontSize: widget.fontsize),
-                        )),
+      appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              RouteGenerator.onTapToHome(context);
+            }),
+        title: Text("Nachricht senden"),
+        backgroundColor: colorTheme,
+      ),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              StreamBuilder(
+                  stream: widget.channel.stream,
+                  builder: (context, snapshot) {
+
+                    widget.controller.setData(snapshot.data);
+
+                    // Logic for Send Message directly Button on Friends Page
+                    int startValueIndex;
+                    if(widget.selectedUser != null) {
+                      for(int i = 0; i < Messages.items.length; i++) {
+                        if(widget.selectedUser.id == Messages.items[i].id) {
+                          dropController.setValue(widget.selectedUser);
+                          startValueIndex = i;
+                        }
+                      }
+                    }
+
+                    return CustomDropdownLabel(
+                      label: "Empfänger",
+                      child: CustomDropdownMenu<User>(
+                        controller: dropController,
+                        data: Messages.items,
+                        startValueId: startValueIndex,
                       ),
-                      Expanded(
-                        flex: 3,
-                        child: TextFormField(
-                          maxLines: null,
-                          textAlignVertical: TextAlignVertical.bottom,
-                          decoration: InputDecoration(),
-                          maxLength: 25,
-                        ),
+                    );
+                  }
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(widget.leftStart, 15, 20, 0),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 5,
+                      child: Container(
+                          child: Text(
+                        "Betreff:",
+                        style: TextStyle(fontSize: widget.fontsize),
+                      )),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: TextFormField(
+                        controller: _subject,
+                        maxLines: null,
+                        textAlignVertical: TextAlignVertical.bottom,
+                        decoration: InputDecoration(),
+                        maxLength: 25,
                       ),
-                      Spacer(
-                        flex: 2,
-                      )
-                    ],
-                  ),
+                    ),
+                    Spacer(
+                      flex: 2,
+                    )
+                  ],
                 ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                      margin: EdgeInsets.fromLTRB(
-                          widget.leftStart, widget.topSpace, 0, 0),
-                      child: Text("Message: ",
-                          style: TextStyle(fontSize: widget.fontsize))),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                    margin: EdgeInsets.fromLTRB(
+                        widget.leftStart, widget.topSpace, 0, 0),
+                    child: Text("Nachricht: ",
+                        style: TextStyle(fontSize: widget.fontsize))),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(
+                    widget.leftStart, widget.topSpace, widget.leftStart, 0),
+                child: TextFormField(
+                  controller: _message,
+                  maxLines: null,
+                  maxLength: 300,
+                )),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
+                child: RaisedButton(
+                  onPressed: () {
+
+                    if(dropController.getValue() != null && _subject.text.isNotEmpty && _message.text.isNotEmpty) {
+                      widget.controller.sendMessage(dropController.getValue(), _subject.text, _message.text);
+                      _showAlertDialog(true);
+                    }
+                    else {
+                      _showAlertDialog(false);
+                    }
+                  },
+                  child: Text("Auftrag starten"),
                 ),
-                Container(
-                    padding: EdgeInsets.fromLTRB(
-                        widget.leftStart, widget.topSpace, widget.leftStart, 0),
-                    child: TextFormField(
-                      maxLines: null,
-                      maxLength: 300,
-                    )),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      widget.controller.getValue();
-                    },
-                    child: Text("Send Message"),
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
-        ));
+        ),
+      )
+    );
+  }
+
+  void _showAlertDialog(bool success) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: success ? Text('Geklappt!'): Text('Fehler'),
+          content: success ? Text(
+              'Du hast den Auftrag für ${dropController.getValue().name} gestartet:\n\n${_message.text}'
+          ) : Text('Alle Felder ausfüllen'),
+          actions: <Widget> [
+              FlatButton(
+                onPressed: (){
+                  if(success) {
+                    RouteGenerator.onTapToMessages(context);
+                  } else {
+                    Navigator.of(context).pop();
+                  }
+                },
+                child: Text('Ok'))
+          ]
+        );
+      }
+    );
   }
 }
 
-class ControllerMessages {
-  Color _colorTheme;
-  ControllerCustomDropdown dropController = ControllerCustomDropdown<User>();
+class MessageController {
 
-  Messages view;
-
-  getValue() {
-    User u = dropController.getValue();
-    print(u.id);
-
-    print(dropController.getValue());
+  void getData(WebSocketChannel channel) {
+    String data = '{"action": "GET USERS"}';
+    channel.sink.add(data);
   }
 
-  ControllerMessages(this.view, this._colorTheme);
+  void setData(json) {
+    Messages.items = [];
 
-  get colorTheme {
-    return Color(_colorTheme.value);
+    String jsonDataString = json.toString();
+    var users = jsonDecode(jsonDataString);
+
+    for (int i = 0; i < users.length; i++) {
+      User u = new User(
+          users[i]['user_id'], users[i]['location_id'],
+          users[i]['username']);
+      Messages.items.add(u);
+    }
+  }
+
+  void sendMessage(User user, String subject, String message) {
+    WebSocketChannel channel = MyApp.con();
+
+    String data = '{"action": "SEND MESSAGE", "from_user": ${MyApp.id}, "to_user": ${user.id}, "subject": "$subject", "message": "$message"}';
+    channel.sink.add(data);
   }
 }

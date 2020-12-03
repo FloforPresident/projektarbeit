@@ -28,6 +28,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 import rospy
+from std_msgs.msg import String
 from geometry_msgs.msg import Twist
 import sys, select, os
 if os.name == 'nt':
@@ -35,154 +36,162 @@ if os.name == 'nt':
 else:
   import tty, termios
 
-BURGER_MAX_LIN_VEL = 0.22
-BURGER_MAX_ANG_VEL = 2.84
+class Teleop:
 
-WAFFLE_MAX_LIN_VEL = 0.26
-WAFFLE_MAX_ANG_VEL = 1.82
+    BURGER_MAX_LIN_VEL = 0.22
+    BURGER_MAX_ANG_VEL = 2.84
 
-LIN_VEL_STEP_SIZE = 0.01
-ANG_VEL_STEP_SIZE = 0.1
+    WAFFLE_MAX_LIN_VEL = 0.26
+    WAFFLE_MAX_ANG_VEL = 1.82
 
-msg = """
-Control Your TurtleBot3!
----------------------------
-Moving around:
-        w
-   a    s    d
-        x
+    LIN_VEL_STEP_SIZE = 0.01
+    ANG_VEL_STEP_SIZE = 0.1
 
-w/x : increase/decrease linear velocity (Burger : ~ 0.22, Waffle and Waffle Pi : ~ 0.26)
-a/d : increase/decrease angular velocity (Burger : ~ 2.84, Waffle and Waffle Pi : ~ 1.82)
+    msg = """
+    Control Your TurtleBot3!
+    ---------------------------
+    Moving around:
+            w
+      a    s    d
+            x
 
-space key, s : force stop
+    w/x : increase/decrease linear velocity (Burger : ~ 0.22, Waffle and Waffle Pi : ~ 0.26)
+    a/d : increase/decrease angular velocity (Burger : ~ 2.84, Waffle and Waffle Pi : ~ 1.82)
 
-CTRL-C to quit
-"""
+    space key, s : force stop
 
-e = """
-Communications Failed
-"""
+    CTRL-C to quit
+    """
 
-currentKey = 'empty'
+    e = """
+    Communications Failed
+    """
 
-def getKey():
-    key = currentKey
-    return key
-def setKey(key):
-    currentKey = key
-def resetKey():
     currentKey = 'empty'
 
-def vels(target_linear_vel, target_angular_vel):
-    return "currently:\tlinear vel %s\t angular vel %s " % (target_linear_vel,target_angular_vel)
 
-def makeSimpleProfile(output, input, slop):
-    if input > output:
-        output = min( input, output + slop )
-    elif input < output:
-        output = max( input, output - slop )
-    else:
-        output = input
+    def getKey(self):
+        if self.currentKey != 'empty':
+            print("Get key::: " + self.currentKey)
+        key = self.currentKey
+        return key
+    def setKey(self, key):
+        print("key is: " + key)
+        self.currentKey = key
+        print("Current key is: " + self.currentKey)
+    def resetKey(self):
+        self.currentKey = 'empty'
 
-    return output
+    def vels(self, target_linear_vel, target_angular_vel):
+        return "currently:\tlinear vel %s\t angular vel %s " % (target_linear_vel,target_angular_vel)
 
-def constrain(input, low, high):
-    if input < low:
-      input = low
-    elif input > high:
-      input = high
-    else:
-      input = input
+    def makeSimpleProfile(self, output, input, slop):
+        if input > output:
+            output = min( input, output + slop )
+        elif input < output:
+            output = max( input, output - slop )
+        else:
+            output = input
 
-    return input
+        return output
 
-def checkLinearLimitVelocity(vel):
-    if turtlebot3_model == "burger":
-      vel = constrain(vel, -BURGER_MAX_LIN_VEL, BURGER_MAX_LIN_VEL)
-    elif turtlebot3_model == "waffle" or turtlebot3_model == "waffle_pi":
-      vel = constrain(vel, -WAFFLE_MAX_LIN_VEL, WAFFLE_MAX_LIN_VEL)
-    else:
-      vel = constrain(vel, -BURGER_MAX_LIN_VEL, BURGER_MAX_LIN_VEL)
+    def constrain(self, input, low, high):
+        if input < low:
+          input = low
+        elif input > high:
+          input = high
+        else:
+          input = input
 
-    return vel
+        return input
 
-def checkAngularLimitVelocity(vel):
-    if turtlebot3_model == "burger":
-      vel = constrain(vel, -BURGER_MAX_ANG_VEL, BURGER_MAX_ANG_VEL)
-    elif turtlebot3_model == "waffle" or turtlebot3_model == "waffle_pi":
-      vel = constrain(vel, -WAFFLE_MAX_ANG_VEL, WAFFLE_MAX_ANG_VEL)
-    else:
-      vel = constrain(vel, -BURGER_MAX_ANG_VEL, BURGER_MAX_ANG_VEL)
+    def checkLinearLimitVelocity(self, vel):
+        if turtlebot3_model == "burger":
+          vel = constrain(vel, -BURGER_MAX_LIN_VEL, BURGER_MAX_LIN_VEL)
+        elif turtlebot3_model == "waffle" or turtlebot3_model == "waffle_pi":
+          vel = constrain(vel, -WAFFLE_MAX_LIN_VEL, WAFFLE_MAX_LIN_VEL)
+        else:
+          vel = constrain(vel, -BURGER_MAX_LIN_VEL, BURGER_MAX_LIN_VEL)
 
-    return vel
+        return vel
 
-def startTeleop():
+    def checkAngularLimitVelocity(self, vel):
+        if turtlebot3_model == "burger":
+          vel = constrain(vel, -BURGER_MAX_ANG_VEL, BURGER_MAX_ANG_VEL)
+        elif turtlebot3_model == "waffle" or turtlebot3_model == "waffle_pi":
+          vel = constrain(vel, -WAFFLE_MAX_ANG_VEL, WAFFLE_MAX_ANG_VEL)
+        else:
+          vel = constrain(vel, -BURGER_MAX_ANG_VEL, BURGER_MAX_ANG_VEL)
 
-    rospy.init_node('turtlebot3_teleop')
-    pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+        return vel
 
-    turtlebot3_model = rospy.get_param("model", "burger")
+    def startTeleop(self):
+        print("####################################")
+        rospy.init_node('turtlebot3_teleop')
+        pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
 
-    status = 0
-    target_linear_vel   = 0.0
-    target_angular_vel  = 0.0
-    control_linear_vel  = 0.0
-    control_angular_vel = 0.0
+        turtlebot3_model = rospy.get_param("model", "burger")
 
-    try:
-        print(msg)
-        while(1):
-            key = getKey()
-            if key != 'empty':
-                print("Got key:")
-                print(key)
-            if key == 'w' :
-                target_linear_vel = checkLinearLimitVelocity(target_linear_vel + LIN_VEL_STEP_SIZE)
-                status = status + 1
-                print(vels(target_linear_vel,target_angular_vel))
-                resetKey()
-            elif key == 'x' :
-                target_linear_vel = checkLinearLimitVelocity(target_linear_vel - LIN_VEL_STEP_SIZE)
-                status = status + 1
-                print(vels(target_linear_vel,target_angular_vel))
-            elif key == 'a' :
-                target_angular_vel = checkAngularLimitVelocity(target_angular_vel + ANG_VEL_STEP_SIZE)
-                status = status + 1
-                print(vels(target_linear_vel,target_angular_vel))
-            elif key == 'd' :
-                target_angular_vel = checkAngularLimitVelocity(target_angular_vel - ANG_VEL_STEP_SIZE)
-                status = status + 1
-                print(vels(target_linear_vel,target_angular_vel))
-            elif key == ' ' or key == 's' :
-                target_linear_vel   = 0.0
-                control_linear_vel  = 0.0
-                target_angular_vel  = 0.0
-                control_angular_vel = 0.0
-                print(vels(target_linear_vel, target_angular_vel))
-            else:
-                if (key == '\x03'):
-                    break
+        status = 0
+        target_linear_vel   = 0.0
+        target_angular_vel  = 0.0
+        control_linear_vel  = 0.0
+        control_angular_vel = 0.0
 
-            if status == 20 :
-                print(msg)
-                status = 0
+        try:
+            while(1):
+                key = self.getKey()
+                if key != 'empty':
+                    print("Got key:")
+                    print(key)
+                if key == 'w' :
+                    target_linear_vel = self.checkLinearLimitVelocity(target_linear_vel + self.LIN_VEL_STEP_SIZE)
+                    status = status + 1
+                    print(self.vels(target_linear_vel,target_angular_vel))
+                    resetKey()
+                elif key == 'x' :
+                    target_linear_vel = self.checkLinearLimitVelocity(target_linear_vel - self.LIN_VEL_STEP_SIZE)
+                    status = status + 1
+                    print(self.vels(target_linear_vel,target_angular_vel))
+                elif key == 'a' :
+                    target_angular_vel = self.checkAngularLimitVelocity(target_angular_vel + self.ANG_VEL_STEP_SIZE)
+                    status = status + 1
+                    print(vels(target_linear_vel,target_angular_vel))
+                elif key == 'd' :
+                    target_angular_vel = self.checkAngularLimitVelocity(target_angular_vel - self.ANG_VEL_STEP_SIZE)
+                    status = status + 1
+                    print(self.vels(target_linear_vel,target_angular_vel))
+                elif key == ' ' or key == 's' :
+                    target_linear_vel   = 0.0
+                    control_linear_vel  = 0.0
+                    target_angular_vel  = 0.0
+                    control_angular_vel = 0.0
+                    print(self.vels(target_linear_vel, target_angular_vel))
+                else:
+                    if (key == '\x03'):
+                        break
 
+                if status == 20 :
+                    status = 0
+
+                twist = Twist()
+
+                control_linear_vel = self.makeSimpleProfile(control_linear_vel, target_linear_vel, (self.LIN_VEL_STEP_SIZE/2.0))
+                twist.linear.x = control_linear_vel; twist.linear.y = 0.0; twist.linear.z = 0.0
+
+                control_angular_vel = self.makeSimpleProfile(control_angular_vel, target_angular_vel, (self.ANG_VEL_STEP_SIZE/2.0))
+                twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = control_angular_vel
+
+                pub.publish(twist)
+
+        except Exception as e:
+            print("EXCEPTION")
+            print(e)
+
+        finally:
             twist = Twist()
-
-            control_linear_vel = makeSimpleProfile(control_linear_vel, target_linear_vel, (LIN_VEL_STEP_SIZE/2.0))
-            twist.linear.x = control_linear_vel; twist.linear.y = 0.0; twist.linear.z = 0.0
-
-            control_angular_vel = makeSimpleProfile(control_angular_vel, target_angular_vel, (ANG_VEL_STEP_SIZE/2.0))
-            twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = control_angular_vel
-
+            twist.linear.x = 0.0; twist.linear.y = 0.0; twist.linear.z = 0.0
+            twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = 0.0
             pub.publish(twist)
+            print("Finally................")
 
-    except:
-        print(e)
-
-    finally:
-        twist = Twist()
-        twist.linear.x = 0.0; twist.linear.y = 0.0; twist.linear.z = 0.0
-        twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = 0.0
-        pub.publish(twist)
