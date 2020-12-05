@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
-import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
-import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
+import 'package:turtlebot/frameworks/top_app_bar.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -103,10 +103,6 @@ class _RoomState extends State<Rooms> {
         roboName = Rooms.roboItems[i].name;
       }
     }
-    bool _selected = false;
-    if(item.scanned == 1){
-      _selected = true;
-    }
 
     return SizeTransition(
       sizeFactor: animation,
@@ -127,7 +123,7 @@ class _RoomState extends State<Rooms> {
                 flex: 1,
                 child: Align(
                   child: Padding(
-                    child: _selected ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank),
+                    child: item.scanned ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank),
                     padding: EdgeInsets.fromLTRB(5, 0, 15, 0),
                   ),
                   alignment: Alignment.centerRight,
@@ -365,13 +361,13 @@ class RoomController {
     var robos = jsonData['robos'];
 
     for (int i = 0; i < rooms.length; i++) {
-      Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-          rooms[i]['title'], rooms[i]['scanned']);
+      Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'],
+          rooms[i]['name'], rooms[i]['scanned']);
       Rooms.items.add(r);
     }
     for (int i = 0; i < robos.length; i++) {
       Robo r = new Robo(
-          robos[i]['robo_id'], robos[i]['name'], robos[i]['ip']);
+          robos[i]['id'], robos[i]['name'], robos[i]['ip']);
       Rooms.roboItems.add(r);
     }
   }
@@ -393,7 +389,7 @@ class RoomController {
         String jsonDataString = json.toString();
         final jsonData = jsonDecode(jsonDataString);
 
-        Rooms.newRoom = new Room(jsonData['room_id'], jsonData['robo_id'], jsonData['title'], jsonData['scanned']);
+        Rooms.newRoom = new Room(jsonData['id'], jsonData['robo_id'], jsonData['name'], jsonData['scanned']);
       }
     });
   }

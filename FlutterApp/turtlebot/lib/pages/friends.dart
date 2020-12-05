@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
-import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
+import 'package:turtlebot/pages/login.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -244,22 +245,22 @@ class FriendController {
     var rooms = jsonData['rooms'];
 
     for(int i = 0; i < users.length; i++) {
-      User u = new User(users[i]['user_id'], users[i]['location_id'],
-          users[i]['username']);
+      User u = new User(users[i]['id'], users[i]['location_id'],
+          users[i]['name']);
       Friends.items.add(u);
     }
     for (int i = 0; i < locations.length; i++) {
       Location l = new Location(
-          locations[i]['location_id'],
+          locations[i]['id'],
           locations[i]['room_id'],
-          locations[i]['title'],
+          locations[i]['name'],
           locations[i]['x'],
           locations[i]['y']);
       Friends.locationItems.add(l);
     }
     for (int i = 0; i < rooms.length; i++) {
-      Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-          rooms[i]['title'], rooms[i]['scanned']);
+      Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'],
+          rooms[i]['name'], rooms[i]['scanned']);
       Friends.roomItems.add(r);
     }
   }

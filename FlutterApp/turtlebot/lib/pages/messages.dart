@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
-import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -213,8 +213,8 @@ class MessageController {
 
     for (int i = 0; i < users.length; i++) {
       User u = new User(
-          users[i]['user_id'], users[i]['location_id'],
-          users[i]['username']);
+          users[i]['id'], users[i]['location_id'],
+          users[i]['name']);
       Messages.items.add(u);
     }
   }

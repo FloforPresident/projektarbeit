@@ -33,7 +33,7 @@ class Room implements DatabaseObject {
   int _id;
   int _roboID;
   String _name;
-  int _scanned;
+  bool _scanned;
 //  List<Robo> _whoHasThisMap; //
 
   Room(this._id, this._roboID, this._name, this._scanned);

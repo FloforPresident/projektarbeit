@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/routing.dart';
@@ -341,19 +341,20 @@ class LoginController {
         var jsonData = jsonDecode(jsonDataString);
         var locations = jsonData['locations'];
         var rooms = jsonData['rooms'];
+        print(rooms);
 
         for (int i = 0; i < locations.length; i++) {
           Location l = new Location(
-              locations[i]['location_id'],
+              locations[i]['id'],
               locations[i]['room_id'],
-              locations[i]['title'],
+              locations[i]['name'],
               locations[i]['x'],
               locations[i]['y']);
           Login.locationItems.add(l);
         }
         for (int i = 0; i < rooms.length; i++) {
-          Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-              rooms[i]['title'], rooms['scanned']);
+          Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'],
+              rooms[i]['name'], rooms[i]['scanned']);
           Login.roomItems.add(r);
         }
       }
@@ -399,8 +400,8 @@ class LoginController {
   void loginHelper(BuildContext context, String jsonDataString) {
     final jsonData = jsonDecode(jsonDataString);
 
-    User sessionUser = new User(jsonData['user_id'],
-        jsonData['location_id'], jsonData['username']);
+    User sessionUser = new User(jsonData['id'],
+        jsonData['location_id'], jsonData['name']);
 
     RouteGenerator.onTapToHome(context, sessionUser: sessionUser);
   }

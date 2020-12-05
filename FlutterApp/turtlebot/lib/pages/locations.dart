@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
-import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
-import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/top_app_bar.dart';
+import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
@@ -206,17 +206,17 @@ class LocationController {
 
     for (int i = 0; i < locations.length; i++) {
       Location l = new Location(
-          locations[i]['location_id'],
+          locations[i]['id'],
           locations[i]['room_id'],
-          locations[i]['title'],
+          locations[i]['name'],
           locations[i]['x'],
           locations[i]['y']);
       Locations.items.add(l);
       Locations.activeItems.add(l);
     }
     for (int i = 0; i < rooms.length; i++) {
-      Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-          rooms[i]['title'], rooms[i]['scanned']);
+      Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'],
+          rooms[i]['name'], rooms[i]['scanned']);
       Locations.roomItems.add(r);
     }
   }

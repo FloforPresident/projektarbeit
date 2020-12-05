@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/routing.dart';
@@ -184,7 +184,7 @@ class RoboController {
     var robos = jsonDecode(jsonDataString);
 
     for (int i = 0; i < robos.length; i++) {
-      Robo r = new Robo(robos[i]['robo_id'], robos[i]['name'],
+      Robo r = new Robo(robos[i]['id'], robos[i]['name'],
           robos[i]['ip']);
       Robos.items.add(r);
     }
