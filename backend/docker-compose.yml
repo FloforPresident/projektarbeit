@@ -13,6 +13,7 @@ services:
       - db
     depends_on:
       - db
+    # Insert your own IP in here
     ports:
       - 192.168.0.175:8765:8765
     environment:

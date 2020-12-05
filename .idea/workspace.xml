@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91cf9fe0-187f-4249-ac9a-355edd623d27" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/databaseClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/databaseClass.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +36,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/controller" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -50,16 +49,37 @@
       <option name="presentableId" value="Default" />
       <updated>1606150344007</updated>
       <workItem from="1606150345048" duration="63000" />
+      <workItem from="1607191654647" duration="232000" />
     </task>
+    <task id="LOCAL-00001" summary="Remove db-befehle.txt">
+      <created>1607191797134</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1607191797134</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Remove db-befehle.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove db-befehle.txt" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="558" y="131" width="794" height="851" key="CommitChangelistDialog2" timestamp="1607191797079">
+      <screen x="0" y="40" width="1920" height="1040" />
+    </state>
+    <state x="558" y="131" width="794" height="851" key="CommitChangelistDialog2/0.40.1920.1040@0.40.1920.1040" timestamp="1607191797079" />
     <state x="741" y="282" width="424" height="479" key="FileChooserDialogImpl" timestamp="1606150405582">
       <screen x="118" y="0" width="1680" height="1050" />
     </state>
     <state x="741" y="282" width="424" height="479" key="FileChooserDialogImpl/0.1050.1920.1080/118.0.1680.1050@118.0.1680.1050" timestamp="1606150405582" />
+    <state x="555" y="295" width="800" height="523" key="Vcs.Push.Dialog.v2" timestamp="1607191798211">
+      <screen x="0" y="40" width="1920" height="1040" />
+    </state>
+    <state x="555" y="295" width="800" height="523" key="Vcs.Push.Dialog.v2/0.40.1920.1040@0.40.1920.1040" timestamp="1607191798211" />
   </component>
 </project>
