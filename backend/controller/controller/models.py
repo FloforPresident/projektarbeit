@@ -154,7 +154,7 @@ def send_message(from_user, to_user, subject, message):
 class Location(db.Model, SerializerMixin):
     __tablename__ = 'location'
     id = db.Column(db.Integer, primary_key=True)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), nullable=False)
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id', ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String(80), nullable=False)
     x = db.Column(db.FLOAT, nullable=False)
     y = db.Column(db.FLOAT, nullable=False)
@@ -176,7 +176,7 @@ class Robo(db.Model, SerializerMixin):
 class Room(db.Model, SerializerMixin):
     __tablename__ = 'room'
     id = db.Column(db.Integer, primary_key=True)
-    robo_id = db.Column(db.Integer, db.ForeignKey('robo.id'), nullable=True)
+    robo_id = db.Column(db.Integer, db.ForeignKey('robo.id', ondelete='SET NULL'), nullable=True)
     name = db.Column(db.String(80), nullable=False)
     pgm = db.Column(db.Binary, nullable=True)
     yaml = db.Column(db.Text, nullable=True)
@@ -189,7 +189,7 @@ class Room(db.Model, SerializerMixin):
 class User(db.Model, SerializerMixin):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
-    location_id = db.Column(db.Integer, db.ForeignKey('location.id'), nullable=True)
+    location_id = db.Column(db.Integer, db.ForeignKey('location.id', ondelete='SET NULL'), nullable=True)
     name = db.Column(db.String(80), nullable=False)
     image = db.Column(db.Binary, nullable=True)
     embedding = db.Column(db.Text, nullable=True)

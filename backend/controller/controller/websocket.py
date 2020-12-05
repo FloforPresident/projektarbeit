@@ -7,7 +7,7 @@ import websockets
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@172.18.0.2:5432/turtlebot_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@db:5432/turtlebot_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 connected = set()
@@ -91,13 +91,13 @@ async def ws_handler(websocket, path):
 
 
 async def create_db():
-    # db.drop_all()
+    db.drop_all()
     db.create_all()
 
 
 async def main():
     await create_db()
-    ws_server = websockets.serve(ws_handler, '172.18.0.3', 8765)
+    ws_server = websockets.serve(ws_handler, '0.0.0.0', 8765)
     asyncio.ensure_future(ws_server)
 
 
