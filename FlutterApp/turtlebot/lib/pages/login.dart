@@ -398,8 +398,8 @@ class LoginController {
   void loginHelper(BuildContext context, String jsonDataString) {
     final jsonData = jsonDecode(jsonDataString);
 
-    User sessionUser = new User(jsonData['id'],
-        jsonData['location_id'], jsonData['name']);
+    User sessionUser = new User( 0,
+        0,"seas" );
 
     RouteGenerator.onTapToHome(context, sessionUser: sessionUser);
   }

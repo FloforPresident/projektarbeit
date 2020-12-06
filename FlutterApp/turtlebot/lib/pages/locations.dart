@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
-import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
-import 'package:turtlebot/frameworks/onDelete/on_delete.dart';
+import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/top_app_bar.dart';
+import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
@@ -79,9 +79,9 @@ class _LocationsState extends State<Locations> {
 
               widget.controller.setData(snapshot.data);
 
-              if(dropDownRoomId != null) {
-                widget.controller.updateLocations(context, Locations.roomItems[dropDownRoomId].id);
-                dropController.setValue(Locations.roomItems[dropDownRoomId]);
+              if(widget.dropDownRoomId != null) {
+                widget.controller.updateLocations(context, Locations.roomItems[widget.dropDownRoomId].id);
+                dropController.setValue(Locations.roomItems[widget.dropDownRoomId]);
               }
 
               return SingleChildScrollView(
@@ -133,6 +133,7 @@ class _LocationsState extends State<Locations> {
                       ],
                     ),
                   ),
+
                   Container(
                       margin: EdgeInsets.fromLTRB(15, 30, 0, 15),
                       child: Align(
@@ -152,7 +153,7 @@ class _LocationsState extends State<Locations> {
 
                         widget.controller.updateLocations(context, dropController.getValue().id);
                       },
-                      startValueId: dropDownRoomId,
+                      startValueId: widget.dropDownRoomId,
                       controller: dropController,
                       data: Locations.roomItems,
                     ),
@@ -167,7 +168,7 @@ class _LocationsState extends State<Locations> {
                     return widget.controller.buildItem(context, Locations.activeItems[index], animation, index);
                   },
                 )
-              ]);
+              ]));
             } else {
               return Text('');
             }
