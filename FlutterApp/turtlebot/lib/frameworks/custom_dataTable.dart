@@ -25,7 +25,7 @@ class CustomDataTable extends SizedBox {
               rows: rows,
               columnSpacing: 0.0,
               horizontalMargin: 0.0),
-        ) {}
+        );
 
 
         //todo add possibility to add textstyles
@@ -63,9 +63,8 @@ class CustomDataTable extends SizedBox {
 ///Use this for better positioning of Column TextWidget
 class CustomColumnText extends StatelessWidget
 {
-
-  Text _textWidget;
-  EdgeInsets _padding;
+  final Text _textWidget;
+  final EdgeInsets _padding;
   CustomColumnText(this._textWidget, [this._padding = const EdgeInsets.all(15.0)]);
 
   @override
@@ -83,9 +82,9 @@ class CustomColumnText extends StatelessWidget
 ///Will produce a Container Widget taken up full space
 class CustomColourText extends StatelessWidget {
 
-  Color _backgroundColor;
+  final Color _backgroundColor;
   final Text _text;
-  EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry padding;
 
   CustomColourText(this._text,[ this._backgroundColor = Colors.white,this.padding = const EdgeInsets.all(15.0)]);
 

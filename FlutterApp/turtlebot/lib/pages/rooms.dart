@@ -173,7 +173,6 @@ class _RoomState extends State<Rooms> {
       barrierDismissible: true,
       context: context,
       builder: (context) {
-        List<Location> selectedLocations = [];
         return StatefulBuilder(
           builder: (context, setState) {
             return SingleChildScrollView(

@@ -91,7 +91,7 @@ async def ws_handler(websocket, path):
 
 
 async def create_db():
-    db.drop_all()
+    # db.drop_all()
     db.create_all()
 
 

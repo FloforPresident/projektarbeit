@@ -36,11 +36,14 @@ class _RoboCommandsState extends State<RoboCommands> {
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[RaisedButton(
-            child: Text("Scan Room"),
-          ),
+          children: <Widget>[
+            RaisedButton(
+              child: Text("Scan Room"),
+              onPressed: (){},
+            ),
             RaisedButton(
               child: Text("Bla bla"),
+              onPressed: (){},
             )],
         ),
       )

@@ -14,7 +14,6 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 class Locations extends StatefulWidget {
   final LocationController controller = new LocationController();
   final WebSocketChannel channel = MyApp.con();
-  int dropDownRoomId;
 
   static List<Location> items = [];
   static List<Location> activeItems = [];
@@ -31,6 +30,7 @@ class Locations extends StatefulWidget {
 class _LocationsState extends State<Locations> {
   final colorTheme = Colors.pink;
   ControllerCustomDropdown dropController = ControllerCustomDropdown<Room>();
+  int dropDownRoomId;
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _LocationsState extends State<Locations> {
 
     if(roomID != null) {
       setState(() {
-        widget.dropDownRoomId = roomID;
+        dropDownRoomId = roomID;
       });
     }
   }
@@ -79,9 +79,9 @@ class _LocationsState extends State<Locations> {
 
               widget.controller.setData(snapshot.data);
 
-              if(widget.dropDownRoomId != null) {
-                widget.controller.updateLocations(context, Locations.roomItems[widget.dropDownRoomId].id);
-                dropController.setValue(Locations.roomItems[widget.dropDownRoomId]);
+              if(dropDownRoomId != null) {
+                widget.controller.updateLocations(context, Locations.roomItems[dropDownRoomId].id);
+                dropController.setValue(Locations.roomItems[dropDownRoomId]);
               }
 
               return Column(children: <Widget>[
@@ -96,7 +96,7 @@ class _LocationsState extends State<Locations> {
 
                         widget.controller.updateLocations(context, dropController.getValue().id);
                       },
-                      startValueId: widget.dropDownRoomId,
+                      startValueId: dropDownRoomId,
                       controller: dropController,
                       data: Locations.roomItems,
                     ),
@@ -255,9 +255,6 @@ class LocationController {
         int end = Locations.activeItems.length;
         Locations.activeItems.add(Locations.items[i]);
 
-        AnimatedListItemBuilder build = (context, index, animation) {
-          return buildItem(context, Locations.activeItems[index], animation, index);
-        };
         if(key.currentState != null) {
           key.currentState.insertItem(end);
         }

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
@@ -26,7 +25,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   double _leftStart = 40;
   double _rightEnd = 40;
-  double _topSpace = 20;
   Color colorTheme = Colors.cyan;
   Color secondaryTheme = Colors.white;
 

@@ -36,9 +36,7 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
                   setState(() {
                     widget.controller.currentIndexValue = value;
                     widget.controller.resetState(value);
-                    (widget.controller.onChanged != null)
-                        ? widget.controller.onChanged()
-                        : null;
+                    widget.controller.onChanged();
                   });
                 }),
           ),
@@ -53,11 +51,9 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
 }
 
 class ControllerCustomDropdown<T extends DatabaseObject> {
-  T _value;
-  int _startValueId;
-  int _currentIndexValue;
-
-  int get currentIndexValue => _currentIndexValue;
+  T value;
+  int startValueId;
+  int currentIndexValue;
 
   int getCurrentIndex()
   {
@@ -67,15 +63,6 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
       return currentIndexValue;
   }
 
-  set currentIndexValue(int value) {
-    _currentIndexValue = value;
-  }
-
-  set startValueId(int value) {
-    _startValueId = value;
-  }
-
-  int get startValueId => _startValueId;
   List<DatabaseObject> data;
   Function onChanged;
 
@@ -87,12 +74,12 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
   }
 
   void setValue(T value) {
-    _value = value;
+    this.value = value;
   }
 
   T getValue() {
-    if (_value != null)
-      return _value;
+    if (value != null)
+      return value;
     else
       return null;
   }
@@ -109,7 +96,7 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
 
   void resetState(int value) {
     startValueId = value;
-    this._value = data[value];
+    this.value = data[value];
   }
 }
 
