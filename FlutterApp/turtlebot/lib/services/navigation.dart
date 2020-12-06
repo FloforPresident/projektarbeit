@@ -48,7 +48,7 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                   },
                   icon: Icon(Icons.location_on),
                   label: Text('Rooms'),
-                  color: Colors.green,
+                  color: Colors.purple,
                 ),
               ),
               ButtonTheme(
@@ -73,7 +73,7 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                   },
                   icon: Icon(Icons.videogame_asset),
                   label: Text('Control'),
-                  color: Colors.purple,
+                  color: Colors.green,
                 ),
               )
             ]));

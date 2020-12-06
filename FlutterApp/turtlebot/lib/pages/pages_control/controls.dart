@@ -3,9 +3,14 @@ import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/main.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-
 class Controls extends StatefulWidget {
   final ControlController controller = new ControlController();
+  Color textColor = Colors.white;
+  Color backgroundColor = Colors.green;
+  Color borderActionButtonColor = Colors.white;
+  Color controlPadBackground = Color(0xffe7ebda);
+  Color borderConrolPadBackground = Colors.green;
+  double borderFloatingWidth = 3.0;
 
   Controls({Key key}) : super(key: key);
 
@@ -13,82 +18,98 @@ class Controls extends StatefulWidget {
 }
 
 class _ControlsState extends State<Controls> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: Center(child: Icon(Icons.arrow_back, color: widget.textColor,)),
             onPressed: () {
               RouteGenerator.onTapToHome(context);
             },
           ),
-          title: Text("Controlling"),
-          backgroundColor: Colors.purple,
+          title: Text("Controlling",style: TextStyle(
+            color: widget.textColor)
+          ),
+          backgroundColor: widget.backgroundColor,
         ),
         body: Container(
-            padding: EdgeInsets.all(20),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  ButtonTheme(
-                    minWidth: 200,
-                    height: 100,
-                    child: FlatButton.icon(
-                      onPressed: () {
-                        widget.controller.up();
-                        RouteGenerator.onTapToRoboStatus(context);
-                      },
-                      label: Text(''),
-                      icon: Icon(Icons.arrow_upward_rounded),
-                      color: Colors.grey,
+            child: Container(
+              height: double.infinity,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Expanded(child: Container(decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black
+                      )
+                    ),child: Center(child: Text("Video")))),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: widget.borderConrolPadBackground,
+                          width: 4.0,
+                        ),
+                        shape: BoxShape.circle,
+                        color: widget.controlPadBackground,
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border:Border.all(
+                                  color: widget.borderActionButtonColor,
+                                  width: widget.borderFloatingWidth,
+                                )
+                            ),
+                            child: FloatingActionButton(
+                                backgroundColor: widget.backgroundColor,
+                                heroTag:"up",
+                                onPressed: () {},
+                                child: Icon(Icons.arrow_upward, color: widget.textColor)),
+                          ),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border:Border.all(
+                                      color: widget.borderActionButtonColor,
+                                      width: widget.borderFloatingWidth,
+                                    )
+                                ),
+                                    margin:EdgeInsets.fromLTRB(0, 0, 70, 0) ,child: FloatingActionButton(onPressed: () {},backgroundColor: widget.backgroundColor,heroTag:"left", child: Icon(Icons.arrow_back_rounded, color: widget.textColor))),
+                                Container(decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border:Border.all(
+                                    color: widget.borderActionButtonColor,
+                                    width: widget.borderFloatingWidth,
+                                  )
+                                ), child: FloatingActionButton(onPressed: () {},backgroundColor: widget.backgroundColor,  heroTag:"right", child: Icon(Icons.arrow_forward_rounded, color: widget.textColor,)))
+                              ],
+                            ),
+                          ),
+                          Container(
+                              decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border:Border.all(
+                                color: widget.borderActionButtonColor,
+                                width: widget.borderFloatingWidth
+                              )
+                          ),
+                              child: FloatingActionButton(onPressed: () {}, heroTag:"down",backgroundColor: widget.backgroundColor, child: Icon(Icons.arrow_downward_rounded, color: widget.textColor))),
+                        ],
+                      ),
                     ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 300,
-                    height: 100,
-                    child: FlatButton.icon(
-                      onPressed: () {
-                        widget.controller.left();
-                        RouteGenerator.onTapToRoboStatus(context);
-                      },
-                      label: Text(''),
-                      icon: Icon(Icons.arrow_back),
-                      color: Colors.grey,
-                    ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 200,
-                    height: 100,
-                    child: FlatButton.icon(
-                      onPressed: () {
-                        widget.controller.right();
-                        RouteGenerator.onTapToRoboStatus(context);
-                      },
-                      label: Text(''),
-                      icon: Icon(Icons.arrow_forward),
-                      color: Colors.grey,
-                    ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 200,
-                    height: 100,
-                    child: FlatButton.icon(
-                      onPressed: () {
-                        widget.controller.down();
-                        RouteGenerator.onTapToRoboStatus(context);
-                      },
-                      label: Text(''),
-                      icon: Icon(Icons.arrow_downward_rounded),
-                      color: Colors.grey,
-                    ),
-                  ),
-                ]
-            )
-        )
-    );
+                    Container(width: 200, height: 40 ,margin: EdgeInsets.fromLTRB(20, 20, 20, 20), child: RaisedButton(onPressed: (){}, child: Text("Stop"),))
+                  ]),
+            )));
   }
 }
 
@@ -98,16 +119,19 @@ class ControlController {
     String data = '{"action": "UP"}';
     channel.sink.add(data);
   }
+
   void down() {
     WebSocketChannel channel = MyApp.con();
     String data = '{"action": "DOWN"}';
     channel.sink.add(data);
   }
+
   void right() {
     WebSocketChannel channel = MyApp.con();
     String data = '{"action": "RIGHT"}';
     channel.sink.add(data);
   }
+
   void left() {
     WebSocketChannel channel = MyApp.con();
     String data = '{"action": "LEFT"}';
