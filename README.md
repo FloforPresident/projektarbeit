@@ -1,4 +1,12 @@
 # projektarbeit
+
+Backend Controller in Docker starten:
+
+- Navigiere in Backend Ordner im Terminal
+- Trage deine aktuelle IP in der Datei docker-compose.yml an kommentierter Stelle ein
+- Terminal-Befehl: "make start", startet controller und Datenbank, nun kann sich App im selben Netzwerk verbinden 
+
+
 #----bei Änderung des benutzers-----
 
 cd ~/projektarbeit/catkin_ws/ && rm -r build devel && catkin_make

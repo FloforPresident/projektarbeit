@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
-import 'package:turtlebot/frameworks/customDropDownMenu/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -17,6 +17,20 @@ class Messages extends StatefulWidget {
   static List<User> items = [];
 
   Messages(this.selectedUser, {Key key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _MessageState();
+  }
+}
+
+class _MessageState extends State<Messages> {
+  TextEditingController _subject = new TextEditingController();
+  TextEditingController _message = new TextEditingController();
+
+  ControllerCustomDropdown dropController = ControllerCustomDropdown<User>();
+
+  final colorTheme = Colors.orange;
 
   double _fontsize = 18;
   double _leftStart = 40;
@@ -38,20 +52,6 @@ class Messages extends StatefulWidget {
   get leftStart {
     return _leftStart;
   }
-
-  @override
-  State<StatefulWidget> createState() {
-    return _MessageState();
-  }
-}
-
-class _MessageState extends State<Messages> {
-  TextEditingController _subject = new TextEditingController();
-  TextEditingController _message = new TextEditingController();
-
-  ControllerCustomDropdown dropController = ControllerCustomDropdown<User>();
-
-  final colorTheme = Colors.orange;
 
   @override
   void initState() {
@@ -106,7 +106,7 @@ class _MessageState extends State<Messages> {
                   }
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(widget.leftStart, 15, 20, 0),
+                margin: EdgeInsets.fromLTRB(leftStart, 15, 20, 0),
                 child: Row(
                   children: <Widget>[
                     Expanded(
@@ -114,7 +114,7 @@ class _MessageState extends State<Messages> {
                       child: Container(
                           child: Text(
                         "Betreff:",
-                        style: TextStyle(fontSize: widget.fontsize),
+                        style: TextStyle(fontSize: fontsize),
                       )),
                     ),
                     Expanded(
@@ -137,20 +137,20 @@ class _MessageState extends State<Messages> {
                 alignment: Alignment.centerLeft,
                 child: Container(
                     margin: EdgeInsets.fromLTRB(
-                        widget.leftStart, widget.topSpace, 0, 0),
+                        leftStart, topSpace, 0, 0),
                     child: Text("Nachricht: ",
-                        style: TextStyle(fontSize: widget.fontsize))),
+                        style: TextStyle(fontSize: fontsize))),
               ),
               Container(
                 padding: EdgeInsets.fromLTRB(
-                    widget.leftStart, widget.topSpace, widget.leftStart, 0),
+                    leftStart, topSpace, leftStart, 0),
                 child: TextFormField(
                   controller: _message,
                   maxLines: null,
                   maxLength: 300,
                 )),
               Container(
-                margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
+                margin: EdgeInsets.fromLTRB(0, topSpace, 0, 0),
                 child: RaisedButton(
                   onPressed: () {
 
@@ -213,8 +213,8 @@ class MessageController {
 
     for (int i = 0; i < users.length; i++) {
       User u = new User(
-          users[i]['user_id'], users[i]['location_id'],
-          users[i]['username']);
+          users[i]['id'], users[i]['location_id'],
+          users[i]['name']);
       Messages.items.add(u);
     }
   }

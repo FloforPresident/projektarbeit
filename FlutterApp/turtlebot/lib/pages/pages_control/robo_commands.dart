@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turtlebot/frameworks/custom_navigation_bar/top_app_bar.dart';
+import 'package:turtlebot/frameworks/top_app_bar.dart';
 import 'package:turtlebot/services/routing.dart';
 
 class RoboCommands extends StatefulWidget {
@@ -36,11 +36,14 @@ class _RoboCommandsState extends State<RoboCommands> {
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[RaisedButton(
-            child: Text("Scan Room"),
-          ),
+          children: <Widget>[
+            RaisedButton(
+              child: Text("Scan Room"),
+              onPressed: (){},
+            ),
             RaisedButton(
               child: Text("Bla bla"),
+              onPressed: (){},
             )],
         ),
       )

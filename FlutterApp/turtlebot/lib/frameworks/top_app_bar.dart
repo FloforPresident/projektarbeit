@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/**_navigationFields
-* The First Element in the second array hast to be either a Image ( Image.asset(path)) or a Icon (Icon.whatever)
-* The Second Element hast to be a Function, usually the routing function **/
+// _navigationFields
+// The First Element in the second array hast to be either a Image ( Image.asset(path)) or a Icon (Icon.whatever)
+// The Second Element hast to be a Function, usually the routing function
 
 class TopAppBar extends StatefulWidget {
-  @override
 
   final List<Widget> navigationFields;
   final String titleText;

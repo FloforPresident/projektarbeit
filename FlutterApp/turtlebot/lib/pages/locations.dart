@@ -44,7 +44,7 @@ class _LocationsState extends State<Locations> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final int roomID = prefs.getInt('room_id');
 
-    if (roomID != null) {
+    if(roomID != null) {
       setState(() {
         widget.dropDownRoomId = roomID;
       });
@@ -76,13 +76,12 @@ class _LocationsState extends State<Locations> {
           stream: widget.channel.stream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+
               widget.controller.setData(snapshot.data);
 
-              if (widget.dropDownRoomId != null) {
-                widget.controller.updateLocations(
-                    context, Locations.roomItems[widget.dropDownRoomId].id);
-                dropController
-                    .setValue(Locations.roomItems[widget.dropDownRoomId]);
+              if(dropDownRoomId != null) {
+                widget.controller.updateLocations(context, Locations.roomItems[dropDownRoomId].id);
+                dropController.setValue(Locations.roomItems[dropDownRoomId]);
               }
 
               return SingleChildScrollView(
@@ -110,7 +109,7 @@ class _LocationsState extends State<Locations> {
                             child: Text("CurrentLocation",
                                 style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.white)),
                           ),
-                        ),                  
+                        ),
                         Card(
                           margin: EdgeInsets.fromLTRB(10, 10, 10, 20),
                           elevation: 2,
@@ -151,27 +150,24 @@ class _LocationsState extends State<Locations> {
                           prefs.setInt(
                               'room_id', dropController.getCurrentIndex());
 
-                          widget.controller.updateLocations(
-                              context, dropController.getValue().id);
-                        },
-                        startValueId: widget.dropDownRoomId,
-                        controller: dropController,
-                        data: Locations.roomItems,
-                      ),
+                        widget.controller.updateLocations(context, dropController.getValue().id);
+                      },
+                      startValueId: dropDownRoomId,
+                      controller: dropController,
+                      data: Locations.roomItems,
                     ),
                   ),
-                  AnimatedList(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    key: widget.controller.key,
-                    initialItemCount: Locations.activeItems.length,
-                    itemBuilder: (context, index, animation) {
-                      return widget.controller.buildItem(context,
-                          Locations.activeItems[index], animation, index);
-                    },
-                  )
-                ]),
-              );
+                ),
+                AnimatedList(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  key: widget.controller.key,
+                  initialItemCount: Locations.activeItems.length,
+                  itemBuilder: (context, index, animation) {
+                    return widget.controller.buildItem(context, Locations.activeItems[index], animation, index);
+                  },
+                )
+              ]);
             } else {
               return Text('');
             }
@@ -266,17 +262,17 @@ class LocationController {
 
     for (int i = 0; i < locations.length; i++) {
       Location l = new Location(
-          locations[i]['location_id'],
+          locations[i]['id'],
           locations[i]['room_id'],
-          locations[i]['title'],
+          locations[i]['name'],
           locations[i]['x'],
           locations[i]['y']);
       Locations.items.add(l);
       Locations.activeItems.add(l);
     }
     for (int i = 0; i < rooms.length; i++) {
-      Room r = new Room(rooms[i]['room_id'], rooms[i]['robo_id'],
-          rooms[i]['title'], rooms[i]['scanned']);
+      Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'],
+          rooms[i]['name'], rooms[i]['scanned']);
       Locations.roomItems.add(r);
     }
   }
@@ -296,8 +292,7 @@ class LocationController {
 
   void updateItem(int userID, Location location) {
     WebSocketChannel channel = MyApp.con();
-    String data =
-        '{"action": "UPDATE FRIEND", "user_id": "$userID", "location_id": ${location.id}}';
+    String data = '{"action": "UPDATE FRIEND", "user_id": "$userID", "location_id": ${location.id}}';
     channel.sink.add(data);
   }
 
@@ -305,31 +300,27 @@ class LocationController {
     bool inserted = false;
     int indexRemoveableItem = 0;
 
-    for (int i = 0; i < Locations.items.length; i++) {
-      for (int y = 0; y < Locations.activeItems.length; y++) {
-        if (Locations.items[i].id == Locations.activeItems[y].id) {
+    for(int i = 0; i < Locations.items.length; i++) {
+      for(int y = 0; y < Locations.activeItems.length; y++) {
+        if(Locations.items[i].id == Locations.activeItems[y].id) {
           inserted = true;
           indexRemoveableItem = y;
         }
       }
-      if (Locations.items[i].roomId == roomId && !inserted) {
+      if(Locations.items[i].roomId == roomId && !inserted){
         int end = Locations.activeItems.length;
         Locations.activeItems.add(Locations.items[i]);
 
-        AnimatedListItemBuilder build = (context, index, animation) {
-          return buildItem(
-              context, Locations.activeItems[index], animation, index);
-        };
-        if (key.currentState != null) {
+        if(key.currentState != null) {
           key.currentState.insertItem(end);
         }
-      } else if (Locations.items[i].roomId != roomId && inserted) {
-        Location removeItem =
-            Locations.activeItems.removeAt(indexRemoveableItem);
+      }
+      else if(Locations.items[i].roomId != roomId && inserted) {
+        Location removeItem = Locations.activeItems.removeAt(indexRemoveableItem);
         AnimatedListRemovedItemBuilder build = (context, animation) {
           return buildItem(context, removeItem, animation, indexRemoveableItem);
         };
-        if (key.currentState != null) {
+        if(key.currentState != null) {
           key.currentState.removeItem(indexRemoveableItem, build);
         }
       }
@@ -337,8 +328,7 @@ class LocationController {
     }
   }
 
-  Widget buildItem(
-      BuildContext context, Location item, Animation animation, int index) {
+  Widget buildItem(BuildContext context, Location item, Animation animation, int index) {
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -392,8 +382,7 @@ class LocationController {
       barrierDismissible: true,
       context: context,
       builder: (context) => AlertDialog(
-        title:
-            Text("Willst du $locationString zu deinem aktuellen Platz machen?"),
+        title: Text("Willst du $locationString zu deinem aktuellen Platz machen?"),
         actions: <Widget>[
           FlatButton(
             child: Text("Nein"),
