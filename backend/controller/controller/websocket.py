@@ -83,6 +83,8 @@ async def ws_handler(websocket, path):
         response = action
     elif action == "LEFT":
         response = action
+    elif action == "STOP":
+        response = action
 
     response = json.dumps(response)
     print(response)
