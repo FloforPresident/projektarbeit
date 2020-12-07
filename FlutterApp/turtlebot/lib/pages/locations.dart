@@ -19,6 +19,8 @@ class Locations extends StatefulWidget {
   static List<Location> items = [];
   static List<Location> activeItems = [];
   static List<Room> roomItems = [];
+  static Location activeLocation;
+  static Room activeRoom;
 
   Locations({Key key}) : super(key: key);
 
@@ -124,12 +126,18 @@ class _LocationsState extends State<Locations> {
                               child: Align(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                      "Here hast to be the current Location")),
+                                      Locations.activeLocation != null
+                                      ? Locations.activeLocation.name
+                                      : "Keine aktive Location ausgewählt"
+                                  )
+                              ),
                             ),
                             subtitle: Container(
                                 margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                 child: Text(
-                                    "Here has to be to room to the Location",
+                                    Locations.activeRoom != null
+                                    ? Locations.activeRoom.name
+                                    : 'Wähle unten eine aktive Location oder füge eigene hinzu',
                                     style: TextStyle(
                                       color: Colors.indigo,
                                       fontSize: 15.0,
@@ -282,7 +290,7 @@ class LocationController {
   final GlobalKey<AnimatedListState> key = GlobalKey();
 
   void getData(WebSocketChannel channel) {
-    String data = '{"action": "GET LOCATIONS"}';
+    String data = '{"action": "GET LOCATIONS", "id": ${MyApp.id}}';
     channel.sink.add(data);
   }
 
@@ -290,6 +298,8 @@ class LocationController {
     Locations.items = [];
     Locations.roomItems = [];
     Locations.activeItems = [];
+    Locations.activeRoom = null;
+    Locations.activeLocation = null;
 
     String jsonDataString = json.toString();
     var jsonData = jsonDecode(jsonDataString);
@@ -306,6 +316,19 @@ class LocationController {
       Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'], rooms[i]['name'],
           rooms[i]['scanned']);
       Locations.roomItems.add(r);
+    }
+
+    // Get active Location
+    var user = jsonData["user"]["location_id"];
+    for(int i = 0; i < Locations.items.length; i++) {
+      if(user == Locations.items[i].id) {
+        Locations.activeLocation = Locations.items[i];
+        for(int y = 0; y < Locations.roomItems.length; y++) {
+          if(Locations.activeLocation.roomId == Locations.roomItems[y].id) {
+            Locations.activeRoom = Locations.roomItems[y];
+          }
+        }
+      }
     }
   }
 
@@ -429,7 +452,7 @@ class LocationController {
             child: Text("Ja"),
             onPressed: () {
               updateItem(MyApp.id, location);
-              Navigator.of(context).pop();
+              RouteGenerator.onTapToLocations(context);
             },
           ),
         ],

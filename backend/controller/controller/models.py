@@ -25,6 +25,13 @@ def login_user(name):
     return ''
 
 
+def get_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+        return user.to_dict()
+    return ''
+
+
 def delete_user(user_id):
     user = User.query.filter_by(id=user_id).first()
     db.session.delete(user)
@@ -117,7 +124,6 @@ def delete_location(location_id):
 def update_location(user_id, location_id):
     user = User.query.filter_by(id=user_id).first()
     user.location_id = location_id
-    db.session.update(user)
     db.session.commit()
 
 

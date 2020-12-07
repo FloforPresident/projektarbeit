@@ -67,7 +67,7 @@ async def ws_handler(websocket, path):
     elif action == 'DELETE LOCATION':
         delete_location(data['id'])
     elif action == 'GET LOCATIONS':
-        response = {"locations": get_locations(), "rooms": get_rooms()}
+        response = {"locations": get_locations(), "rooms": get_rooms(), "user": get_user(data['id'])}
 
     # MESSAGE
     elif action == 'SEND MESSAGE':
