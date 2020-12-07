@@ -4,11 +4,13 @@ import 'package:turtlebot/objects/data_base_objects.dart';
 class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
   final double fontSize;
   final ControllerCustomDropdown<T> controller;
+  final double dropButtonSize;
 
   CustomDropdownMenu(
       {int startValueId,
       @required this.controller,
       this.fontSize = 18,
+        this.dropButtonSize = 130,
       List<T> data,
       Function onChanged}) {
     controller.initialize(startValueId, onChanged, data);
@@ -25,8 +27,8 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Row(
         children: [
-          Expanded(
-            flex: 3,
+          Container(
+            width: widget.dropButtonSize,
             child: DropdownButton(
                 isExpanded: true,
                 value: widget.controller.startValueId,
@@ -36,12 +38,12 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
                   setState(() {
                     widget.controller.currentIndexValue = value;
                     widget.controller.resetState(value);
-                    widget.controller.onChanged();
+                    if(widget.controller.onChanged != null)
+                      {
+                        widget.controller.onChanged();
+                      }
                   });
                 }),
-          ),
-          Spacer(
-            flex: 2,
           ),
         ],
         mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +106,7 @@ class CustomDropdownLabel extends StatelessWidget {
   final CustomDropdownMenu child;
   final double fontSize;
   final double leftStart;
-  final String label;
+  final Text label;
   final double labelRightSpace;
   final double topSpace;
 
@@ -125,7 +127,7 @@ class CustomDropdownLabel extends StatelessWidget {
           Expanded(
             flex: 5,
             child: Container(
-              child: Text(label + ":", style: TextStyle(fontSize: fontSize)),
+              child: label,
               margin: EdgeInsets.fromLTRB(leftStart, 0, labelRightSpace, 0),
             ),
           ),

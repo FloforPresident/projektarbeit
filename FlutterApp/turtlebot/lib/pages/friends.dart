@@ -44,11 +44,13 @@ class _FriendState extends State<Friends> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
               RouteGenerator.onTapToHome(context);
             }),
-        title: Text("Friends"),
+        title: Text("Friends", style: TextStyle(
+          color: Colors.white,
+        )),
         backgroundColor: colorTheme,
       ),
       body: StreamBuilder(
@@ -174,7 +176,7 @@ class _FriendState extends State<Friends> {
                 content: Column(
                   children: <Widget>[
                     CustomDropdownLabel(
-                      label: "Raum",
+                      label: Text("Raum"),
                       child: CustomDropdownMenu<Room>(
                         onChanged: () {
                           List<Location> buffer = [];
@@ -191,7 +193,7 @@ class _FriendState extends State<Friends> {
                         controller: roomDropController, data: Friends.roomItems),
                     ),
                     CustomDropdownLabel(
-                      label: "Platz",
+                      label: Text("Platz"),
                       child: CustomDropdownMenu<Location>(
                         controller: locationDropController,
                         data: selectedLocations),

@@ -36,11 +36,13 @@ class _RoboState extends State<Robos>{
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
               RouteGenerator.onTapToHome(context);
             }),
-        title: Text("Robos"),
+        title: Text("Robos", style: TextStyle(
+          color: Colors.white
+        )),
         backgroundColor: colorTheme,
       ),
       body: StreamBuilder(

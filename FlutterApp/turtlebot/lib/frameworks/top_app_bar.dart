@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class TopAppBar extends StatefulWidget {
 
   final List<Widget> navigationFields;
-  final String titleText;
+  final Text titleText;
 
   TopAppBar({@required this.navigationFields,@required this.titleText});
 
@@ -24,7 +24,7 @@ class _TopAppBar extends State<TopAppBar> {
     return Row(
       children: <Widget>[
         Align(
-          child: Text(widget.titleText),
+          child: widget.titleText,
           alignment: Alignment.centerLeft,
         ),
         Spacer(),

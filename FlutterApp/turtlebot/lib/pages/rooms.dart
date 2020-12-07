@@ -44,7 +44,7 @@ class _RoomState extends State<Rooms> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             RouteGenerator.onTapToHome(context);
           },
@@ -61,7 +61,9 @@ class _RoomState extends State<Rooms> {
             TopBarImageIcon(
                 Icon(Icons.room, size: 30), RouteGenerator.onTapToLocations),
           ],
-          titleText: "Rooms",
+          titleText: Text("Rooms", style: TextStyle(
+            color: Colors.white,
+          )),
         ),
         backgroundColor: colorTheme,
       ),
@@ -181,7 +183,7 @@ class _RoomState extends State<Rooms> {
                 content: Column(
                   children: <Widget>[
                     CustomDropdownLabel(
-                      label: "Robo",
+                      label: Text("Robo:"),
                       child: CustomDropdownMenu<Robo>(
                         controller: dropController,
                         data: Rooms.roboItems),
@@ -241,7 +243,7 @@ class _RoomState extends State<Rooms> {
                       decoration: InputDecoration(labelText: "Name"),
                     ),
                     CustomDropdownLabel(
-                      label: "Robo",
+                      label: Text("Robo:"),
                       child: CustomDropdownMenu<Robo>(
                           controller: dropController, data: Rooms.roboItems),
                     ),

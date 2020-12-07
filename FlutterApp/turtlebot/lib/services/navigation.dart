@@ -4,6 +4,7 @@ import 'package:turtlebot/services/routing.dart';
 class AppNavBarController extends StatefulWidget {
   @override
   _AppNavBarControllerState createState() => _AppNavBarControllerState();
+  Color iconTextColor = Colors.white;
 }
 
 class _AppNavBarControllerState extends State<AppNavBarController> {
@@ -22,8 +23,10 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                   onPressed: () {
                     Navigator.pushNamed(context, RouteGenerator.RouteRobos);
                   },
-                  icon: Icon(Icons.mood),
-                  label: Text('Robos'),
+                  icon: Icon(Icons.mood, color: widget.iconTextColor),
+                  label: Text('Robos', style: TextStyle(
+                    color: widget.iconTextColor,
+                  ),),
                   color: Colors.blue,
                 ),
               ),
@@ -34,8 +37,10 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                   onPressed: () {
                     Navigator.pushNamed(context, RouteGenerator.RouteFriends);
                   },
-                  icon: Icon(Icons.perm_contact_calendar),
-                  label: Text('Friends'),
+                  icon: Icon(Icons.perm_contact_calendar, color: widget.iconTextColor),
+                  label: Text('Friends', style: TextStyle(
+                    color: widget.iconTextColor,
+                  ),),
                   color: Colors.red,
                 ),
               ),
@@ -46,8 +51,10 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                   onPressed: () {
                     Navigator.pushNamed(context, RouteGenerator.RouteRooms);
                   },
-                  icon: Icon(Icons.location_on),
-                  label: Text('Rooms'),
+                  icon: Icon(Icons.location_on, color: widget.iconTextColor),
+                  label: Text('Rooms', style: TextStyle(
+                    color: widget.iconTextColor,
+                  ),),
                   color: Colors.purple,
                 ),
               ),
@@ -58,8 +65,10 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                   onPressed: () {
                     Navigator.pushNamed(context, RouteGenerator.RouteMessages);
                   },
-                  icon: Icon(Icons.mail),
-                  label: Text('Message'),
+                  icon: Icon(Icons.mail, color: widget.iconTextColor),
+                  label: Text('Message', style: TextStyle(
+                    color: widget.iconTextColor,
+                  ),),
                   color: Colors.orange,
                 ),
               ),
@@ -71,8 +80,10 @@ class _AppNavBarControllerState extends State<AppNavBarController> {
                     Navigator.pushNamed(
                         context, RouteGenerator.RouteRoboStatus);
                   },
-                  icon: Icon(Icons.videogame_asset),
-                  label: Text('Control'),
+                  icon: Icon(Icons.videogame_asset, color: widget.iconTextColor),
+                  label: Text('Control', style: TextStyle(
+                    color: widget.iconTextColor,
+                  ),),
                   color: Colors.green,
                 ),
               )

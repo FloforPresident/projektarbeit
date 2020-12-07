@@ -65,11 +65,13 @@ class _MessageState extends State<Messages> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
               RouteGenerator.onTapToHome(context);
             }),
-        title: Text("Nachricht senden"),
+        title: Text("Nachricht senden", style: TextStyle(
+          color: Colors.white
+        )),
         backgroundColor: colorTheme,
       ),
       body: SingleChildScrollView(
@@ -96,7 +98,7 @@ class _MessageState extends State<Messages> {
                     }
 
                     return CustomDropdownLabel(
-                      label: "Empfänger",
+                      label: Text("Empfänger:"),
                       child: CustomDropdownMenu<User>(
                         controller: dropController,
                         data: Messages.items,

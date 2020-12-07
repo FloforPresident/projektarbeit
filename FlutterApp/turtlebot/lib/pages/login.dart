@@ -261,7 +261,7 @@ class _LoginState extends State<Login> {
                       children: <Widget>[
                         Text("Hier kannst du den Raum und deinen Platz auswählen, in dem man dich in der Regel findet.\n\nDiese Einstellung kannst du auch später nochmal aktualisieren oder einen neuen Platz hinzufügen."),
                         CustomDropdownLabel(
-                          label: "Raum",
+                          label: Text("Raum:"),
                           child: CustomDropdownMenu<Room>(
                             onChanged: () {
                               List<Location> buffer = [];
@@ -279,7 +279,7 @@ class _LoginState extends State<Login> {
                             controller: roomDropController, data: Login.roomItems),
                         ),
                         CustomDropdownLabel(
-                          label: "Platz",
+                          label: Text("Platz"),
                           child: CustomDropdownMenu<Location>(
                               controller: locationDropController,
                               data: selectedLocations),
@@ -398,8 +398,8 @@ class LoginController {
   void loginHelper(BuildContext context, String jsonDataString) {
     final jsonData = jsonDecode(jsonDataString);
 
-    User sessionUser = new User( 0,
-        0,"seas" );
+    User sessionUser = new User(jsonData['id'],
+        jsonData['location_id'], jsonData['name']);
 
     RouteGenerator.onTapToHome(context, sessionUser: sessionUser);
   }
