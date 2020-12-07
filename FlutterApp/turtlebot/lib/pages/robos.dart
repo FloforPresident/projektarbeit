@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
@@ -163,6 +164,10 @@ class _RoboState extends State<Robos>{
                   widget.controller.addItem(_name.text, _ip.text);
                   RouteGenerator.onTapToRobos(context);
                 }
+                else
+                  {
+                    NoDataDialog.noLoginData(context);
+                  }
               },
             ),
           ],

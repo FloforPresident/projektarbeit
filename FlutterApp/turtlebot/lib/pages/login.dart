@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/routing.dart';
@@ -25,7 +26,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   double _leftStart = 40;
   double _rightEnd = 40;
-  Color colorTheme = Colors.cyan;
+  Color colorTheme = Colors.green;
   Color secondaryTheme = Colors.white;
 
   TextEditingController _name = new TextEditingController();
@@ -41,72 +42,84 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colorTheme,
-        title: Center(
-          child: Text(
-            "TurtleBot Control Application",
-            style: TextStyle(
-              color: secondaryTheme,
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: colorTheme,
+          title: Center(
+            child: Text(
+              "TurtleBot Control Application",
+              style: TextStyle(
+                color: secondaryTheme,
+              ),
             ),
           ),
+          automaticallyImplyLeading: false,
         ),
-        automaticallyImplyLeading: false,
-      ),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                child: Icon(Icons.adb, color: Colors.green, size: 60),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
-                child: TextFormField(
-                  controller: _name,
-                  decoration: InputDecoration(
-                    labelText: "Name",
-                    labelStyle: TextStyle(
-                      color: colorTheme,
-                    )
+        body: SingleChildScrollView(
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                  child: Icon(Icons.adb, color: Colors.green, size: 60),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
+                  child: TextFormField(
+                    controller: _name,
+                    decoration: InputDecoration(
+                      labelText: "Name",
+                      labelStyle: TextStyle(
+                        color: colorTheme,
+                      )
+                    ),
+                    maxLength: 20,
+                    maxLines: null,
+                  )
+                ),
+                RaisedButton(
+                  color: Colors.blueGrey,
+                  child: Text(
+                    "Anmelden",
+                    style: TextStyle(
+                      color: secondaryTheme,
+                    ),
                   ),
-                  maxLength: 20,
-                  maxLines: null,
+                  onPressed: () async {
+                    if(_name.text.isNotEmpty) {
+                      widget.controller.loginUser(context, _name.text);
+                    }
+                    else
+                      {
+                        NoDataDialog.noLoginData(context);
+                      }
+                  },
+                ),
+                RaisedButton(
+                  color: Colors.grey,
+                  child: Text(
+                    "Registrieren",
+                    style: TextStyle(
+                      color: secondaryTheme,
+                    ),
+                  ),
+                  onPressed: () {
+                    signupDialog(context);
+                  },
                 )
-              ),
-              RaisedButton(
-                color: Colors.blueGrey,
-                child: Text(
-                  "Anmelden",
-                  style: TextStyle(
-                    color: secondaryTheme,
-                  ),
-                ),
-                onPressed: () async {
-                  if(_name.text.isNotEmpty) {
-                    widget.controller.loginUser(context, _name.text);
-                  }
-                },
-              ),
-              RaisedButton(
-                color: Colors.grey,
-                child: Text(
-                  "Registrieren",
-                  style: TextStyle(
-                    color: secondaryTheme,
-                  ),
-                ),
-                onPressed: () {
-                  signupDialog(context);
-                },
-              )
-            ]
+              ]
+            )
           )
         )
-      )
+      ),
     );
   }
 
@@ -126,17 +139,11 @@ class _LoginState extends State<Login> {
             var width = MediaQuery.of(context).size.width;
 
             return Container(
-              height: height,
-              width: width,
-              child: Column(
-                children: <Widget>[
-                  TextField(
-                    decoration: InputDecoration(labelText: "Name"),
-                    controller: _name,
-                    maxLines: null,
-                    maxLength: 20,
-                  ),
-                ],
+              child: TextField(
+                decoration: InputDecoration(labelText: "Name"),
+                controller: _name,
+                maxLines: null,
+                maxLength: 20,
               ),
             );
           }
@@ -160,6 +167,10 @@ class _LoginState extends State<Login> {
               if (_name.text.isNotEmpty) {
                 pictureDialog(context);
               }
+              else
+                {
+                  NoDataDialog.noLoginData(context);
+                }
             },
           ),
         ],

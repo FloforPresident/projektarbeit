@@ -5,6 +5,9 @@ class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
   final double fontSize;
   final ControllerCustomDropdown<T> controller;
   final double dropButtonSize;
+  final TextStyle itemTextStyle;
+  final Color focusColorItem;
+  final TextStyle  selectedItemTextStyle;
 
   CustomDropdownMenu(
       {int startValueId,
@@ -12,8 +15,12 @@ class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
       this.fontSize = 18,
         this.dropButtonSize = 130,
       List<T> data,
-      Function onChanged}) {
-    controller.initialize(startValueId, onChanged, data);
+      Function onChanged,
+      this.itemTextStyle,
+      this.focusColorItem,
+      this.selectedItemTextStyle}) {
+    controller.initialize(startValueId, onChanged, data, this);
+
   }
 
   State<StatefulWidget> createState() {
@@ -30,10 +37,12 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
           Container(
             width: widget.dropButtonSize,
             child: DropdownButton(
+              focusColor: widget.focusColorItem,
                 isExpanded: true,
                 value: widget.controller.startValueId,
                 items: widget.controller
                     ._createDropdownMenuItem(widget.controller.data),
+
                 onChanged: (value) {
                   setState(() {
                     widget.controller.currentIndexValue = value;
@@ -42,6 +51,7 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
                       {
                         widget.controller.onChanged();
                       }
+
                   });
                 }),
           ),
@@ -56,6 +66,7 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
   T value;
   int startValueId;
   int currentIndexValue;
+  CustomDropdownMenu _widget;
 
   int getCurrentIndex()
   {
@@ -68,11 +79,12 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
   List<DatabaseObject> data;
   Function onChanged;
 
-  initialize(int startValueId, Function onChanged, List<DatabaseObject> data) {
+  initialize(int startValueId, Function onChanged, List<DatabaseObject> data, CustomDropdownMenu widget) {
     this.startValueId = startValueId;
     currentIndexValue = startValueId;
     this.onChanged = onChanged;
     this.data = data;
+    this._widget = widget;
   }
 
   void setValue(T value) {
@@ -88,10 +100,13 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
 
   List<DropdownMenuItem> _createDropdownMenuItem(List<DatabaseObject> objects) {
     int counter = 0;
+    TextStyle currentTextStyle;
     return objects.map((item) {
+      currentTextStyle = (counter == startValueId) ? _widget.selectedItemTextStyle : _widget.itemTextStyle;
       return DropdownMenuItem(
         value: counter++,
-        child: Text(item.name),
+        child: Container(color: Colors.lightBlue,
+            child:  Text(item.name, style: currentTextStyle,)),
       );
     }).toList();
   }

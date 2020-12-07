@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
@@ -267,6 +268,10 @@ class _RoomState extends State<Rooms> {
 
                   scanMapDialog(context);
                 }
+                else
+                  {
+                    NoDataDialog.noLoginData(context);
+                  }
               },
             ),
           ],

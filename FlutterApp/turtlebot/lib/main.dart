@@ -108,6 +108,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          shadowColor: Colors.white,
           automaticallyImplyLeading: false,
           title: Text(MyApp.name != null
             ? "Hi " + MyApp.name

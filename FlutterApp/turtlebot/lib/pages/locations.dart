@@ -109,7 +109,7 @@ class _LocationsState extends State<Locations> {
                           margin: EdgeInsets.fromLTRB(15, 30, 0, 15),
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Text("CurrentLocation",
+                            child: Text("Aktuelle Location",
                                 style: TextStyle(
                                     fontSize: 22.0,
                                     fontWeight: FontWeight.bold,
@@ -142,6 +142,7 @@ class _LocationsState extends State<Locations> {
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                    padding: EdgeInsets.fromLTRB(15,0,15,20),
                     decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(6),
@@ -160,12 +161,18 @@ class _LocationsState extends State<Locations> {
                             child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text("Verfügbare Locations",
-                                    style: TextStyle(fontSize: 20.0, color: Colors.white)))),
+                                    style: TextStyle(fontSize: 22.0, color: Colors.white, fontWeight: FontWeight.bold)))),
                         Container(
                           margin: EdgeInsets.fromLTRB(15, 15, 0, 15),
                           child: CustomDropdownLabel(
-                            label: Text("Room"),
+                            label: Text("Room:", style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17.0,
+                              fontWeight: FontWeight.bold,
+                            )),
                             child: CustomDropdownMenu<Room>(
+                              itemTextStyle: TextStyle(color: Colors.black87),
+                              selectedItemTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.lightBlue) ,
                               onChanged: () async {
                                 final SharedPreferences prefs =
                                 await SharedPreferences.getInstance();

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
@@ -158,10 +159,10 @@ class _MessageState extends State<Messages> {
 
                     if(dropController.getValue() != null && _subject.text.isNotEmpty && _message.text.isNotEmpty) {
                       widget.controller.sendMessage(dropController.getValue(), _subject.text, _message.text);
-                      _showAlertDialog(true);
+                      _showAlertDialog();
                     }
                     else {
-                      _showAlertDialog(false);
+                      NoDataDialog.noLoginData(context);
                     }
                   },
                   child: Text("Auftrag starten"),
@@ -174,25 +175,21 @@ class _MessageState extends State<Messages> {
     );
   }
 
-  void _showAlertDialog(bool success) {
+  void _showAlertDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: success ? Text('Geklappt!'): Text('Fehler'),
-          content: success ? Text(
+          title: Text('Geklappt!'),
+          content: Text(
               'Du hast den Auftrag für ${dropController.getValue().name} gestartet:\n\n${_message.text}'
-          ) : Text('Alle Felder ausfüllen'),
+          ),
           actions: <Widget> [
               FlatButton(
                 onPressed: (){
-                  if(success) {
                     RouteGenerator.onTapToMessages(context);
-                  } else {
-                    Navigator.of(context).pop();
-                  }
                 },
-                child: Text('Ok'))
+                child: Text('Weiter'))
           ]
         );
       }
