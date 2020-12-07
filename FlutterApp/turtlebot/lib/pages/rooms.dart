@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
@@ -374,6 +375,9 @@ class RoomController {
   }
 
   void removeItem(Room room) {
+    //Remove Shared Preference
+    removeSelectedRoom();
+
     WebSocketChannel channel = MyApp.con();
     String data = '{"action": "DELETE ROOM", "id": "${room.id}"}';
     channel.sink.add(data);
@@ -419,5 +423,11 @@ class RoomController {
          channel.sink.add(data);
        }
      }
+  }
+
+  // Remove Shared Preference
+  void removeSelectedRoom() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('room_id', null);
   }
 }
