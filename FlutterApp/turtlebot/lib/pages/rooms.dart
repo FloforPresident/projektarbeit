@@ -199,6 +199,7 @@ class _RoomState extends State<Rooms> {
                     child: Text("Update"),
                     onPressed: () {
                       if(dropController.getValue() != null) {
+                        widget.controller.newRoomRoboAlreadyTaken(dropController.getValue());
                         widget.controller.updateItem(room, dropController.getValue());
                         RouteGenerator.onTapToRooms(context);
                       }
@@ -261,6 +262,7 @@ class _RoomState extends State<Rooms> {
               child: Text("Weiter"),
               onPressed: () {
                 if (controller.text.isNotEmpty && dropController.getValue() != null) {
+                  widget.controller.newRoomRoboAlreadyTaken(dropController.getValue());
                   widget.controller.addItem(dropController.getValue().id, controller.text);
 
                   scanMapDialog(context);
@@ -405,5 +407,17 @@ class RoomController {
     String data =
         '{"action": "SCAN ROOM", "room_id": ${Rooms.newRoom.id}}';
     channel.sink.add(data);
+  }
+
+  void newRoomRoboAlreadyTaken(Robo robo) {
+     for(int i = 0; i < Rooms.items.length; i++) {
+       if(Rooms.items[i].roboID == robo.id) {
+         int id;
+         WebSocketChannel channel = MyApp.con();
+         String data = '{"action": "UPDATE ROBO", "room_id": ${Rooms.items[i].id}, "robo_id": $id}';
+
+         channel.sink.add(data);
+       }
+     }
   }
 }

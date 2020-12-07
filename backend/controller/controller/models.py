@@ -83,7 +83,6 @@ def delete_room(room_id):
 def update_robo(robo_id, room_id):
     room = Room.query.filter_by(id=room_id).first()
     room.robo_id = robo_id
-    db.session.update(room)
     db.session.commit()
 
 
