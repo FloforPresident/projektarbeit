@@ -105,8 +105,7 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
       currentTextStyle = (counter == startValueId) ? _widget.selectedItemTextStyle : _widget.itemTextStyle;
       return DropdownMenuItem(
         value: counter++,
-        child: Container(color: Colors.lightBlue,
-            child:  Text(item.name, style: currentTextStyle,)),
+        child: Container(child:  Text(item.name, style: _widget.itemTextStyle,)),
       );
     }).toList();
   }
