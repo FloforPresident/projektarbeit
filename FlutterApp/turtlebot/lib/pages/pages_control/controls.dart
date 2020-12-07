@@ -77,7 +77,9 @@ class _ControlsState extends State<Controls> {
                         child: FloatingActionButton(
                             backgroundColor: widget.backgroundColor,
                             heroTag: "up",
-                            onPressed: () {},
+                            onPressed: () {
+                              widget.controller.up();
+                            },
                             child: Icon(Icons.arrow_upward,
                                 color: widget.textColor)),
                       ),
@@ -95,7 +97,9 @@ class _ControlsState extends State<Controls> {
                                     )),
                                 margin: EdgeInsets.fromLTRB(0, 0, 70, 0),
                                 child: FloatingActionButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      widget.controller.left();
+                                    },
                                     backgroundColor: widget.backgroundColor,
                                     heroTag: "left",
                                     child: Icon(Icons.arrow_back_rounded,
@@ -108,7 +112,9 @@ class _ControlsState extends State<Controls> {
                                       width: widget.borderFloatingWidth,
                                     )),
                                 child: FloatingActionButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      widget.controller.right();
+                                    },
                                     backgroundColor: widget.backgroundColor,
                                     heroTag: "right",
                                     child: Icon(
@@ -125,7 +131,9 @@ class _ControlsState extends State<Controls> {
                                   color: widget.borderActionButtonColor,
                                   width: widget.borderFloatingWidth)),
                           child: FloatingActionButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                widget.controller.down();
+                              },
                               heroTag: "down",
                               backgroundColor: widget.backgroundColor,
                               child: Icon(Icons.arrow_downward_rounded,
@@ -138,7 +146,9 @@ class _ControlsState extends State<Controls> {
                     height: 40,
                     margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        widget.controller.stop();
+                      },
                       child: Text("Stop"),
                     ))
               ]),
@@ -170,6 +180,12 @@ class ControlController {
   void left() {
     WebSocketChannel channel = MyApp.con();
     String data = '{"action": "LEFT"}';
+    channel.sink.add(data);
+  }
+
+  void stop() {
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "STOP"}';
     channel.sink.add(data);
   }
 }
