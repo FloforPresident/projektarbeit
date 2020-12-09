@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turtlebot/pages/friends.dart';
+import 'package:turtlebot/pages/messages.dart';
+import 'package:turtlebot/pages/pages_control/controls.dart';
+import 'package:turtlebot/pages/pages_control/maps.dart';
+import 'package:turtlebot/pages/robos.dart';
+import 'package:turtlebot/pages/rooms.dart';
 import 'package:turtlebot/services/routing.dart';
-import 'package:turtlebot/services/navigation.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:turtlebot/services/socke_info.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
@@ -104,32 +109,58 @@ class _HomeState extends State<Home> {
     });
   }
 
+  int _selectedIndex = 0;
+
+  static List<Widget> pages = [
+    Messages(null),
+    Maps(),
+    Robos(),
+    Friends(),
+    Controls()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          shadowColor: Colors.white,
-          automaticallyImplyLeading: false,
-          title: Text(MyApp.name != null
-            ? "Hi " + MyApp.name
-            : ''
-          ),
-          backgroundColor: Colors.white,
-          actions: <Widget>[
-            RaisedButton(
-                color: Colors.grey,
-                child: Text("Abmelden",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                onPressed: () {
-                  logout();
-                  RouteGenerator.onTapToLogin(context);
-                })
-          ],
-        ),
-        body: AppNavBarController()
+        body: pages[_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.mail),
+                label: 'Home',
+                backgroundColor: Colors.orange
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.location_on),
+                label: 'Maps',
+                backgroundColor: Colors.purple
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.mood),
+                label: 'Robos',
+                backgroundColor: Colors.blue
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.perm_contact_calendar),
+                label: 'Friends',
+                backgroundColor: Colors.red
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.videogame_asset),
+                label: 'Controls',
+                backgroundColor: Colors.green
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Colors.grey[900],
+            iconSize: 30  ,
+            onTap: (int index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+
+        )
     );
   }
 }

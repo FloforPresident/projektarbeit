@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
+import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
-import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Robos extends StatefulWidget {
@@ -35,16 +35,9 @@ class _RoboState extends State<Robos>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {
-              RouteGenerator.onTapToHome(context);
-            }),
-        title: Text("Robos", style: TextStyle(
-          color: Colors.white
-        )),
-        backgroundColor: colorTheme,
+      appBar: TopAppBarLogout(
+        colorTheme: colorTheme,
+        page: "Robos"
       ),
       body: StreamBuilder(
         stream: channel.stream,

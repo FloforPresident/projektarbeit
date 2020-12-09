@@ -57,176 +57,74 @@ class _LocationsState extends State<Locations> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            RouteGenerator.onTapToHome(context);
-          },
-        ),
-        backgroundColor: colorTheme,
-        title: TopAppBar(
-          navigationFields: <Widget>[
-            TopBarImageIcon(
-                Icon(Icons.map, size: 30), RouteGenerator.onTapToRooms),
-            TopBarImageIcon(
-                Icon(Icons.room, color: Colors.white, size: 30), (context) {}),
-          ],
-          titleText: Text("Locations",
-              style: TextStyle(
-                color: Colors.white,
-              )),
-        ),
-      ),
-      body: StreamBuilder(
-          stream: channel.stream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              widget.controller.setData(snapshot.data);
+    return StreamBuilder(
+        stream: channel.stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            widget.controller.setData(snapshot.data);
 
-              if (widget.dropDownRoomId != null) {
-                widget.controller.updateLocations(
-                    context, Locations.roomItems[widget.dropDownRoomId].id);
-                dropController
-                    .setValue(Locations.roomItems[widget.dropDownRoomId]);
-              }
-
-              return SingleChildScrollView(
-                child: Column(children: <Widget>[
-                  // Container(
-                  //   margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                  //   decoration: BoxDecoration(
-                  //       color: Colors.grey,
-                  //       borderRadius: BorderRadius.circular(6),
-                  //       boxShadow: [
-                  //         BoxShadow(
-                  //           color: Colors.grey.withOpacity(0.5),
-                  //           offset: Offset(4, 7),
-                  //           spreadRadius: 5,
-                  //           blurRadius: 3,
-                  //         )
-                  //       ]),
-                  //   child: Column(
-                  //     children: [
-                  //       Container(
-                  //         margin: EdgeInsets.fromLTRB(15, 30, 0, 15),
-                  //         child: Align(
-                  //           alignment: Alignment.centerLeft,
-                  //           child: Text("Aktuelle Location",
-                  //               style: TextStyle(
-                  //                   fontSize: 22.0,
-                  //                   fontWeight: FontWeight.bold,
-                  //                   color: Colors.white)),
-                  //         ),
-                  //       ),
-                  //       Card(
-                  //         margin: EdgeInsets.fromLTRB(10, 10, 10, 20),
-                  //         elevation: 2,
-                  //         child: ListTile(
-                  //           title: Container(
-                  //             child: Align(
-                  //                 alignment: Alignment.topLeft,
-                  //                 child: Text(
-                  //                     Locations.activeLocation != null
-                  //                     ? Locations.activeLocation.name
-                  //                     : "Keine aktive Location ausgewählt"
-                  //                 )
-                  //             ),
-                  //           ),
-                  //           subtitle: Container(
-                  //               margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                  //               child: Text(
-                  //                   Locations.activeRoom != null
-                  //                   ? Locations.activeRoom.name
-                  //                   : 'Wähle unten eine aktive Location oder füge eigene hinzu',
-                  //                   style: TextStyle(
-                  //                     color: Colors.indigo,
-                  //                     fontSize: 15.0,
-                  //                     fontWeight: FontWeight.bold,
-                  //                   ))),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                    padding: EdgeInsets.fromLTRB(15,0,15,20),
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(6),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            offset: Offset(4, 7),
-                            spreadRadius: 5,
-                            blurRadius: 3,
-                          )
-                        ]),
-                    child: Column(
-                      children: [
-                        Container(
-                            margin: EdgeInsets.fromLTRB(15, 30, 0, 15),
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text("Verfügbare Locations",
-                                    style: TextStyle(fontSize: 22.0, color: Colors.white, fontWeight: FontWeight.bold)))),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(15, 15, 0, 15),
-                          child: CustomDropdownLabel(
-                            label: Text("Room:", style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.bold,
-                            )),
-                            child: CustomDropdownMenu<Room>(
-                              itemTextStyle: TextStyle(color: Colors.black87),
-                              selectedItemTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.lightBlue) ,
-                              onChanged: () async {
-                                final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                                prefs.setInt(
-                                    'room_id', dropController.getCurrentIndex());
-
-                                widget.controller.updateLocations(
-                                    context, dropController.getValue().id);
-                              },
-                              startValueId: widget.dropDownRoomId,
-                              controller: dropController,
-                              data: Locations.roomItems,
-                            ),
-                          ),
-                        ),
-                        AnimatedList(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          key: widget.controller.key,
-                          initialItemCount: Locations.activeItems.length,
-                          itemBuilder: (context, index, animation) {
-                            return widget.controller.buildItem(context,
-                                Locations.activeItems[index], animation, index);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-
-                ]),
-              );
-            } else {
-              return Text('');
+            if (widget.dropDownRoomId != null) {
+              widget.controller.updateLocations(
+                  context, Locations.roomItems[widget.dropDownRoomId].id);
+              dropController
+                  .setValue(Locations.roomItems[widget.dropDownRoomId]);
             }
-          }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (dropController.getValue() != null) {
-            addItemDialog(context, dropController.getValue());
+
+            return SingleChildScrollView(
+              child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(15, 15, 0, 15),
+                      child: CustomDropdownLabel(
+                        label: Text("Room:", style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold,
+                        )),
+                        child: CustomDropdownMenu<Room>(
+                          itemTextStyle: TextStyle(color: Colors.black87),
+                          selectedItemTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.lightBlue) ,
+                          onChanged: () async {
+                            final SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                            prefs.setInt(
+                                'room_id', dropController.getCurrentIndex());
+
+                            widget.controller.updateLocations(
+                                context, dropController.getValue().id);
+                          },
+                          startValueId: widget.dropDownRoomId,
+                          controller: dropController,
+                          data: Locations.roomItems,
+                        ),
+                      ),
+                    ),
+                    AnimatedList(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      key: widget.controller.key,
+                      initialItemCount: Locations.activeItems.length,
+                      itemBuilder: (context, index, animation) {
+                        return widget.controller.buildItem(context,
+                            Locations.activeItems[index], animation, index);
+                      },
+                    ),
+                    // FloatingActionButton(
+                    //   onPressed: () {
+                    //     if (dropController.getValue() != null) {
+                    //       addItemDialog(context, dropController.getValue());
+                    //     }
+                    //   },
+                    //   backgroundColor: colorTheme,
+                    //   child: Icon(Icons.add, color: Colors.white),
+                    // ),
+                  ],
+                ),
+              );
+          } else {
+            return Text('');
           }
-        },
-        backgroundColor: colorTheme,
-        child: Icon(Icons.add, color: Colors.white),
-      ),
+        }
     );
   }
 

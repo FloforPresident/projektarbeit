@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/no_data_entered.dart';
+import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
-import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 
@@ -65,17 +65,10 @@ class _MessageState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {
-              RouteGenerator.onTapToHome(context);
-            }),
-        title: Text("Nachricht senden", style: TextStyle(
-          color: Colors.white
-        )),
-        backgroundColor: colorTheme,
-      ),
+        appBar: TopAppBarLogout(
+            colorTheme: colorTheme,
+            page: "Messages"
+        ),
       body: SingleChildScrollView(
         child: SizedBox(
           width: double.infinity,

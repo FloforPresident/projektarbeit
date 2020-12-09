@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
+import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/routing.dart';
@@ -36,16 +37,9 @@ class _FriendState extends State<Friends> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {
-              RouteGenerator.onTapToHome(context);
-            }),
-        title: Text("Friends", style: TextStyle(
-          color: Colors.white,
-        )),
-        backgroundColor: colorTheme,
+      appBar: TopAppBarLogout(
+        colorTheme: colorTheme,
+        page: "Friends"
       ),
       body: StreamBuilder(
         stream: channel.stream,
@@ -195,7 +189,7 @@ class FriendController {
                       IconButton(
                         icon: Icon(Icons.email),
                         onPressed: () {
-                          RouteGenerator.onTapToMessages(context, selectedUser: item);
+                          //RouteGenerator.onTapToMessages(context, selectedUser: item);
                         },
                       ),
                       IconButton(

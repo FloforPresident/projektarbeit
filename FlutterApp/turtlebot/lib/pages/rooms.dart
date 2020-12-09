@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
+import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/top_app_bar.dart';
@@ -44,60 +45,39 @@ class _RoomState extends State<Rooms> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+    return Column(
+      children: [
+        StreamBuilder(
+          stream: channel.stream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+
+              widget.controller.setData(snapshot.data);
+
+              return AnimatedList(
+                key: widget.controller.key,
+                initialItemCount: Rooms.items.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index, animation) {
+                  return widget.controller.buildItem(context, Rooms.items[index], animation, index);
+                },
+              );
+            } else {
+              return Text('');
+            }
+          }
+        ),
+        FloatingActionButton(
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          backgroundColor: colorTheme,
           onPressed: () {
-            RouteGenerator.onTapToHome(context);
+            addItemDialog(context);
           },
         ),
-        title: TopAppBar(
-          navigationFields: <Widget>[
-            TopBarImageIcon(
-              Icon(
-                Icons.map,
-                color: Colors.white,
-                size: 30,
-              ),
-              (context) {}),
-            TopBarImageIcon(
-                Icon(Icons.room, size: 30), RouteGenerator.onTapToLocations),
-          ],
-          titleText: Text("Rooms", style: TextStyle(
-            color: Colors.white,
-          )),
-        ),
-        backgroundColor: colorTheme,
-      ),
-      body: StreamBuilder(
-        stream: channel.stream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-
-            widget.controller.setData(snapshot.data);
-
-            return AnimatedList(
-              key: widget.controller.key,
-              initialItemCount: Rooms.items.length,
-              itemBuilder: (context, index, animation) {
-                return widget.controller.buildItem(context, Rooms.items[index], animation, index);
-              },
-            );
-          } else {
-            return Text('');
-          }
-        }),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        backgroundColor: colorTheme,
-        onPressed: () {
-          addItemDialog(context);
-        },
-      ),
+      ],
     );
   }
 
@@ -166,75 +146,6 @@ class _RoomState extends State<Rooms> {
         }
     );
   }
-
-  // void scanMapDialog(BuildContext context) {
-  //   bool _startScan = false;
-  //
-  //   showDialog(
-  //       barrierDismissible: true,
-  //       context: context,
-  //       builder: (context) {
-  //         return AlertDialog(
-  //           shape: RoundedRectangleBorder(
-  //               borderRadius:
-  //               BorderRadius.all(
-  //                   Radius.circular(10.0))),
-  //           title: Text("Raum scannen"),
-  //           content: StatefulBuilder(
-  //               builder: (context, setState) {
-  //                 var height = MediaQuery.of(context).size.height;
-  //                 var width = MediaQuery.of(context).size.width;
-  //
-  //                 return Container(
-  //                   height: height,
-  //                   width: width,
-  //                   child: Column(
-  //                     children: <Widget>[
-  //                       Text("Dieser Vorgang kann einige Zeit dauern, sobald er abgeschlossen ist wird der Raum abgehakt in der Raum-Liste erscheinen."),
-  //                       Container(
-  //                         margin: EdgeInsets.all(15),
-  //                         child: RaisedButton(
-  //                           child: Text("Start"),
-  //                           color: colorTheme,
-  //                           textColor: Colors.white,
-  //                           onPressed: () {
-  //                             setState(() {
-  //                               _startScan = true;
-  //                             });
-  //                             widget.controller.startScan();
-  //                           },
-  //                         ),
-  //                       ),
-  //                       CheckboxListTile(
-  //                         title: Text("Scan gestartet"),
-  //                         value: _startScan,
-  //                         onChanged: (bool value) {},
-  //                       )
-  //                     ],
-  //                   ),
-  //                 );
-  //               }
-  //           ),
-  //           actions: <Widget>[
-  //             FlatButton(
-  //               child: Text("Schließen"),
-  //               onPressed: () {
-  //                 Navigator.of(context).pop();
-  //               },
-  //             ),
-  //             FlatButton(
-  //               child: Text("Fertig"),
-  //               onPressed: () {
-  //                 if (_startScan) {
-  //                   Navigator.of(context).pop();
-  //                 }
-  //               },
-  //             ),
-  //           ],
-  //         );
-  //       }
-  //   );
-  // }
 
   @override
   void dispose() {

@@ -26,7 +26,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   double _leftStart = 40;
   double _rightEnd = 40;
-  Color colorTheme = Colors.green;
+  Color colorTheme = Colors.blueGrey;
   Color secondaryTheme = Colors.white;
 
   TextEditingController _name = new TextEditingController();
@@ -69,7 +69,7 @@ class _LoginState extends State<Login> {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                  child: Icon(Icons.adb, color: Colors.green, size: 60),
+                  child: Icon(Icons.adb, color: Colors.blueGrey, size: 60),
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
