@@ -18,8 +18,6 @@ class Locations extends StatefulWidget {
   static List<Location> items = [];
   static List<Location> activeItems = [];
   static List<Room> roomItems = [];
-  static Location activeLocation;
-  static Room activeRoom;
 
   Locations({Key key}) : super(key: key);
 
@@ -204,8 +202,6 @@ class LocationController {
     Locations.items = [];
     Locations.roomItems = [];
     Locations.activeItems = [];
-    Locations.activeRoom = null;
-    Locations.activeLocation = null;
 
     String jsonDataString = json.toString();
     var jsonData = jsonDecode(jsonDataString);
@@ -222,19 +218,6 @@ class LocationController {
       Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'], rooms[i]['name'],
           rooms[i]['scanned']);
       Locations.roomItems.add(r);
-    }
-
-    // Get active Location
-    var user = jsonData["user"]["location_id"];
-    for(int i = 0; i < Locations.items.length; i++) {
-      if(user == Locations.items[i].id) {
-        Locations.activeLocation = Locations.items[i];
-        for(int y = 0; y < Locations.roomItems.length; y++) {
-          if(Locations.activeLocation.roomId == Locations.roomItems[y].id) {
-            Locations.activeRoom = Locations.roomItems[y];
-          }
-        }
-      }
     }
   }
 

@@ -29,7 +29,7 @@ async def ws_handler(websocket, path):
     elif action == 'LOGIN USER':
         response = login_user(data['name'])
     elif action == 'GET USERS':
-        response = get_users()
+        response = {"users": get_users(), "locations": get_locations(), "rooms": get_rooms()}
 
     # ROOM
     elif action == 'ADD ROOM':

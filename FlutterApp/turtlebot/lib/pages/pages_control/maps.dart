@@ -21,7 +21,6 @@ class _MapsState extends State<Maps> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBody: true,
         appBar: TopAppBarLogout(
             colorTheme: colorTheme,
             page: "Maps"

@@ -67,16 +67,16 @@ class _RoomState extends State<Rooms> {
             }
           }
         ),
-        FloatingActionButton(
-          child: Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-          backgroundColor: colorTheme,
-          onPressed: () {
-            addItemDialog(context);
-          },
-        ),
+        // FloatingActionButton(
+        //   child: Icon(
+        //     Icons.add,
+        //     color: Colors.white,
+        //   ),
+        //   backgroundColor: colorTheme,
+        //   onPressed: () {
+        //     addItemDialog(context);
+        //   },
+        // ),
       ],
     );
   }
