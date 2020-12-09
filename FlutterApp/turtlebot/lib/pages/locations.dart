@@ -13,7 +13,6 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Locations extends StatefulWidget {
   final LocationController controller = new LocationController();
-  final WebSocketChannel channel = MyApp.con();
   int dropDownRoomId;
 
   static List<Location> items = [];
@@ -31,6 +30,9 @@ class Locations extends StatefulWidget {
 }
 
 class _LocationsState extends State<Locations> {
+
+  final WebSocketChannel channel = MyApp.con();
+
   final colorTheme = Colors.pink;
   ControllerCustomDropdown dropController = ControllerCustomDropdown<Room>();
 
@@ -38,7 +40,7 @@ class _LocationsState extends State<Locations> {
   void initState() {
     super.initState();
 
-    widget.controller.getData(widget.channel);
+    widget.controller.getData(channel);
     getSelectedRoom();
   }
 
@@ -78,7 +80,7 @@ class _LocationsState extends State<Locations> {
         ),
       ),
       body: StreamBuilder(
-          stream: widget.channel.stream,
+          stream: channel.stream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               widget.controller.setData(snapshot.data);
@@ -92,62 +94,62 @@ class _LocationsState extends State<Locations> {
 
               return SingleChildScrollView(
                 child: Column(children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(6),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            offset: Offset(4, 7),
-                            spreadRadius: 5,
-                            blurRadius: 3,
-                          )
-                        ]),
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(15, 30, 0, 15),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("Aktuelle Location",
-                                style: TextStyle(
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                          ),
-                        ),
-                        Card(
-                          margin: EdgeInsets.fromLTRB(10, 10, 10, 20),
-                          elevation: 2,
-                          child: ListTile(
-                            title: Container(
-                              child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                      Locations.activeLocation != null
-                                      ? Locations.activeLocation.name
-                                      : "Keine aktive Location ausgewählt"
-                                  )
-                              ),
-                            ),
-                            subtitle: Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                child: Text(
-                                    Locations.activeRoom != null
-                                    ? Locations.activeRoom.name
-                                    : 'Wähle unten eine aktive Location oder füge eigene hinzu',
-                                    style: TextStyle(
-                                      color: Colors.indigo,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold,
-                                    ))),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                  //   decoration: BoxDecoration(
+                  //       color: Colors.grey,
+                  //       borderRadius: BorderRadius.circular(6),
+                  //       boxShadow: [
+                  //         BoxShadow(
+                  //           color: Colors.grey.withOpacity(0.5),
+                  //           offset: Offset(4, 7),
+                  //           spreadRadius: 5,
+                  //           blurRadius: 3,
+                  //         )
+                  //       ]),
+                  //   child: Column(
+                  //     children: [
+                  //       Container(
+                  //         margin: EdgeInsets.fromLTRB(15, 30, 0, 15),
+                  //         child: Align(
+                  //           alignment: Alignment.centerLeft,
+                  //           child: Text("Aktuelle Location",
+                  //               style: TextStyle(
+                  //                   fontSize: 22.0,
+                  //                   fontWeight: FontWeight.bold,
+                  //                   color: Colors.white)),
+                  //         ),
+                  //       ),
+                  //       Card(
+                  //         margin: EdgeInsets.fromLTRB(10, 10, 10, 20),
+                  //         elevation: 2,
+                  //         child: ListTile(
+                  //           title: Container(
+                  //             child: Align(
+                  //                 alignment: Alignment.topLeft,
+                  //                 child: Text(
+                  //                     Locations.activeLocation != null
+                  //                     ? Locations.activeLocation.name
+                  //                     : "Keine aktive Location ausgewählt"
+                  //                 )
+                  //             ),
+                  //           ),
+                  //           subtitle: Container(
+                  //               margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  //               child: Text(
+                  //                   Locations.activeRoom != null
+                  //                   ? Locations.activeRoom.name
+                  //                   : 'Wähle unten eine aktive Location oder füge eigene hinzu',
+                  //                   style: TextStyle(
+                  //                     color: Colors.indigo,
+                  //                     fontSize: 15.0,
+                  //                     fontWeight: FontWeight.bold,
+                  //                   ))),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   Container(
                     margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
                     padding: EdgeInsets.fromLTRB(15,0,15,20),
@@ -261,7 +263,7 @@ class _LocationsState extends State<Locations> {
             FlatButton(
               child: Text("Schließen"),
               onPressed: () {
-                RouteGenerator.onTapToLocations(context);
+                Navigator.of(context).pop();
               },
             ),
             FlatButton(
@@ -275,14 +277,20 @@ class _LocationsState extends State<Locations> {
                       titleController.text,
                       double.parse(xController.text),
                       double.parse(yController.text));
-                  RouteGenerator.onTapToLocations(context);
-                }
+                  }
+                  Navigator.of(context).pop();
               },
             ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    channel.sink.close();
+    super.dispose();
   }
 }
 
@@ -332,10 +340,17 @@ class LocationController {
     }
   }
 
-  void removeItem(Location location) {
+  void removeItem(Location location, int index) {
     WebSocketChannel channel = MyApp.con();
     String data = '{"action": "DELETE LOCATION", "id": "${location.id}"}';
     channel.sink.add(data);
+
+    AnimatedListRemovedItemBuilder build = (context, animation) {
+      return buildItem(context, location, animation, index);
+    };
+    Locations.items.remove(location);
+    Locations.activeItems.remove(location);
+    key.currentState.removeItem(index, build);
   }
 
   void addItem(int roomID, String title, double x, double y) {
@@ -343,6 +358,21 @@ class LocationController {
     String data =
         '{"action": "ADD LOCATION", "roomID": "$roomID", "title": "$title", "x": "$x", "y": "$y"}';
     channel.sink.add(data);
+
+    channel.stream.listen((json) async {
+      if (json != '') {
+        String jsonDataString = json.toString();
+        final jsonData = jsonDecode(jsonDataString);
+
+        Location location = new Location(jsonData['id'], jsonData['room_id'],
+            jsonData['name'], jsonData['x'], jsonData['y']);
+
+        int end = Locations.activeItems.length;
+        Locations.activeItems.add(location);
+        Locations.items.add(location);
+        key.currentState.insertItem(end);
+      }
+    });
   }
 
   void updateItem(int userID, Location location) {
@@ -417,8 +447,7 @@ class LocationController {
                       onPressed: () async {
                         bool delete = await OnDelete.onDelete(context);
                         if (delete) {
-                          removeItem(item);
-                          RouteGenerator.onTapToLocations(context);
+                          removeItem(item, index);
                         }
                       },
                     )
@@ -452,7 +481,7 @@ class LocationController {
             child: Text("Ja"),
             onPressed: () {
               updateItem(MyApp.id, location);
-              RouteGenerator.onTapToLocations(context);
+              Navigator.of(context).pop();
             },
           ),
         ],

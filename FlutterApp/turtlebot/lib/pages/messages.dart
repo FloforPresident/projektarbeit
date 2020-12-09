@@ -12,7 +12,6 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Messages extends StatefulWidget {
   final MessageController controller = new MessageController();
-  final channel = MyApp.con();
   final User selectedUser;
 
   static List<User> items = [];
@@ -26,6 +25,8 @@ class Messages extends StatefulWidget {
 }
 
 class _MessageState extends State<Messages> {
+  final channel = MyApp.con();
+
   TextEditingController _subject = new TextEditingController();
   TextEditingController _message = new TextEditingController();
 
@@ -58,7 +59,7 @@ class _MessageState extends State<Messages> {
   void initState() {
     super.initState();
 
-    widget.controller.getData(widget.channel);
+    widget.controller.getData(channel);
   }
 
   @override
@@ -82,7 +83,7 @@ class _MessageState extends State<Messages> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               StreamBuilder(
-                  stream: widget.channel.stream,
+                  stream: channel.stream,
                   builder: (context, snapshot) {
 
                     widget.controller.setData(snapshot.data);
@@ -187,13 +188,21 @@ class _MessageState extends State<Messages> {
           actions: <Widget> [
               FlatButton(
                 onPressed: (){
-                    RouteGenerator.onTapToMessages(context);
+                  _subject.text = '';
+                  _message.text = '';
+                  Navigator.of(context).pop();
                 },
                 child: Text('Weiter'))
           ]
         );
       }
     );
+  }
+
+  @override
+  void dispose() {
+    channel.sink.close();
+    super.dispose();
   }
 }
 
