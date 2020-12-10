@@ -19,21 +19,15 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:alternative_design" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- changed DropdownButton so color is normal">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/messages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/messages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/pages_control/controls.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/pages_control/controls.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/pubspec.yaml" afterDir="false" />
+    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- Commit Before implemented VideoStream, and implemented function to detect wifi ip address automatically for the app">
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/friends.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/friends.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607358617152</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="- changed DropdownButton so color is normal">
+      <created>1607609346240</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1607609346240</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -187,7 +188,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="alternative_design" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
@@ -208,7 +209,8 @@
     <MESSAGE value="added IntelliJ files" />
     <MESSAGE value="- changed most of the text color to white&#10;- changed controlling a bit&#10;- changed top_app_bar.dart to receive a Text instead of String better flexibility&#10;- changed custom_dropdown_menu.dart that Label receives a Text widget aswell instead of Text" />
     <MESSAGE value="- changed DropdownButton so color is normal" />
-    <option name="LAST_COMMIT_MESSAGE" value="- changed DropdownButton so color is normal" />
+    <MESSAGE value="- Commit Before implemented VideoStream, and implemented function to detect wifi ip address automatically for the app" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Commit Before implemented VideoStream, and implemented function to detect wifi ip address automatically for the app" />
   </component>
   <component name="WindowStateProjectService">
     <state x="249" y="0" key="#Project_Structure" timestamp="1606989298447">
@@ -253,52 +255,52 @@
     </state>
     <state x="-1235" y="212" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1606389026136" />
     <state x="548" y="168" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1606238784439" />
-    <state width="1877" height="246" key="GridCell.Tab.0.bottom" timestamp="1607608630995">
+    <state width="1877" height="246" key="GridCell.Tab.0.bottom" timestamp="1607609369839">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607608630995" />
+    <state width="1877" height="246" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369839" />
     <state width="1491" height="249" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
     <state width="1491" height="150" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.0.center" timestamp="1607608630993">
+    <state width="1877" height="246" key="GridCell.Tab.0.center" timestamp="1607609369838">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607608630993" />
+    <state width="1877" height="246" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
     <state width="1491" height="249" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
     <state width="1491" height="150" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.0.left" timestamp="1607608630993">
+    <state width="1877" height="246" key="GridCell.Tab.0.left" timestamp="1607609369838">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607608630993" />
+    <state width="1877" height="246" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
     <state width="1491" height="249" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
     <state width="1491" height="150" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607004278041" />
-    <state width="1877" height="246" key="GridCell.Tab.0.right" timestamp="1607608630994">
+    <state width="1877" height="246" key="GridCell.Tab.0.right" timestamp="1607609369839">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607608630994" />
+    <state width="1877" height="246" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369839" />
     <state width="1491" height="249" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
     <state width="1491" height="150" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.1.bottom" timestamp="1607608672647">
+    <state width="1877" height="246" key="GridCell.Tab.1.bottom" timestamp="1607609369838">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607608672647" />
+    <state width="1877" height="246" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
     <state width="1491" height="249" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
     <state width="1491" height="150" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.1.center" timestamp="1607608672647">
+    <state width="1877" height="246" key="GridCell.Tab.1.center" timestamp="1607609369838">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607608672647" />
+    <state width="1877" height="246" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
     <state width="1491" height="249" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781485" />
     <state width="1491" height="150" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.1.left" timestamp="1607608672647">
+    <state width="1877" height="246" key="GridCell.Tab.1.left" timestamp="1607609369838">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607608672647" />
+    <state width="1877" height="246" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
     <state width="1491" height="249" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781485" />
     <state width="1491" height="150" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.1.right" timestamp="1607608672647">
+    <state width="1877" height="246" key="GridCell.Tab.1.right" timestamp="1607609369838">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607608672647" />
+    <state width="1877" height="246" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
     <state width="1491" height="249" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
     <state width="1491" height="150" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
     <state x="-1850" y="60" width="1825" height="915" key="MergeDialog" timestamp="1607269358073">
@@ -322,10 +324,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="100" y="100" width="1336" height="624" key="ShowDiffWithBranchDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607265559053" />
-    <state x="-1368" y="252" key="Vcs.Push.Dialog.v2" timestamp="1607609324973">
+    <state x="-1368" y="252" key="Vcs.Push.Dialog.v2" timestamp="1607609467995">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1368" y="252" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609324973" />
+    <state x="-1368" y="252" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609467995" />
     <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607601834764" />
     <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607009568922" />
     <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1607596139791">
