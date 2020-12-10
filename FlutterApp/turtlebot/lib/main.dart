@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/pages/friends.dart';
-import 'package:turtlebot/pages/messages.dart';
-import 'package:turtlebot/pages/pages_control/controls.dart';
-import 'package:turtlebot/pages/pages_control/maps.dart';
+import 'package:turtlebot/pages/home/home.dart';
+import 'package:turtlebot/pages/controls.dart';
+import 'package:turtlebot/pages/maps/maps.dart';
 import 'package:turtlebot/pages/robos.dart';
-import 'package:turtlebot/pages/rooms.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:turtlebot/services/socke_info.dart';
@@ -114,7 +113,7 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   static List<Widget> pages = [
-    Messages(null),
+    HomeScreen(),
     Maps(),
     Robos(),
     Friends(),

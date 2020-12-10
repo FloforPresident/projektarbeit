@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/no_data_entered.dart';
-import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
@@ -13,9 +12,6 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 class Messages extends StatefulWidget {
   final MessageController controller = new MessageController();
   final User selectedUser;
-
-  static Location activeLocation;
-  static Room activeRoom;
 
   static List<User> items = [];
 
@@ -67,110 +63,32 @@ class _MessageState extends State<Messages> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: TopAppBarLogout(
-            colorTheme: colorTheme,
-            page: "Home"
-        ),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                decoration: BoxDecoration(
-                    color: colorTheme.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(6),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        offset: Offset(4, 7),
-                        spreadRadius: 1,
-                        blurRadius: 8,
-                      )
-                    ]),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.fromLTRB(15, 15, 0, 5),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text("Aktuelle Location",
-                            style: TextStyle(
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white)),
-                      ),
-                    ),
-                    Card(
-                      margin: EdgeInsets.fromLTRB(10, 10, 10, 20),
-                      elevation: 2,
-                      child: ListTile(
-                        title: Container(
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                  Messages.activeLocation != null
-                                  ? Messages.activeLocation.name
-                                  : "Keine aktive Location ausgewählt"
-                              )
-                          ),
-                        ),
-                        subtitle: Container(
-                            margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                            child: Text(
-                                Messages.activeRoom != null
-                                ? Messages.activeRoom.name
-                                : '',
-                                style: TextStyle(
-                                  color: Colors.indigo,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.bold,
-                                ))),
-                      ),
-                    ),
-                  ],
+    return StreamBuilder(
+      stream: channel.stream,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          widget.controller.setData(snapshot.data);
+
+          // Logic for Send Message directly Button on Friends Page
+          int startValueIndex;
+          if(widget.selectedUser != null) {
+            for(int i = 0; i < Messages.items.length; i++) {
+              if(widget.selectedUser.id == Messages.items[i].id) {
+                dropController.setValue(widget.selectedUser);
+                startValueIndex = i;
+              }
+            }
+          }
+
+          return Column(
+            children: [
+              CustomDropdownLabel(
+              label: Text("Empfänger:"),
+                child: CustomDropdownMenu<User>(
+                controller: dropController,
+                data: Messages.items,
+                startValueId: startValueIndex,
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(25, 15, 0, 5),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text("Nachricht",
-                      style: TextStyle(
-                          fontSize: 22.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey)),
-                ),
-              ),
-              StreamBuilder(
-                  stream: channel.stream,
-                  builder: (context, snapshot) {
-
-                    widget.controller.setData(snapshot.data);
-
-                    // Logic for Send Message directly Button on Friends Page
-                    int startValueIndex;
-                    if(widget.selectedUser != null) {
-                      for(int i = 0; i < Messages.items.length; i++) {
-                        if(widget.selectedUser.id == Messages.items[i].id) {
-                          dropController.setValue(widget.selectedUser);
-                          startValueIndex = i;
-                        }
-                      }
-                    }
-
-                    return CustomDropdownLabel(
-                      label: Text("Empfänger:"),
-                      child: CustomDropdownMenu<User>(
-                        controller: dropController,
-                        data: Messages.items,
-                        startValueId: startValueIndex,
-                      ),
-                    );
-                  }
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(leftStart, 15, 20, 0),
@@ -180,9 +98,9 @@ class _MessageState extends State<Messages> {
                       flex: 5,
                       child: Container(
                           child: Text(
-                        "Betreff:",
-                        style: TextStyle(fontSize: fontsize),
-                      )),
+                            "Betreff:",
+                            style: TextStyle(fontSize: fontsize),
+                          )),
                     ),
                     Expanded(
                       flex: 3,
@@ -233,9 +151,11 @@ class _MessageState extends State<Messages> {
                 ),
               )
             ],
-          ),
-        ),
-      )
+          );
+        } else {
+          return Text('');
+        }
+      }
     );
   }
 
@@ -278,25 +198,15 @@ class MessageController {
 
   void setData(json) {
     Messages.items = [];
-    Messages.activeRoom = null;
-    Messages.activeLocation = null;
 
     String jsonDataString = json.toString();
-    var jsonData = jsonDecode(jsonDataString);
-    var users = jsonData;
-
-
-    User user;
+    var users = jsonDecode(jsonDataString);
 
     for (int i = 0; i < users.length; i++) {
       User u = new User(
           users[i]['id'], users[i]['location_id'],
           users[i]['name']);
       Messages.items.add(u);
-
-      if (u.id == MyApp.id) {
-        user = u;
-      }
     }
   }
 

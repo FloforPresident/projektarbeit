@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/main.dart';
-import 'package:turtlebot/pages/messages.dart';
+import 'package:turtlebot/pages/home/messages.dart';
 import 'package:turtlebot/pages/robos.dart';
 
 

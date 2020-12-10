@@ -1,5 +1,3 @@
-import json
-import re
 from flask import Flask
 from models import *
 import asyncio
@@ -29,7 +27,7 @@ async def ws_handler(websocket, path):
     elif action == 'LOGIN USER':
         response = login_user(data['name'])
     elif action == 'GET USERS':
-        response = {"users": get_users(), "locations": get_locations(), "rooms": get_rooms()}
+        response = get_users()
 
     # ROOM
     elif action == 'ADD ROOM':
