@@ -2,16 +2,20 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 
 class ActiveLocation extends StatefulWidget {
-  final MessageController controller = new MessageController();
+  final ActiveLocationController controller = new ActiveLocationController();
 
+  static List<Location> locationItems = [];
+  static List<Room> roomItems = [];
   static Location activeLocation;
   static Room activeRoom;
+  static User user;
 
   ActiveLocation({Key key}) : super(key: key);
 
@@ -56,71 +60,103 @@ class _ActiveLocationState extends State<ActiveLocation> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
-            decoration: BoxDecoration(
-              color: colorTheme.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(6),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  offset: Offset(4, 7),
-                  spreadRadius: 1,
-                  blurRadius: 8,
-                )
-              ]),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(15, 15, 0, 5),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Aktuelle Location",
-                      style: TextStyle(
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
-                  ),
-                ),
-                Card(
-                  margin: EdgeInsets.fromLTRB(10, 10, 10, 20),
-                  elevation: 2,
-                  child: ListTile(
-                    title: Container(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          ActiveLocation.activeLocation != null
-                            ? ActiveLocation.activeLocation.name
-                            : "Keine aktive Location ausgewählt"
+    return StreamBuilder(
+        stream: channel.stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            widget.controller.setData(snapshot.data);
+
+            return SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                    decoration: BoxDecoration(
+                      color: colorTheme.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(6),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          offset: Offset(4, 7),
+                          spreadRadius: 1,
+                          blurRadius: 8,
                         )
-                      ),
-                    ),
-                    subtitle: Container(
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                      child: Text(
-                        ActiveLocation.activeRoom != null
-                          ? ActiveLocation.activeRoom.name
-                          : '',
-                        style: TextStyle(
-                          color: Colors.indigo,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
-                        )
-                      )
+                      ]),
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(15, 15, 0, 5),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("Aktuelle Location",
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                          ),
+                        ),
+                        Card(
+                          margin: EdgeInsets.fromLTRB(10, 10, 10, 20),
+                          elevation: 2,
+                          child: ListTile(
+                            title: Row(
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text(
+                                          ActiveLocation.activeLocation != null
+                                              ? ActiveLocation.activeLocation.name
+                                              : "Nichts ausgewählt"
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                // Expanded(
+                                //   flex: 2,
+                                //   child: Row(
+                                //     mainAxisAlignment: MainAxisAlignment.end,
+                                //     children: <Widget>[
+                                //       IconButton(
+                                //         icon: Icon(Icons.create),
+                                //         onPressed: () {
+                                //           widget.controller.editItemDialog(context);
+                                //         },
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
+                              ]
+                          ),
+                          subtitle: Container(
+                              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                              child: Text(
+                                  ActiveLocation.activeRoom != null
+                                      ? ActiveLocation.activeRoom.name
+                                      : '',
+                                  style: TextStyle(
+                                    color: Colors.indigo,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                  )
+                              )
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+                ],
+              ),
+            );
+
+          } else {
+            return Text('');
+          }
+        }
     );
   }
 
@@ -131,10 +167,14 @@ class _ActiveLocationState extends State<ActiveLocation> {
   }
 }
 
-class MessageController {
+class ActiveLocationController {
+  ControllerCustomDropdown roomDropController = ControllerCustomDropdown<Room>();
+  ControllerCustomDropdown locationDropController = ControllerCustomDropdown<Location>();
+
 
   void getData(WebSocketChannel channel) {
-    String data = '{"action": "GET LOCATIONS"}';
+    String data = '{"action": "GET LOCATIONS", "id": ${MyApp.id}}';
+
     channel.sink.add(data);
   }
 
@@ -146,12 +186,13 @@ class MessageController {
     var jsonData = jsonDecode(jsonDataString);
     var locations = jsonData['locations'];
     var rooms = jsonData['rooms'];
+    var userData = jsonData["user"];
 
-    var user = jsonData["user"]["location_id"];
+    ActiveLocation.user = new User(userData['id'], userData['location_id'], userData['name']);
     for (int i = 0; i < locations.length; i++) {
       Location l = new Location(locations[i]['id'], locations[i]['room_id'],
           locations[i]['name'], locations[i]['x'], locations[i]['y']);
-      if(user == l.id){
+      if(ActiveLocation.user.locationID == l.id){
         ActiveLocation.activeLocation = l;
         for (int i = 0; i < rooms.length; i++) {
           Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'], rooms[i]['name'],
@@ -162,12 +203,5 @@ class MessageController {
         }
       }
     }
-  }
-
-  void sendMessage(User user, String subject, String message) {
-    WebSocketChannel channel = MyApp.con();
-
-    String data = '{"action": "SEND MESSAGE", "from_user": ${MyApp.id}, "to_user": ${user.id}, "subject": "$subject", "message": "$message"}';
-    channel.sink.add(data);
   }
 }

@@ -67,6 +67,15 @@ class _RoomState extends State<Rooms> {
             }
           }
         ),
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: RaisedButton(
+            onPressed: () {
+              addItemDialog(context);
+            },
+            child: Text("Hinzufügen"),
+          ),
+        )
         // FloatingActionButton(
         //   child: Icon(
         //     Icons.add,
@@ -85,65 +94,65 @@ class _RoomState extends State<Rooms> {
     TextEditingController controller = TextEditingController();
 
     showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius:
-                BorderRadius.all(
-                    Radius.circular(10.0))),
-            title: Text("Neuen Raum hinzufügen"),
-            content: Builder(
-                builder: (context) {
-                  var height = MediaQuery.of(context).size.height;
-                  var width = MediaQuery.of(context).size.width;
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius:
+            BorderRadius.all(
+                Radius.circular(10.0))),
+          title: Text("Neuen Raum hinzufügen"),
+          content: Builder(
+            builder: (context) {
+              var height = MediaQuery.of(context).size.height;
+              var width = MediaQuery.of(context).size.width;
 
-                  return Container(
-                    height: height,
-                    width: width,
-                    child: Column(
-                      children: <Widget>[
-                        TextField(
-                          controller: controller,
-                          decoration: InputDecoration(labelText: "Name"),
-                        ),
-                        CustomDropdownLabel(
-                          label: Text("Robo:"),
-                          child: CustomDropdownMenu<Robo>(
-                              controller: dropController, data: Rooms.roboItems),
-                        ),
-                      ],
+              return Container(
+                height: height,
+                width: width,
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      controller: controller,
+                      decoration: InputDecoration(labelText: "Name"),
                     ),
-                  );
-                }
+                    CustomDropdownLabel(
+                      label: Text("Robo:"),
+                      child: CustomDropdownMenu<Robo>(
+                        controller: dropController, data: Rooms.roboItems),
+                    ),
+                  ],
+                ),
+              );
+            }
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Schließen"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Schließen"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              FlatButton(
-                child: Text("Hinzufügen"),
-                onPressed: () {
-                  if (controller.text.isNotEmpty && dropController.getValue() != null) {
-                    widget.controller.newRoomRoboAlreadyTaken(dropController.getValue());
-                    widget.controller.addItem(dropController.getValue().id, controller.text);
+            FlatButton(
+              child: Text("Hinzufügen"),
+              onPressed: () {
+                if (controller.text.isNotEmpty && dropController.getValue() != null) {
+                  widget.controller.newRoomRoboAlreadyTaken(dropController.getValue());
+                  widget.controller.addItem(dropController.getValue().id, controller.text);
 
-                    // scanMapDialog(context);
-                    Navigator.of(context).pop();
-                  }
-                  else
-                  {
-                    NoDataDialog.noLoginData(context);
-                  }
-                },
-              ),
-            ],
-          );
-        }
+                  // scanMapDialog(context);
+                  Navigator.of(context).pop();
+                }
+                else
+                {
+                  NoDataDialog.noLoginData(context);
+                }
+              },
+            ),
+          ],
+        );
+      }
     );
   }
 

@@ -107,6 +107,15 @@ class _LocationsState extends State<Locations> {
                             Locations.activeItems[index], animation, index);
                       },
                     ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      child: RaisedButton(
+                        onPressed: () {
+                          addItemDialog(context, dropController.getValue());
+                        },
+                        child: Text("Hinzufügen"),
+                      ),
+                    )
                     // FloatingActionButton(
                     //   onPressed: () {
                     //     if (dropController.getValue() != null) {
@@ -318,7 +327,7 @@ class LocationController {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.create),
+                      icon: Icon(Icons.add),
                       onPressed: () {
                         setActiveLocationDialog(context, item);
                       },
