@@ -42,6 +42,9 @@ class Room implements DatabaseObject {
   get id => _id;
 
   get roboID => _roboID;
+  void setValue(int id) {
+    this._roboID = id;
+  }
 
   @override
   get name => _name;
@@ -61,6 +64,9 @@ class User implements DatabaseObject {
   get id => _id;
 
   get locationID => _locationID;
+  void setValue(int id) {
+    this._locationID = id;
+  }
 
   @override
   get name => _name;

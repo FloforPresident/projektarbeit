@@ -29,7 +29,7 @@ async def ws_handler(websocket, path):
     elif action == 'LOGIN USER':
         response = login_user(data['name'])
     elif action == 'GET USERS':
-        response = get_users()
+        response = {"users": get_users(), "locations": get_locations(), "rooms": get_rooms()}
 
     # ROOM
     elif action == 'ADD ROOM':
@@ -47,7 +47,7 @@ async def ws_handler(websocket, path):
 
     # ROBO
     elif action == 'ADD ROBO':
-        add_robo(data['name'], data['ip'])
+        response = add_robo(data['name'], data['ip'])
     elif action == 'DELETE ROBO':
         delete_robo(data['id'])
     elif action == 'GET ROBOS':
@@ -63,7 +63,7 @@ async def ws_handler(websocket, path):
 
     # LOCATION
     elif action == 'ADD LOCATION':
-        add_location(data['roomID'], data['title'], data['x'], data['y'])
+        response = add_location(data['roomID'], data['title'], data['x'], data['y'])
     elif action == 'DELETE LOCATION':
         delete_location(data['id'])
     elif action == 'GET LOCATIONS':

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/main.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -21,19 +22,9 @@ class _ControlsState extends State<Controls> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Center(
-              child: Icon(
-            Icons.arrow_back,
-            color: widget.textColor,
-          )),
-          onPressed: () {
-            RouteGenerator.onTapToHome(context);
-          },
-        ),
-        title: Text("Controlling", style: TextStyle(color: widget.textColor)),
-        backgroundColor: widget.backgroundColor,
+      appBar: TopAppBarLogout(
+          colorTheme: widget.backgroundColor,
+          page: "Controlling"
       ),
       body: Container(
         child: Container(

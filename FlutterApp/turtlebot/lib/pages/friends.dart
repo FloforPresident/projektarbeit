@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
+import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/routing.dart';
@@ -11,8 +12,6 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Friends extends StatefulWidget {
   final FriendController controller = new FriendController();
-  final WebSocketChannel channel = MyApp.con();
-
   static List<User> items = [];
   static List<Location> locationItems = [];
   static List<Room> roomItems = [];
@@ -26,35 +25,24 @@ class Friends extends StatefulWidget {
 }
 
 class _FriendState extends State<Friends> {
-  final GlobalKey<AnimatedListState> key = GlobalKey();
+  final WebSocketChannel channel = MyApp.con();
   final colorTheme = Colors.red;
-
-  ControllerCustomDropdown roomDropController = ControllerCustomDropdown<Room>();
-  ControllerCustomDropdown locationDropController = ControllerCustomDropdown<Location>();
-
 
   @override
   void initState() {
     super.initState();
-    widget.controller.getData(widget.channel);
+    widget.controller.getData(channel);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {
-              RouteGenerator.onTapToHome(context);
-            }),
-        title: Text("Friends", style: TextStyle(
-          color: Colors.white,
-        )),
-        backgroundColor: colorTheme,
+      appBar: TopAppBarLogout(
+        colorTheme: colorTheme,
+        page: "Friends"
       ),
       body: StreamBuilder(
-        stream: widget.channel.stream,
+        stream: channel.stream,
         builder: (context, snapshot) {
           if(snapshot.hasData) {
 
@@ -62,10 +50,10 @@ class _FriendState extends State<Friends> {
 
             return AnimatedList(
                 shrinkWrap: true,
-                key: key,
+                key: widget.controller.key,
                 initialItemCount: Friends.items.length,
                 itemBuilder: (context, index, animation) {
-                  return buildItem(Friends.items[index], animation, index);
+                  return widget.controller.buildItem(context, Friends.items[index], animation, index);
                 },
               );
           } else {
@@ -76,158 +64,19 @@ class _FriendState extends State<Friends> {
     );
   }
 
-  Widget buildItem(User item, Animation animation, int index) {
-    String locationName = '';
-    String roomName = '';
-    for(int i = 0; i < Friends.locationItems.length; i++) {
-      if(item.locationID == Friends.locationItems[i].id) {
-        Location location = Friends.locationItems[i];
-        locationName = location.name;
-
-        for(int y = 0; y < Friends.roomItems.length; y++) {
-          if(location.roomId == Friends.roomItems[y].id) {
-            roomName = Friends.roomItems[y].name;
-          }
-        }
-      }
-    }
-    return SizeTransition(
-      sizeFactor: animation,
-      child: Card(
-        elevation: 2,
-        child: ListTile(
-          title: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 4,
-                child: Row(
-                  children: <Widget>[
-                    Text(item.name),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children:
-                  MyApp.id != item.id
-                  ? <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.email),
-                      onPressed: () {
-                        RouteGenerator.onTapToMessages(context, selectedUser: item);
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () async {
-                        bool delete = await OnDelete.onDelete(context);
-                        if(delete) {
-                          widget.controller.removeItem(item);
-                          RouteGenerator.onTapToFriends(context);
-                        }
-                      },
-                    )
-                  ]
-                  : <Widget> [
-                    IconButton(
-                      icon: Icon(Icons.create),
-                      onPressed: (){
-                        editItemDialog(context, item);
-                      },
-                    ),
-                    IconButton(
-                        icon: Icon(Icons.assignment_ind_rounded),
-                        onPressed: (){},
-                    )
-                  ]
-                ),
-              ),
-            ],
-          ),
-          subtitle: Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-            child: Row(children: <Widget>[
-              Text(roomName + " - ",
-                style: TextStyle(
-                  color: Colors.indigo,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold,
-                )),
-              Text(locationName != '' ? locationName : "No active location set")
-            ])),
-        ),
-      ),
-    );
-  }
-
-  void editItemDialog(BuildContext context, User user) {
-    showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (context) {
-        List<Location> selectedLocations = [];
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return SingleChildScrollView(
-              child: AlertDialog(
-                title: Text("Deinen aktuellen Platz ändern"),
-                content: Column(
-                  children: <Widget>[
-                    CustomDropdownLabel(
-                      label: Text("Raum"),
-                      child: CustomDropdownMenu<Room>(
-                        onChanged: () {
-                          List<Location> buffer = [];
-                          for(int i = 0; i < Friends.locationItems.length; i++) {
-                            if(Friends.locationItems[i].roomId == roomDropController.getValue().id) {
-                              buffer.add(Friends.locationItems[i]);
-                            }
-                          }
-                          setState(() {
-                            selectedLocations = [];
-                            selectedLocations.addAll(buffer);
-                          });
-                        },
-                        controller: roomDropController, data: Friends.roomItems),
-                    ),
-                    CustomDropdownLabel(
-                      label: Text("Platz"),
-                      child: CustomDropdownMenu<Location>(
-                        controller: locationDropController,
-                        data: selectedLocations),
-                    ),
-                  ],
-                ),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text("Schließen"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  FlatButton(
-                    child: Text("Ändern"),
-                    onPressed: () {
-                      if (roomDropController.getValue() != null &&
-                          locationDropController.getValue() != null) {
-                        widget.controller.updateItem(user, locationDropController.getValue());
-                        RouteGenerator.onTapToFriends(context);
-                      }
-                    },
-                  ),
-                ],
-              )
-            );
-          }
-        );
-      }
-    );
+  @override
+  void dispose() {
+    channel.sink.close();
+    super.dispose();
   }
 }
 
 class FriendController {
+  final GlobalKey<AnimatedListState> key = GlobalKey();
+
+  ControllerCustomDropdown roomDropController = ControllerCustomDropdown<Room>();
+  ControllerCustomDropdown locationDropController = ControllerCustomDropdown<Location>();
+
 
   void getData(WebSocketChannel channel) {
     String data = '{"action": "GET FRIENDS"}';
@@ -266,15 +115,186 @@ class FriendController {
     }
   }
 
-  void removeItem(User user) {
+  void removeItem(User user, int index) {
     WebSocketChannel channel = MyApp.con();
     String data = '{"action": "DELETE FRIEND", "id": "${user.id}"}';
     channel.sink.add(data);
+
+    AnimatedListRemovedItemBuilder build = (context, animation) {
+      return buildItem(context, user, animation, index);
+    };
+    Friends.items.remove(user);
+    key.currentState.removeItem(index, build);
   }
 
   void updateItem(User user, Location location) {
     WebSocketChannel channel = MyApp.con();
     String data = '{"action": "UPDATE FRIEND", "user_id": "${user.id}", "location_id": ${location.id}}';
     channel.sink.add(data);
+
+    for(int i = 0; i < Friends.items.length; i++) {
+      if(Friends.items[i].id == user.id) {
+
+        user.setValue(location.id);
+        AnimatedListRemovedItemBuilder build = (context, animation) {
+          return buildItem(context, Friends.items[i], animation, i);
+        };
+
+        key.currentState.removeItem(i, build);
+        Friends.items.remove(Friends.items[i]);
+
+        Friends.items.add(user);
+        key.currentState.insertItem(i);
+      }
+    }
+  }
+
+  Widget buildItem(BuildContext context, User item, Animation animation, int index) {
+    String locationName = '';
+    String roomName = '';
+    for(int i = 0; i < Friends.locationItems.length; i++) {
+      if(item.locationID == Friends.locationItems[i].id) {
+        Location location = Friends.locationItems[i];
+        locationName = location.name;
+
+        for(int y = 0; y < Friends.roomItems.length; y++) {
+          if(location.roomId == Friends.roomItems[y].id) {
+            roomName = Friends.roomItems[y].name;
+          }
+        }
+      }
+    }
+    return SizeTransition(
+      sizeFactor: animation,
+      child: Card(
+        elevation: 2,
+        child: ListTile(
+          title: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 4,
+                child: Row(
+                  children: <Widget>[
+                    Text(item.name),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children:
+                    MyApp.id != item.id
+                        ? <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.email),
+                        onPressed: () {
+                          //RouteGenerator.onTapToMessages(context, selectedUser: item);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () async {
+                          bool delete = await OnDelete.onDelete(context);
+                          if(delete) {
+                            removeItem(item, index);
+                          }
+                        },
+                      )
+                    ]
+                        : <Widget> [
+                      IconButton(
+                        icon: Icon(Icons.create),
+                        onPressed: (){
+                          editItemDialog(context, item);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.assignment_ind_rounded),
+                        onPressed: (){},
+                      )
+                    ]
+                ),
+              ),
+            ],
+          ),
+          subtitle: Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: Row(children: <Widget>[
+                Text(roomName + " - ",
+                    style: TextStyle(
+                      color: Colors.indigo,
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text(locationName != '' ? locationName : "No active location set")
+              ])),
+        ),
+      ),
+    );
+  }
+
+  void editItemDialog(BuildContext context, User user) {
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          List<Location> selectedLocations = [];
+          return StatefulBuilder(
+              builder: (context, setState) {
+                return SingleChildScrollView(
+                    child: AlertDialog(
+                      title: Text("Deinen aktuellen Platz ändern"),
+                      content: Column(
+                        children: <Widget>[
+                          CustomDropdownLabel(
+                            label: Text("Raum"),
+                            child: CustomDropdownMenu<Room>(
+                                onChanged: () {
+                                  List<Location> buffer = [];
+                                  for(int i = 0; i < Friends.locationItems.length; i++) {
+                                    if(Friends.locationItems[i].roomId == roomDropController.getValue().id) {
+                                      buffer.add(Friends.locationItems[i]);
+                                    }
+                                  }
+                                  setState(() {
+                                    selectedLocations = [];
+                                    selectedLocations.addAll(buffer);
+                                  });
+                                },
+                                controller: roomDropController, data: Friends.roomItems),
+                          ),
+                          CustomDropdownLabel(
+                            label: Text("Platz"),
+                            child: CustomDropdownMenu<Location>(
+                                controller: locationDropController,
+                                data: selectedLocations),
+                          ),
+                        ],
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text("Schließen"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        FlatButton(
+                          child: Text("Ändern"),
+                          onPressed: () {
+                            if (roomDropController.getValue() != null &&
+                                locationDropController.getValue() != null) {
+                              updateItem(user, locationDropController.getValue());
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        ),
+                      ],
+                    )
+                );
+              }
+          );
+        }
+    );
   }
 }

@@ -40,7 +40,7 @@ def delete_user(user_id):
 
 def get_users():
     users = []
-    for i in User.query.all():
+    for i in User.query.order_by(User.id).all():
         users.append(i.to_dict())
     return users
 
@@ -51,6 +51,7 @@ def add_robo(name, ip):
     robo = Robo(name=name, ip=ip)
     db.session.add(robo)
     db.session.commit()
+    return robo.to_dict()
 
 
 def delete_robo(robo_id):
@@ -61,7 +62,7 @@ def delete_robo(robo_id):
 
 def get_robos():
     robos = []
-    for i in Robo.query.all():
+    for i in Robo.query.order_by(Robo.id).all():
         robos.append(i.to_dict())
     return robos
 
@@ -95,7 +96,7 @@ def update_robo(robo_id, room_id):
 
 def get_rooms():
     rooms = []
-    for i in Room.query.all():
+    for i in Room.query.order_by(Room.id).all():
         rooms.append(i.to_dict())
     return rooms
 
@@ -106,6 +107,7 @@ def add_location(room_id, name, x, y):
     location = Location(room_id=room_id, name=name, x=x, y=y)
     db.session.add(location)
     db.session.commit()
+    return location.to_dict()
 
 
 def get_location(location_id):
@@ -129,7 +131,7 @@ def update_location(user_id, location_id):
 
 def get_locations():
     locations = []
-    for i in Location.query.all():
+    for i in Location.query.order_by(Location.id).all():
         locations.append(i.to_dict())
     return locations
 
