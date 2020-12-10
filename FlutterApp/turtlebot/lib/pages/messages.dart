@@ -283,9 +283,8 @@ class MessageController {
 
     String jsonDataString = json.toString();
     var jsonData = jsonDecode(jsonDataString);
-    var users = jsonData['users'];
-    var locations = jsonData['locations'];
-    var rooms = jsonData['rooms'];
+    var users = jsonData;
+
 
     User user;
 
@@ -295,21 +294,8 @@ class MessageController {
           users[i]['name']);
       Messages.items.add(u);
 
-      if(u.id == MyApp.id) { user = u; }
-    }
-
-    for (int i = 0; i < locations.length; i++) {
-      Location l = new Location(locations[i]['id'], locations[i]['room_id'],
-          locations[i]['name'], locations[i]['x'], locations[i]['y']);
-      if(user.locationID == l.id){
-        Messages.activeLocation = l;
-        for (int i = 0; i < rooms.length; i++) {
-          Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'], rooms[i]['name'],
-              rooms[i]['scanned']);
-          if(Messages.activeLocation.roomId == r.id){
-            Messages.activeRoom = r;
-          }
-        }
+      if (u.id == MyApp.id) {
+        user = u;
       }
     }
   }

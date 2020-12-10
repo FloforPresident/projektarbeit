@@ -3,6 +3,7 @@ import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/main.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:flutter_mjpeg/flutter_mjpeg.dart';
 
 class Controls extends StatefulWidget {
   final ControlController controller = new ControlController();
@@ -42,7 +43,10 @@ class _ControlsState extends State<Controls> {
                             borderRadius: BorderRadius.circular(6),
                             color: Colors.white,
                             border: Border.all(color: Colors.black)),
-                        child: Center(child: Text("Video"))),
+                        child: Center(child: Mjpeg(
+                          isLive: true,
+                          stream:"http://192.168.2.105:8080/stream?topic=/Face_Recognition_Stream",
+                        ) )),
                   ),
                 ),
                 Container(

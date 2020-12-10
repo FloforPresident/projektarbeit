@@ -24,6 +24,8 @@ dependencies:
   web_socket_channel: ^1.1.0
   password: ^1.0.0
   shared_preferences: ^0.5.1+2
+  flutter_mjpeg: ^1.2.9
+  wifi_info_flutter: ^1.0.1
 
   
   # The following adds the Cupertino Icons font to your application.
@@ -48,8 +50,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/images/
+  #assets:
+   # - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
