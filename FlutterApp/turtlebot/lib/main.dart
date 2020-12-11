@@ -60,7 +60,7 @@ class Home extends StatefulWidget{
 class _HomeState extends State<Home> {
 
   @override
-  void initState() {
+  initState() {
     super.initState();
 
     if(widget.sessionUser != null) {
@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
 
   int _selectedIndex = 0;
 
-  static List<Widget> pages = [
+  List<Widget> pages = [
     HomeScreen(),
     Maps(),
     Robos(),
@@ -123,7 +123,19 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: pages[_selectedIndex],
+        body: MyApp.id == null ? FutureBuilder(
+          future: login(),
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting: return new Text('');
+              default:
+                if (snapshot.hasError)
+                  return new Text('Error: ${snapshot.error}');
+                else
+                  return pages[_selectedIndex];
+            }
+          }
+        ) : pages[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(

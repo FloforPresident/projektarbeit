@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/pages/home/active_location.dart';
 import 'package:turtlebot/pages/home/messages.dart';
-import 'package:turtlebot/pages/maps/locations.dart';
-import 'package:turtlebot/pages/maps/rooms.dart';
-
-import '../friends.dart';
-import '../robos.dart';
 
 class HomeScreen extends StatefulWidget{
   @override
