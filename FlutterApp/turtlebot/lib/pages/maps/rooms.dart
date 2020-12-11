@@ -54,38 +54,32 @@ class _RoomState extends State<Rooms> {
 
               widget.controller.setData(snapshot.data);
 
-              return AnimatedList(
-                key: widget.controller.key,
-                initialItemCount: Rooms.items.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index, animation) {
-                  return widget.controller.buildItem(context, Rooms.items[index], animation, index);
-                },
+              return Column(
+                children: [
+                  AnimatedList(
+                  key: widget.controller.key,
+                    initialItemCount: Rooms.items.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index, animation) {
+                      return widget.controller.buildItem(context, Rooms.items[index], animation, index);
+                    },
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    child: RaisedButton(
+                      onPressed: () {
+                        addItemDialog(context);
+                      },
+                      child: Text("Hinzufügen"),
+                    ),
+                  )
+                ],
               );
             } else {
               return Text('');
             }
           }
         ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-          child: RaisedButton(
-            onPressed: () {
-              addItemDialog(context);
-            },
-            child: Text("Hinzufügen"),
-          ),
-        )
-        // FloatingActionButton(
-        //   child: Icon(
-        //     Icons.add,
-        //     color: Colors.white,
-        //   ),
-        //   backgroundColor: colorTheme,
-        //   onPressed: () {
-        //     addItemDialog(context);
-        //   },
-        // ),
       ],
     );
   }

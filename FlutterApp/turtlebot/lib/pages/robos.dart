@@ -45,25 +45,32 @@ class _RoboState extends State<Robos>{
           if(snapshot.hasData) {
             widget.controller.setData(snapshot.data);
 
-            return AnimatedList(
-              key: widget.controller.key,
-              initialItemCount: Robos.items.length,
-              itemBuilder: (context, index, animation) {
-                return widget.controller.buildItem(context, Robos.items[index], animation, index);
-              },
+            return Column(
+              children: [
+                AnimatedList(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  key: widget.controller.key,
+                  initialItemCount: Robos.items.length,
+                  itemBuilder: (context, index, animation) {
+                    return widget.controller.buildItem(context, Robos.items[index], animation, index);
+                  },
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () {
+                      addItemDialog(context);
+                    },
+                    child: Text("Hinzufügen"),
+                  ),
+                )
+              ]
             );
           } else {
             return Text('');
           }
         }
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        foregroundColor: Colors.white,
-        backgroundColor: colorTheme,
-        onPressed: () {
-          addItemDialog(context);
-        },
       ),
     );
   }

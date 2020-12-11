@@ -71,30 +71,27 @@ class _LocationsState extends State<Locations> {
             return SingleChildScrollView(
               child: Column(
                   children: [
-                    Container(
-                      margin: EdgeInsets.fromLTRB(15, 15, 0, 15),
-                      child: CustomDropdownLabel(
-                        label: Text("Room:", style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17.0,
-                          fontWeight: FontWeight.bold,
-                        )),
-                        child: CustomDropdownMenu<Room>(
-                          itemTextStyle: TextStyle(color: Colors.black87),
-                          selectedItemTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.lightBlue) ,
-                          onChanged: () async {
-                            final SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                            prefs.setInt(
-                                'room_id', dropController.getCurrentIndex());
+                    CustomDropdownLabel(
+                      label: Text("Room:", style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                      )),
+                      child: CustomDropdownMenu<Room>(
+                        itemTextStyle: TextStyle(color: Colors.black87),
+                        selectedItemTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.lightBlue) ,
+                        onChanged: () async {
+                          final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                          prefs.setInt(
+                              'room_id', dropController.getCurrentIndex());
 
-                            widget.controller.updateLocations(
-                                context, dropController.getValue().id);
-                          },
-                          startValueId: widget.dropDownRoomId,
-                          controller: dropController,
-                          data: Locations.roomItems,
-                        ),
+                          widget.controller.updateLocations(
+                              context, dropController.getValue().id);
+                        },
+                        startValueId: widget.dropDownRoomId,
+                        controller: dropController,
+                        data: Locations.roomItems,
                       ),
                     ),
                     AnimatedList(
@@ -116,15 +113,6 @@ class _LocationsState extends State<Locations> {
                         child: Text("Hinzufügen"),
                       ),
                     )
-                    // FloatingActionButton(
-                    //   onPressed: () {
-                    //     if (dropController.getValue() != null) {
-                    //       addItemDialog(context, dropController.getValue());
-                    //     }
-                    //   },
-                    //   backgroundColor: colorTheme,
-                    //   child: Icon(Icons.add, color: Colors.white),
-                    // ),
                   ],
                 ),
               );
