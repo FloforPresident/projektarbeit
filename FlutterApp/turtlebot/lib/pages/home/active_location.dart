@@ -78,14 +78,7 @@ class _ActiveLocationState extends State<ActiveLocation> {
                     decoration: BoxDecoration(
                       color: colorTheme.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(6),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          offset: Offset(4, 7),
-                          spreadRadius: 1,
-                          blurRadius: 8,
-                        )
-                      ]),
+                    ),
                     child: Column(
                       children: [
                         Container(
