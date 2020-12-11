@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 ActiveLocation(),
                 Container(
-                  margin: EdgeInsets.fromLTRB(25, 15, 0, 5),
+                  margin: EdgeInsets.fromLTRB(25, 10, 0, 5),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text("Nachricht",

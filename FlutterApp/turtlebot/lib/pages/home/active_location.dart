@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
+import 'package:turtlebot/pages/maps/locations.dart';
+import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 
@@ -115,20 +117,20 @@ class _ActiveLocationState extends State<ActiveLocation> {
                                     ],
                                   ),
                                 ),
-                                // Expanded(
-                                //   flex: 2,
-                                //   child: Row(
-                                //     mainAxisAlignment: MainAxisAlignment.end,
-                                //     children: <Widget>[
-                                //       IconButton(
-                                //         icon: Icon(Icons.create),
-                                //         onPressed: () {
-                                //           widget.controller.editItemDialog(context);
-                                //         },
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      IconButton(
+                                        icon: Icon(Icons.create),
+                                        onPressed: () {
+                                          widget.controller.editItemDialog(context);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ]
                           ),
                           subtitle: Container(
@@ -203,5 +205,46 @@ class ActiveLocationController {
         }
       }
     }
+  }
+
+  void editItemDialog(BuildContext context) {
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          List<Location> selectedLocations = [];
+          return StatefulBuilder(
+              builder: (context, setState) {
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius:
+                      BorderRadius.all(
+                          Radius.circular(10.0))),
+                  title: Text("Aktuellen Platz ändern"),
+                  content: Builder(
+                      builder: (context) {
+                        var height = MediaQuery.of(context).size.height;
+                        var width = MediaQuery.of(context).size.width;
+
+                        return Container(
+                          height: height,
+                          width: width,
+                          child: Locations()
+                        );
+                      }
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text("Schließen"),
+                      onPressed: () {
+                        RouteGenerator.onTapToHome(context);
+                      },
+                    ),
+                  ],
+                );
+              }
+          );
+        }
+    );
   }
 }

@@ -35,7 +35,7 @@ class _MessageState extends State<Messages> {
 
   double _fontsize = 18;
   double _leftStart = 40;
-  double _topSpace = 15;
+  double _topSpace = 5;
   double _spaceRightLabel = 20;
 
   get spaceRightLabel {
