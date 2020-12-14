@@ -31,7 +31,10 @@ services:
       - 5432:5432
 
   ros:
+    command: tail -F anything
     container_name: 'ros'
     build:
       context: ""
       dockerfile: ros/Dockerfile
+    ports:
+      - 192.168.188.145:11311:11311
