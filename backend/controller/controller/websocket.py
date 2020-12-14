@@ -1,4 +1,5 @@
 import json
+import base64
 from flask import Flask
 from models import *
 import asyncio
@@ -23,7 +24,7 @@ async def ws_handler(websocket, path):
 
     # USER
     if action == 'ADD USER':
-        add_user(data['location_id'], data['name'])
+        add_user(data['location_id'], data['name'], data['image'])
         response = login_user(data['name'])
     elif action == 'LOGIN USER':
         response = login_user(data['name'])

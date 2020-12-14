@@ -41,5 +41,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+    <string>Enable myApp to access your camera to capture your photo</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Enable myApp to access mic to record your voice</string>
 </dict>
 </plist>

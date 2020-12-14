@@ -14,7 +14,7 @@ services:
       - db
     # Insert your own IP in here
     ports:
-      - 192.168.1.100:8765:8765
+      - 192.168.188.145:8765:8765
     environment:
       - PYTHONUNBUFFERED=1
 
@@ -30,11 +30,11 @@ services:
     ports:
       - 5432:5432
 
-  ros:
-    command: tail -F anything
-    container_name: 'ros'
-    build:
-      context: ""
-      dockerfile: ros/Dockerfile
-    ports:
-      - 192.168.1.100:11311:11311
+#  ros:
+#    command: tail -F anything
+#    container_name: 'ros'
+#    build:
+#      context: ""
+#      dockerfile: ros/Dockerfile
+#    ports:
+#      - 192.168.188.145:11311:11311

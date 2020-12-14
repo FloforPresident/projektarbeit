@@ -12,7 +12,9 @@ db = SQLAlchemy(app)
 
 # USER
 
-def add_user(location_id, name):
+def add_user(location_id, name, image):
+    # image_bytes = base64.b64decode(image)
+    # image_bytes.decode('utf-8')
     user = User(location_id=location_id, name=name)
     db.session.add(user)
     db.session.commit()
