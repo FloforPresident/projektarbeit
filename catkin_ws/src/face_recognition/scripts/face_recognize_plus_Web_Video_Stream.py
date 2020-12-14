@@ -88,8 +88,9 @@ def face_recognition_(cv_image):
 	face_encodings = []
 	face_names = []
 
-	process_this_frame = True
+	publish_this_frame = True
 
+	frame_counter = 0
 
 	# Resize frame of video to 1/4 size for faster face recognition processing
 	small_frame = cv2.resize(cv_image, (0, 0), fx=0.25, fy=0.25)
@@ -97,10 +98,8 @@ def face_recognition_(cv_image):
 	#Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
 	rgb_small_frame = small_frame[:, :, ::-1]
 
-
-	# Only process every other frame of video to save time
-
-	if process_this_frame:
+	# Only process every 4th frame of video to save time
+	if frame_counter == 0:
 		# Find all the faces and face encodings in the current frame of video
 		face_locations = face_recognition.face_locations(rgb_small_frame)
 		face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
@@ -110,8 +109,7 @@ def face_recognition_(cv_image):
 			matches = face_recognition.compare_faces(known_face_encoding, face_encoding)
 			recognised_name = "unkonown"
 
-			# If a match was found in known_face_encodings, just use the first one
-		
+			# If a match was found in known_face_encodings, just use the first one		
 			if True in matches:	
 				first_match_index = matches.index(True)
 				recognised_name = known_face_name[first_match_index]
@@ -131,7 +129,7 @@ def face_recognition_(cv_image):
 				#unregister from topic, doesnt work yet
 				#image_sub.unregister()
 		
-		process_this_frame = not process_this_frame
+		
 
 
 	# Display results
@@ -151,10 +149,18 @@ def face_recognition_(cv_image):
 		cv2.putText(cv_image, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
 
 
-	# Publish processed image to Node "Video_Stream_Node" on Topic "Video_Stream_Topic"		
-	rgb_image = cv_image[:, :, ::-1]
-	pub.publish(bridge.cv2_to_imgmsg(rgb_image, "bgr8"))
 
+	if publish_this_frame:
+		# Publish processed image to Node on Topic "Face_Recognition_Stream"		
+		pub.publish(bridge.cv2_to_imgmsg(cv2.resize(cv_image, (0, 0), fx=0.5, fy=0.5), "bgr8"))
+
+	#publish every other frame
+	publish_this_frame = not publish_this_frame
+	
+	#process every 4th frame
+	frame_counter += 1
+	if frame_counter == 4:
+		frame_counter = 0
 
 
 ######     /Face Recognition    #############################################################################################################
