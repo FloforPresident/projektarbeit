@@ -24,6 +24,9 @@ RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash"
 RUN apt-get install ros-kinetic-turtlebot3-msgs -y && \
     apt-get install ros-kinetic-turtlebot3 -y
 
+RUN mkdir /home/catkin_ws
+ADD ros/catkin_ws /home/catkin_ws
+
 RUN echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 RUN echo "export ROS_MASTER_URI=HTTP://0.0.0.0:11311" >> ~/.bashrc
 RUN echo "export ROS_HOSTNAME=0.0.0.0" >> ~/.bashrc
