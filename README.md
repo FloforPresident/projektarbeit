@@ -46,7 +46,7 @@ Die wichtigsten Docker Commands:
     $ cd ~/projektarbeit/catkin_ws/ && rm -r build devel && catkin_make
 
 
-# GIT
+## GIT
 
     $ git status                    // Show local file changes
     $ git commit -a                 // Only commit tracked files
