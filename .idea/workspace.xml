@@ -26,15 +26,22 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- Commit Before implemented VideoStream, and implemented function to detect wifi ip address automatically for the app">
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/friends.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/friends.dart" afterDir="false" />
+    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="Update README.md and remove unused files">
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start_xampp.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/turtlebot.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_2_API_28]" />
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -51,6 +58,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
   <component name="ProjectId" id="1kk3e79Z66cdcQ7ltkPV4aIuHSG" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -62,8 +72,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -76,6 +89,7 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -86,6 +100,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606230856060</updated>
+      <workItem from="1608038372772" duration="1783000" />
     </task>
     <task id="LOCAL-00001" summary="Push Johannes IP">
       <created>1606392280397</created>
@@ -167,6 +182,9 @@
     <option name="localTasksCounter" value="12" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
       <list>
@@ -211,153 +229,5 @@
     <MESSAGE value="- changed DropdownButton so color is normal" />
     <MESSAGE value="- Commit Before implemented VideoStream, and implemented function to detect wifi ip address automatically for the app" />
     <option name="LAST_COMMIT_MESSAGE" value="- Commit Before implemented VideoStream, and implemented function to detect wifi ip address automatically for the app" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="249" y="0" key="#Project_Structure" timestamp="1606989298447">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="249" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1606989298447" />
-    <state x="237" y="82" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606238800925">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="237" y="82" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1606238800925" />
-    <state x="-1147" y="281" key="#com.intellij.ide.util.MemberChooser" timestamp="1606396959526">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1147" y="281" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1606396959526" />
-    <state x="498" y="202" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1606234002937">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="498" y="202" key="#com.intellij.ide.util.TreeFileChooserDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1606234002937" />
-    <state x="-1230" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607356857898">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1230" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607356857898" />
-    <state x="43" y="108" width="1200" height="584" key="AVDManager" timestamp="1607607423554">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="43" y="108" width="1200" height="584" key="AVDManager/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607607423554" />
-    <state x="168" y="120" width="1200" height="584" key="AVDManager/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607265559052" />
-    <state x="432" y="122" width="960" height="463" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1606561798898" />
-    <state width="622" height="589" key="DebuggerActiveHint" timestamp="1607608020016">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="622" height="589" key="DebuggerActiveHint/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607608020016" />
-    <state width="497" height="466" key="DebuggerActiveHint/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607596305969" />
-    <state width="497" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1607001465958" />
-    <state x="136" y="108" width="1228" height="688" key="DiffContextDialog" timestamp="1607288731468">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="-1347" y="182" key="DiffContextDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1606398676574" />
-    <state x="136" y="108" width="1228" height="688" key="DiffContextDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607288731468" />
-    <state x="-1235" y="212" key="FileChooserDialogImpl" timestamp="1606389026136">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1235" y="212" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1606389026136" />
-    <state x="548" y="168" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1606238784439" />
-    <state width="1877" height="246" key="GridCell.Tab.0.bottom" timestamp="1607609369839">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369839" />
-    <state width="1491" height="249" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
-    <state width="1491" height="150" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.0.center" timestamp="1607609369838">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
-    <state width="1491" height="249" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
-    <state width="1491" height="150" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.0.left" timestamp="1607609369838">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
-    <state width="1491" height="249" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
-    <state width="1491" height="150" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607004278041" />
-    <state width="1877" height="246" key="GridCell.Tab.0.right" timestamp="1607609369839">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369839" />
-    <state width="1491" height="249" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
-    <state width="1491" height="150" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.1.bottom" timestamp="1607609369838">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="246" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
-    <state width="1491" height="249" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
-    <state width="1491" height="150" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.1.center" timestamp="1607609369838">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="246" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
-    <state width="1491" height="249" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781485" />
-    <state width="1491" height="150" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.1.left" timestamp="1607609369838">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="246" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
-    <state width="1491" height="249" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781485" />
-    <state width="1491" height="150" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state width="1877" height="246" key="GridCell.Tab.1.right" timestamp="1607609369838">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="246" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609369838" />
-    <state width="1491" height="249" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607598781486" />
-    <state width="1491" height="150" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607004278042" />
-    <state x="-1850" y="60" width="1825" height="915" key="MergeDialog" timestamp="1607269358073">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1347" y="182" key="MergeDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1606398344787" />
-    <state x="-1850" y="60" width="1825" height="915" key="MergeDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607269358073" />
-    <state x="666" y="231" key="MultipleFileMergeDialog" timestamp="1607269360379">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="-1087" y="291" key="MultipleFileMergeDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1606398344794" />
-    <state x="666" y="231" key="MultipleFileMergeDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607269360379" />
-    <state x="666" y="231" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1606986574129" />
-    <state x="393" y="0" key="SettingsEditor" timestamp="1606989376724">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="-1429" y="54" key="SettingsEditor/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1606401694039" />
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1606238793054" />
-    <state x="393" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1606989376724" />
-    <state x="100" y="100" width="1336" height="624" key="ShowDiffWithBranchDialog" timestamp="1607265559053">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="100" y="100" width="1336" height="624" key="ShowDiffWithBranchDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607265559053" />
-    <state x="-1368" y="252" key="Vcs.Push.Dialog.v2" timestamp="1607609467995">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1368" y="252" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607609467995" />
-    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607601834764" />
-    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607009568922" />
-    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1607596139791">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607596139791" />
-    <state x="-1828" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1607361823037">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1828" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607361823037" />
-    <state x="-906" y="84" width="587" height="801" key="find.popup" timestamp="1607608463685">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-906" y="84" width="587" height="801" key="find.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1607608463685" />
-    <state x="533" y="94" width="582" height="635" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1607010316278" />
-    <state x="720" y="252" key="git4idea.merge.GitPullDialog" timestamp="1607264619509">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="-1020" y="318" key="git4idea.merge.GitPullDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1606392284802" />
-    <state x="720" y="252" key="git4idea.merge.GitPullDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607264619509" />
-    <state x="720" y="252" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1606986561452" />
-    <state x="-1089" y="433" key="git4idea.rebase.GitUnstructuredEditor" timestamp="1606398358419">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1089" y="433" key="git4idea.rebase.GitUnstructuredEditor/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1606398358419" />
-    <state x="686" y="232" width="672" height="538" key="search.everywhere.popup" timestamp="1607276740741">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="-1062" y="293" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1606401675900" />
-    <state x="686" y="232" width="672" height="538" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1607276740741" />
-    <state x="686" y="232" width="672" height="538" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1606988687634" />
   </component>
 </project>

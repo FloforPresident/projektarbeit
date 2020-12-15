@@ -1,26 +1,60 @@
-# projektarbeit
+# Projektarbeit
 
-Backend Controller in Docker starten:
+## Backend
 
-- Navigiere in Backend Ordner im Terminal
-- Trage deine aktuelle IP in der Datei docker-compose.yml an kommentierter Stelle ein
-- Terminal-Befehl: "make start", startet controller und Datenbank, nun kann sich App im selben Netzwerk verbinden 
+Backend starten: 
 
+    $ make start
 
-#----bei Änderung des benutzers-----
+### Docker Container
 
-cd ~/projektarbeit/catkin_ws/ && rm -r build devel && catkin_make
-
-#----push data from command line ----
-
-cd {REPOSITORY_PATH}
-
-git add {FOLDER_FILE_ETC_NAME} oder alles hinzufügen: "git add ."
-
-git commit -m "Push beschreibung" {FOLDER_FILE_ETC_NAME}
-
-
-git status #aktuelle Änderungen, commits etc
+- Controller
+    - _python3.8 image_
+    - Schnittstelle zwischen App, Datenbank und ROS
+- Datenbank
+    - _postgress image_
+    - Postgress Datenbank, zugriff mit O/M Mapper SQlAlchemy aus controller
+- Ros  
+    - _ubuntu 16.04 image_ 
+    - Vollständige Ubuntu installation mit allen Ros Konfigurationen
 
 
-git push -u origin master
+Die wichtigsten Docker Commands:
+
+    $ docker ps                                     // Laufende Container anzeigen lassen
+    $ docker inspect {container-name}               // Infos zu bestimmtem Container
+    $ docker container kill $(docker ps -q)         // Alle laufenden Container schließen
+    $ docker exec -it {container-name} /bin/bash    // Alle laufenden Container schließen
+
+## App
+
+### Setup:
+
+- Installiertes Flutter SDK
+- Android / IOS Emulator
+- Android Studio / IntelliJ
+- Laufender Controller im selben Netzwerk
+
+
+## ROS
+
+### Setup
+
+    $ roscore                       // Ros starten
+    $ catkin_make                   // Im catkin_ws Ordner ausführen um packages zu regisrieren
+    $ rosrun package python-file    // Topic starten
+    $ cd ~/projektarbeit/catkin_ws/ && rm -r build devel && catkin_make
+
+
+# GIT
+
+    $ git status                    // Show local file changes
+    $ git commit -a                 // Only commit tracked files
+    $ git commit -a                 // Only commit tracked files
+    $ git add .                     // Stage tracked and untracked files
+    $ git commit -m '(message)'     // Commit message -> If applied, this commit will...
+    $ git push                      // Push local commits
+    $ git pull                      // Pull remote commits
+    $ git checkout -b branch        // Create and Switch to branch
+    $ git checkout branch           // Switch to branch
+    $ git reset --soft HEAD~1       // Rollback not already pushed commit if you havent pulled before committing
