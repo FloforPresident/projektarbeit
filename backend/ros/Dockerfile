@@ -30,3 +30,7 @@ ADD ros/catkin_ws /home/catkin_ws
 RUN echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 RUN echo "export ROS_MASTER_URI=HTTP://0.0.0.0:11311" >> ~/.bashrc
 RUN echo "export ROS_HOSTNAME=0.0.0.0" >> ~/.bashrc
+
+#RUN echo "source /home/catkin_ws/devel/setup.bash" >> ~/.bashrc
+#RUN /bin/bash -c "source ~/.bashrc"
+
