@@ -2,7 +2,9 @@
 
 ## Backend
 
-Backend starten: 
+Backend starten:
+  1. Persönliche IP Adresse im .env file anpassen (`ifconfig`)
+  2. Befehl im Terminal ausführen
 
     $ make start
 
@@ -49,7 +51,6 @@ Die wichtigsten Docker Commands:
 # GIT
 
     $ git status                    // Show local file changes
-    $ git commit -a                 // Only commit tracked files
     $ git commit -a                 // Only commit tracked files
     $ git add .                     // Stage tracked and untracked files
     $ git commit -m '(message)'     // Commit message -> If applied, this commit will...

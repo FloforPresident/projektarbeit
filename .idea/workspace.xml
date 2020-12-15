@@ -26,13 +26,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="Update README.md and remove unused files">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start_xampp.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/turtlebot.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +55,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -100,7 +99,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606230856060</updated>
-      <workItem from="1608038372772" duration="1783000" />
+      <workItem from="1608038372772" duration="2221000" />
+      <workItem from="1608043628547" duration="80000" />
     </task>
     <task id="LOCAL-00001" summary="Push Johannes IP">
       <created>1606392280397</created>
@@ -179,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607609346240</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Update README.md and remove unused files">
+      <created>1608040162762</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1608040162762</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,6 +235,7 @@
     <MESSAGE value="- changed most of the text color to white&#10;- changed controlling a bit&#10;- changed top_app_bar.dart to receive a Text instead of String better flexibility&#10;- changed custom_dropdown_menu.dart that Label receives a Text widget aswell instead of Text" />
     <MESSAGE value="- changed DropdownButton so color is normal" />
     <MESSAGE value="- Commit Before implemented VideoStream, and implemented function to detect wifi ip address automatically for the app" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Commit Before implemented VideoStream, and implemented function to detect wifi ip address automatically for the app" />
+    <MESSAGE value="Update README.md and remove unused files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update README.md and remove unused files" />
   </component>
 </project>
