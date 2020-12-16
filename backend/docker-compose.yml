@@ -12,11 +12,10 @@ services:
       - db
     depends_on:
       - db
-    # Insert your own IP in here
     ports:
       - ${HOST_IP}:8765:8765
     environment:
-      - PYTHONUNBUFFERED=1
+      - "PYTHONUNBUFFERED=1"
 
   db:
     container_name: 'db'
@@ -26,7 +25,6 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: turtlebot_db
       POSTGRES_HOST: db
-    #      POSTGRES_HOST: 172.21.0.2
     ports:
       - 5432:5432
 

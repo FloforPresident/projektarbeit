@@ -26,12 +26,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/docker-compose.yml" afterDir="false" />
-    </list>
+    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +50,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -100,7 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606230856060</updated>
       <workItem from="1608038372772" duration="2221000" />
-      <workItem from="1608043628547" duration="80000" />
+      <workItem from="1608043628547" duration="277000" />
     </task>
     <task id="LOCAL-00001" summary="Push Johannes IP">
       <created>1606392280397</created>
@@ -186,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608040162762</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Extract host-ip to environment variable">
+      <created>1608043749605</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1608043749605</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,6 +237,7 @@
     <MESSAGE value="- changed DropdownButton so color is normal" />
     <MESSAGE value="- Commit Before implemented VideoStream, and implemented function to detect wifi ip address automatically for the app" />
     <MESSAGE value="Update README.md and remove unused files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update README.md and remove unused files" />
+    <MESSAGE value="Extract host-ip to environment variable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Extract host-ip to environment variable" />
   </component>
 </project>

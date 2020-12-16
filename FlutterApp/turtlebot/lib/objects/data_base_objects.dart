@@ -56,7 +56,6 @@ class User implements DatabaseObject {
   int _id;
   int _locationID;
   String _name;
-  // ByteData image; Hier noch File Upload implementieren
 
   User(this._id, this._locationID, this._name);
 
@@ -109,6 +108,4 @@ class Message {
   get recipient => _recipient;
 
   get content => _content;
-
-
 }

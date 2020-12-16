@@ -1,9 +1,21 @@
 from datetime import datetime
+import base64
 from websocket import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy(app)
+
+
+#################################
+# HELPER FUNCTIONS
+#################################
+
+def remove_user_binary(user):
+    user.image = base64.b64encode(user.image)
+    json_data = user.to_dict()
+    del json_data['image']
+    return json_data
 
 
 #################################
@@ -13,9 +25,8 @@ db = SQLAlchemy(app)
 # USER
 
 def add_user(location_id, name, image):
-    # image_bytes = base64.b64decode(image)
-    # image_bytes.decode('utf-8')
-    user = User(location_id=location_id, name=name)
+    image_bytes = base64.b64decode(image)
+    user = User(location_id=location_id, name=name, image=image_bytes)
     db.session.add(user)
     db.session.commit()
 
@@ -23,14 +34,14 @@ def add_user(location_id, name, image):
 def login_user(name):
     user = User.query.filter_by(name=name).first()
     if user:
-        return user.to_dict()
+        return remove_user_binary(user)
     return ''
 
 
 def get_user(user_id):
     user = User.query.filter_by(id=user_id).first()
     if user:
-        return user.to_dict()
+        return remove_user_binary(user)
     return ''
 
 
@@ -42,8 +53,8 @@ def delete_user(user_id):
 
 def get_users():
     users = []
-    for i in User.query.order_by(User.id).all():
-        users.append(i.to_dict())
+    for user in User.query.order_by(User.id).all():
+        users.append(remove_user_binary(user))
     return users
 
 
@@ -154,11 +165,10 @@ def send_message(from_user, to_user, subject, message):
     return data
 
 
-
-
 #################################
 # MODELS
 #################################
+
 
 class Location(db.Model, SerializerMixin):
     __tablename__ = 'location'
