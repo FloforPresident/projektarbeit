@@ -1,19 +1,21 @@
 version: "3"
 
 services:
-  controller:
-    container_name: 'controller'
+  backend:
+    command: tail -F anything
+    container_name: 'backend'
     build:
       context: ""
-      dockerfile: controller/Dockerfile
-    volumes:
-      - ./controller/controller:/app/controller/controller
+      dockerfile: Dockerfile
+#    volumes:
+#      - ./controller:/app/controller
     links:
       - db
     depends_on:
       - db
     ports:
       - ${HOST_IP}:8765:8765
+      - ${HOST_IP}:11311:11311
     environment:
       - "PYTHONUNBUFFERED=1"
 

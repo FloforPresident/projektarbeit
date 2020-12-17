@@ -24,16 +24,27 @@ RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash"
 RUN apt-get install ros-kinetic-turtlebot3-msgs -y && \
     apt-get install ros-kinetic-turtlebot3 -y
 
+ADD backend /home
+
 RUN echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
-RUN echo "export ROS_MASTER_URI=http://0.0.0.0:11311" >> ~/.bashrc
+RUN echo "export ROS_MASTER_URI=HTTP://0.0.0.0:11311" >> ~/.bashrc
 RUN echo "export ROS_HOSTNAME=0.0.0.0" >> ~/.bashrc
-RUN /bin/bash -c "source ~/.bashrc"
 
-RUN mkdir /home/catkin_ws
-ADD ros/catkin_ws /home/catkin_ws
+RUN apt install -y software-properties-common && \
+    add-apt-repository ppa:deadsnakes/ppa && \
+    apt-get update && \
+    apt-get install -y  python3.7 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 0
 
-RUN cd  && catkin_make
+RUN apt-get update && \
+    apt-get install -y python-pip && \
+    apt-get install -y python3-pip
 
-#RUN /bin/bash -c "roscore"
-#CMD ["rosrun face_recognition", "/home/catkin_ws/src/face_recognition/scripts/face_recognize_plus_Web_Video_Stream.py"]
+RUN pip3 install -r /home/pip3_requirements.txt
+#    pip install -r /home/pip2_requirements.txt
+
+CMD ["python3", "/home/controller/websocket.py"]
+
+#RUN echo "source /home/catkin_ws/devel/setup.bash" >> ~/.bashrc
+#RUN /bin/bash -c "source ~/.bashrc"
 
