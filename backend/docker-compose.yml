@@ -2,7 +2,6 @@ version: "3"
 
 services:
   backend:
-    command: tail -F anything
     container_name: 'backend'
     build:
       context: ""

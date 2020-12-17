@@ -24,9 +24,10 @@ def remove_user_binary(user):
 
 # USER
 
-def add_user(location_id, name, image):
+def add_user(location_id, name, image, embedding):
+    print(embedding)
     image_bytes = base64.b64decode(image)
-    user = User(location_id=location_id, name=name, image=image_bytes)
+    user = User(location_id=location_id, name=name, image=image_bytes, embedding=embedding)
     db.session.add(user)
     db.session.commit()
 

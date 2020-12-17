@@ -33,7 +33,7 @@ RUN echo "export ROS_HOSTNAME=0.0.0.0" >> ~/.bashrc
 RUN apt install -y software-properties-common && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
-    apt-get install -y  python3.7 && \
+    apt-get install -y  python3.7 python3.7-dev && \
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 0
 
 RUN apt-get update && \
@@ -41,7 +41,7 @@ RUN apt-get update && \
     apt-get install -y python3-pip
 
 RUN pip3 install -r /home/pip3_requirements.txt
-#    pip install -r /home/pip2_requirements.txt
+#    pip install -r /home/pip-requirements.txt
 
 CMD ["python3", "/home/controller/websocket.py"]
 

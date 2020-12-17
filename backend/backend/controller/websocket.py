@@ -4,6 +4,7 @@ from flask import Flask
 from models import *
 import asyncio
 import websockets
+from face_encoding.face_encoding import createFaceEncoding
 
 app = Flask(__name__)
 
@@ -24,7 +25,8 @@ async def ws_handler(websocket, path):
 
     # USER
     if action == 'ADD USER':
-        add_user(data['location_id'], data['name'], data['image'])
+        embedding = createFaceEncoding(data['image'])
+        add_user(data['location_id'], data['name'], data['image'], embedding)
         response = login_user(data['name'])
     elif action == 'LOGIN USER':
         response = login_user(data['name'])
