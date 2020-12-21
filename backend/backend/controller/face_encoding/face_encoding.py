@@ -2,14 +2,18 @@
 
 import face_recognition
 import numpy as np
+import base64
 
 
 def createFaceEncoding(data):
-    with open("image.jpg", "wb") as file:
-        file.write(data.decode("base64"))
+    image = base64.b64decode(data)
+
+    with open("/home/controller/face_encoding/image.jpg", "wb") as file:
+        file.write(image)
         file.close()
 
-    image = face_recognition.load_image_file("faceTest.jpg")
+    image = face_recognition.load_image_file("/home/controller/face_encoding/image.jpg")
+    #TODO image out of range?
     face_encoding = face_recognition.face_encodings(image)[0]
 
     # Numpy Array in String umwandeln

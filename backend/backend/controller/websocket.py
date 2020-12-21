@@ -25,8 +25,8 @@ async def ws_handler(websocket, path):
 
     # USER
     if action == 'ADD USER':
-        embedding = createFaceEncoding(data['image'])
-        add_user(data['location_id'], data['name'], data['image'], embedding)
+        # embedding = createFaceEncoding(data['image'])
+        add_user(data['location_id'], data['name'], data['image'])
         response = login_user(data['name'])
     elif action == 'LOGIN USER':
         response = login_user(data['name'])
