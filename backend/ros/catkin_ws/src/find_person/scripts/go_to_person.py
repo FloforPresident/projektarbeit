@@ -19,90 +19,91 @@ foundPerson = False
 #standard callback if chatter data received
 def callback_action(data):
 	global goalX, goalY, currentX, currentY, foundPerson
-	jsonString = data.data
-	dataArray = json.loads(jsonString)
-	pubBase = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
+	try:
+		jsonString = data.data
+		dataArray = json.loads(jsonString)
+		pubBase = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
 
-	#current time
-	now = rospy.get_rostime()
+		#current time
+		now = rospy.get_rostime()
 
-	#::::: goes to person, publishing to simple goal :::::
-	if dataArray["action"] == "find_person":
-		person = dataArray["name"]
-		x = float(dataArray["x"])
-		y = float(dataArray["y"])
+		#::::: goes to person, publishing to simple goal :::::
+		if dataArray["action"] == "find_person":
+			person = dataArray["name"]
+			x = float(dataArray["x"])
+			y = float(dataArray["y"])
 
-		answer = PoseStamped()
-		answer.header.stamp = now
-		answer.header.frame_id = "map"
-		answer.pose.position.x = x
-		answer.pose.position.y = y
-		answer.pose.position.z = 0
-		answer.pose.orientation.w = 1.0
+			answer = PoseStamped()
+			answer.header.stamp = now
+			answer.header.frame_id = "map"
+			answer.pose.position.x = x
+			answer.pose.position.y = y
+			answer.pose.position.z = 0
+			answer.pose.orientation.w = 1.0
 
-		print("Gehe ins Buero von: "+person)
-		pubBase.publish(answer)
+			print("Gehe ins Buero von: "+person)
+			pubBase.publish(answer)
 
-		#set goal coordinates
-		goalX = x
-		goalY = y
+			#set goal coordinates
+			goalX = x
+			goalY = y
 
-	#::::: stops movement :::::
-	elif dataArray["action"] == "stop":
+		#::::: stops movement :::::
+		elif dataArray["action"] == "stop":
 
-		if currentX == None or currentY == None:
-			print("robot hasnt moved yet")
-			currentX = 0
-			currentY = 0
+			if currentX == None or currentY == None:
+				print("robot hasnt moved yet")
+				currentX = 0
+				currentY = 0
 
-		print("Stop movement at:")
-		print("X: " + str(currentX))
-		print("Y: " + str(currentY))
+			print("Stop movement at:")
+			print("X: " + str(currentX))
+			print("Y: " + str(currentY))
 
-		#set new goal to current position
-		answerBase = PoseStamped()
-		answerBase.header.stamp = now
-		answerBase.header.frame_id = "map"
-		answerBase.pose.position.x = currentX
-		answerBase.pose.position.y = currentY
-		answerBase.pose.position.z = 0
-		answerBase.pose.orientation.w = 1.0
+			#set new goal to current position
+			answerBase = PoseStamped()
+			answerBase.header.stamp = now
+			answerBase.header.frame_id = "map"
+			answerBase.pose.position.x = currentX
+			answerBase.pose.position.y = currentY
+			answerBase.pose.position.z = 0
+			answerBase.pose.orientation.w = 1.0
 
-		pubBase.publish(answerBase)
+			pubBase.publish(answerBase)
 
-		goalX = currentX
-		goalY = currentY
+			goalX = currentX
+			goalY = currentY
 
-	#::::: found person :::::
-	elif dataArray["action"] == "found_person":
-		print("FOUND PERSON!!!")
-		foundPerson = True
+		#::::: found person :::::
+		elif dataArray["action"] == "found_person":
+			print("FOUND PERSON!!!")
+			foundPerson = True
 
-		answer = PoseStamped()
-		answer.header.stamp = now
-		answer.header.frame_id = "map"
-		answer.pose.position.x = currentX
-		answer.pose.position.y = currentY
-		answer.pose.position.z = 0
-		answer.pose.orientation.w = 1.0
+			answer = PoseStamped()
+			answer.header.stamp = now
+			answer.header.frame_id = "map"
+			answer.pose.position.x = currentX
+			answer.pose.position.y = currentY
+			answer.pose.position.z = 0
+			answer.pose.orientation.w = 1.0
 
-		print("Stoppe hier fuer Person.")
-		pubBase.publish(answer)
-
-		# TODO hier kann Soundausgabe initialisiert werden
-		
-		goalX = None
-		goalY = None
-		# Warten auf Person welche Nachricht erhalten hat
-		rate = rospy.Rate(0.1) # 10hz
-		i = 0
-		while i < 4:
-			print("Waiting for person.")
-			i += 1
-			rate.sleep()
-		go_home()
-	else:
-		rospy.loginfo("no action selected")
+			print("Stoppe hier fuer Person.")
+			pubBase.publish(answer)
+			
+			goalX = None
+			goalY = None
+			# Warten auf Person welche Nachricht erhalten hat
+			rate = rospy.Rate(0.1) # 10hz
+			i = 0
+			while i < 4:
+				print("Waiting for person.")
+				i += 1
+				rate.sleep()
+			go_home()
+		else:
+			rospy.loginfo("no action selected")
+	except:
+		rospy.loginfo("none of my business")
 
 def reached_goal():
 	#rotate and go home
