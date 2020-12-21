@@ -7,7 +7,7 @@ import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-
+import 'package:turtlebot/services/error_messages.dart';
 
 class Messages extends StatefulWidget {
   final MessageController controller = new MessageController();
@@ -37,6 +37,7 @@ class _MessageState extends State<Messages> {
   double _leftStart = 40;
   double _topSpace = 5;
   double _spaceRightLabel = 20;
+  Color textColor = Colors.black;
 
   get spaceRightLabel {
     return _spaceRightLabel;
@@ -64,122 +65,131 @@ class _MessageState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: channel.stream,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          widget.controller.setData(snapshot.data);
+        stream: channel.stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            widget.controller.setData(snapshot.data);
 
-          // Logic for Send Message directly Button on Friends Page
-          int startValueIndex;
-          if(widget.selectedUser != null) {
-            for(int i = 0; i < Messages.items.length; i++) {
-              if(widget.selectedUser.id == Messages.items[i].id) {
-                dropController.setValue(widget.selectedUser);
-                startValueIndex = i;
+            // Logic for Send Message directly Button on Friends Page
+            int startValueIndex;
+            if (widget.selectedUser != null) {
+              for (int i = 0; i < Messages.items.length; i++) {
+                if (widget.selectedUser.id == Messages.items[i].id) {
+                  dropController.setValue(widget.selectedUser);
+                  startValueIndex = i;
+                }
               }
             }
-          }
 
-          return Column(
-            children: [
-              CustomDropdownLabel(
-              label: Text("Empfänger:"),
-                child: CustomDropdownMenu<User>(
-                controller: dropController,
-                data: Messages.items,
-                startValueId: startValueIndex,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(leftStart, 15, 20, 0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 5,
-                      child: Container(
-                          child: Text(
-                            "Betreff:",
-                            style: TextStyle(fontSize: fontsize),
-                          )),
+            return Container(
+              child: Column(
+                children: [
+                  CustomDropdownLabel(
+                    label: Text("Empfänger:", style: TextStyle(
+                        color: textColor
+                    )),
+                    child: CustomDropdownMenu<User>(
+                      itemTextStyle: TextStyle(fontSize: Theme.of(context).textTheme.bodyText2.fontSize, color: Colors.black),
+                      dropButtonSize: 130,
+                      controller: dropController,
+                      data: Messages.items,
+                      startValueId: startValueIndex,
                     ),
-                    Expanded(
-                      flex: 3,
+                  ),
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          child: Text("Betreff:", style: TextStyle(
+                            color: textColor
+                          ),),
+                        ),
+                        Container(
+                          width: 130,
+                          child: TextFormField(
+                            cursorColor: textColor,
+                            controller: _subject,
+                            maxLines: null,
+                            textAlignVertical: TextAlignVertical.bottom,
+                            decoration: InputDecoration(
+                              helperStyle: TextStyle(color: textColor),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: textColor, width: 0.25)
+                              )
+                            ),
+                            maxLength: 25,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                        margin: EdgeInsets.fromLTRB(0, topSpace, 0, 0),
+                        child: Text("Nachricht: ", style: TextStyle(
+                            color: textColor
+                        ))),
+                  ),
+                  Container(
                       child: TextFormField(
-                        controller: _subject,
-                        maxLines: null,
-                        textAlignVertical: TextAlignVertical.bottom,
-                        decoration: InputDecoration(),
-                        maxLength: 25,
-                      ),
+                    controller: _message,
+                    maxLines: null,
+                    maxLength: 300,
+                        decoration: InputDecoration(
+                            helperStyle: TextStyle(color: textColor),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: textColor, width: 0.5)
+                            )
+                        ),
+                  )),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, topSpace, 0, 0),
+                    child: RaisedButton(
+                      onPressed: () {
+                        if (dropController.getValue() != null &&
+                            _subject.text.isNotEmpty &&
+                            _message.text.isNotEmpty) {
+                          widget.controller.sendMessage(
+                              dropController.getValue(),
+                              _subject.text,
+                              _message.text);
+                          _showAlertDialog();
+                        } else {
+                          ErrorMessages.fieldsNotFilled(context);
+                        }
+                      },
+                      child: Text("Auftrag starten"),
                     ),
-                    Spacer(
-                      flex: 2,
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                    margin: EdgeInsets.fromLTRB(
-                        leftStart, topSpace, 0, 0),
-                    child: Text("Nachricht: ",
-                        style: TextStyle(fontSize: fontsize))),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(
-                    leftStart, topSpace, leftStart, 0),
-                child: TextFormField(
-                  controller: _message,
-                  maxLines: null,
-                  maxLength: 300,
-                )),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, topSpace, 0, 0),
-                child: RaisedButton(
-                  onPressed: () {
-
-                    if(dropController.getValue() != null && _subject.text.isNotEmpty && _message.text.isNotEmpty) {
-                      widget.controller.sendMessage(dropController.getValue(), _subject.text, _message.text);
-                      _showAlertDialog();
-                    }
-                    else {
-                      NoDataDialog.noLoginData(context);
-                    }
-                  },
-                  child: Text("Auftrag starten"),
-                ),
-              )
-            ],
-          );
-        } else {
-          return Text('');
-        }
-      }
-    );
+            );
+          } else {
+            return Text('');
+          }
+        });
   }
 
   void _showAlertDialog() {
     showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Geklappt!'),
-          content: Text(
-              'Du hast den Auftrag für ${dropController.getValue().name} gestartet:\n\n${_message.text}'
-          ),
-          actions: <Widget> [
-              FlatButton(
-                onPressed: (){
-                  _subject.text = '';
-                  _message.text = '';
-                  Navigator.of(context).pop();
-                },
-                child: Text('Weiter'))
-          ]
-        );
-      }
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text('Geklappt!'),
+              content: Text(
+                  'Du hast den Auftrag für ${dropController.getValue().name} gestartet:\n\n${_message.text}'),
+              actions: <Widget>[
+                FlatButton(
+                    onPressed: () {
+                      _subject.text = '';
+                      _message.text = '';
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Weiter'))
+              ]);
+        });
   }
 
   @override
@@ -190,7 +200,6 @@ class _MessageState extends State<Messages> {
 }
 
 class MessageController {
-
   void getData(WebSocketChannel channel) {
     String data = '{"action": "GET USERS"}';
     channel.sink.add(data);
@@ -203,9 +212,8 @@ class MessageController {
     var users = jsonDecode(jsonDataString);
 
     for (int i = 0; i < users.length; i++) {
-      User u = new User(
-          users[i]['id'], users[i]['location_id'],
-          users[i]['name']);
+      User u =
+          new User(users[i]['id'], users[i]['location_id'], users[i]['name']);
       Messages.items.add(u);
     }
   }
@@ -213,7 +221,8 @@ class MessageController {
   void sendMessage(User user, String subject, String message) {
     WebSocketChannel channel = MyApp.con();
 
-    String data = '{"action": "SEND MESSAGE", "from_user": ${MyApp.id}, "to_user": ${user.id}, "subject": "$subject", "message": "$message"}';
+    String data =
+        '{"action": "SEND MESSAGE", "from_user": ${MyApp.id}, "to_user": ${user.id}, "subject": "$subject", "message": "$message"}';
     channel.sink.add(data);
   }
 }

@@ -1,15 +1,12 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-
 
 
 class Login extends StatefulWidget {
@@ -35,18 +32,6 @@ class _LoginState extends State<Login> {
   TextEditingController _name = new TextEditingController();
   ControllerCustomDropdown roomDropController = ControllerCustomDropdown<Room>();
   ControllerCustomDropdown locationDropController = ControllerCustomDropdown<Location>();
-
-  // Camera stuff
-  File imageFile;
-
-  void _openCamera() async {
-    var picture = await ImagePicker().getImage(
-      source: ImageSource.camera,
-    );
-    this.setState(() {
-      imageFile = File(picture.path);
-    });
-  }
 
   @override
   void initState() {
@@ -194,6 +179,7 @@ class _LoginState extends State<Login> {
   }
 
   void pictureDialog(BuildContext context) {
+    bool _uploadedImage = true;
 
     showDialog(
       barrierDismissible: true,
@@ -218,15 +204,17 @@ class _LoginState extends State<Login> {
                     Container(
                       margin: EdgeInsets.all(15),
                       child: RaisedButton(
-                        child: Text("Kamera"),
+                        child: Text("Bild schießen"),
                         color: colorTheme,
                         textColor: Colors.white,
-                        onPressed: () {
-                          _openCamera();
-                        },
+                        onPressed: () {},
                       ),
                     ),
-                    // imageFile != null ? Image.file(imageFile, width: 400, height: 400): Text(''),
+                    CheckboxListTile(
+                      title: Text("Bild hochgeladen"),
+                      value: _uploadedImage,
+                      onChanged: (bool value) {},
+                    ),
                   ],
                 ),
               );
@@ -248,7 +236,7 @@ class _LoginState extends State<Login> {
             ),
             color: Colors.blueGrey,
             onPressed: () {
-              if (imageFile != null) {
+              if (_uploadedImage == true) {
                 editItemDialog(context);
               }
             },
@@ -329,10 +317,10 @@ class _LoginState extends State<Login> {
                   color: Colors.blueGrey,
                   onPressed: () async {
                     if (locationDropController.getValue() != null) {
-                      widget.controller.addUser(context, _name.text, locationDropController.getValue().id, imageFile);
+                      widget.controller.addUser(context, _name.text, locationDropController.getValue().id);
                     }
                     else {
-                      widget.controller.addUser(context, _name.text, null, imageFile);
+                      widget.controller.addUser(context, _name.text, null);
                     }
                   },
                 ),
@@ -382,14 +370,10 @@ class LoginController {
     });
   }
 
-  void addUser(BuildContext context, String name, int locationID, File imageFile) {
-
-    List<int> imageBytes = imageFile.readAsBytesSync();
-    String base64Image = base64Encode(imageBytes);
-
+  void addUser(BuildContext context, String name, int locationID) {
     WebSocketChannel channel = MyApp.con();
     String data =
-        '{"action": "ADD USER", "name": "$name", "location_id": $locationID, "image": "$base64Image"}';
+        '{"action": "ADD USER", "name": "$name", "location_id": $locationID}';
     channel.sink.add(data);
 
     channel.stream.listen((json) async {
