@@ -1,0 +1,5 @@
+<launch>
+
+<node pkg="find_person" name="go_to_person" type="go_to_person.py" output="screen"></node>
+
+</launch>

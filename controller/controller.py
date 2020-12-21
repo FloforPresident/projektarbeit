@@ -102,6 +102,7 @@ teleopInstance = teleop.Teleop()
 def action_teleop_start():
 	print("Start**********")
 	print(teleopInstance)
+	#print(telopInstance.getKey())
 	teleopInstance.startTeleop()
 	
 	print("Starting teleop....")
@@ -110,6 +111,14 @@ def action_teleop_set_key(key):
 	print("Teleop set key...")
 	teleopInstance.setKey(key)
 	print(teleopInstance)
+
+
+def teleop_talker(key):
+	pub = rospy.Publisher('teleop_chatter', String, queue_size=10)
+	rospy.init_node('teleop_talker', anonymous=True)
+	rate = rospy.Rate(10) # 10hz
+	rospy.loginfo("Talker: " + key)
+	pub.publish(key)
 	
 
 
@@ -142,13 +151,13 @@ def start_websocket():
 			if(key == 'start'):
 				action_teleop_start()
 			else:
-				action_teleop_set_key(key)
+				teleop_talker(key)
 		else:
 			print("unknown action")
 		
 		#await websocket.send(response)
 
-	start_server = websockets.serve(ws_recieve, "192.168.1.116", 8897, close_timeout=1000) # IP has to be IP of ROS-Computer
+	start_server = websockets.serve(ws_recieve, "192.168.1.225", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
 
 	asyncio.get_event_loop().run_until_complete(start_server)
 	asyncio.get_event_loop().run_forever()
@@ -188,7 +197,7 @@ def main():
 
 		# -- teleop process --
 		p_teleop = multiprocessing.Process(target=action_teleop_start)
-		#p_teleop.start()
+		p_teleop.start()
 
 		# -- robot ssh process --
 		process3 = multiprocessing.Process(target=robo_ssh)
