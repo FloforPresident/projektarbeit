@@ -9,6 +9,7 @@ project(location_monitor)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
 	nav_msgs
+	std_msgs
 	move_base_msgs
 	geometry_msgs
 	roscpp
@@ -73,6 +74,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
  generate_messages(
 	DEPENDENCIES
+	std_msgs
 	nav_msgs
 	move_base_msgs
 	geometry_msgs
@@ -110,7 +112,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES location_monitor
-  CATKIN_DEPENDS nav_msgs move_base_msgs geometry_msgs roscpp rospy 
+  CATKIN_DEPENDS nav_msgs std_msgs move_base_msgs geometry_msgs roscpp rospy 
 #message_runtime TODO
 #  DEPENDS system_lib
 )
