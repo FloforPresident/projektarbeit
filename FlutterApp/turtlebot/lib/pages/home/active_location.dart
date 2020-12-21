@@ -74,10 +74,10 @@ class _ActiveLocationState extends State<ActiveLocation> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.fromLTRB(15, 15, 15, 15),
                     decoration: BoxDecoration(
-                      color: colorTheme.withOpacity(0.5),
+                      color: colorTheme.withOpacity(0),
                       borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: Colors.grey.withOpacity(0.0), width: 4.0)
                     ),
                     child: Column(
                       children: [
@@ -88,12 +88,11 @@ class _ActiveLocationState extends State<ActiveLocation> {
                             child: Text("Aktuelle Location",
                               style: TextStyle(
                                 fontSize: 22.0,
-                                fontWeight: FontWeight.bold,
                                 color: Colors.white)),
                           ),
                         ),
                         Card(
-                          margin: EdgeInsets.fromLTRB(10, 10, 10, 20),
+                          margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
                           elevation: 2,
                           child: ListTile(
                             title: Row(

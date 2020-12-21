@@ -11,12 +11,17 @@ class ErrorMessages {
   static const Color _generalHeadlineColor = Colors.green;
 
 
+  static const List<FlatButton> _standardFlatButton = [
+    FlatButton(onPressed: _emptyFunction, child: Text("Schließen"))
+  ];
+
+  static _emptyFunction() {}
 
   static void _basicErrorMessage(
       {@required BuildContext context,
-        @required Text title,
-        @required List<Widget> content,
-        @required List<Widget> actions }) {
+      @required Text title,
+      @required List<Widget> content,
+      List<Widget> actions = _standardFlatButton}) {
     showDialog(
         context: context,
         builder: (context) {
@@ -65,7 +70,7 @@ class ErrorMessages {
         title: Text("Falscher Typ in Feld",style: TextStyle(color: _generalHeadlineColor),),
         content: [
           Text(
-            "Es wurde ein falscher Typ, zum Beispiel anstatt ein reiner Zahlenwert, oder eine IP-Addresse, eine Zeichenkombination eingefügt.",style: TextStyle(fontSize: _fontsize),),
+              "Es wurde ein falscher Typ, zum Beispiel anstatt ein reiner Zahlenwert, oder eine IP-Addresse, eine Zeichenkombination eingefügt.",style: TextStyle(fontSize: _fontsize),),
         ],
         actions: [
           FlatButton(

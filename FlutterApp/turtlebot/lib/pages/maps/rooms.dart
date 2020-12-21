@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/no_data_entered.dart';
@@ -14,6 +15,7 @@ import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Rooms extends StatefulWidget {
+  final colorTheme = Colors.purple;
   final RoomController controller = new RoomController();
 
   static List<Room> items = [];
@@ -32,7 +34,7 @@ class _RoomState extends State<Rooms> {
   final WebSocketChannel channel = MyApp.con();
 
 
-  final colorTheme = Colors.purple;
+
 
   ControllerCustomDropdown dropController = ControllerCustomDropdown<Robo>();
 
@@ -45,42 +47,47 @@ class _RoomState extends State<Rooms> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        StreamBuilder(
-          stream: channel.stream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value:  SystemUiOverlayStyle(
+          statusBarColor: widget.colorTheme
+      ),
+      child: Column(
+        children: [
+          StreamBuilder(
+            stream: channel.stream,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
 
-              widget.controller.setData(snapshot.data);
+                widget.controller.setData(snapshot.data);
 
-              return Column(
-                children: [
-                  AnimatedList(
-                  key: widget.controller.key,
-                    initialItemCount: Rooms.items.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index, animation) {
-                      return widget.controller.buildItem(context, Rooms.items[index], animation, index);
-                    },
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: RaisedButton(
-                      onPressed: () {
-                        addItemDialog(context);
+                return Column(
+                  children: [
+                    AnimatedList(
+                    key: widget.controller.key,
+                      initialItemCount: Rooms.items.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index, animation) {
+                        return widget.controller.buildItem(context, Rooms.items[index], animation, index);
                       },
-                      child: Text("Hinzufügen"),
                     ),
-                  )
-                ],
-              );
-            } else {
-              return Text('');
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      child: RaisedButton(
+                        onPressed: () {
+                          addItemDialog(context);
+                        },
+                        child: Text("Hinzufügen"),
+                      ),
+                    )
+                  ],
+                );
+              } else {
+                return Text('');
+              }
             }
-          }
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -299,7 +306,7 @@ class RoomController {
           title: Row(
             children: <Widget>[
               Expanded(
-                flex: 4,
+                flex: 3,
                 child: Row(
                   children: <Widget>[
                     Text(item.name),
@@ -309,10 +316,7 @@ class RoomController {
               Expanded(
                 flex: 1,
                 child: Align(
-                  child: Padding(
-                    child: item.scanned ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank),
-                    padding: EdgeInsets.fromLTRB(5, 0, 15, 0),
-                  ),
+                  child: item.scanned ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank),
                   alignment: Alignment.centerRight,
                 ),
               ),
@@ -331,7 +335,7 @@ class RoomController {
                       icon: Icon(Icons.delete),
                       onPressed: () async {
                         bool delete = await OnDelete.onDelete(context);
-                        if (delete) {
+                        if (delete != null && delete) {
                           removeItem(item, index);
                         }
                       },
