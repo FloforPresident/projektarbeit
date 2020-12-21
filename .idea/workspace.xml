@@ -246,4 +246,14 @@
     <MESSAGE value="Extract host-ip to environment variable" />
     <option name="LAST_COMMIT_MESSAGE" value="Extract host-ip to environment variable" />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="-1476" y="353" key="MultipleFileMergeDialog" timestamp="1608555508487">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1476" y="353" key="MultipleFileMergeDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608555508487" />
+    <state x="-1615" y="294" key="RollbackChangesDialog" timestamp="1608555624561">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1615" y="294" key="RollbackChangesDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608555624561" />
+  </component>
 </project>
