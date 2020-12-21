@@ -28,22 +28,7 @@
   <component name="ChangeListManager">
     <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/archive/database/dbHelper.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/frameworks/custom_dropdown_menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/frameworks/custom_dropdown_menu.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/objects/data_base_objects.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/objects/data_base_objects.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/controls.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/controls.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/friends.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/friends.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/active_location.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/active_location.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/messages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/messages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/locations.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/locations.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/maps.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/maps.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/rooms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/rooms.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/error_messages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/error_messages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Jojo_new_fullColor" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -268,6 +253,42 @@
     <option name="LAST_COMMIT_MESSAGE" value="- test" />
   </component>
   <component name="WindowStateProjectService">
+    <state width="399" height="466" key="DebuggerActiveHint" timestamp="1608577776879">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="399" height="466" key="DebuggerActiveHint/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608577776879" />
+    <state width="1476" height="306" key="GridCell.Tab.0.bottom" timestamp="1608578736484">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1476" height="306" key="GridCell.Tab.0.bottom/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578736484" />
+    <state width="1476" height="306" key="GridCell.Tab.0.center" timestamp="1608578736477">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1476" height="306" key="GridCell.Tab.0.center/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578736477" />
+    <state width="1476" height="306" key="GridCell.Tab.0.left" timestamp="1608578736477">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1476" height="306" key="GridCell.Tab.0.left/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578736477" />
+    <state width="1476" height="306" key="GridCell.Tab.0.right" timestamp="1608578736483">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1476" height="306" key="GridCell.Tab.0.right/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578736483" />
+    <state width="1476" height="306" key="GridCell.Tab.1.bottom" timestamp="1608578580095">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1476" height="306" key="GridCell.Tab.1.bottom/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578580095" />
+    <state width="1476" height="306" key="GridCell.Tab.1.center" timestamp="1608578580095">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1476" height="306" key="GridCell.Tab.1.center/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578580095" />
+    <state width="1476" height="306" key="GridCell.Tab.1.left" timestamp="1608578580095">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1476" height="306" key="GridCell.Tab.1.left/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578580095" />
+    <state width="1476" height="306" key="GridCell.Tab.1.right" timestamp="1608578580095">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1476" height="306" key="GridCell.Tab.1.right/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578580095" />
     <state x="-1476" y="353" key="MultipleFileMergeDialog" timestamp="1608555508487">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
@@ -276,13 +297,28 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1615" y="294" key="RollbackChangesDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608562159319" />
-    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2" timestamp="1608562216030">
+    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2" timestamp="1608562628121">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608562216030" />
+    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608562628121" />
+    <state x="-1408" y="326" width="587" height="534" key="find.popup" timestamp="1608569701284">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1408" y="326" width="587" height="534" key="find.popup/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608569701284" />
     <state x="-1409" y="381" key="git4idea.merge.GitPullDialog" timestamp="1608562229534">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1409" y="381" key="git4idea.merge.GitPullDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608562229534" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart</url>
+          <line>69</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

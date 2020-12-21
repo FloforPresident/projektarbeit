@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
   }
 
   //Shared Preferences
-  void autoLogin() async {
+  Future<Null> autoLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final int userID = prefs.getInt('id');
     final String userName = prefs.getString('name');
@@ -159,7 +159,7 @@ class _HomeState extends State<Home> {
 
           child: MyApp.id == null
               ? FutureBuilder(
-                  future: login(),
+                  future: autoLogin(),
                   builder:
                       (BuildContext context, AsyncSnapshot<String> snapshot) {
                     switch (snapshot.connectionState) {
