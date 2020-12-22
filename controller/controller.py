@@ -100,28 +100,15 @@ def action_find_person(name, x, y, message):
 teleopInstance = teleop.Teleop()
 
 def action_teleop_start():
-	print("Start**********")
-	print(teleopInstance)
-	#print(telopInstance.getKey())
 	teleopInstance.startTeleop()
-	
 	print("Starting teleop....")
-
-def action_teleop_set_key(key):
-	print("Teleop set key...")
-	teleopInstance.setKey(key)
-	print(teleopInstance)
-
 
 def teleop_talker(key):
 	pub = rospy.Publisher('teleop_chatter', String, queue_size=10)
 	rospy.init_node('teleop_talker', anonymous=True)
 	rate = rospy.Rate(10) # 10hz
-	rospy.loginfo("Talker: " + key)
 	pub.publish(key)
 	
-
-
 def launch_node():
 	print("launching node...")
 	subprocess.run(["rosrun", "find_person", "go_to_person.py"])

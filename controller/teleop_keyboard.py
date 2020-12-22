@@ -86,20 +86,6 @@ class Teleop:
         # spin() simply keeps python from exiting until this node is stopped
         rospy.spin()
 
-    '''
-    def getKey(self):
-        if self.currentKey != 'empty':
-            print("Get key::: " + self.currentKey)
-        key = self.currentKey
-        return key
-    def setKey(self, key):
-        print("key is: " + key)
-        self.currentKey = key
-        print("Current key is: " + self.currentKey)
-    def resetKey(self):
-        self.currentKey = 'empty'
-    '''
-
     def vels(self, target_linear_vel, target_angular_vel):
         return "currently:\tlinear vel %s\t angular vel %s " % (self.target_linear_vel,self.target_angular_vel)
 
@@ -148,8 +134,6 @@ class Teleop:
         
         pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
         try:
-            print(self)
-            #print(self.getKey())
             if key != 'empty':
                 print("Got key:")
                 print(key)
@@ -158,17 +142,17 @@ class Teleop:
                 self.status = self.status + 1
                 print(self.vels(self.target_linear_vel,self.target_angular_vel))
             elif key == 'x' :
-                target_linear_vel = self.checkLinearLimitVelocity(target_linear_vel - self.LIN_VEL_STEP_SIZE)
+                self.target_linear_vel = self.checkLinearLimitVelocity(self.target_linear_vel - self.LIN_VEL_STEP_SIZE)
                 self.status = self.status + 1
                 print(self.vels(self.target_linear_vel,self.target_angular_vel))
             elif key == 'a' :
-                target_angular_vel = self.checkAngularLimitVelocity(target_angular_vel + self.ANG_VEL_STEP_SIZE)
+                self.target_angular_vel = self.checkAngularLimitVelocity(self.target_angular_vel + self.ANG_VEL_STEP_SIZE)
                 self.status = self.status + 1
                 print(self.vels(self.target_linear_vel,self.target_angular_vel))
             elif key == 'd' :
                 self.target_angular_vel = self.checkAngularLimitVelocity(self.target_angular_vel - self.ANG_VEL_STEP_SIZE)
                 self.status = self.status + 1
-                print(self.vels(target_linear_vel,target_angular_vel))
+                print(self.vels(self.target_linear_vel,self.target_angular_vel))
             elif key == ' ' or key == 's' :
                 self.target_linear_vel   = 0.0
                 self.control_linear_vel  = 0.0
@@ -192,7 +176,7 @@ class Teleop:
             pub.publish(twist)
 
         except Exception as e:
-            print("EXCEPTION")
+            print("EXCEPTION:")
             print(e)
 
         finally:
@@ -200,7 +184,6 @@ class Teleop:
             twist.linear.x = 0.0; twist.linear.y = 0.0; twist.linear.z = 0.0
             twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = 0.0
             pub.publish(twist)
-            print("Finally................")
 
     def startTeleop(self):
         
