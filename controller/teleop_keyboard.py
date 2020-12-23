@@ -173,7 +173,10 @@ class Teleop:
             self.control_angular_vel = self.makeSimpleProfile(self.control_angular_vel, self.target_angular_vel, (self.ANG_VEL_STEP_SIZE/2.0))
             twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = self.control_angular_vel
 
+            print(pub)
+            print(twist)
             pub.publish(twist)
+            
 
         except Exception as e:
             print("EXCEPTION:")

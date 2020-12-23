@@ -1,0 +1,2 @@
+raspicam_node:turtlebot3_msgs:turtlebot3_simulations/turtlebot3_fake:turtlebot3_simulations/turtlebot3_gazebo:turtlebot3_simulations/turtlebot3_simulations
+-DCATKIN_DEVEL_PREFIX=/home/patrick/projektarbeit/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/patrick/projektarbeit/catkin_ws/install -G Unix Makefiles

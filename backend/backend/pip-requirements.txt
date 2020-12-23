@@ -1,1 +1,2 @@
-face-recognition==1.3.0
+rospy==1.12.16
+roslaunch==1.12.16

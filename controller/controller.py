@@ -115,10 +115,9 @@ def launch_node():
 
 ######################### WEBSOCKET ####################################################
 
-
+connected = set()
 
 def start_websocket():
-	connected = set()
 	print("Starting websocket")
 	async def ws_recieve(websocket, path):
 		connected.add(websocket)
@@ -152,12 +151,12 @@ def start_websocket():
 ######################### CLEANUP ####################################################
 def cleanup_on_exit(signal, frame):
 	print("cleanup...")
-	'''
+
 	# terminate websocket connections
 	for ws in connected:
 		ws.close()
 		print("closed websocket connection: " + str(ws))
-	'''
+
 	for proc in activeProcesses:
 		proc.terminate()
 		print("terminated process: " + str(proc))

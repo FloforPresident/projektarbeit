@@ -13,7 +13,7 @@ async def ws_send():
 		print(msg)
 		'''
 
-		msg = json.dumps({"action":"TELEOP","key":"s"})
+		msg = json.dumps({"action":"TELEOP","key":"w"})
 
 		#msg = json.dumps({"action":"FIND PERSON","name":"Patrick", "message":"Hallo", "x":"0.723","y":"0.087"})
 

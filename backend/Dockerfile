@@ -40,8 +40,8 @@ RUN apt-get update && \
     apt-get install -y python-pip && \
     apt-get install -y python3-pip
 
-RUN pip3 install -r /home/pip3_requirements.txt
-#    pip install -r /home/pip-requirements.txt
+RUN pip3 install -r /home/pip3_requirements.txt && \
+    pip install -r /home/pip-requirements.txt
 
 CMD ["python3", "/home/controller/websocket.py"]
 
