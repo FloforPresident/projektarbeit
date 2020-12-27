@@ -26,9 +26,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- updated Login to new design">
+    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- changed robos.dart so that the cards value are responsive and take as much space as they need but still remain in the same global column">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609074864279</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="- changed robos.dart so that the cards value are responsive and take as much space as they need but still remain in the same global column">
+      <created>1609084429437</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1609084429437</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,45 +255,46 @@
     <MESSAGE value="- Commit Before implemented VideoStream, and implemented function to detect wifi ip address automatically for the app" />
     <MESSAGE value="- update auf current FlutterApp" />
     <MESSAGE value="- updated Login to new design" />
-    <option name="LAST_COMMIT_MESSAGE" value="- updated Login to new design" />
+    <MESSAGE value="- changed robos.dart so that the cards value are responsive and take as much space as they need but still remain in the same global column" />
+    <option name="LAST_COMMIT_MESSAGE" value="- changed robos.dart so that the cards value are responsive and take as much space as they need but still remain in the same global column" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1476" height="228" key="GridCell.Tab.0.bottom" timestamp="1609072334953">
+    <state width="1877" height="228" key="GridCell.Tab.0.bottom" timestamp="1609089493925">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1476" height="228" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609072334953" />
-    <state width="1476" height="228" key="GridCell.Tab.0.center" timestamp="1609072334953">
+    <state width="1877" height="228" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609089493925" />
+    <state width="1877" height="228" key="GridCell.Tab.0.center" timestamp="1609089493924">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1476" height="228" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609072334953" />
-    <state width="1476" height="228" key="GridCell.Tab.0.left" timestamp="1609072334953">
+    <state width="1877" height="228" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609089493924" />
+    <state width="1877" height="228" key="GridCell.Tab.0.left" timestamp="1609089493924">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1476" height="228" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609072334953" />
-    <state width="1476" height="228" key="GridCell.Tab.0.right" timestamp="1609072334953">
+    <state width="1877" height="228" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609089493924" />
+    <state width="1877" height="228" key="GridCell.Tab.0.right" timestamp="1609089493924">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1476" height="228" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609072334953" />
-    <state width="1476" height="228" key="GridCell.Tab.1.bottom" timestamp="1609072335089">
+    <state width="1877" height="228" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609089493924" />
+    <state width="1877" height="228" key="GridCell.Tab.1.bottom" timestamp="1609089494047">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1476" height="228" key="GridCell.Tab.1.bottom/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609072335089" />
-    <state width="1476" height="228" key="GridCell.Tab.1.center" timestamp="1609072335089">
+    <state width="1877" height="228" key="GridCell.Tab.1.bottom/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609089494047" />
+    <state width="1877" height="228" key="GridCell.Tab.1.center" timestamp="1609089494046">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1476" height="228" key="GridCell.Tab.1.center/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609072335089" />
-    <state width="1476" height="228" key="GridCell.Tab.1.left" timestamp="1609072335089">
+    <state width="1877" height="228" key="GridCell.Tab.1.center/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609089494046" />
+    <state width="1877" height="228" key="GridCell.Tab.1.left" timestamp="1609089494046">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1476" height="228" key="GridCell.Tab.1.left/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609072335089" />
-    <state width="1476" height="228" key="GridCell.Tab.1.right" timestamp="1609072335089">
+    <state width="1877" height="228" key="GridCell.Tab.1.left/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609089494046" />
+    <state width="1877" height="228" key="GridCell.Tab.1.right" timestamp="1609089494047">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1476" height="228" key="GridCell.Tab.1.right/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609072335089" />
-    <state x="2577" y="164" key="Vcs.Push.Dialog.v2" timestamp="1609074868119">
+    <state width="1877" height="228" key="GridCell.Tab.1.right/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609089494047" />
+    <state x="2577" y="164" key="Vcs.Push.Dialog.v2" timestamp="1609084433801">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2577" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609074868119" />
+    <state x="2577" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609084433801" />
     <state x="2689" y="165" key="VcsDiffUtil.ChangesDialog" timestamp="1609068271475">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

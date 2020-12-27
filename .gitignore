@@ -6,3 +6,9 @@ catkin_ws/build/*
 catkin_ws/devel/*
 catkin_ws/build/
 catkin_ws/devel/
+.idea
+.vscode
+backend
+catkin_ws
+controller
+turtlebot_scripts
