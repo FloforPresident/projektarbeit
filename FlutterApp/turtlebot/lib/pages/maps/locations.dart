@@ -4,16 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
-import 'package:turtlebot/frameworks/top_app_bar.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
-import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Locations extends StatefulWidget {
   final LocationController controller = new LocationController();
   int dropDownRoomId;
+  final colorTheme = Colors.purple;
 
   static List<Location> items = [];
   static List<Location> activeItems = [];
@@ -31,7 +30,7 @@ class _LocationsState extends State<Locations> {
 
   final WebSocketChannel channel = MyApp.con();
 
-  final colorTheme = Colors.pink;
+
   ControllerCustomDropdown dropController = ControllerCustomDropdown<Room>();
 
   @override
@@ -71,27 +70,30 @@ class _LocationsState extends State<Locations> {
             return SingleChildScrollView(
               child: Column(
                   children: [
-                    CustomDropdownLabel(
-                      label: Text("Room:", style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17.0,
-                        fontWeight: FontWeight.bold,
-                      )),
-                      child: CustomDropdownMenu<Room>(
-                        itemTextStyle: TextStyle(color: Colors.black87),
-                        selectedItemTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.lightBlue) ,
-                        onChanged: () async {
-                          final SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                          prefs.setInt(
-                              'room_id', dropController.getCurrentIndex());
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      child: CustomDropdownLabel(
+                        label: Text("Room:", style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25.0,
+                        )),
+                        child: CustomDropdownMenu<Room>(
+                          itemTextStyle: TextStyle(color: Colors.white, fontSize: Theme.of(context).textTheme.bodyText2.fontSize),
+                          dropdowncolor: widget.colorTheme,
+                          selectedItemTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.lightBlue) ,
+                          onChanged: () async {
+                            final SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                            prefs.setInt(
+                                'room_id', dropController.getCurrentIndex());
 
-                          widget.controller.updateLocations(
-                              context, dropController.getValue().id);
-                        },
-                        startValueId: widget.dropDownRoomId,
-                        controller: dropController,
-                        data: Locations.roomItems,
+                            widget.controller.updateLocations(
+                                context, dropController.getValue().id);
+                          },
+                          startValueId: widget.dropDownRoomId,
+                          controller: dropController,
+                          data: Locations.roomItems,
+                        ),
                       ),
                     ),
                     AnimatedList(

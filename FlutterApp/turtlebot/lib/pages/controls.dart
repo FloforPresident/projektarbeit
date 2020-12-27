@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/main.dart';
@@ -7,12 +8,13 @@ import 'package:flutter_mjpeg/flutter_mjpeg.dart';
 
 class Controls extends StatefulWidget {
   final ControlController controller = new ControlController();
-  Color textColor = Colors.white;
-  Color backgroundColor = Colors.green;
-  Color borderActionButtonColor = Colors.white;
-  Color controlPadBackground = Color(0xffe7ebda);
-  Color borderConrolPadBackground = Colors.green;
-  double borderFloatingWidth = 3.0;
+  final Color textColor = Colors.white;
+  static final Color colorTheme = Colors.green;
+  final Color borderActionButtonColor = Colors.white;
+  final Color controlPadBackground = Color(0xffe7ebda);
+  final Color borderConrolPadBackground = Colors.green;
+  final double borderFloatingWidth = 3.0;
+  final double iconSize = 60.0;
 
   Controls({Key key}) : super(key: key);
 
@@ -22,33 +24,29 @@ class Controls extends StatefulWidget {
 class _ControlsState extends State<Controls> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: TopAppBarLogout(
-          colorTheme: widget.backgroundColor,
-          page: "Controlling"
-      ),
-      body: Container(
-        child: Container(
-          height: double.infinity,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    color: Colors.grey,
-                    padding: EdgeInsets.fromLTRB(20, 25, 20, 25),
-                    child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black)),
-                        child: Center(child: Mjpeg(
-                          isLive: true,
-                          stream:"http://192.168.2.105:8080/stream?topic=/Face_Recognition_Stream",
-                        ) )),
-                  ),
-                ),
+    return Container(
+      height: double.infinity,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                  margin: EdgeInsets.fromLTRB(0,10,0,10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: Colors.white,
+                      border: Border.all(color: Colors.black)),
+                  child: Center(child: Text("Video")
+
+                      // Mjpeg(
+                      //   isLive: true,
+                      //   stream:"http://192.168.2.105:8080/stream?topic=/Face_Recognition_Stream",
+                      // )
+                      )),
+            ),
+            Row(
+              children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
                   padding: EdgeInsets.all(10),
@@ -69,17 +67,21 @@ class _ControlsState extends State<Controls> {
                               color: widget.borderActionButtonColor,
                               width: widget.borderFloatingWidth,
                             )),
-                        child: FloatingActionButton(
-                            backgroundColor: widget.backgroundColor,
-                            heroTag: "up",
-                            onPressed: () {
-                              widget.controller.up();
-                            },
-                            child: Icon(Icons.arrow_upward,
-                                color: widget.textColor)),
+                        child: SizedBox(
+                          height: widget.iconSize,
+                          width: widget.iconSize,
+                          child: FloatingActionButton(
+                              backgroundColor: Controls.colorTheme,
+                              heroTag: "up",
+                              onPressed: () {
+                                widget.controller.up();
+                              },
+                              child: Icon(Icons.arrow_upward,
+                                  color: widget.textColor)),
+                        ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -91,14 +93,18 @@ class _ControlsState extends State<Controls> {
                                       width: widget.borderFloatingWidth,
                                     )),
                                 margin: EdgeInsets.fromLTRB(0, 0, 70, 0),
-                                child: FloatingActionButton(
-                                    onPressed: () {
-                                      widget.controller.left();
-                                    },
-                                    backgroundColor: widget.backgroundColor,
-                                    heroTag: "left",
-                                    child: Icon(Icons.arrow_back_rounded,
-                                        color: widget.textColor))),
+                                child: SizedBox(
+                                  height: widget.iconSize,
+                                  width: widget.iconSize,
+                                  child: FloatingActionButton(
+                                      onPressed: () {
+                                        widget.controller.left();
+                                      },
+                                      backgroundColor: Controls.colorTheme,
+                                      heroTag: "left",
+                                      child: Icon(Icons.arrow_back_rounded,
+                                          color: widget.textColor)),
+                                )),
                             Container(
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
@@ -106,16 +112,20 @@ class _ControlsState extends State<Controls> {
                                       color: widget.borderActionButtonColor,
                                       width: widget.borderFloatingWidth,
                                     )),
-                                child: FloatingActionButton(
-                                    onPressed: () {
-                                      widget.controller.right();
-                                    },
-                                    backgroundColor: widget.backgroundColor,
-                                    heroTag: "right",
-                                    child: Icon(
-                                      Icons.arrow_forward_rounded,
-                                      color: widget.textColor,
-                                    )))
+                                child: SizedBox(
+                                  height: widget.iconSize,
+                                  width: widget.iconSize,
+                                  child: FloatingActionButton(
+                                      onPressed: () {
+                                        widget.controller.right();
+                                      },
+                                      backgroundColor: Controls.colorTheme,
+                                      heroTag: "right",
+                                      child: Icon(
+                                        Icons.arrow_forward_rounded,
+                                        color: widget.textColor,
+                                      )),
+                                ))
                           ],
                         ),
                       ),
@@ -125,30 +135,41 @@ class _ControlsState extends State<Controls> {
                               border: Border.all(
                                   color: widget.borderActionButtonColor,
                                   width: widget.borderFloatingWidth)),
-                          child: FloatingActionButton(
-                              onPressed: () {
-                                widget.controller.down();
-                              },
-                              heroTag: "down",
-                              backgroundColor: widget.backgroundColor,
-                              child: Icon(Icons.arrow_downward_rounded,
-                                  color: widget.textColor))),
+                          child: SizedBox(
+                            width: widget.iconSize,
+                            height: widget.iconSize,
+                            child: FloatingActionButton(
+                                onPressed: () {
+                                  widget.controller.down();
+                                },
+                                heroTag: "down",
+                                backgroundColor: Controls.colorTheme,
+                                child: Icon(Icons.arrow_downward_rounded,
+                                    color: widget.textColor)),
+                          )),
                     ],
                   ),
                 ),
                 Container(
-                    width: 200,
-                    height: 40,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            color: Colors.grey,
+                            width: widget.borderFloatingWidth)),
+                    width: 100,
+                    height: 100,
                     margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                    child: RaisedButton(
+                    child: FloatingActionButton(
+                      backgroundColor: Colors.blueGrey,
                       onPressed: () {
                         widget.controller.stop();
                       },
-                      child: Text("Stop"),
+                      child: Text("Stop",
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
                     ))
-              ]),
-        ),
-      ),
+              ],
+            ),
+          ]),
     );
   }
 }

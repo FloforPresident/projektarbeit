@@ -11,7 +11,6 @@ import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 
-
 class Login extends StatefulWidget {
   final LoginController controller = new LoginController();
 
@@ -47,6 +46,7 @@ class _LoginState extends State<Login> {
       imageFile = File(picture.path);
     });
   }
+
 
   @override
   void initState() {
@@ -194,6 +194,7 @@ class _LoginState extends State<Login> {
   }
 
   void pictureDialog(BuildContext context) {
+    bool _uploadedImage = true;
 
     showDialog(
       barrierDismissible: true,
@@ -226,7 +227,7 @@ class _LoginState extends State<Login> {
                         },
                       ),
                     ),
-                    // imageFile != null ? Image.file(imageFile, width: 400, height: 400): Text(''),
+                  // imageFile != null ? Image.file(imageFile, width: 400, height: 400): Text(''),
                   ],
                 ),
               );

@@ -8,14 +8,9 @@ class SocketInfo {
   static const String port = ':8765';
 
 
-  static Future<String> getLocalIP  () async
-  {
-    WifiInfo wifi = WifiInfo();
-    return await wifi.getWifiIP();
-  }
 
-  static setHostAdress() async
+  static setHostAdress(String ipAddres)
   {
-    hostAdress = await getLocalIP();
+    hostAdress = ipAddres;
   }
 }

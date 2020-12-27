@@ -8,6 +8,7 @@ class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
   final TextStyle itemTextStyle;
   final Color focusColorItem;
   final TextStyle  selectedItemTextStyle;
+  final Color dropdowncolor;
 
   CustomDropdownMenu(
       {int startValueId,
@@ -16,9 +17,10 @@ class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
         this.dropButtonSize = 130,
       List<T> data,
       Function onChanged,
-      this.itemTextStyle,
+      this.itemTextStyle = const TextStyle(color: Colors.black),
       this.focusColorItem,
-      this.selectedItemTextStyle}) {
+      this.selectedItemTextStyle,
+      this.dropdowncolor}) {
     controller.initialize(startValueId, onChanged, data, this);
 
   }
@@ -31,33 +33,27 @@ class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
 class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-      child: Row(
-        children: [
-          Container(
-            width: widget.dropButtonSize,
-            child: DropdownButton(
-              focusColor: widget.focusColorItem,
-                isExpanded: true,
-                value: widget.controller.startValueId,
-                items: widget.controller
-                    ._createDropdownMenuItem(widget.controller.data),
+      width: widget.dropButtonSize,
+      child: DropdownButton(
+        style: widget.itemTextStyle,
+        isExpanded: true,
+        dropdownColor: widget.dropdowncolor,
+        focusColor: widget.focusColorItem,
+          value: widget.controller.startValueId,
+          items: widget.controller
+              ._createDropdownMenuItem(widget.controller.data),
 
-                onChanged: (value) {
-                  setState(() {
-                    widget.controller.currentIndexValue = value;
-                    widget.controller.resetState(value);
-                    if(widget.controller.onChanged != null)
-                      {
-                        widget.controller.onChanged();
-                      }
+          onChanged: (value) {
+            setState(() {
+              widget.controller.currentIndexValue = value;
+              widget.controller.resetState(value);
+              if(widget.controller.onChanged != null)
+                {
+                  widget.controller.onChanged();
+                }
 
-                  });
-                }),
-          ),
-        ],
-        mainAxisAlignment: MainAxisAlignment.center,
-      ),
+            });
+          }),
     );
   }
 }
@@ -100,12 +96,10 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
 
   List<DropdownMenuItem> _createDropdownMenuItem(List<DatabaseObject> objects) {
     int counter = 0;
-    TextStyle currentTextStyle;
     return objects.map((item) {
-      currentTextStyle = (counter == startValueId) ? _widget.selectedItemTextStyle : _widget.itemTextStyle;
       return DropdownMenuItem(
         value: counter++,
-        child: Container(child:  Text(item.name, style: _widget.itemTextStyle,)),
+        child: Container(child:  Text(item.name)),
       );
     }).toList();
   }
@@ -119,38 +113,28 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
 class CustomDropdownLabel extends StatelessWidget {
   final CustomDropdownMenu child;
   final double fontSize;
-  final double leftStart;
   final Text label;
   final double labelRightSpace;
-  final double topSpace;
 
   CustomDropdownLabel(
       {@required this.child,
       this.fontSize = 18,
-      this.leftStart = 30,
       @required this.label,
-      this.labelRightSpace = 20,
-      this.topSpace = 15});
+      this.labelRightSpace = 20});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, topSpace, 0, 0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
-            flex: 5,
-            child: Container(
-              child: label,
-              margin: EdgeInsets.fromLTRB(leftStart, 0, labelRightSpace, 0),
-            ),
+          Container(
+            child: label,
+            margin: EdgeInsets.fromLTRB(0, 0, labelRightSpace, 0),
           ),
-          Expanded(
-            flex: 5,
-            child: child,
-          ),
+          Container(child: child),
         ],
-        mainAxisAlignment: MainAxisAlignment.center,
+
       ),
     );
   }

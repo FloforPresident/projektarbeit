@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turtlebot/frameworks/page_frame.dart';
 import 'package:turtlebot/pages/friends.dart';
 import 'package:turtlebot/pages/home/home.dart';
 import 'package:turtlebot/pages/controls.dart';
@@ -10,17 +11,13 @@ import 'package:web_socket_channel/io.dart';
 import 'package:turtlebot/services/socke_info.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 
-
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
   static int id;
   static String name;
 
   static IOWebSocketChannel con() {
-
     // SocketInfo.setHostAdress();
     return new IOWebSocketChannel.connect(
         'ws://' + SocketInfo.hostAdress + SocketInfo.port);
@@ -38,7 +35,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'TurtleBot',
-        theme: ThemeData(primarySwatch: Colors.orange),
+        theme: ThemeData(
+            primarySwatch: Colors.orange,
+            textTheme: TextTheme(
+                bodyText2: TextStyle(fontSize: 18),
+                headline1: TextStyle(fontSize: 32))),
         initialRoute: '/',
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
@@ -46,7 +47,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatefulWidget{
+
+class Home extends StatefulWidget {
+
+
   final User sessionUser;
 
   Home(this.sessionUser);
@@ -58,21 +62,19 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home> {
-
   @override
   initState() {
     super.initState();
 
-    if(widget.sessionUser != null) {
+    if (widget.sessionUser != null) {
       login();
-    }
-    else {
+    } else {
       autoLogin();
     }
   }
 
   //Shared Preferences
-  void autoLogin() async {
+  Future<Null> autoLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final int userID = prefs.getInt('id');
     final String userName = prefs.getString('name');
@@ -82,7 +84,7 @@ class _HomeState extends State<Home> {
         MyApp.id = userID;
         MyApp.name = userName;
       });
-    } else{
+    } else {
       RouteGenerator.onTapToLogin(context);
     }
   }
@@ -112,69 +114,101 @@ class _HomeState extends State<Home> {
 
   int _selectedIndex = 0;
 
-  List<Widget> pages = [
-    HomeScreen(),
-    Maps(),
-    Robos(),
-    Friends(),
-    Controls()
-  ];
 
-  @override
+
+  Widget choosePageAndColor(int Index)
+  {
+    List<Widget> pages = [HomeScreen(), Maps(), Robos(), Friends(), Controls()];
+
+    switch(Index)
+    {
+      //HomeScreen
+      case 0:
+        return PageFrame(
+          colorTheme: HomeScreen.colorTheme,
+          page: pages[0],
+        );
+      case 1:
+        return PageFrame(
+          colorTheme: Maps.colorTheme,
+          page: pages[1],
+        );
+      case 2:
+        return PageFrame(
+          colorTheme: Robos.colorTheme,
+          page: pages[2],
+        );
+      case 3:
+        return PageFrame(
+          colorTheme: Friends.colorTheme,
+          page: pages[3],
+        );
+      case 4:
+        return PageFrame(
+          colorTheme: Controls.colorTheme,
+          page: pages[4],
+        );
+
+    }
+  }
+
+  //If you change order of BottomNavigationBar you also have to change the order in choosePageAndColor Function
   Widget build(BuildContext context) {
     return Scaffold(
-        body: MyApp.id == null ? FutureBuilder(
-          future: login(),
-          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting: return new Text('');
-              default:
-                if (snapshot.hasError)
-                  return new Text('Error: ${snapshot.error}');
-                else
-                  return pages[_selectedIndex];
-            }
-          }
-        ) : pages[_selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.mail),
-                label: 'Home',
-                backgroundColor: Colors.orange
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.location_on),
-                label: 'Maps',
-                backgroundColor: Colors.purple
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.mood),
-                label: 'Robos',
-                backgroundColor: Colors.blue
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.perm_contact_calendar),
-                label: 'Friends',
-                backgroundColor: Colors.red
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.videogame_asset),
-                label: 'Controls',
-                backgroundColor: Colors.green
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            selectedItemColor: Colors.grey[900],
-            iconSize: 30  ,
-            onTap: (int index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
+        body: Container(
 
-        )
-    );
+          child: MyApp.id == null
+              ? FutureBuilder(
+                  future: autoLogin(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return new Text('');
+                      default:
+                        if (snapshot.hasError)
+                          return new Text('Error: ${snapshot.error}');
+                        else
+                          return choosePageAndColor(_selectedIndex);
+                    }
+                  })
+              : choosePageAndColor(_selectedIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.mail),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.location_on),
+              label: 'Maps',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.mood),
+              label: 'Robos',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.perm_contact_calendar),
+              label: 'Friends',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.videogame_asset),
+              label: 'Controls',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.grey[900],
+          iconSize: 30,
+          onTap: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+        ));
   }
 }
-
