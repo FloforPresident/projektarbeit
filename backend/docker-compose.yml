@@ -14,7 +14,7 @@ services:
       - db
     # Insert your own IP in here
     ports:
-      - 192.168.188.145:8765:8765
+      - 192.168.2.104:8765:8765
     environment:
       - PYTHONUNBUFFERED=1
 
