@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
 
 class Home extends StatefulWidget {
 
-
+  //sessionUser is newly created user via Login.dart creating a new account
   final User sessionUser;
 
   Home(this.sessionUser);
@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  // Shared Preference
+  // Shared Preference, will be activated by hitting the raised button in the Login page
   Future<Null> login() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('id', widget.sessionUser.id);
