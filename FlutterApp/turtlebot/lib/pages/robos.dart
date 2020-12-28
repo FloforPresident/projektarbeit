@@ -35,51 +35,49 @@ class _RoboState extends State<Robos> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-          stream: channel.stream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              widget.controller.setData(snapshot.data);
+        stream: channel.stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            widget.controller.setData(snapshot.data);
 
-              return Column(children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    child: Text("Robos",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: Theme.of(context)
-                                .textTheme
-                                .headline1
-                                .fontSize)),
-                  ),
+            return Column(children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  child: Text("Robos",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize:
+                              Theme.of(context).textTheme.headline1.fontSize)),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 30.0),
-                  child: AnimatedList(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    key: widget.controller.key,
-                    initialItemCount: Robos.items.length,
-                    itemBuilder: (context, index, animation) {
-                      return widget.controller.buildItem(
-                          context, Robos.items[index], animation, index);
-                    },
-                  ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 30.0),
+                child: AnimatedList(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  key: widget.controller.key,
+                  initialItemCount: Robos.items.length,
+                  itemBuilder: (context, index, animation) {
+                    return widget.controller.buildItem(
+                        context, Robos.items[index], animation, index);
+                  },
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      addItemDialog(context);
-                    },
-                    child: Text("Hinzufügen"),
-                  ),
-                )
-              ]);
-            } else {
-              return Text('');
-            }
-          });
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: RaisedButton(
+                  onPressed: () {
+                    addItemDialog(context);
+                  },
+                  child: Text("Hinzufügen"),
+                ),
+              )
+            ]);
+          } else {
+            return Text('');
+          }
+        });
   }
 
   void addItemDialog(BuildContext context) {
@@ -200,27 +198,16 @@ class RoboController {
       child: Card(
         elevation: 2,
         child: ListTile(
-          title: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 4,
-                child: Row(
-                  children: <Widget>[
-                    Text(item.name),
-                  ],
+          title: Table(
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              children: <TableRow>[
+            TableRow(
+              children: [
+                Text(item.name),
+                Text(
+                  item.iP,
                 ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Row(
-                  children: <Widget>[
-                    Text(item.iP),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     IconButton(
@@ -234,9 +221,9 @@ class RoboController {
                     )
                   ],
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ]),
         ),
       ),
     );

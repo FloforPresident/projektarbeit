@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/pages/login.dart';
+import 'package:turtlebot/frameworks/page_frame.dart';
 
 
 class RouteGenerator {
@@ -13,7 +14,7 @@ class RouteGenerator {
     switch (settings.name) {
       case RouteLogin:
         {
-          return MaterialPageRoute(builder: (_) => Login());
+          return MaterialPageRoute(builder: (_) => PageFrame(colorTheme: Login.colorTheme, page:Login()));
         }
       case RouteHome:
         {
