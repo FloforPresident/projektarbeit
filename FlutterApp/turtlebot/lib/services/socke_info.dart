@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:turtlebot/services/error_messages.dart';
+import 'package:turtlebot/services/alertDialogs/error_messages.dart';
 
 class SocketInfo {
 
 
   //insert your current IP in 'hostAdress' and get controller on same IP running
-  static String hostAdress= "192.168.2.104";
+  static String hostAdress;
   static const String port = ':8765';
 
 
@@ -25,10 +25,12 @@ class SocketInfo {
     if(prefs.getString("hostAdress") != null)
       {
         hostAdress = prefs.getString("hostAdress");
+
       }
     else
       {
         ErrorMessages.noWebSocketConnection(context);
+
       }
   }
 }

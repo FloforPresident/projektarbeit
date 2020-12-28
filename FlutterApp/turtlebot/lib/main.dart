@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             textTheme: TextTheme(
                 bodyText2: TextStyle(fontSize: 18),
                 headline1: TextStyle(fontSize: 32, color: Colors.white))),
-        initialRoute: '/',
+        initialRoute: RouteGenerator.RouteLoading,
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );

@@ -2,6 +2,13 @@
   <library name="Dart Packages" type="DartPackagesLibraryType">
     <properties>
       <option name="packageNameToDirsMap">
+        <entry key="after_layout">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/after_layout-1.0.7+2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="async">
           <value>
             <list>
@@ -439,6 +446,7 @@
       </option>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/../FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/after_layout-1.0.7+2/lib" />
       <root url="file://$PROJECT_DIR$/../FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.5.0-nullsafety.1/lib" />
       <root url="file://$PROJECT_DIR$/../FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0-nullsafety.1/lib" />
       <root url="file://$PROJECT_DIR$/../FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/camera-0.5.8+17/lib" />

@@ -64,13 +64,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("ROS-IP"),
-                      Container(
-                        width: 130,
-                        child: TextField(
-                          controller: widget.ipController,
-                          maxLines: null,
-                          maxLength: 15,
-                        ),
+                      Row(
+                        children: [
+                          Container(
+                            width: 130,
+                            child: TextField(
+                              controller: widget.ipController,
+                              maxLines: null,
+                              maxLength: 15,
+                            ),
+                          ),
+                          IconButton(icon: Icon(Icons.create), onPressed: () {
+
+                          })
+                        ],
                       )
                     ],
                   )

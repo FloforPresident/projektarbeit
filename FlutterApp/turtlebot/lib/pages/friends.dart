@@ -256,66 +256,70 @@ class FriendController {
 
   void editItemDialog(BuildContext context, User user) {
     showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) {
-          List<Location> selectedLocations = [];
-          return StatefulBuilder(builder: (context, setState) {
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        List<Location> selectedLocations = [];
+        return StatefulBuilder(
+          builder: (context, setState) {
             return SingleChildScrollView(
-                child: AlertDialog(
-              title: Text("Deinen aktuellen Platz ändern"),
-              content: Column(
-                children: <Widget>[
-                  CustomDropdownLabel(
-                    label: Text("Raum"),
-                    child: CustomDropdownMenu<Room>(
-                        onChanged: () {
-                          List<Location> buffer = [];
-                          for (int i = 0;
-                              i < Friends.locationItems.length;
-                              i++) {
-                            if (Friends.locationItems[i].roomId ==
-                                roomDropController.getValue().id) {
-                              buffer.add(Friends.locationItems[i]);
+              child: AlertDialog(
+                title: Text("Deinen aktuellen Platz ändern"),
+                content: Column(
+                  children: <Widget>[
+                    CustomDropdownLabel(
+                      label: Text("Raum"),
+                      child: CustomDropdownMenu<Room>(
+                          onChanged: () {
+                            List<Location> buffer = [];
+                            for (int i = 0;
+                                i < Friends.locationItems.length;
+                                i++) {
+                              if (Friends.locationItems[i].roomId ==
+                                  roomDropController.getValue().id) {
+                                buffer.add(Friends.locationItems[i]);
+                              }
                             }
-                          }
-                          setState(() {
-                            selectedLocations = [];
-                            selectedLocations.addAll(buffer);
-                          });
-                        },
-                        controller: roomDropController,
-                        data: Friends.roomItems),
+                            setState(() {
+                              selectedLocations = [];
+                              selectedLocations.addAll(buffer);
+                            });
+                          },
+                          controller: roomDropController,
+                          data: Friends.roomItems),
+                    ),
+                    CustomDropdownLabel(
+                      label: Text("Platz"),
+                      child: CustomDropdownMenu<Location>(
+                          controller: locationDropController,
+                          data: selectedLocations),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Schließen"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
-                  CustomDropdownLabel(
-                    label: Text("Platz"),
-                    child: CustomDropdownMenu<Location>(
-                        controller: locationDropController,
-                        data: selectedLocations),
+                  FlatButton(
+                    child: Text("Ändern"),
+                    onPressed: () {
+                      if (roomDropController.getValue() != null &&
+                          locationDropController.getValue() != null) {
+                        updateItem(user, locationDropController.getValue());
+                        Navigator.of(context).pop();
+                      }
+                    },
                   ),
                 ],
               ),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text("Schließen"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                FlatButton(
-                  child: Text("Ändern"),
-                  onPressed: () {
-                    if (roomDropController.getValue() != null &&
-                        locationDropController.getValue() != null) {
-                      updateItem(user, locationDropController.getValue());
-                      Navigator.of(context).pop();
-                    }
-                  },
-                ),
-              ],
-            ));
-          });
-        });
+            );
+          },
+        );
+      },
+    );
   }
 
   void messageDialog(BuildContext context, User user) {
