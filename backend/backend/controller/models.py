@@ -34,14 +34,14 @@ def add_user(location_id, name, image):
 def login_user(name):
     user = User.query.filter_by(name=name).first()
     if user:
-        return remove_user_binary(user)
+        return user.as_dict()
     return ''
 
 
 def get_user(user_id):
     user = User.query.filter_by(id=user_id).first()
     if user:
-        return remove_user_binary(user)
+        return user.as_dict()
     return ''
 
 
@@ -54,7 +54,7 @@ def delete_user(user_id):
 def get_users():
     users = []
     for user in User.query.order_by(User.id).all():
-        users.append(remove_user_binary(user))
+        users.append(user.as_dict())
     return users
 
 
@@ -212,6 +212,13 @@ class User(db.Model, SerializerMixin):
     name = db.Column(db.String(80), nullable=False)
     image = db.Column(db.Binary, nullable=True)
     embedding = db.Column(db.Text, nullable=True)
+
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "location_id": self.location_id,
+            "name": self.name,
+        }
 
     def __repr__(self):
         return '<User %r>' % self.name
