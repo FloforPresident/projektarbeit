@@ -68,10 +68,8 @@ class _HomeState extends State<Home> {
 
     if (widget.sessionUser != null) {
       login();
-      SocketInfo.initializeHostAdress(context);
     } else {
       autoLogin();
-      SocketInfo.initializeHostAdress(context);
     }
   }
 
