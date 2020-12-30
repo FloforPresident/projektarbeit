@@ -66,7 +66,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # chan=ssh.invoke_shell()
 # chan.send('roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true')
 
-def action_find_person(name, x, y, message):
+def action_face_recognition(user, message):
+    pub_embedding = rospy.Publisher('embedding', String, queue_size=10)
+    rospy.init_node('encoding_creator', anonymous=False)
+    while pub_embedding.get_num_connections() < 1:
+        string = ""
+    pub_embedding.publish("test")
+
+
+def action_find_person(name, x, y):
     # user = db.getUser(name)
     # locationID = user[1]
     # location = db.getLocation(locationID)
@@ -177,6 +185,7 @@ def start_websocket():
         # MESSAGE
         elif action == 'SEND MESSAGE':
             response = send_message(data['from_user'], data['to_user'], data['subject'], data['message'])
+            # action_find_person(response['user']['name'], response['location']['x'], response['location']['y'], data['message'])
             action_face_recognition(response['user'], data['message'])
 
         # CONTROL
