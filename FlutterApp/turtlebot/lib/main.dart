@@ -11,7 +11,11 @@ import 'package:web_socket_channel/io.dart';
 import 'package:turtlebot/services/socke_info.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 
-void main() => runApp(MyApp());
+void main()
+{
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   static int id;
@@ -25,6 +29,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    //Receives current IP-Adress
+    SocketInfo.initializeHostAdressFromShared();
+
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -40,7 +48,7 @@ class MyApp extends StatelessWidget {
             textTheme: TextTheme(
                 bodyText2: TextStyle(fontSize: 18),
                 headline1: TextStyle(fontSize: 32, color: Colors.white))),
-        initialRoute: RouteGenerator.RouteLoading,
+        initialRoute: RouteGenerator.RouteHome,
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
@@ -61,6 +69,7 @@ class Home extends StatefulWidget {
   }
 }
 
+
 class _HomeState extends State<Home> {
   @override
   initState() {
@@ -79,7 +88,7 @@ class _HomeState extends State<Home> {
     final int userID = prefs.getInt('id');
     final String userName = prefs.getString('name');
 
-    if (userID != null) {
+    if (userID != null && SocketInfo.hostAdress != "0.0.0.0") {
       setState(() {
         MyApp.id = userID;
         MyApp.name = userName;

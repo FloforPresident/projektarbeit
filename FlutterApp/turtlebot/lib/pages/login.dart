@@ -7,8 +7,10 @@ import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
+import 'package:turtlebot/services/alertDialogs/error_messages.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:turtlebot/services/socke_info.dart';
 
 class Login extends StatefulWidget {
   final LoginController controller = new LoginController();
@@ -31,6 +33,7 @@ class _LoginState extends State<Login> {
   double _rightEnd = 40;
 
   TextEditingController _name = new TextEditingController();
+  TextEditingController _ip = new TextEditingController();
   ControllerCustomDropdown roomDropController =
       ControllerCustomDropdown<Room>();
   ControllerCustomDropdown locationDropController =
@@ -52,7 +55,6 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
 
-    widget.controller.getData();
   }
 
   @override
@@ -110,6 +112,21 @@ class _LoginState extends State<Login> {
                     maxLength: 20,
                     maxLines: null,
                   )),
+              Container(
+                  padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
+                  child: TextField(
+                    style: TextStyle(),
+                    controller: _ip,
+                    decoration: InputDecoration(
+
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide()),
+                      labelText: "IP-Adresse",
+                      labelStyle: TextStyle(),
+                    ),
+                    maxLength: 15,
+                    maxLines: null,
+                  )),
               RaisedButton(
                 color: Colors.blueGrey,
                 child: Text(
@@ -119,7 +136,9 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 onPressed: () async {
-                  if (_name.text.isNotEmpty) {
+                  if (_name.text.isNotEmpty && _ip.text.isNotEmpty) {
+                    SocketInfo.setHostAdress(_ip.text);
+                    widget.controller.getData();
                     widget.controller.loginUser(context, _name.text);
                   } else {
                     NoDataDialog.noLoginData(context);
@@ -135,7 +154,17 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 onPressed: () {
-                  signupDialog(context);
+                  if(_ip.text.isNotEmpty)
+                    {
+                      SocketInfo.setHostAdress(_ip.text);
+                      widget.controller.getData();
+                      signupDialog(context);
+                    }
+                  else
+                    {
+                      ErrorMessages.noIpAdress(context);
+                    }
+
                 },
               )
             ],
@@ -337,6 +366,8 @@ class _LoginState extends State<Login> {
 }
 
 class LoginController {
+
+
   void getData() {
     Login.locationItems = [];
     Login.roomItems = [];

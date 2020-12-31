@@ -26,11 +26,17 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- test">
+    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- implemented manually setable hostAddress in the beginning&#10;&#10;- set therefore new startPage&#10;&#10;- started to rework alertDialogs in a whole">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/messages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/messages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/loading_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/loading_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/alertDialogs/basic_alert_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/alertDialogs/basic_alert_dialog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/alertDialogs/error_messages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/alertDialogs/error_messages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/alertDialogs/status_messages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/alertDialogs/status_messages.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/routing.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/routing.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" afterDir="false" />
     </list>
@@ -86,6 +92,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Flutter_Turtlebot\FlutterApp\turtlebot\lib\services\alertDialogs" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Turtlebot" type="FlutterRunConfigurationType" factoryName="Flutter">
@@ -205,7 +216,28 @@
       <option name="project" value="LOCAL" />
       <updated>1608562205788</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="- login.dart is now in new Design aswell&#10;&#10;- robos.dart List is now organized in a table&#10;&#10;- started implementing manual set of hostAddress">
+      <created>1609149875934</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1609149875934</updated>
+    </task>
+    <task id="LOCAL-00016" summary="- added some usefull commentary">
+      <created>1609150466417</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1609150466417</updated>
+    </task>
+    <task id="LOCAL-00017" summary="- implemented manually setable hostAddress in the beginning&#10;&#10;- set therefore new startPage&#10;&#10;- started to rework alertDialogs in a whole">
+      <created>1609173694936</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1609173694936</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,45 +289,89 @@
     <MESSAGE value="Update README.md and remove unused files" />
     <MESSAGE value="Extract host-ip to environment variable" />
     <MESSAGE value="- test" />
-    <option name="LAST_COMMIT_MESSAGE" value="- test" />
+    <MESSAGE value="- login.dart is now in new Design aswell&#10;&#10;- robos.dart List is now organized in a table&#10;&#10;- started implementing manual set of hostAddress" />
+    <MESSAGE value="- added some usefull commentary" />
+    <MESSAGE value="- implemented manually setable hostAddress in the beginning&#10;&#10;- set therefore new startPage&#10;&#10;- started to rework alertDialogs in a whole" />
+    <option name="LAST_COMMIT_MESSAGE" value="- implemented manually setable hostAddress in the beginning&#10;&#10;- set therefore new startPage&#10;&#10;- started to rework alertDialogs in a whole" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="399" height="466" key="DebuggerActiveHint" timestamp="1608577776879">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state x="499" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609421824200">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="499" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609421824200" />
+    <state width="536" height="466" key="DebuggerActiveHint" timestamp="1609172153786">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="399" height="466" key="DebuggerActiveHint/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608577776879" />
-    <state width="1476" height="306" key="GridCell.Tab.0.bottom" timestamp="1608578736484">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="536" height="466" key="DebuggerActiveHint/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609172153786" />
+    <state x="100" y="100" width="1336" height="664" maximized="true" key="DiffContextDialog" timestamp="1609422370699">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="100" y="100" width="1336" height="664" maximized="true" key="DiffContextDialog/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609422370699" />
+    <state width="1478" height="278" key="GridCell.Tab.0.bottom" timestamp="1609422969616">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1476" height="306" key="GridCell.Tab.0.bottom/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578736484" />
-    <state width="1476" height="306" key="GridCell.Tab.0.center" timestamp="1608578736477">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1478" height="278" key="GridCell.Tab.0.bottom/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609422969616" />
+    <state width="1491" height="369" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1609171088419" />
+    <state width="1474" height="169" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609184924213" />
+    <state width="1476" height="278" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1609270482520" />
+    <state width="1478" height="278" key="GridCell.Tab.0.center" timestamp="1609422969614">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1476" height="306" key="GridCell.Tab.0.center/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578736477" />
-    <state width="1476" height="306" key="GridCell.Tab.0.left" timestamp="1608578736477">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1478" height="278" key="GridCell.Tab.0.center/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609422969614" />
+    <state width="1491" height="369" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1609171088419" />
+    <state width="1474" height="169" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609184924213" />
+    <state width="1476" height="278" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1609270482519" />
+    <state width="1478" height="278" key="GridCell.Tab.0.left" timestamp="1609422969613">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1476" height="306" key="GridCell.Tab.0.left/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578736477" />
-    <state width="1476" height="306" key="GridCell.Tab.0.right" timestamp="1608578736483">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1478" height="278" key="GridCell.Tab.0.left/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609422969613" />
+    <state width="1491" height="369" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1609171088419" />
+    <state width="1474" height="169" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609184924213" />
+    <state width="1476" height="278" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1609270482519" />
+    <state width="1478" height="278" key="GridCell.Tab.0.right" timestamp="1609422969615">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1476" height="306" key="GridCell.Tab.0.right/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578736483" />
-    <state width="1476" height="306" key="GridCell.Tab.1.bottom" timestamp="1608578580095">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1478" height="278" key="GridCell.Tab.0.right/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609422969615" />
+    <state width="1491" height="369" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1609171088419" />
+    <state width="1474" height="169" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609184924213" />
+    <state width="1476" height="278" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1609270482519" />
+    <state width="1478" height="278" key="GridCell.Tab.1.bottom" timestamp="1609422752551">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1476" height="306" key="GridCell.Tab.1.bottom/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578580095" />
-    <state width="1476" height="306" key="GridCell.Tab.1.center" timestamp="1608578580095">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1478" height="278" key="GridCell.Tab.1.bottom/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609422752551" />
+    <state width="1491" height="369" key="GridCell.Tab.1.bottom/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1609170790782" />
+    <state width="1474" height="169" key="GridCell.Tab.1.bottom/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609184924213" />
+    <state width="1476" height="278" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1609270482636" />
+    <state width="1478" height="278" key="GridCell.Tab.1.center" timestamp="1609422752551">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1476" height="306" key="GridCell.Tab.1.center/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578580095" />
-    <state width="1476" height="306" key="GridCell.Tab.1.left" timestamp="1608578580095">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1478" height="278" key="GridCell.Tab.1.center/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609422752551" />
+    <state width="1491" height="369" key="GridCell.Tab.1.center/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1609170790782" />
+    <state width="1474" height="169" key="GridCell.Tab.1.center/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609184924212" />
+    <state width="1476" height="278" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1609270482636" />
+    <state width="1478" height="278" key="GridCell.Tab.1.left" timestamp="1609422752551">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1476" height="306" key="GridCell.Tab.1.left/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578580095" />
-    <state width="1476" height="306" key="GridCell.Tab.1.right" timestamp="1608578580095">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1478" height="278" key="GridCell.Tab.1.left/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609422752551" />
+    <state width="1491" height="369" key="GridCell.Tab.1.left/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1609170790782" />
+    <state width="1474" height="169" key="GridCell.Tab.1.left/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609184924212" />
+    <state width="1476" height="278" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1609270482636" />
+    <state width="1478" height="278" key="GridCell.Tab.1.right" timestamp="1609422752551">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1476" height="306" key="GridCell.Tab.1.right/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608578580095" />
+    <state width="1478" height="278" key="GridCell.Tab.1.right/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609422752551" />
+    <state width="1491" height="369" key="GridCell.Tab.1.right/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1609170790782" />
+    <state width="1474" height="169" key="GridCell.Tab.1.right/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609184924212" />
+    <state width="1476" height="278" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1609270482636" />
     <state x="-1476" y="353" key="MultipleFileMergeDialog" timestamp="1608555508487">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
@@ -304,10 +380,17 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1615" y="294" key="RollbackChangesDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608562159319" />
-    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2" timestamp="1608562628121">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state x="2318" y="325" key="Vcs.Push.Dialog.v2" timestamp="1609173701930">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608562628121" />
+    <state x="2318" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609173701930" />
+    <state x="93" y="93" width="1351" height="679" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1609266883104">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1609171021517" />
+    <state x="2036" y="116" width="1688" height="848" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609178090970" />
+    <state x="93" y="93" width="1351" height="679" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1609266883104" />
     <state x="-1408" y="326" width="587" height="534" key="find.popup" timestamp="1608569701284">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
@@ -317,14 +400,19 @@
     </state>
     <state x="-1409" y="381" key="git4idea.merge.GitPullDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608562229534" />
     <state x="2431" y="381" key="git4idea.merge.GitPullDialog/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609149696913" />
+    <state x="498" y="188" width="672" height="543" key="search.everywhere.popup" timestamp="1609421624956">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="498" y="188" width="672" height="543" key="search.everywhere.popup/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609421624956" />
+    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609177672369" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart</url>
-          <line>69</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/rooms.dart</url>
+          <line>33</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

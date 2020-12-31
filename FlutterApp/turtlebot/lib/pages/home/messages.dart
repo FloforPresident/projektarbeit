@@ -167,7 +167,7 @@ class _MessageState extends State<Messages> {
               ),
             );
           } else {
-            return Text('');
+            return Text('Diese IP-Adresse führt leider nicht zu einem angemeldet ROS-Laptop, bitte probiere eine andere IP-Adresse');
           }
         });
   }

@@ -172,4 +172,22 @@ class ErrorMessages {
               child: Text("Schließen"))
         ]);
   }
+
+  static void noIpAdress(BuildContext context) {
+    BasicAlertDialog.basicAlertDialog(
+        context: context,
+        title: Text("Keine IP-Adresse gesetzt",
+            style: TextStyle(color: _generalHeadlineColor)),
+        content: [
+          Text("Bitte setzen sie eine IP-Adresse, sonst können die Daten nicht eingeholt werden",
+              style: TextStyle(fontSize: _fontsize))
+        ],
+        actions: [
+          FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Schließen"))
+        ]);
+  }
 }

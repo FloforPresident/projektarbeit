@@ -7,30 +7,24 @@ class SocketInfo {
 
 
   //insert your current IP in 'hostAdress' and get controller on same IP running
-  static String hostAdress;
+  static String hostAdress = "0.0.0.0";
   static const String port = ':8765';
 
 
 
   static setHostAdress(String ipAddres) async
   {
+    SocketInfo.hostAdress = ipAddres;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("hostAdress", ipAddres);
-    SocketInfo.hostAdress = ipAddres;
   }
 
-  static initializeHostAdress(BuildContext context) async
+  static initializeHostAdressFromShared() async
   {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.getString("hostAdress") != null)
+    if(prefs.getString("hostAdress").isNotEmpty)
       {
         hostAdress = prefs.getString("hostAdress");
-
-      }
-    else
-      {
-        ErrorMessages.noWebSocketConnection(context);
-
       }
   }
 }

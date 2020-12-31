@@ -8,9 +8,11 @@ class BasicAlertDialog
         @required List<Widget> content,
         @required List<Widget> actions }) {
     showDialog(
+      barrierDismissible: false,
         context: context,
         builder: (context) {
           return AlertDialog(
+
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0))),
               title: title,
