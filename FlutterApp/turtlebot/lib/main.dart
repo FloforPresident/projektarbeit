@@ -15,6 +15,8 @@ void main()
 {
 
   runApp(MyApp());
+  //Receives current IP-Adress
+  SocketInfo.initializeHostAdressFromShared();
 }
 
 class MyApp extends StatelessWidget {
@@ -30,8 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    //Receives current IP-Adress
-    SocketInfo.initializeHostAdressFromShared();
+
 
     return GestureDetector(
       onTap: () {

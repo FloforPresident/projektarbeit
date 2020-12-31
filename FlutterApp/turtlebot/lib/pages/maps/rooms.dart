@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
 import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
@@ -81,8 +82,10 @@ class _RoomState extends State<Rooms> {
                     )
                   ],
                 );
+              }          else if(snapshot.connectionState == ConnectionState.waiting){
+                return Text("");
               } else {
-                return Text('');
+                return IncorrectIP();
               }
             }
           ),

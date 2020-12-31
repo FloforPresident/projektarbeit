@@ -4,6 +4,7 @@ import 'package:turtlebot/pages/home/active_location.dart';
 import 'package:turtlebot/pages/home/messages.dart';
 import 'package:flutter/services.dart';
 import 'package:turtlebot/frameworks/logout.dart';
+import 'package:turtlebot/services/alertDialogs/error_messages.dart';
 import 'package:turtlebot/services/alertDialogs/status_messages.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/services/socke_info.dart';
@@ -97,9 +98,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         setState(
                           () {
-                            SocketInfo.setHostAdress(widget.ipController.text);
-                            RouteGenerator.onTapToHome(context);
-                            StatusMessages.hostAdressChanged(context);
+                            if(widget.ipController.text.isNotEmpty)
+                              {
+                                SocketInfo.setHostAdress(widget.ipController.text);
+                                RouteGenerator.onTapToHome(context);
+                                StatusMessages.hostAdressChanged(context);
+                              }
+                            else
+                              {
+                                ErrorMessages.noIpAdress(context);
+                              }
+
                           },
                         );
                       },

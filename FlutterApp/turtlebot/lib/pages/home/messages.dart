@@ -8,6 +8,7 @@ import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:turtlebot/services/alertDialogs/error_messages.dart';
+import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
 
 class Messages extends StatefulWidget {
   final MessageController controller = new MessageController();
@@ -166,8 +167,10 @@ class _MessageState extends State<Messages> {
                 ],
               ),
             );
+          }          else if(snapshot.connectionState == ConnectionState.waiting){
+            return Text("");
           } else {
-            return Text('Diese IP-Adresse führt leider nicht zu einem angemeldet ROS-Laptop, bitte probiere eine andere IP-Adresse');
+            return IncorrectIP(padding: EdgeInsets.all(0));
           }
         });
   }

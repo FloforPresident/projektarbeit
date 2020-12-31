@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
@@ -74,8 +75,26 @@ class _FriendState extends State<Friends> {
                 ],
               ),
             );
-          } else {
-            return Text('');
+          }
+          else if(snapshot.connectionState == ConnectionState.waiting){
+            return Text("");
+          }
+          else {
+            return Column(
+              
+              children: [
+                Container(
+                  child: Text("Friends",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Theme.of(context)
+                              .textTheme
+                              .headline1
+                              .fontSize)),
+                ),
+                IncorrectIP(),
+              ],
+            );
           }
         });
   }

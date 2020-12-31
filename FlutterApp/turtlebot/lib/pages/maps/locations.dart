@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
+import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
@@ -118,8 +119,10 @@ class _LocationsState extends State<Locations> {
                   ],
                 ),
               );
+          }          else if(snapshot.connectionState == ConnectionState.waiting){
+            return Text("");
           } else {
-            return Text('');
+            return IncorrectIP();
           }
         }
     );
