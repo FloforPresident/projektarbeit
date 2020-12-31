@@ -6,8 +6,8 @@ services:
     build:
       context: ""
       dockerfile: Dockerfile
-#    volumes:
-#      - ./controller:/app/controller
+    volumes:
+      - ./controller:/app/controller
     links:
       - db
     depends_on:
