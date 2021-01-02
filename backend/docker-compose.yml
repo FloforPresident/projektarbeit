@@ -2,12 +2,13 @@ version: "3"
 
 services:
   backend:
+    command: tail -F anything
     container_name: 'backend'
     build:
       context: ""
       dockerfile: Dockerfile
     volumes:
-      - ./controller:/app/controller
+      - ./backend:/app/backend
     links:
       - db
     depends_on:

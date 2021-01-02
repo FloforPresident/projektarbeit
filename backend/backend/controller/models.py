@@ -227,8 +227,8 @@ class User(db.Model, SerializerMixin):
 class Message(db.Model, SerializerMixin):
     __tablename__ = 'message'
     id = db.Column(db.Integer, primary_key=True)
-    from_user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, ondelete='CASCADE')
-    to_user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, ondelete='CASCADE')
+    from_user = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    to_user = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     subject = db.Column(db.String(80), nullable=False)
     message = db.Column(db.String(255), nullable=False)
     datetime = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

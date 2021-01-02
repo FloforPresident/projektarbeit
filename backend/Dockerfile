@@ -40,11 +40,20 @@ RUN apt-get update && \
     apt-get install -y python-pip && \
     apt-get install -y python3-pip
 
+
+COPY ./backend/pip3_requirements.txt /app/
 RUN pip3 install -r /home/pip3_requirements.txt
 #    pip install -r /home/pip-requirements.txt
 
-CMD ["python3", "/home/controller/websocket.py"]
+COPY . /app
 
-#RUN echo "source /home/catkin_ws/devel/setup.bash" >> ~/.bashrc
-#RUN /bin/bash -c "source ~/.bashrc"
+RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; catkin_make'
+RUN echo "source /home/catkin_ws/devel/setup.bash" >> ~/.bashrc
+RUN /bin/bash -c "source ~/.bashrc"
+
+#RUN /bin/bash -c 'source /opt/ros/kinetic/setup.bash'
+#ENV PATH=/opt/ros/kinetic/bin:$PATH
+#RUN /bin/bash -c 'echo $PATH'
+#CMD ["roscore"]
+#CMD ["python3", "/home/controller/controller.py"]
 
