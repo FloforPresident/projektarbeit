@@ -49,6 +49,10 @@ class image_converter:
 
 
 		face_recognition_(cv_image)
+
+	def unsubscribe(self):
+    		# use the saved subscriber object to unregister the subscriber
+		self.image_sub.unregister()
 		
 
 ######     /Image Converter Class ###########################################################################################################
@@ -66,6 +70,12 @@ def callback_textdata():
 ######     Publish Message   ################################################################################################################
 
 def talker(tts):
+	### Publisher Found Person ###
+	pub_action = rospy.Publisher('chatter', String, queue_size=10)
+	datastring = '{"action": "found_person"}'
+	pub_action.publish(datastring)
+
+	### Publisher Message For Speaker ###
 	pub = rospy.Publisher('Message_for_Speaker', std_msgs.msg.String, queue_size = 2)
 	pub.publish(tts)
 
@@ -119,7 +129,7 @@ def face_recognition_(cv_image):
 				print("Person erkannt: " + recognised_name)
 
 				#Create String, which is going to be published to talker Topic for speaker
-				tts = "Hallo" + recognised_name
+				tts = "Hallo" + recognised_name #+ message
 
 				try:
 					talker(tts)
@@ -127,7 +137,7 @@ def face_recognition_(cv_image):
 					print("Fehler im Talker")
 
 				#unregister from topic, doesnt work yet
-				#image_sub.unregister()
+				unsubscribe()
 		
 		
 

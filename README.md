@@ -3,7 +3,7 @@
 ## Backend
 
 Backend starten:
-  1. Persönliche IP Adresse im .env file anpassen (`ifconfig`)
+  1. Persönliche IP Adresse im projektarbeit/backend/.env file anpassen (`ifconfig`) (wird im File-Explorer nicht angezeig)
   2. Befehl im Terminal ausführen
 
     $ make start
@@ -46,6 +46,18 @@ Die wichtigsten Docker Commands:
     $ catkin_make                   // Im catkin_ws Ordner ausführen um packages zu regisrieren
     $ rosrun package python-file    // Topic starten
     $ cd ~/projektarbeit/catkin_ws/ && rm -r build devel && catkin_make
+
+
+### Camera, Face Recognition, Stream
+
+    Turtlebot:
+    $	roslaunch raspicam_node camerav2_1280x960.launch	// Streamt Bild von Raspicam an Topic /raspicam_node/image
+
+    Host Laptop:
+    $	rosrun face_recognition face_recognition	// Startet Face Recognition Node, streamt verarbeitetes Bild an Topic /Face_Recognition_Stream 
+    $	rosrun web_video_server web_video_server  	// Streamt sämtliche Image Topics an http://localhost:8080/ - Link für /Face_Recognition_Stream ist in App eingebaut
+
+	
 
 
 ## GIT
