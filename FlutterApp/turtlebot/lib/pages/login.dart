@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
-import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/alertDialogs/error_messages.dart';
@@ -141,7 +140,7 @@ class _LoginState extends State<Login> {
                     widget.controller.getData();
                     widget.controller.loginUser(context, _name.text);
                   } else {
-                    NoDataDialog.noLoginData(context);
+                    ErrorMessages.noDataEntered(context);
                   }
                 },
               ),
@@ -212,7 +211,7 @@ class _LoginState extends State<Login> {
               if (_name.text.isNotEmpty) {
                 pictureDialog(context);
               } else {
-                NoDataDialog.noLoginData(context);
+                ErrorMessages.noDataEntered(context);
               }
             },
           ),
@@ -421,19 +420,34 @@ class LoginController {
   }
 
   void loginUser(BuildContext context, String name) {
-    WebSocketChannel channel = MyApp.con();
-    String data = '{"action": "LOGIN USER", "name": "$name"}';
-    channel.sink.add(data);
 
-    channel.stream.listen((json) async {
-      if (json != '') {
-        String jsonDataString = json.toString();
 
-        loginHelper(context, jsonDataString);
-      } else {
-        RouteGenerator.onTapToLogin(context);
-      }
-    });
+    try{
+      WebSocketChannel channel = MyApp.con();
+      String data = '{"action": "LOGIN USER", "name": "$name"}';
+      channel.sink.add(data);
+
+      channel.stream.listen( (json) async {
+        if (json != '') {
+          String jsonDataString = json.toString();
+
+          loginHelper(context, jsonDataString);
+        } else {
+          RouteGenerator.onTapToLogin(context);
+        }
+      },
+          //onError hast to remain set otherwise Exception will not be caught
+        onError: () {}
+      );
+    }
+    catch(Exception)
+    {
+      ErrorMessages.wrongIpAdress(context);
+    }
+
+
+
+
   }
 
   void loginHelper(BuildContext context, String jsonDataString) {

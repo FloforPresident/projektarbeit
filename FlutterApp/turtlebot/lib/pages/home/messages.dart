@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';

@@ -6,12 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
-import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/top_app_bar.dart';
+import 'package:turtlebot/services/alertDialogs/error_messages.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -150,7 +150,7 @@ class _RoomState extends State<Rooms> {
                 }
                 else
                 {
-                  NoDataDialog.noLoginData(context);
+                  ErrorMessages.noDataEntered(context);
                 }
               },
             ),

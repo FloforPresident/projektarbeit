@@ -190,4 +190,40 @@ class ErrorMessages {
               child: Text("Schließen"))
         ]);
   }
+
+  static void wrongIpAdress(BuildContext context) {
+    BasicAlertDialog.basicAlertDialog(
+        context: context,
+        title: Text("Keine Verbindung unter dieser IP-Adresse",
+            style: TextStyle(color: _generalHeadlineColor)),
+        content: [
+          Text("Die angegebene IP-Adresse führt zu keinem ROS-Laptop, bitte prüfe ob der Docker Container läuft, und ob du die richtige IP-Adresse angegeben hast.",
+              style: TextStyle(fontSize: _fontsize))
+        ],
+        actions: [
+          FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Schließen"))
+        ]);
+  }
+
+  static void noDataEntered(BuildContext context) {
+    BasicAlertDialog.basicAlertDialog(
+        context: context,
+        title: Text("Es wurden nicht alle Felder ausgefüllt",
+            style: TextStyle(color: _generalHeadlineColor)),
+        content: [
+          Text("Bitte fülle alle Felder, sonst würde ich abstürzen wenn ich dich weiterleite",
+              style: TextStyle(fontSize: _fontsize))
+        ],
+        actions: [
+          FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Schließen"))
+        ]);
+  }
 }
