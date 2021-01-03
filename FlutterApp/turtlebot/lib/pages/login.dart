@@ -53,7 +53,6 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -74,22 +73,25 @@ class _LoginState extends State<Login> {
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                 decoration: BoxDecoration(
-                  border: Border.symmetric(horizontal: BorderSide(color: Colors.white, width: 3.0))
-                ),
+                    border: Border.symmetric(
+                        horizontal:
+                            BorderSide(color: Colors.white, width: 3.0))),
                 child: Column(
-                  children: [Container(
-                    child: Text(
-                      "Servebot,",
-
-                      style: TextStyle(
-                        fontSize: Theme.of(context).textTheme.headline1.fontSize,
-                        color: Theme.of(context).textTheme.headline1.color,
+                  children: [
+                    Container(
+                      child: Text(
+                        "Servebot,",
+                        style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.headline1.fontSize,
+                          color: Theme.of(context).textTheme.headline1.color,
+                        ),
                       ),
                     ),
-                  ),
                     Container(
-                        child: Text("zu ihren Diensten", style: TextStyle(color: Colors.white))
-                    ),],
+                        child: Text("zu ihren Diensten",
+                            style: TextStyle(color: Colors.white))),
+                  ],
                 ),
               ),
               Container(
@@ -102,9 +104,8 @@ class _LoginState extends State<Login> {
                     style: TextStyle(),
                     controller: _name,
                     decoration: InputDecoration(
-
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide()),
+                      enabledBorder:
+                          UnderlineInputBorder(borderSide: BorderSide()),
                       labelText: "Name",
                       labelStyle: TextStyle(),
                     ),
@@ -117,9 +118,8 @@ class _LoginState extends State<Login> {
                     style: TextStyle(),
                     controller: _ip,
                     decoration: InputDecoration(
-
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide()),
+                      enabledBorder:
+                          UnderlineInputBorder(borderSide: BorderSide()),
                       labelText: "IP-Adresse",
                       labelStyle: TextStyle(),
                     ),
@@ -153,17 +153,13 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 onPressed: () {
-                  if(_ip.text.isNotEmpty)
-                    {
-                      SocketInfo.setHostAdress(_ip.text);
-                      widget.controller.getData();
-                      signupDialog(context);
-                    }
-                  else
-                    {
-                      ErrorMessages.noIpAdress(context);
-                    }
-
+                  if (_ip.text.isNotEmpty) {
+                    SocketInfo.setHostAdress(_ip.text);
+                    widget.controller.getData();
+                    signupDialog(context);
+                  } else {
+                    ErrorMessages.noIpAdress(context);
+                  }
                 },
               )
             ],
@@ -365,8 +361,6 @@ class _LoginState extends State<Login> {
 }
 
 class LoginController {
-
-
   void getData() {
     Login.locationItems = [];
     Login.roomItems = [];
@@ -403,31 +397,12 @@ class LoginController {
     List<int> imageBytes = imageFile.readAsBytesSync();
     String base64Image = base64Encode(imageBytes);
 
-    WebSocketChannel channel = MyApp.con();
-    String data =
-        '{"action": "ADD USER", "name": "$name", "location_id": $locationID, "image": "$base64Image"}';
-    channel.sink.add(data);
-
-    channel.stream.listen((json) async {
-      if (json != '') {
-        String jsonDataString = json.toString();
-
-        loginHelper(context, jsonDataString);
-      } else {
-        RouteGenerator.onTapToLogin(context);
-      }
-    });
-  }
-
-  void loginUser(BuildContext context, String name) {
-
-
-    try{
+    try {
       WebSocketChannel channel = MyApp.con();
-      String data = '{"action": "LOGIN USER", "name": "$name"}';
+      String data =
+          '{"action": "ADD USER", "name": "$name", "location_id": $locationID, "image": "$base64Image"}';
       channel.sink.add(data);
-
-      channel.stream.listen( (json) async {
+      channel.stream.listen((json) async {
         if (json != '') {
           String jsonDataString = json.toString();
 
@@ -436,18 +411,45 @@ class LoginController {
           RouteGenerator.onTapToLogin(context);
         }
       },
-          //onError hast to remain set otherwise Exception will not be caught
-        onError: () {}
-      );
+          cancelOnError: false,
+      onError: () {
+        print("hi");
+      });
     }
-    catch(Exception)
-    {
+    catch (exception) {
       ErrorMessages.wrongIpAdress(context);
     }
+  }
 
 
+  void loginUser(BuildContext context, String name) {
+    WebSocketChannel channel = MyApp.con();
+    String data = '{"action": "LOGIN USER", "name": "$name"}';
+    channel.sink.add(data);
 
+    channel.stream.listen(
+        (json) async {
+          if (json != '') {
+            String jsonDataString = json.toString();
 
+            try
+            {
+              loginHelper(context, jsonDataString);
+            }
+            catch (exception)
+          {
+            ErrorMessages.wrongUserName(context);
+          }
+
+          } else {
+            RouteGenerator.onTapToLogin(context);
+          }
+        },
+        cancelOnError: false,
+        //onError hast to remain set otherwise Exception will not be caught
+        onError: (Object e) {
+          ErrorMessages.wrongIpAdress(context);
+        });
   }
 
   void loginHelper(BuildContext context, String jsonDataString) {

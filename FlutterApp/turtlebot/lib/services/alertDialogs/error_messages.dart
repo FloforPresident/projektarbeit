@@ -226,4 +226,22 @@ class ErrorMessages {
               child: Text("Schließen"))
         ]);
   }
+
+  static void wrongUserName(BuildContext context) {
+    BasicAlertDialog.basicAlertDialog(
+        context: context,
+        title: Text("Dieser User existiert nicht",
+            style: TextStyle(color: _generalHeadlineColor)),
+        content: [
+          Text("Leider befindet sich kein User mit diesem Namen in der Datenbank.",
+              style: TextStyle(fontSize: _fontsize))
+        ],
+        actions: [
+          FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Schließen"))
+        ]);
+  }
 }

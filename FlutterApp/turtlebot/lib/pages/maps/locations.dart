@@ -119,14 +119,11 @@ class _LocationsState extends State<Locations> {
                   ],
                 ),
               );
-          }
-          else if(snapshot.connectionState == ConnectionState.none){
+          }          else if(snapshot.connectionState == ConnectionState.waiting){
+            return Text("");
+          } else {
             return IncorrectIP();
           }
-          else
-            {
-              return Text("");
-            }
         }
     );
   }
