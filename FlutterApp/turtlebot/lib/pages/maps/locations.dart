@@ -75,13 +75,12 @@ class _LocationsState extends State<Locations> {
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
                       child: CustomDropdownLabel(
                         label: Text("Room:", style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 25.0,
                         )),
                         child: CustomDropdownMenu<Room>(
-                          itemTextStyle: TextStyle(color: Colors.white, fontSize: Theme.of(context).textTheme.bodyText2.fontSize),
-                          dropdowncolor: widget.colorTheme,
-                          selectedItemTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.lightBlue) ,
+                          itemTextStyle: TextStyle(color: Colors.black, fontSize: Theme.of(context).textTheme.bodyText2.fontSize),
+                          selectedItemTextStyle: TextStyle(color: Colors.black,backgroundColor: Colors.lightBlue) ,
                           onChanged: () async {
                             final SharedPreferences prefs =
                             await SharedPreferences.getInstance();

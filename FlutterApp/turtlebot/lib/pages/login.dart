@@ -302,7 +302,7 @@ class _LoginState extends State<Login> {
                       CustomDropdownLabel(
                         label: Text("Raum:"),
                         child: CustomDropdownMenu<Room>(
-                            onChanged: () {
+                            onChanged: (value) {
                               List<Location> buffer = [];
                               for (int i = 0;
                                   i < Login.locationItems.length;
@@ -313,6 +313,7 @@ class _LoginState extends State<Login> {
                                 }
                               }
                               setState(() {
+                                roomDropController.startValueId = value;
                                 selectedLocations = [];
                                 selectedLocations.addAll(buffer);
                               });
