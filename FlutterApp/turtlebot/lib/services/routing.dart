@@ -26,11 +26,13 @@ class RouteGenerator {
   }
 
   static onTapToHome(BuildContext context, {User sessionUser}) {
+    Navigator.of(context).pop(true);
     Navigator.pushNamed(
         context, RouteGenerator.RouteHome, arguments: sessionUser);
   }
 
   static onTapToLogin(BuildContext context) {
+    Navigator.of(context).pop(true);
     Navigator.pushNamed(context, RouteGenerator.RouteLogin);
   }
 }

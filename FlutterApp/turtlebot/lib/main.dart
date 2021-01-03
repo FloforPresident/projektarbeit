@@ -6,6 +6,7 @@ import 'package:turtlebot/pages/home/home.dart';
 import 'package:turtlebot/pages/controls.dart';
 import 'package:turtlebot/pages/maps/maps.dart';
 import 'package:turtlebot/pages/robos.dart';
+import 'package:turtlebot/services/alertDialogs/error_messages.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:turtlebot/services/socke_info.dart';
@@ -54,6 +55,8 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+
 }
 
 
@@ -125,14 +128,11 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
 
-
-  Widget choosePageAndColor(int Index)
-  {
+  Widget choosePageAndColor(int Index) {
     List<Widget> pages = [HomeScreen(), Maps(), Robos(), Friends(), Controls()];
 
-    switch(Index)
-    {
-      //HomeScreen
+    switch (Index) {
+    //HomeScreen
       case 0:
         return PageFrame(
           colorTheme: HomeScreen.colorTheme,
@@ -158,67 +158,71 @@ class _HomeState extends State<Home> {
           colorTheme: Controls.colorTheme,
           page: pages[4],
         );
-
     }
   }
 
   //If you change order of BottomNavigationBar you also have to change the order in choosePageAndColor Function
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return WillPopScope(
+      onWillPop: () {
+        return ErrorMessages.exitApp(context);
+      },
+      child: Scaffold(
+          body: Container(
 
-          child: MyApp.id == null
-              ? FutureBuilder(
-                  future: autoLogin(),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<String> snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                        return new Text('');
-                      default:
-                        if (snapshot.hasError)
-                          return new Text('Error: ${snapshot.error}');
-                        else
-                          return choosePageAndColor(_selectedIndex);
-                    }
-                  })
-              : choosePageAndColor(_selectedIndex),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.mail),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.location_on),
-              label: 'Maps',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.mood),
-              label: 'Robos',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.perm_contact_calendar),
-              label: 'Friends',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.videogame_asset),
-              label: 'Controls',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.grey[900],
-          iconSize: 30,
-          onTap: (int index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-        ));
+            child: MyApp.id == null
+                ? FutureBuilder(
+                future: autoLogin(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return new Text('');
+                    default:
+                      if (snapshot.hasError)
+                        return new Text('Error: ${snapshot.error}');
+                      else
+                        return choosePageAndColor(_selectedIndex);
+                  }
+                })
+                : choosePageAndColor(_selectedIndex),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.mail),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.location_on),
+                label: 'Maps',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.mood),
+                label: 'Robos',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.perm_contact_calendar),
+                label: 'Friends',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.videogame_asset),
+                label: 'Controls',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Colors.grey[900],
+            iconSize: 30,
+            onTap: (int index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+          )),
+    );
   }
 }
