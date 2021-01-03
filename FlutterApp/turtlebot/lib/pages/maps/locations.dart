@@ -61,7 +61,7 @@ class _LocationsState extends State<Locations> {
           if (snapshot.hasData) {
             widget.controller.setData(snapshot.data);
 
-            if (widget.dropDownRoomId != null) {
+            if (widget.dropDownRoomId != null && Locations.roomItems.isNotEmpty) {
               widget.controller.updateLocations(
                   context, Locations.roomItems[widget.dropDownRoomId].id);
               dropController
