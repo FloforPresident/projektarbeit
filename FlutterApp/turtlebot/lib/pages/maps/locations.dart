@@ -61,7 +61,7 @@ class _LocationsState extends State<Locations> {
           if (snapshot.hasData) {
             widget.controller.setData(snapshot.data);
 
-            if (widget.dropDownRoomId != null) {
+            if (widget.dropDownRoomId != null && Locations.roomItems.isNotEmpty) {
               widget.controller.updateLocations(
                   context, Locations.roomItems[widget.dropDownRoomId].id);
               dropController
@@ -75,14 +75,13 @@ class _LocationsState extends State<Locations> {
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
                       child: CustomDropdownLabel(
                         label: Text("Room:", style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 25.0,
                         )),
                         child: CustomDropdownMenu<Room>(
-                          itemTextStyle: TextStyle(color: Colors.white, fontSize: Theme.of(context).textTheme.bodyText2.fontSize),
-                          dropdowncolor: widget.colorTheme,
-                          selectedItemTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.lightBlue) ,
-                          onChanged: () async {
+                          itemTextStyle: TextStyle(color: Colors.black, fontSize: Theme.of(context).textTheme.bodyText2.fontSize),
+                          selectedItemTextStyle: TextStyle(color: Colors.black,backgroundColor: Colors.lightBlue) ,
+                          onChanged: (value) async {
                             final SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                             prefs.setInt(
@@ -305,37 +304,32 @@ class LocationController {
         elevation: 2,
         child: ListTile(
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Expanded(
-                flex: 4,
-                child: Row(
-                  children: <Widget>[
-                    Text(item.name),
-                  ],
-                ),
+              Row(
+                children: <Widget>[
+                  Text(item.name),
+                ],
               ),
-              Expanded(
-                flex: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        setActiveLocationDialog(context, item);
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () async {
-                        bool delete = await OnDelete.onDelete(context);
-                        if (delete) {
-                          removeItem(item, index);
-                        }
-                      },
-                    )
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: () {
+                      setActiveLocationDialog(context, item);
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () async {
+                      bool delete = await OnDelete.onDelete(context);
+                      if (delete) {
+                        removeItem(item, index);
+                      }
+                    },
+                  )
+                ],
               ),
             ],
           ),

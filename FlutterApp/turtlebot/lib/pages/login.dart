@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
-import 'package:turtlebot/frameworks/no_data_entered.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/alertDialogs/error_messages.dart';
@@ -19,6 +18,12 @@ class Login extends StatefulWidget {
   static List<Location> locationItems = [];
   static Color colorTheme = Colors.blueGrey;
   Color secondaryTheme = Colors.white;
+  ControllerCustomDropdown roomDropController =
+  ControllerCustomDropdown<Room>();
+  ControllerCustomDropdown locationDropController =
+  ControllerCustomDropdown<Location>();
+  GlobalKey<StateCustomDropdownMenu> locationWidgetKey = GlobalKey<StateCustomDropdownMenu>();
+  int currentvalueRoom = null;
 
   Login({Key key}) : super(key: key);
 
@@ -34,10 +39,7 @@ class _LoginState extends State<Login> {
 
   TextEditingController _name = new TextEditingController();
   TextEditingController _ip = new TextEditingController();
-  ControllerCustomDropdown roomDropController =
-      ControllerCustomDropdown<Room>();
-  ControllerCustomDropdown locationDropController =
-      ControllerCustomDropdown<Location>();
+
 
   // Camera stuff
   File imageFile;
@@ -54,7 +56,6 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -66,108 +67,111 @@ class _LoginState extends State<Login> {
           currentFocus.unfocus();
         }
       },
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                decoration: BoxDecoration(
-                  border: Border.symmetric(horizontal: BorderSide(color: Colors.white, width: 3.0))
-                ),
-                child: Column(
-                  children: [Container(
-                    child: Text(
-                      "Servebot,",
-
-                      style: TextStyle(
-                        fontSize: Theme.of(context).textTheme.headline1.fontSize,
-                        color: Theme.of(context).textTheme.headline1.color,
+      child: WillPopScope(
+        onWillPop: ()
+        {
+          return ErrorMessages.exitApp(context);
+        },
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  decoration: BoxDecoration(
+                      border: Border.symmetric(
+                          horizontal:
+                              BorderSide(color: Colors.white, width: 3.0))),
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Text(
+                          "Servebot,",
+                          style: TextStyle(
+                            fontSize:
+                                Theme.of(context).textTheme.headline1.fontSize,
+                            color: Theme.of(context).textTheme.headline1.color,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                    Container(
-                        child: Text("zu ihren Diensten", style: TextStyle(color: Colors.white))
-                    ),],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                child: Icon(Icons.adb, color: Colors.white, size: 60),
-              ),
-              Container(
-                  padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
-                  child: TextField(
-                    style: TextStyle(),
-                    controller: _name,
-                    decoration: InputDecoration(
-
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide()),
-                      labelText: "Name",
-                      labelStyle: TextStyle(),
-                    ),
-                    maxLength: 20,
-                    maxLines: null,
-                  )),
-              Container(
-                  padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
-                  child: TextField(
-                    style: TextStyle(),
-                    controller: _ip,
-                    decoration: InputDecoration(
-
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide()),
-                      labelText: "IP-Adresse",
-                      labelStyle: TextStyle(),
-                    ),
-                    maxLength: 15,
-                    maxLines: null,
-                  )),
-              RaisedButton(
-                color: Colors.blueGrey,
-                child: Text(
-                  "Anmelden",
-                  style: TextStyle(
-                    color: widget.secondaryTheme,
+                      Container(
+                          child: Text("zu ihren Diensten",
+                              style: TextStyle(color: Colors.white))),
+                    ],
                   ),
                 ),
-                onPressed: () async {
-                  if (_name.text.isNotEmpty && _ip.text.isNotEmpty) {
-                    SocketInfo.setHostAdress(_ip.text);
-                    widget.controller.getData();
-                    widget.controller.loginUser(context, _name.text);
-                  } else {
-                    NoDataDialog.noLoginData(context);
-                  }
-                },
-              ),
-              RaisedButton(
-                color: Colors.grey,
-                child: Text(
-                  "Registrieren",
-                  style: TextStyle(
-                    color: widget.secondaryTheme,
-                  ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                  child: Icon(Icons.adb, color: Colors.white, size: 60),
                 ),
-                onPressed: () {
-                  if(_ip.text.isNotEmpty)
-                    {
+                Container(
+                    padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
+                    child: TextField(
+                      style: TextStyle(),
+                      controller: _name,
+                      decoration: InputDecoration(
+                        enabledBorder:
+                            UnderlineInputBorder(borderSide: BorderSide()),
+                        labelText: "Name",
+                        labelStyle: TextStyle(),
+                      ),
+                      maxLength: 20,
+                      maxLines: null,
+                    )),
+                Container(
+                    padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
+                    child: TextField(
+                      style: TextStyle(),
+                      controller: _ip,
+                      decoration: InputDecoration(
+                        enabledBorder:
+                            UnderlineInputBorder(borderSide: BorderSide()),
+                        labelText: "IP-Adresse",
+                        labelStyle: TextStyle(),
+                      ),
+                      maxLength: 15,
+                      maxLines: null,
+                    )),
+                RaisedButton(
+                  color: Colors.blueGrey,
+                  child: Text(
+                    "Anmelden",
+                    style: TextStyle(
+                      color: widget.secondaryTheme,
+                    ),
+                  ),
+                  onPressed: () async {
+                    if (_name.text.isNotEmpty && _ip.text.isNotEmpty) {
+                      SocketInfo.setHostAdress(_ip.text);
+                      widget.controller.getData();
+                      widget.controller.loginUser(context, _name.text);
+                    } else {
+                      ErrorMessages.noDataEntered(context);
+                    }
+                  },
+                ),
+                RaisedButton(
+                  color: Colors.grey,
+                  child: Text(
+                    "Registrieren",
+                    style: TextStyle(
+                      color: widget.secondaryTheme,
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_ip.text.isNotEmpty) {
                       SocketInfo.setHostAdress(_ip.text);
                       widget.controller.getData();
                       signupDialog(context);
-                    }
-                  else
-                    {
+                    } else {
                       ErrorMessages.noIpAdress(context);
                     }
-
-                },
-              )
-            ],
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -212,7 +216,7 @@ class _LoginState extends State<Login> {
               if (_name.text.isNotEmpty) {
                 pictureDialog(context);
               } else {
-                NoDataDialog.noLoginData(context);
+                ErrorMessages.noDataEntered(context);
               }
             },
           ),
@@ -307,28 +311,30 @@ class _LoginState extends State<Login> {
                       CustomDropdownLabel(
                         label: Text("Raum:"),
                         child: CustomDropdownMenu<Room>(
-                            onChanged: () {
+                            onChanged: (value) {
                               List<Location> buffer = [];
                               for (int i = 0;
                                   i < Login.locationItems.length;
                                   i++) {
                                 if (Login.locationItems[i].roomId ==
-                                    roomDropController.getValue().id) {
+                                    widget.roomDropController.getValue().id) {
                                   buffer.add(Login.locationItems[i]);
                                 }
                               }
                               setState(() {
                                 selectedLocations = [];
                                 selectedLocations.addAll(buffer);
-                              });
+                                widget.currentvalueRoom = value;
+                                });
                             },
-                            controller: roomDropController,
+                            startValueId: widget.currentvalueRoom,
+                            controller: widget.roomDropController,
                             data: Login.roomItems),
                       ),
                       CustomDropdownLabel(
                         label: Text("Platz"),
                         child: CustomDropdownMenu<Location>(
-                            controller: locationDropController,
+                            controller: widget.locationDropController,
                             data: selectedLocations),
                       ),
                     ],
@@ -349,9 +355,9 @@ class _LoginState extends State<Login> {
                       style: TextStyle(color: widget.secondaryTheme)),
                   color: Colors.blueGrey,
                   onPressed: () async {
-                    if (locationDropController.getValue() != null) {
+                    if (widget.locationDropController.getValue() != null) {
                       widget.controller.addUser(context, _name.text,
-                          locationDropController.getValue().id, imageFile);
+                          widget.locationDropController.getValue().id, imageFile);
                     } else {
                       widget.controller
                           .addUser(context, _name.text, null, imageFile);
@@ -366,8 +372,6 @@ class _LoginState extends State<Login> {
 }
 
 class LoginController {
-
-
   void getData() {
     Login.locationItems = [];
     Login.roomItems = [];
@@ -404,36 +408,59 @@ class LoginController {
     List<int> imageBytes = imageFile.readAsBytesSync();
     String base64Image = base64Encode(imageBytes);
 
-    WebSocketChannel channel = MyApp.con();
-    String data =
-        '{"action": "ADD USER", "name": "$name", "location_id": $locationID, "image": "$base64Image"}';
-    channel.sink.add(data);
+    try {
+      WebSocketChannel channel = MyApp.con();
+      String data =
+          '{"action": "ADD USER", "name": "$name", "location_id": $locationID, "image": "$base64Image"}';
+      channel.sink.add(data);
+      channel.stream.listen((json) async {
+        if (json != '') {
+          String jsonDataString = json.toString();
 
-    channel.stream.listen((json) async {
-      if (json != '') {
-        String jsonDataString = json.toString();
-
-        loginHelper(context, jsonDataString);
-      } else {
-        RouteGenerator.onTapToLogin(context);
-      }
-    });
+          loginHelper(context, jsonDataString);
+        } else {
+          RouteGenerator.onTapToLogin(context);
+        }
+      },
+          cancelOnError: false,
+      onError: (Object e) {
+        ErrorMessages.wrongIpAdress(context);
+      });
+    }
+    catch (exception) {
+      ErrorMessages.wrongIpAdress(context);
+    }
   }
+
 
   void loginUser(BuildContext context, String name) {
     WebSocketChannel channel = MyApp.con();
     String data = '{"action": "LOGIN USER", "name": "$name"}';
     channel.sink.add(data);
 
-    channel.stream.listen((json) async {
-      if (json != '') {
-        String jsonDataString = json.toString();
+    channel.stream.listen(
+        (json) async {
+          if (json != '') {
+            String jsonDataString = json.toString();
 
-        loginHelper(context, jsonDataString);
-      } else {
-        RouteGenerator.onTapToLogin(context);
-      }
-    });
+            try
+            {
+              loginHelper(context, jsonDataString);
+            }
+            catch (exception)
+          {
+            ErrorMessages.wrongUserName(context);
+          }
+
+          } else {
+            RouteGenerator.onTapToLogin(context);
+          }
+        },
+        cancelOnError: false,
+        //onError hast to remain set otherwise Exception will not be caught
+        onError: (Object e) {
+          ErrorMessages.wrongIpAdress(context);
+        });
   }
 
   void loginHelper(BuildContext context, String jsonDataString) {

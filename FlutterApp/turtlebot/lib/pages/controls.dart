@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:turtlebot/main.dart';
+import 'package:turtlebot/services/socke_info.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:flutter_mjpeg/flutter_mjpeg.dart';
 
@@ -14,7 +15,7 @@ class Controls extends StatefulWidget {
   final Color controlPadBackground = Color(0xffe7ebda);
   final Color borderConrolPadBackground = Colors.green;
   final double borderFloatingWidth = 3.0;
-  final double iconSize = 60.0;
+  final double iconSize = 55.0;
 
   Controls({Key key}) : super(key: key);
 
@@ -37,18 +38,22 @@ class _ControlsState extends State<Controls> {
                       borderRadius: BorderRadius.circular(6),
                       color: Colors.white,
                       border: Border.all(color: Colors.black)),
-                  child: Center(child: Text("Video")
-
-                      // Mjpeg(
-                      //   isLive: true,
-                      //   stream:"http://192.168.2.105:8080/stream?topic=/Face_Recognition_Stream",
-                      // )
-                      )),
+                  child:
+                      Mjpeg(
+                        isLive: true,
+                        stream:"http://${SocketInfo.hostAdress}${SocketInfo.port}/stream?topic=/Face_Recognition_Stream",
+                        error: (context,value)
+                        {
+                          return Center(child: Text("Leider kein Video-Stream gefunden"));
+                        },
+                      )
+                      ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -92,7 +97,7 @@ class _ControlsState extends State<Controls> {
                                       color: widget.borderActionButtonColor,
                                       width: widget.borderFloatingWidth,
                                     )),
-                                margin: EdgeInsets.fromLTRB(0, 0, 70, 0),
+                                margin: EdgeInsets.fromLTRB(0, 0, 60, 0),
                                 child: SizedBox(
                                   height: widget.iconSize,
                                   width: widget.iconSize,

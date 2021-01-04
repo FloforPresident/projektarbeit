@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 
+typedef void OnChangedFunction(int value);
+
+
 class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
+
   final double fontSize;
   final ControllerCustomDropdown<T> controller;
   final double dropButtonSize;
@@ -9,14 +13,16 @@ class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
   final Color focusColorItem;
   final TextStyle  selectedItemTextStyle;
   final Color dropdowncolor;
+  final Key key;
 
   CustomDropdownMenu(
-      {int startValueId,
+      {this.key,
+        int startValueId,
       @required this.controller,
       this.fontSize = 18,
         this.dropButtonSize = 130,
       List<T> data,
-      Function onChanged,
+      OnChangedFunction onChanged,
       this.itemTextStyle = const TextStyle(color: Colors.black),
       this.focusColorItem,
       this.selectedItemTextStyle,
@@ -26,11 +32,11 @@ class CustomDropdownMenu<T extends DatabaseObject> extends StatefulWidget {
   }
 
   State<StatefulWidget> createState() {
-    return _StateCustomDropdownMenu();
+    return StateCustomDropdownMenu();
   }
 }
 
-class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
+class StateCustomDropdownMenu extends State<CustomDropdownMenu> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.dropButtonSize,
@@ -49,12 +55,19 @@ class _StateCustomDropdownMenu extends State<CustomDropdownMenu> {
               widget.controller.resetState(value);
               if(widget.controller.onChanged != null)
                 {
-                  widget.controller.onChanged();
+                  widget.controller.onChanged(value);
                 }
 
             });
           }),
     );
+  }
+
+  rebuildState()
+  {
+    setState(() {
+
+    });
   }
 }
 
@@ -73,7 +86,7 @@ class ControllerCustomDropdown<T extends DatabaseObject> {
   }
 
   List<DatabaseObject> data;
-  Function onChanged;
+  OnChangedFunction onChanged;
 
   initialize(int startValueId, Function onChanged, List<DatabaseObject> data, CustomDropdownMenu widget) {
     this.startValueId = startValueId;

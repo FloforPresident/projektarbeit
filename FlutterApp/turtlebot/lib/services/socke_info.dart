@@ -22,7 +22,7 @@ class SocketInfo {
   static initializeHostAdressFromShared() async
   {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.getString("hostAdress").isNotEmpty)
+    if(prefs.getString("hostAdress") != null)
       {
         hostAdress = prefs.getString("hostAdress");
       }

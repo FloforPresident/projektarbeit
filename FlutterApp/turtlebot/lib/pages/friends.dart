@@ -84,13 +84,16 @@ class _FriendState extends State<Friends> {
               
               children: [
                 Container(
-                  child: Text("Friends",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Theme.of(context)
-                              .textTheme
-                              .headline1
-                              .fontSize)),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text("Friends",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .headline1
+                                .fontSize)),
+                  ),
                 ),
                 IncorrectIP(),
               ],
@@ -289,7 +292,7 @@ class FriendController {
                     CustomDropdownLabel(
                       label: Text("Raum"),
                       child: CustomDropdownMenu<Room>(
-                          onChanged: () {
+                          onChanged: (value) {
                             List<Location> buffer = [];
                             for (int i = 0;
                                 i < Friends.locationItems.length;
