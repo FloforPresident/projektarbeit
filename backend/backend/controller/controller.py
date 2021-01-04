@@ -31,12 +31,12 @@ from std_msgs.msg import String
 
 # user imports
 from models import *
-# from face_encoding.face_encoding import createFaceEncoding
+from face_encoding.face_encoding import createFaceEncoding
 import teleop_keyboard as teleop
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@db:5432/turtlebot_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@192.168.178.58:5432/turtlebot_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -80,8 +80,6 @@ def action_find_person(name, x, y):
     # location = db.getLocation(locationID)
     # x = location[3]
     # y = location[4]
-    print(x)
-    print(y)
     datastring = '{"action": "find_person", "name": "' + name + '", "x": "' + x + '", "y": "' + y + '"}'
     dataArray = json.loads(datastring)
 
@@ -103,6 +101,9 @@ teleopInstance = teleop.Teleop()
 def action_teleop_start():
     teleopInstance.startTeleop()
     print("Starting teleop....")
+
+def action_roscore_start():
+    subprocess.run(["rosrun", "roscore"])
 
 
 def teleop_talker(key):
@@ -185,7 +186,7 @@ def start_websocket():
         # MESSAGE
         elif action == 'SEND MESSAGE':
             response = send_message(data['from_user'], data['to_user'], data['subject'], data['message'])
-            # action_find_person(response['user']['name'], response['location']['x'], response['location']['y'], data['message'])
+            action_find_person(response['user']['name'], response['location']['x'], response['location']['y'], data['message'])
             action_face_recognition(response['user'], data['message'])
 
         # CONTROL
@@ -217,7 +218,7 @@ def start_websocket():
 
         await websocket.send(response)
 
-    start_server = websockets.serve(ws_recieve, "0.0.0.0", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
+    start_server = websockets.serve(ws_recieve, "", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
 
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
@@ -250,6 +251,10 @@ def main():
         # register KeyboardInterrupt handler
         signal.signal(signal.SIGINT, cleanup_on_exit)
 
+        p_roscore = multiprocessing.Process(target=action_roscore_start)
+        p_roscore.start()
+        activeProcesses.add(p_roscore)
+
         # -- launch node process --
         p_launchNode = multiprocessing.Process(target=launch_node)
         p_launchNode.start()
@@ -276,3 +281,5 @@ if __name__ == '__main__':
     print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
     print('<<<<<<<<<<<WELCOME<<<<<<<<<<<<<')
     print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
+
+    add_user(None , "Basti", None, None)

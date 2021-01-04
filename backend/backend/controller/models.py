@@ -1,6 +1,6 @@
 from datetime import datetime
 import base64
-from websocket import *
+from controller import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 
@@ -25,8 +25,9 @@ def remove_user_binary(user):
 # USER
 
 def add_user(location_id, name, image, embedding):
-    image_bytes = base64.b64decode(image)
-    user = User(location_id=location_id, name=name, image=image_bytes, embedding=embedding)
+    #image_bytes = base64.b64decode(image)
+    #user = User(location_id=location_id, name=name, image=image_bytes, embedding=embedding)
+    user = User(location_id=location_id, name=name, image=image, embedding=embedding)
     db.session.add(user)
     db.session.commit()
 
