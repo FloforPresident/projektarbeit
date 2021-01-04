@@ -162,7 +162,7 @@ def send_message(from_user, to_user, subject, message):
     room = Room.query.filter_by(id=location.room_id).first()
     robo = Room.query.filter_by(id=room.robo_id).first()
 
-    data = {"user": [user], "location": [location], "room": [room], "robo": [robo]}
+    data = {"user": [user.name, user.embedding], "x":location.x, "y":location.y}
     return data
 
 
