@@ -127,9 +127,10 @@ def start_websocket():
     async def ws_recieve(websocket, path):
         connected.add(websocket)
         print(websocket)
+
         msg = await websocket.recv()
         data = json.loads(msg)
-        print(msg)
+        
         response = ''
 
         action = data['action']
@@ -191,14 +192,19 @@ def start_websocket():
 
         # CONTROL
         elif action == "UP":
+            teleop_talker('w')
             response = action
         elif action == "DOWN":
+            teleop_talker('x')
             response = action
         elif action == "RIGHT":
+            teleop_talker('d')
             response = action
         elif action == "LEFT":
+            teleop_talker('a')
             response = action
         elif action == "STOP":
+            teleop_talker('s')
             response = action
 
         response = json.dumps(response)
@@ -218,7 +224,7 @@ def start_websocket():
 
         await websocket.send(response)
 
-    start_server = websockets.serve(ws_recieve, "", 8765, close_timeout=1000) # IP has to be IP of ROS-Computer
+    start_server = websockets.serve(ws_recieve, "", 8765, max_size=1000000000000000, close_timeout=1000) # IP has to be IP of ROS-Computer
 
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
@@ -282,4 +288,4 @@ if __name__ == '__main__':
     print('<<<<<<<<<<<WELCOME<<<<<<<<<<<<<')
     print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
 
-    add_user(None , "Basti", None, None)
+    # add_user(None , "Basti", None, None)
