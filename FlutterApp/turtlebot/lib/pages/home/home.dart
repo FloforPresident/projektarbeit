@@ -84,7 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: TextField(
+                          textAlignVertical: TextAlignVertical(y: -0.5),
                           decoration: InputDecoration(
+                            hintText: SocketInfo.hostAdress,
                             contentPadding: EdgeInsets.all(-5)
                           ),
                           controller: widget.ipController,

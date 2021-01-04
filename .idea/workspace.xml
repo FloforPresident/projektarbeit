@@ -26,17 +26,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- VideoStream now connected with HostAdress + port so as long as the stream is on the ros laptop the Stream will be available">
+    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- deleted onchanged StatusMessage as own class is now status_messages.dart">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/frameworks/on_delete.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/friends.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/friends.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/locations.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/locations.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/rooms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/rooms.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/alertDialogs/error_messages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/alertDialogs/error_messages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/alertDialogs/status_messages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/alertDialogs/status_messages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/home.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609736744188</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="- deleted onchanged StatusMessage as own class is now status_messages.dart">
+      <created>1609737728219</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1609737728219</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,7 +353,8 @@
     <MESSAGE value="- fixed bug where only one dropdownMenu input was shown&#10;&#10;- fixed bug for overflow with locations in the active locations.dart&#10;&#10;- used typedef to define function that is accepted by on changed in custom_dropdown_menu.dart" />
     <MESSAGE value="- VideoStream now connected with HostAdress + port so as long as the stream is on the ros laptop the port will be available" />
     <MESSAGE value="- VideoStream now connected with HostAdress + port so as long as the stream is on the ros laptop the Stream will be available" />
-    <option name="LAST_COMMIT_MESSAGE" value="- VideoStream now connected with HostAdress + port so as long as the stream is on the ros laptop the Stream will be available" />
+    <MESSAGE value="- deleted onchanged StatusMessage as own class is now status_messages.dart" />
+    <option name="LAST_COMMIT_MESSAGE" value="- deleted onchanged StatusMessage as own class is now status_messages.dart" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1296" y="224" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609737630588">
@@ -480,10 +480,10 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1615" y="294" key="RollbackChangesDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608562159319" />
-    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2" timestamp="1609737234996">
+    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2" timestamp="1609737730839">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1609737234996" />
+    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1609737730839" />
     <state x="318" y="260" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609433489245" />
     <state x="2318" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609173701930" />
     <state x="100" y="100" width="1336" height="664" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1609605923874">
