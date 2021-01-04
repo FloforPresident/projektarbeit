@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
-import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/alertDialogs/error_messages.dart';
+import 'package:turtlebot/services/alertDialogs/status_messages.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Robos extends StatefulWidget {
@@ -232,7 +232,7 @@ class RoboController {
                     IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () async {
-                        bool delete = await OnDelete.onDelete(context);
+                        bool delete = await StatusMessages.onDelete(context);
                         if (delete != null && delete) {
                           removeItem(item, index);
                         }

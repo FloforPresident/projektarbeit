@@ -7,6 +7,7 @@ import 'package:turtlebot/pages/controls.dart';
 import 'package:turtlebot/pages/maps/maps.dart';
 import 'package:turtlebot/pages/robos.dart';
 import 'package:turtlebot/services/alertDialogs/error_messages.dart';
+import 'package:turtlebot/services/alertDialogs/status_messages.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:turtlebot/services/socke_info.dart';
@@ -165,7 +166,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        return ErrorMessages.exitApp(context);
+        return StatusMessages.exitApp(context);
       },
       child: Scaffold(
           body: Container(

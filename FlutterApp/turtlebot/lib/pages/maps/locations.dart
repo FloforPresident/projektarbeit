@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
-import 'package:turtlebot/frameworks/on_delete.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
+import 'package:turtlebot/services/alertDialogs/status_messages.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Locations extends StatefulWidget {
@@ -323,7 +323,7 @@ class LocationController {
                   IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () async {
-                      bool delete = await OnDelete.onDelete(context);
+                      bool delete = await StatusMessages.onDelete(context);
                       if (delete) {
                         removeItem(item, index);
                       }

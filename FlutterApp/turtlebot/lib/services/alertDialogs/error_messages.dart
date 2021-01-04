@@ -245,27 +245,5 @@ class ErrorMessages {
         ]);
   }
 
-  static Future<bool> exitApp(BuildContext context) {
-   return BasicAlertDialog.basicAlertDialogReturnFutureBool(
-        context: context,
-        title: Text("App verlassen",
-            style: TextStyle(color: _generalHeadlineColor)),
-        content: [
-          Text("Bist du sicher das du diese App verlassen willst?",
-              style: TextStyle(fontSize: _fontsize))
-        ],
-        actions: [
-          FlatButton(
-              onPressed: () {
-                return Navigator.of(context).pop(false);
 
-              },
-              child: Text("Nein")),
-          FlatButton(
-              onPressed: () {
-                return Navigator.of(context).pop(true);
-              },
-              child: Text("Ja"))
-        ]);
-  }
 }

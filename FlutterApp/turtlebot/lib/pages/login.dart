@@ -7,6 +7,7 @@ import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/alertDialogs/error_messages.dart';
+import 'package:turtlebot/services/alertDialogs/status_messages.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:turtlebot/services/socke_info.dart';
@@ -70,7 +71,7 @@ class _LoginState extends State<Login> {
       child: WillPopScope(
         onWillPop: ()
         {
-          return ErrorMessages.exitApp(context);
+          return StatusMessages.exitApp(context);
         },
         child: Scaffold(
           backgroundColor: Colors.transparent,
