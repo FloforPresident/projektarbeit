@@ -15,7 +15,7 @@ class Controls extends StatefulWidget {
   final Color controlPadBackground = Color(0xffe7ebda);
   final Color borderConrolPadBackground = Colors.green;
   final double borderFloatingWidth = 3.0;
-  final double iconSize = 60.0;
+  final double iconSize = 55.0;
 
   Controls({Key key}) : super(key: key);
 
@@ -50,9 +50,10 @@ class _ControlsState extends State<Controls> {
                       ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -96,7 +97,7 @@ class _ControlsState extends State<Controls> {
                                       color: widget.borderActionButtonColor,
                                       width: widget.borderFloatingWidth,
                                     )),
-                                margin: EdgeInsets.fromLTRB(0, 0, 70, 0),
+                                margin: EdgeInsets.fromLTRB(0, 0, 60, 0),
                                 child: SizedBox(
                                   height: widget.iconSize,
                                   width: widget.iconSize,

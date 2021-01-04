@@ -26,7 +26,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- fixed bug where only one dropdownMenu input was shown&#10;&#10;- fixed bug for overflow with locations in the active locations.dart&#10;&#10;- used typedef to define function that is accepted by on changed in custom_dropdown_menu.dart">
+    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- VideoStream now connected with HostAdress + port so as long as the stream is on the ros laptop the Stream will be available">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/controls.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/controls.dart" afterDir="false" />
     </list>
@@ -276,7 +276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609736180930</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="- VideoStream now connected with HostAdress + port so as long as the stream is on the ros laptop the Stream will be available">
+      <created>1609736744188</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1609736744188</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,7 +344,9 @@
     <MESSAGE value="- Bug fixed for Change Location in home, color changed to black" />
     <MESSAGE value="- changed Routes so every route will be killed after it will be rerouted&#10;&#10;- BackButton now exits the App because it does not make any other sense&#10;&#10;- started debugging the glitch in register where only one dropdownmenu has a value" />
     <MESSAGE value="- fixed bug where only one dropdownMenu input was shown&#10;&#10;- fixed bug for overflow with locations in the active locations.dart&#10;&#10;- used typedef to define function that is accepted by on changed in custom_dropdown_menu.dart" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fixed bug where only one dropdownMenu input was shown&#10;&#10;- fixed bug for overflow with locations in the active locations.dart&#10;&#10;- used typedef to define function that is accepted by on changed in custom_dropdown_menu.dart" />
+    <MESSAGE value="- VideoStream now connected with HostAdress + port so as long as the stream is on the ros laptop the port will be available" />
+    <MESSAGE value="- VideoStream now connected with HostAdress + port so as long as the stream is on the ros laptop the Stream will be available" />
+    <option name="LAST_COMMIT_MESSAGE" value="- VideoStream now connected with HostAdress + port so as long as the stream is on the ros laptop the Stream will be available" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1296" y="224" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609609165953">
@@ -463,10 +472,10 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1615" y="294" key="RollbackChangesDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1608562159319" />
-    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2" timestamp="1609736186279">
+    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2" timestamp="1609736748444">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1609736186279" />
+    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1609736748444" />
     <state x="318" y="260" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609433489245" />
     <state x="2318" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609173701930" />
     <state x="100" y="100" width="1336" height="664" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1609605923874">
