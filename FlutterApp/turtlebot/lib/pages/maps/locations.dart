@@ -81,7 +81,7 @@ class _LocationsState extends State<Locations> {
                         child: CustomDropdownMenu<Room>(
                           itemTextStyle: TextStyle(color: Colors.black, fontSize: Theme.of(context).textTheme.bodyText2.fontSize),
                           selectedItemTextStyle: TextStyle(color: Colors.black,backgroundColor: Colors.lightBlue) ,
-                          onChanged: () async {
+                          onChanged: (value) async {
                             final SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                             prefs.setInt(
@@ -304,37 +304,32 @@ class LocationController {
         elevation: 2,
         child: ListTile(
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Expanded(
-                flex: 4,
-                child: Row(
-                  children: <Widget>[
-                    Text(item.name),
-                  ],
-                ),
+              Row(
+                children: <Widget>[
+                  Text(item.name),
+                ],
               ),
-              Expanded(
-                flex: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        setActiveLocationDialog(context, item);
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () async {
-                        bool delete = await OnDelete.onDelete(context);
-                        if (delete) {
-                          removeItem(item, index);
-                        }
-                      },
-                    )
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: () {
+                      setActiveLocationDialog(context, item);
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () async {
+                      bool delete = await OnDelete.onDelete(context);
+                      if (delete) {
+                        removeItem(item, index);
+                      }
+                    },
+                  )
+                ],
               ),
             ],
           ),

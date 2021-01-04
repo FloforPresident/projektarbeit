@@ -23,6 +23,7 @@ class Login extends StatefulWidget {
   ControllerCustomDropdown locationDropController =
   ControllerCustomDropdown<Location>();
   GlobalKey<StateCustomDropdownMenu> locationWidgetKey = GlobalKey<StateCustomDropdownMenu>();
+  int currentvalueRoom = null;
 
   Login({Key key}) : super(key: key);
 
@@ -320,10 +321,13 @@ class _LoginState extends State<Login> {
                                   buffer.add(Login.locationItems[i]);
                                 }
                               }
+                              setState(() {
                                 selectedLocations = [];
                                 selectedLocations.addAll(buffer);
-                                widget.locationWidgetKey.currentState.rebuildState();
+                                widget.currentvalueRoom = value;
+                                });
                             },
+                            startValueId: widget.currentvalueRoom,
                             controller: widget.roomDropController,
                             data: Login.roomItems),
                       ),
@@ -419,8 +423,8 @@ class LoginController {
         }
       },
           cancelOnError: false,
-      onError: () {
-        print("hi");
+      onError: (Object e) {
+        ErrorMessages.wrongIpAdress(context);
       });
     }
     catch (exception) {

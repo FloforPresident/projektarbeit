@@ -292,7 +292,7 @@ class FriendController {
                     CustomDropdownLabel(
                       label: Text("Raum"),
                       child: CustomDropdownMenu<Room>(
-                          onChanged: () {
+                          onChanged: (value) {
                             List<Location> buffer = [];
                             for (int i = 0;
                                 i < Friends.locationItems.length;
