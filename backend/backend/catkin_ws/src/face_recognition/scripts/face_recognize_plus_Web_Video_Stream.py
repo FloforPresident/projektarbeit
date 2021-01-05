@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import multiprocessing
 
 #For writing a ROS Node
 import rospy 
@@ -41,6 +42,10 @@ class image_converter:
 		self.image_sub = rospy.Subscriber("/raspicam_node/image", Image, self.callback_raspi_image)
 
 	def callback_raspi_image(self, data):
+
+		
+		print("Callback!")
+
 		try:
 			cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8") 
 		except Exception as e:
@@ -63,18 +68,26 @@ class image_converter:
 
 person_name = ""
 person_embedding = ""
+person_embedding_array = np.empty([1, 128])
 message = ""
 
 def callback_name(data):
+	global person_name
 	person_name = data
+	print("Name received!")
 	print(person_name)
 
 def callback_embedding(data):
-	person_embedding = data
-	print(person_embedding)
+	#person_embedding = data
+	global person_embedding_array
+	person_embedding_array = np.fromstring(str(data), sep='#')
+	print("Embedding received!")
+	print(person_embedding_array)
 
 def callback_message(data):
+	global message
 	message = data
+	print("Message received!")	
 	print(message)
 
 ######     /Get Data    #####################################################################################################################
@@ -99,16 +112,26 @@ def talker(tts):
 
 
 
-
-
-
-
-
 def face_recognition_(cv_image):
-
+	global person_name
+	global person_embedding_array
+	global message
 
 	#known_face_encoding = [stefan_face_encoding]
 	#known_face_name = ["Stefan"]
+	if person_name == "" or message == "":
+		print("Not all variables set!")
+		print("Name")
+		print(person_name)
+		# print("Embedding Array")
+		# print(person_embedding_array)
+		print("Message")
+		print(message)
+		return
+	else:
+		print("All variables set!")
+	known_face_encodings = [person_embedding_array]
+	known_face_name = []
 
 	face_locations = []
 	face_encodings = []
@@ -132,7 +155,7 @@ def face_recognition_(cv_image):
 
 		for face_encoding in face_encodings:
 			# See if the face is a match for the known face(s)
-			matches = face_recognition.compare_faces(person_embedding, face_encoding)
+			matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
 			recognised_name = "unkonown"
 
 			# If a match was found in known_face_encodings, just use the first one		
@@ -145,7 +168,7 @@ def face_recognition_(cv_image):
 				print("Person erkannt: " + recognised_name)
 
 				#Create String, which is going to be published to talker Topic for speaker
-				tts = "Hallo" + recognised_name #+ message
+				tts = "Hallo" + recognised_name + "! " + message
 
 				try:
 					talker(tts)
@@ -153,7 +176,7 @@ def face_recognition_(cv_image):
 					print("Fehler im Talker")
 
 				#unregister from topic, doesnt work yet
-				unsubscribe()
+				#unsubscribe()
 		
 		
 
@@ -191,20 +214,57 @@ def face_recognition_(cv_image):
 
 ######     /Face Recognition    #############################################################################################################
 
+def name_subscriber():
+	print("name subscriber")
+	rospy.Subscriber('data_name', String, callback_name)
+def embedding_subscriber():
+	print("embedding subscriber")
+	rospy.Subscriber('data_embedding', String, callback_embedding)
+def message_subscriber():
+	print("message subscriber")
+	rospy.Subscriber('data_message', String, callback_message)
+
+def letsGo():
+	
+	rospy.init_node('face_recognition', anonymous=False)
+
+	
+	# p_name_sub = multiprocessing.Process(target=name_subscriber)
+	# p_name_sub.start()
+
+	# p_embedding_sub = multiprocessing.Process(target=embedding_subscriber)
+	# p_embedding_sub.start()
+
+	# p_message_sub = multiprocessing.Process(target=message_subscriber)
+	# p_message_sub.start()
+	
+	name_subscriber()
+	embedding_subscriber()
+	message_subscriber()
+	#rospy.Subscriber("chatter", String, callback_message)
+
+
+	#pub = rospy.Publisher('Face_Recognition_Stream', Image, queue_size=10)
+
+	#ic = image_converter()	
+	rospy.spin()
+
+###########################
+
+
+
 
 
 ######     Main         #####################################################################################################################
 
 if __name__=='__main__':
-		rospy.init_node('face_recognition', anonymous=True)
-		
-		rospy.Subscriber('messageData/name', String, callback_name)
-		rospy.Subscriber('messageData/embedding', String, callback_embedding)
-		rospy.Subscriber('messageData/message', String, callback_message)
 
-		pub = rospy.Publisher('Face_Recognition_Stream', Image, queue_size=10)
-		
+	
+	try:
+		letsGo()
 
+	except rospy.ROSInterruptException:
+		pass
 		
 
 
@@ -221,18 +281,14 @@ if __name__=='__main__':
 
 ######   Video Stream of Raspi Cam works hopefully		
 #		while True:
-		ic = image_converter()
-		
 	
-
-
-
 		
-		try:
-			rospy.spin()
-		except KeybooardInterrupt:
-			print("Shutting down")
-		cv2.destroyAllWindows()
+		
+	#try:
+#		rospy.spin()
+#	except KeybooardInterrupt:
+#		print("Shutting down")
+#	cv2.destroyAllWindows()
 
 
 ######     /Main         #####################################################################################################################

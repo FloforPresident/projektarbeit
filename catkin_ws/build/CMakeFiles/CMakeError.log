@@ -1,0 +1,65 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0e69b/fast && /usr/bin/make  -f CMakeFiles/cmTC_0e69b.dir/build.make CMakeFiles/cmTC_0e69b.dir/build
+make[1]: Verzeichnis „/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_0e69b.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_0e69b.dir/src.c.o -c /home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_0e69b
+/home/patrick/.local/lib/python3.8/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0e69b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD -rdynamic CMakeFiles/cmTC_0e69b.dir/src.c.o -o cmTC_0e69b 
+CMakeFiles/cmTC_0e69b.dir/src.c.o: In Funktion `main':
+src.c:(.text+0x3c): Nicht definierter Verweis auf `pthread_create'
+src.c:(.text+0x48): Nicht definierter Verweis auf `pthread_detach'
+src.c:(.text+0x54): Nicht definierter Verweis auf `pthread_cancel'
+src.c:(.text+0x65): Nicht definierter Verweis auf `pthread_join'
+src.c:(.text+0x79): Nicht definierter Verweis auf `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_0e69b.dir/build.make:105: die Regel für Ziel „cmTC_0e69b“ scheiterte
+make[1]: *** [cmTC_0e69b] Fehler 1
+make[1]: Verzeichnis „/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp“ wird verlassen
+Makefile:140: die Regel für Ziel „cmTC_0e69b/fast“ scheiterte
+make: *** [cmTC_0e69b/fast] Fehler 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_771d9/fast && /usr/bin/make  -f CMakeFiles/cmTC_771d9.dir/build.make CMakeFiles/cmTC_771d9.dir/build
+make[1]: Verzeichnis „/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp“ wird betreten
+Building C object CMakeFiles/cmTC_771d9.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_771d9.dir/CheckFunctionExists.c.o -c /home/patrick/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.18/Modules/CheckFunctionExists.c
+Linking C executable cmTC_771d9
+/home/patrick/.local/lib/python3.8/site-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_771d9.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_771d9.dir/CheckFunctionExists.c.o -o cmTC_771d9  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_771d9.dir/build.make:105: die Regel für Ziel „cmTC_771d9“ scheiterte
+make[1]: *** [cmTC_771d9] Fehler 1
+make[1]: Verzeichnis „/home/patrick/projektarbeit/catkin_ws/build/CMakeFiles/CMakeTmp“ wird verlassen
+Makefile:140: die Regel für Ziel „cmTC_771d9/fast“ scheiterte
+make: *** [cmTC_771d9/fast] Fehler 2
+
+
+

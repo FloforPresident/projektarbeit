@@ -77,15 +77,48 @@ def action_face_recognition(user, message):
 
 
 
-    pub_name = rospy.Publisher('messageData/name', String, queue_size=100)
-    pub_embedding = rospy.Publisher('messageData/embedding', String, queue_size=100)
-    pub_message = rospy.Publisher('messageData/message', String, queue_size=100)
+    pub_name = rospy.Publisher('data_name', String, queue_size=100)
+    pub_embedding = rospy.Publisher('data_embedding', String, queue_size=100)
+    pub_message = rospy.Publisher('data_message', String, queue_size=100)
     rospy.init_node('face_recognition', anonymous=True)
 
+    '''
+    i=0
+    while i<5:
+        pub_name.publish(answer_name)
+        print(e)
+        pub_embedding.publish(answer_embedding)
+        pub_message.publish(answer_message)
+        print("face rec finished")
+        i+=1
+    '''
+
+    while pub_name.get_num_connections() == 0:
+        rospy.loginfo("Waiting for  name publisher to connect")
+        rospy.sleep(1)
     pub_name.publish(name)
-    pub_embedding.publish(embedding)
-    pub_message.publish(message)
-    print("face rec finished")
+
+    time.sleep(2)
+
+    while pub_embedding.get_num_connections() == 0:
+        rospy.loginfo("Waiting for embedding publisher to connect")
+        rospy.sleep(1)
+    pub_name.publish(embedding)
+
+    time.sleep(2)
+
+    while pub_message.get_num_connections() == 0:
+        rospy.loginfo("Waiting for message publisher to connect")
+        rospy.sleep(1)
+    pub_name.publish(message)
+    
+    time.sleep(2)
+    #time.sleep(2)
+    #pub_embedding.publish(answer_embedding)
+    #time.sleep(2)
+    #pub_message.publish(answer_message)
+    #time.sleep(2)
+
 def test_publish():
 
     pub_name = rospy.Publisher('chatter', String, queue_size=100)
