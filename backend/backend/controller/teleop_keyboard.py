@@ -132,7 +132,7 @@ class Teleop:
 
     def publishKey(self, key):
         
-        #pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+        pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10)
         try:
             if key != 'empty':
                 print("Got key:")
@@ -174,10 +174,11 @@ class Teleop:
             twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = self.control_angular_vel
             print(twist)
             
-            # while pub.get_num_connections() < 1:
-            #   string = ""
+            while pub.get_num_connections() < 1:
+                pass
             
-            #pub.publish(twist)
+
+            pub.publish(twist)
 
             #string = '{ linear: {x: ' + str(self.control_linear_vel) + ', y: 0, z: 0}, angular: { x: 0, y: 0, z: ' + str(self.control_angular_vel) + '}}'
             #subprocess.run(["rostopic","pub", "/cmd_vel", "geometry_msgs/Twist", string])
@@ -189,19 +190,19 @@ class Teleop:
         except Exception as e:
             print("EXCEPTION:")
             print(e)
-
+        '''
         finally:
             twist = Twist()
             twist.linear.x = 0.0; twist.linear.y = 0.0; twist.linear.z = 0.0
             twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = 0.0
-            # while pub.get_num_connections() < 1:
-            #   string = ""
+            while pub.get_num_connections() < 1:
+                pass
             
-            #pub.publish(twist)
+            pub.publish(twist)
 
             #string = '{ linear: {x: ' + str(self.control_linear_vel) + ', y: 0, z: 0}, angular: { x: 0, y: 0, z: ' + str(self.control_angular_vel) + '}}'
             #subprocess.run(["rostopic","pub", "/cmd_vel", "geometry_msgs/Twist", string])
-
+        '''
 
 
 

@@ -67,7 +67,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # chan.send('roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true')
 
 def action_face_recognition(user, message):
-
+    print("face recognition started")
     name = user[0]
     embedding = user[1]
     
@@ -79,24 +79,18 @@ def action_face_recognition(user, message):
 
     pub_name = rospy.Publisher('messageData/name', String, queue_size=100)
     pub_embedding = rospy.Publisher('messageData/embedding', String, queue_size=100)
-    pub.message = rospy.Publisher('messageData/message', String, queue_size=100)
-    # rospy.init_node('encoding_creator', anonymous=False)
+    pub_message = rospy.Publisher('messageData/message', String, queue_size=100)
+    rospy.init_node('face_recognition', anonymous=True)
 
-
-    pub_name_neu.publish(name)
-
-
-    while pub_name.get_num_connections() < 1:
-        string = ""
     pub_name.publish(name)
-
-    while pub_embedding.get_num_connections() < 1:
-        string = ""
-    pub_embedding.publish(name)
-
-    while pub_message.get_num_connections() < 1:
-        string = ""
+    pub_embedding.publish(embedding)
     pub_message.publish(message)
+    print("face rec finished")
+def test_publish():
+
+    pub_name = rospy.Publisher('chatter', String, queue_size=100)
+    rospy.init_node('face_recognition', anonymous=True)
+    pub_name.publish("TEST123")
 
 
 def action_find_person(name, x, y):
@@ -134,8 +128,9 @@ def action_roscore_start():
 
 
 def teleop_talker(key):
+    print("Teleop Talker!")
     pub = rospy.Publisher('teleop_chatter', String, queue_size=10)
-    #rospy.init_node('teleop_talker', anonymous=True)
+    rospy.init_node('teleop_talker', anonymous=True)
     rate = rospy.Rate(10)  # 10hz
     pub.publish(key)
 
@@ -217,8 +212,10 @@ def start_websocket():
         # MESSAGE
         elif action == 'SEND MESSAGE':
             response = send_message(data['from_user'], data['to_user'], data['subject'], data['message'])
-            action_find_person(response['user'][0], response['x'], response['y'])
-            action_face_recognition(response['user'], data['message'])
+            #action_find_person(response['user'][0], response['x'], response['y'])
+            #action_face_recognition(response['user'], data['message'])
+            mp_action_face_recognition = multiprocessing.Process(target=action_face_recognition, args=[response['user'], data['message']])
+            mp_action_face_recognition.start()
 
         # CONTROL
         elif action == "UP":
@@ -277,6 +274,8 @@ def cleanup_on_exit(signal, frame):
 
 activeProcesses = set()
 
+def rospy_init_node():
+    rospy.init_node('controller_node', anonymous=False)
 
 def main():
 
@@ -288,11 +287,14 @@ def main():
         # register KeyboardInterrupt handler
         signal.signal(signal.SIGINT, cleanup_on_exit)
 
-        rospy.init_node('controller', anonymous=False)
+        #rospy_init_node()
 
         #p_roscore = multiprocessing.Process(target=action_roscore_start)
         #p_roscore.start()
         #activeProcesses.add(p_roscore)
+        p_testPublish = multiprocessing.Process(target=test_publish)
+        p_testPublish.start()
+        activeProcesses.add(p_testPublish)
 
         # -- launch node process --
         p_launchNode = multiprocessing.Process(target=launch_node)
@@ -317,6 +319,7 @@ def main():
 
 
 if __name__ == '__main__':
+    print("start controller")
     main()
     print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
     print('<<<<<<<<<<<WELCOME<<<<<<<<<<<<<')
