@@ -70,28 +70,17 @@ def action_face_recognition(user, message):
     print("face recognition started")
     name = user[0]
     embedding = user[1]
+    pubMessage = message
     
-    print(name)
-    print(embedding)
-    print(message)
+    print("Name: " + name)
+    print("Embedding: " + embedding)
+    print("Message" + message)
 
-
-
-    pub_name = rospy.Publisher('data_name', String, queue_size=100)
-    pub_embedding = rospy.Publisher('data_embedding', String, queue_size=100)
-    pub_message = rospy.Publisher('data_message', String, queue_size=100)
     rospy.init_node('face_recognition', anonymous=True)
 
-    '''
-    i=0
-    while i<5:
-        pub_name.publish(answer_name)
-        print(e)
-        pub_embedding.publish(answer_embedding)
-        pub_message.publish(answer_message)
-        print("face rec finished")
-        i+=1
-    '''
+    pub_name = rospy.Publisher('data_name', String, queue_size=1)
+    pub_embedding = rospy.Publisher('data_embedding', String, queue_size=1)
+    pub_message = rospy.Publisher('data_message', String, queue_size=1)
 
     while pub_name.get_num_connections() == 0:
         rospy.loginfo("Waiting for  name publisher to connect")
@@ -103,51 +92,32 @@ def action_face_recognition(user, message):
     while pub_embedding.get_num_connections() == 0:
         rospy.loginfo("Waiting for embedding publisher to connect")
         rospy.sleep(1)
-    pub_name.publish(embedding)
+    pub_embedding.publish(embedding)
 
     time.sleep(2)
 
     while pub_message.get_num_connections() == 0:
         rospy.loginfo("Waiting for message publisher to connect")
         rospy.sleep(1)
-    pub_name.publish(message)
-    
+    pub_message.publish(pubMessage)
+
     time.sleep(2)
-    #time.sleep(2)
-    #pub_embedding.publish(answer_embedding)
-    #time.sleep(2)
-    #pub_message.publish(answer_message)
-    #time.sleep(2)
-
-def test_publish():
-
-    pub_name = rospy.Publisher('chatter', String, queue_size=100)
-    rospy.init_node('face_recognition', anonymous=True)
-    pub_name.publish("TEST123")
-
 
 def action_find_person(name, x, y):
-    # user = db.getUser(name)
-    # locationID = user[1]
-    # location = db.getLocation(locationID)
-    # x = location[3]
-    # y = location[4]
     datastring = '{"action": "find_person", "name": "' + name + '", "x": "' + str(x) + '", "y": "' + str(y) + '"}'
     print(datastring)
     dataArray = json.loads(datastring)
 
-    # TODO: pub = rospy.Publisher('chatter', String, queue_size=10)
+    pub = rospy.Publisher('chatter', String, queue_size=10)
     # rospy.init_node('print_person', anonymous=False)
     rospy.loginfo("Auf der Suche nach: " + dataArray["name"])
 
     rate = rospy.Rate(1)  # 10hz
     i = 0
-    '''
     while i < 4:
-        # TODO: pub.publish(datastring)
+        pub.publish(datastring)
         i += 1
         rate.sleep()
-    '''
 
 teleopInstance = teleop.Teleop()
 
@@ -268,7 +238,7 @@ def start_websocket():
             response = action
 
         response = json.dumps(response)
-        print(response)
+        #print(response)
 
         # if(action == 'FIND PERSON'):
         #     action_find_person(data['name'],data['x'], data['y'], data['message'])
@@ -325,9 +295,6 @@ def main():
         #p_roscore = multiprocessing.Process(target=action_roscore_start)
         #p_roscore.start()
         #activeProcesses.add(p_roscore)
-        p_testPublish = multiprocessing.Process(target=test_publish)
-        p_testPublish.start()
-        activeProcesses.add(p_testPublish)
 
         # -- launch node process --
         p_launchNode = multiprocessing.Process(target=launch_node)

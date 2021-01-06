@@ -38,6 +38,7 @@ bridge = CvBridge()
 class image_converter:
 
 	def __init__(self):
+		print("INIT")
 		self.bridge = CvBridge()
 		self.image_sub = rospy.Subscriber("/raspicam_node/image", Image, self.callback_raspi_image)
 
@@ -73,22 +74,27 @@ message = ""
 
 def callback_name(data):
 	global person_name
-	person_name = data
-	print("Name received!")
-	print(person_name)
+	person_name = data.data
+	print("Name received!" + person_name)
+	#print(person_name)
 
 def callback_embedding(data):
 	#person_embedding = data
+	global person_embedding
 	global person_embedding_array
-	person_embedding_array = np.fromstring(str(data), sep='#')
+	person_embedding = data.data
+	person_embedding_array = np.fromstring(data.data, sep='#')
+	
 	print("Embedding received!")
 	print(person_embedding_array)
 
+	# print(person_embedding_array)
+
 def callback_message(data):
 	global message
-	message = data
-	print("Message received!")	
-	print(message)
+	message = data.data
+	print("Message received!" + message)	
+	# print(message)
 
 ######     /Get Data    #####################################################################################################################
 
@@ -101,7 +107,7 @@ def talker(tts):
 	pub_action.publish(datastring)
 
 	### Publisher Message For Speaker ###
-	pub = rospy.Publisher('Message_for_Speaker', std_msgs.msg.String, queue_size = 2)
+	pub = rospy.Publisher('Message_for_Speaker', String, queue_size = 2)
 	pub.publish(tts)
 
 ######     /Publish Message   ################################################################################################################
@@ -110,36 +116,27 @@ def talker(tts):
 
 #Load a sample picture and learn how to recognize it
 
-
+publish_this_frame = True
 
 def face_recognition_(cv_image):
 	global person_name
 	global person_embedding_array
 	global message
+	global publish_this_frame
 
-	#known_face_encoding = [stefan_face_encoding]
-	#known_face_name = ["Stefan"]
-	if person_name == "" or message == "":
-		print("Not all variables set!")
-		print("Name")
-		print(person_name)
-		# print("Embedding Array")
-		# print(person_embedding_array)
-		print("Message")
-		print(message)
-		return
-	else:
-		print("All variables set!")
 	known_face_encodings = [person_embedding_array]
-	known_face_name = []
+	known_face_names = [person_name]
+
+	
+	
 
 	face_locations = []
 	face_encodings = []
 	face_names = []
 
-	publish_this_frame = True
+	
 
-	frame_counter = 0
+	#frame_counter = 0
 
 	# Resize frame of video to 1/4 size for faster face recognition processing
 	small_frame = cv2.resize(cv_image, (0, 0), fx=0.25, fy=0.25)
@@ -147,28 +144,64 @@ def face_recognition_(cv_image):
 	#Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
 	rgb_small_frame = small_frame[:, :, ::-1]
 
-	# Only process every 4th frame of video to save time
-	if frame_counter == 0:
-		# Find all the faces and face encodings in the current frame of video
-		face_locations = face_recognition.face_locations(rgb_small_frame)
-		face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
+	# Find all the faces and face encodings in the current frame of video
+	face_locations = face_recognition.face_locations(rgb_small_frame)
+	face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
+
+	if person_name == "" or message == "":
+		print("Not all variables set!")
+		face_names.append("unknown")
+	else:
+		print("All variables set!")
+		
+
+		# print("")
+		# print("Name")
+		# print(person_name)
+		
+		# print("")
+		# print("Embedding Array")
+		# print(person_embedding_array)
+		# print(person_embedding_array.shape)
+		
+		# print("")
+		# print("Message")
+		# print(message)
 
 		for face_encoding in face_encodings:
+
+			print ("Face detected")
+			print ("Starting Comparison")
+			print ("For Schleife face_encoding")
+			
+
+
 			# See if the face is a match for the known face(s)
-			matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
+			matches = face_recognition.compare_faces(known_face_encodings, face_encoding, 0.9)
 			recognised_name = "unkonown"
+			print("Matches:")
+			print(matches)
+			print("Known face encodings: ")
+			print(known_face_encodings[0])
+			print(known_face_encodings[0].shape)
+			print("Face encoding: ")
+			print (face_encoding)
+			print (face_encoding.shape)
+
+
+
 
 			# If a match was found in known_face_encodings, just use the first one		
 			if True in matches:	
 				first_match_index = matches.index(True)
-				recognised_name = known_face_name[first_match_index]
+				recognised_name = known_face_names[first_match_index]
 			
 				face_names.append(recognised_name)
 			
 				print("Person erkannt: " + recognised_name)
 
 				#Create String, which is going to be published to talker Topic for speaker
-				tts = "Hallo" + recognised_name + "! " + message
+				tts = "Hallo " + recognised_name + "! " + message
 
 				try:
 					talker(tts)
@@ -177,6 +210,8 @@ def face_recognition_(cv_image):
 
 				#unregister from topic, doesnt work yet
 				#unsubscribe()
+			else:
+				face_names.append("unknown")
 		
 		
 
@@ -197,19 +232,16 @@ def face_recognition_(cv_image):
 		font = cv2.FONT_HERSHEY_DUPLEX
 		cv2.putText(cv_image, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
 
-
-
-	if publish_this_frame:
-		# Publish processed image to Node on Topic "Face_Recognition_Stream"		
-		pub.publish(bridge.cv2_to_imgmsg(cv2.resize(cv_image, (0, 0), fx=0.5, fy=0.5), "bgr8"))
+	
+	#if publish_this_frame:
+	# Publish processed image to Node on Topic "Face_Recognition_Stream"
+	print("Publish this frame")
+	pub.publish(bridge.cv2_to_imgmsg(cv2.resize(cv_image, (0, 0), fx=0.5, fy=0.5), "bgr8"))
 
 	#publish every other frame
-	publish_this_frame = not publish_this_frame
+#	publish_this_frame = not publish_this_frame
 	
-	#process every 4th frame
-	frame_counter += 1
-	if frame_counter == 4:
-		frame_counter = 0
+
 
 
 ######     /Face Recognition    #############################################################################################################
@@ -244,10 +276,10 @@ def letsGo():
 	#rospy.Subscriber("chatter", String, callback_message)
 
 
-	#pub = rospy.Publisher('Face_Recognition_Stream', Image, queue_size=10)
+	
 
-	#ic = image_converter()	
-	rospy.spin()
+	ic = image_converter()	
+	#rospy.spin()
 
 ###########################
 
@@ -259,14 +291,15 @@ def letsGo():
 
 if __name__=='__main__':
 
-	
+	pub = rospy.Publisher('Face_Recognition_Stream', Image, queue_size=10)
+
 	try:
 		letsGo()
 
 	except rospy.ROSInterruptException:
 		pass
 		
-
+	rospy.spin()
 
 ######   Video Stream with Webcam works
 
@@ -277,18 +310,9 @@ if __name__=='__main__':
 #			ret, frame = video_capture.read()
 #			face_recognition_(frame)
 
-
-
-######   Video Stream of Raspi Cam works hopefully		
-#		while True:
 	
 		
-		
-	#try:
-#		rospy.spin()
-#	except KeybooardInterrupt:
-#		print("Shutting down")
-#	cv2.destroyAllWindows()
+
 
 
 ######     /Main         #####################################################################################################################
