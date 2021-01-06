@@ -141,7 +141,7 @@ class _RoomState extends State<Rooms> {
             FlatButton(
               child: Text("Hinzufügen"),
               onPressed: () {
-                if (controller.text.isNotEmpty && dropController.getValue() != null) {
+                if (controller.text.isNotEmpty) {
                   widget.controller.newRoomRoboAlreadyTaken(dropController.getValue());
                   widget.controller.addItem(dropController.getValue().id, controller.text);
 
