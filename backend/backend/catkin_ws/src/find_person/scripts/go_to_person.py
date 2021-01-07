@@ -7,6 +7,8 @@ from geometry_msgs.msg import PoseStamped, Twist
 from move_base_msgs.msg import MoveBaseActionGoal, MoveBaseActionFeedback
 from actionlib_msgs.msg import GoalID
 
+import time
+
 
 #global variables - coordinates
 goalX = None
@@ -95,7 +97,7 @@ def callback_action(data):
 			# Warten auf Person welche Nachricht erhalten hat
 			rate = rospy.Rate(0.1) # 10hz
 			i = 0
-			while i < 4:
+			while i < 2:
 				print("Waiting for person.")
 				i += 1
 				rate.sleep()
@@ -109,7 +111,8 @@ def reached_goal():
 	#rotate and go home
 	print("GOOOOOOOAL!!!!")
 	cancel_move_base()
-	rotate()
+	#rotate()
+	time.sleep(10) #wait 10 seconds for person
 	cancel_move_base()
 	#statement is needed if bot finds person during rotating
 	if foundPerson == False:
@@ -168,7 +171,7 @@ def rotate():
     vel_msg = Twist()
     # Receiveing the user's input
     print("I am looking for the person.")
-    speed = 120	#degrees/second
+    speed = 20	#degrees/second
     angle = 360	#degrees
     clockwise = True #True or false
     #Converting from angles to radians

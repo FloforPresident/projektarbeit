@@ -201,7 +201,7 @@ def face_recognition_(cv_image):
 				print("Person erkannt: " + recognised_name)
 
 				#Create String, which is going to be published to talker Topic for speaker
-				tts = "Hallo " + recognised_name + "! " + message
+				tts = "Hallo " + recognised_name + "! Hier ist eine Nachricht fuer dich:        " + message
 
 				try:
 					talker(tts)

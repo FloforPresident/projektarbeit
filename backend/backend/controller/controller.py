@@ -109,7 +109,7 @@ def action_find_person(name, x, y):
     dataArray = json.loads(datastring)
 
     pub = rospy.Publisher('chatter', String, queue_size=10)
-    # rospy.init_node('print_person', anonymous=False)
+    rospy.init_node('print_person', anonymous=False)
     rospy.loginfo("Auf der Suche nach: " + dataArray["name"])
 
     rate = rospy.Rate(1)  # 10hz
@@ -216,6 +216,8 @@ def start_websocket():
         elif action == 'SEND MESSAGE':
             response = send_message(data['from_user'], data['to_user'], data['subject'], data['message'])
             #action_find_person(response['user'][0], response['x'], response['y'])
+            mp_action_find_person = multiprocessing.Process(target=action_find_person, args=[response['user'][0], response['x'], response['y']])
+            mp_action_find_person.start()
             #action_face_recognition(response['user'], data['message'])
             mp_action_face_recognition = multiprocessing.Process(target=action_face_recognition, args=[response['user'], data['message']])
             mp_action_face_recognition.start()
@@ -297,9 +299,9 @@ def main():
         #activeProcesses.add(p_roscore)
 
         # -- launch node process --
-        p_launchNode = multiprocessing.Process(target=launch_node)
-        p_launchNode.start()
-        activeProcesses.add(p_launchNode)
+        # p_launchNode = multiprocessing.Process(target=launch_node)
+        # p_launchNode.start()
+        # activeProcesses.add(p_launchNode)
 
         # -- websocket process --
         p_websocket = multiprocessing.Process(target=start_websocket)
