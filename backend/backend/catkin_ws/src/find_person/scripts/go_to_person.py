@@ -79,6 +79,7 @@ def callback_action(data):
 		#::::: found person :::::
 		elif dataArray["action"] == "found_person":
 			print("FOUND PERSON!!!")
+
 			foundPerson = True
 
 			answer = PoseStamped()
@@ -89,38 +90,89 @@ def callback_action(data):
 			answer.pose.position.z = 0
 			answer.pose.orientation.w = 1.0
 
-			print("Stoppe hier fuer Person.")
 			pubBase.publish(answer)
 			
 			goalX = None
 			goalY = None
-			# Warten auf Person welche Nachricht erhalten hat
-			rate = rospy.Rate(0.1) # 10hz
-			i = 0
-			while i < 2:
-				print("Waiting for person.")
-				i += 1
-				rate.sleep()
-			go_home()
+
+			reached_goal()
 		else:
 			rospy.loginfo("no action selected")
 	except:
 		rospy.loginfo("none of my business")
 
 def reached_goal():
+	global foundPerson
+	
+	#foundperson output for debugging
+	print(foundPerson)
+
+	sleeptime = 15
 	#rotate and go home
 	print("GOOOOOOOAL!!!!")
-	cancel_move_base()
-	#rotate()
-	time.sleep(10) #wait 10 seconds for person
-	cancel_move_base()
-	#statement is needed if bot finds person during rotating
-	if foundPerson == False:
+	if foundPerson == True:
+		print("Waiting here!")
+		time.sleep(sleeptime)
 		go_home()
-		print("Finished my business. Awaiting more commands.")
+	else:
+		rotate(sleeptime)
+
+#-----rotate-----
+PI = 3.1415926535897
+def rotate(sleeptime):
+	global foundPerson
+
+	velocity_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+	vel_msg = Twist()
+	
+	print("Rotating. I am looking for the person.")
+	speed = 40	#degrees/second
+	angle = 360	#degrees
+	
+	#Converting from angles to radians
+	angular_speed = speed*2*PI/360
+	relative_angle = angle*2*PI/360
+	#We wont use linear components
+	vel_msg.linear.x=0
+	vel_msg.linear.y=0
+	vel_msg.linear.z=0
+	vel_msg.angular.x = 0
+	vel_msg.angular.y = 0
+
+	vel_msg.angular.z = abs(angular_speed)
+
+	# Setting the current time for distance calculus
+	t0 = rospy.Time.now().to_sec()
+	current_angle = 0
+
+	while(current_angle < relative_angle):
+		velocity_publisher.publish(vel_msg)
+		t1 = rospy.Time.now().to_sec()
+		current_angle = angular_speed*(t1-t0)
+
+		if foundPerson == True:
+			print("found person while rotating.")
+			#Forcing our robot to stop
+			vel_msg.angular.z = current_angle
+			velocity_publisher.publish(vel_msg)
+			print("waiting and roating!")
+			time.sleep(sleeptime*2)
+			
+			return
+
+	#Forcing our robot to stop
+	vel_msg.angular.z = 0
+	velocity_publisher.publish(vel_msg)
+
+	#go home after rotating
+	print("havent found person yet")
+	go_home()
 		 
 def go_home():
-	print("Finished looking for the person. I am driving home for christmas.")
+	global foundPerson
+
+	cancel_move_base()
+
 	pubGoHome = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
 	gohome = PoseStamped()
 	gohome.header.stamp = rospy.get_rostime()
@@ -163,44 +215,6 @@ def callback_simple_goal(data):
 	answer.goal.target_pose = data
 
 	pubBase.publish(answer)
-
-#-----rotate-----
-PI = 3.1415926535897
-def rotate():
-    velocity_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
-    vel_msg = Twist()
-    # Receiveing the user's input
-    print("I am looking for the person.")
-    speed = 20	#degrees/second
-    angle = 360	#degrees
-    clockwise = True #True or false
-    #Converting from angles to radians
-    angular_speed = speed*2*PI/360
-    relative_angle = angle*2*PI/360
-    #We wont use linear components
-    vel_msg.linear.x=0
-    vel_msg.linear.y=0
-    vel_msg.linear.z=0
-    vel_msg.angular.x = 0
-    vel_msg.angular.y = 0
-
-    # Checking if our movement is CW or CCW
-    if clockwise:
-        vel_msg.angular.z = -abs(angular_speed)
-    else:
-        vel_msg.angular.z = abs(angular_speed)
-    # Setting the current time for distance calculus
-    t0 = rospy.Time.now().to_sec()
-    current_angle = 0
-
-    while(current_angle < relative_angle):
-		velocity_publisher.publish(vel_msg)
-		t1 = rospy.Time.now().to_sec()
-		current_angle = angular_speed*(t1-t0)
-
-    #Forcing our robot to stop
-    vel_msg.angular.z = 0
-    velocity_publisher.publish(vel_msg)
 
 
 #-----get current location constantaniously-----

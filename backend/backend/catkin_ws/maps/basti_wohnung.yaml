@@ -1,4 +1,4 @@
-image: /home/patrick/projektarbeit/backend/backend/catkin_ws/maps/basti_wohnung.pgm
+image: /home/basti/projektarbeit/backend/backend/catkin_ws/maps/basti_wohnung.pgm
 resolution: 0.050000
 origin: [-10.000000, -10.000000, 0.000000]
 negate: 0
