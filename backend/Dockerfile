@@ -38,16 +38,13 @@ RUN apt-get update && \
     apt-get install -y python-pip && \
     apt-get install -y python3-pip
 
-
-COPY ./backend/pip3_requirements.txt /app/
-RUN pip3 install -r /home/pip3_requirements.txt
-#    pip install -r /home/pip-requirements.txt
-
 COPY . /app
 
 RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash"
 #RUN apt-get install ros-kinetic-turtlebot3-msgs -y && \
 #    apt-get install ros-kinetic-turtlebot3 -y
+
+RUN /bin/bash -c 'cd /home/catkin_ws/src; rm -rf turtlebot3 turtlebot3_msgs;'
 
 RUN apt-get remove ros-kinetic-turtlebot3-msgs && \
     apt-get remove ros-kinetic-turtlebot3
@@ -56,13 +53,17 @@ RUN cd /home/catkin_ws/src/ && \
     git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
 
 
-RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; catkin_make'
+RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; rm -rf build devel; catkin_make;'
 RUN echo "source /home/catkin_ws/devel/setup.bash" >> ~/.bashrc
 RUN /bin/bash -c "source ~/.bashrc"
+
+#war vorher in 42
+COPY ./backend/pip3_requirements.txt /app/
+RUN pip3 install -r /home/pip3_requirements.txt
+#    pip install -r /home/pip-requirements.txt
 
 #RUN /bin/bash -c 'source /opt/ros/kinetic/setup.bash'
 #ENV PATH=/opt/ros/kinetic/bin:$PATH
 #RUN /bin/bash -c 'echo $PATH'
 #CMD ["roscore"]
 #CMD ["python3", "/home/controller/controller.py"]
-
