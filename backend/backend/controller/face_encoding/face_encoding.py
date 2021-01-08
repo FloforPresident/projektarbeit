@@ -14,7 +14,7 @@ def createFaceEncoding(data):
 
     image = base64.b64decode(data)
 
-    with open("/home/patrick/projektarbeit/backend/backend/controller/face_encoding/image.jpg", "wb") as file:
+    with open("/home/basti/projektarbeit/backend/backend/controller/face_encoding/image.jpg", "wb") as file:
         file.write(image)
         file.close()
 
@@ -26,7 +26,7 @@ def createFaceEncoding(data):
     time.sleep(5)
 
     #erkennt auf image.jpg kein Gesicht, deshalb wird stefan.jpg verwendet
-    image_new = face_recognition.load_image_file("/home/patrick/projektarbeit/backend/backend/controller/face_encoding/stefan.jpg")
+    image_new = face_recognition.load_image_file("/home/basti/projektarbeit/backend/backend/controller/face_encoding/image.jpg")
 
     
    
