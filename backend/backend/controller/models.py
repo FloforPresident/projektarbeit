@@ -1,6 +1,6 @@
 from datetime import datetime
 import base64
-from websocket import *
+from controller import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 
@@ -27,6 +27,7 @@ def remove_user_binary(user):
 def add_user(location_id, name, image, embedding):
     image_bytes = base64.b64decode(image)
     user = User(location_id=location_id, name=name, image=image_bytes, embedding=embedding)
+    #user = User(location_id=location_id, name=name, image=image, embedding=embedding)
     db.session.add(user)
     db.session.commit()
 
@@ -161,7 +162,7 @@ def send_message(from_user, to_user, subject, message):
     room = Room.query.filter_by(id=location.room_id).first()
     robo = Room.query.filter_by(id=room.robo_id).first()
 
-    data = {"user": [user], "location": [location], "room": [room], "robo": [robo]}
+    data = {"user": [user.name, user.embedding], "x":location.x, "y":location.y}
     return data
 
 
