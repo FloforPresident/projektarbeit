@@ -5,17 +5,18 @@ services:
     command: tail -F anything
     container_name: 'backend'
     build:
+#      network: host
       context: ""
       dockerfile: Dockerfile
     volumes:
-      - ./backend:/app/backend
+      - ./backend:/home/backend
     links:
       - db
     depends_on:
       - db
     ports:
-      - ${HOST_IP}:8765:8765
-      - ${HOST_IP}:11311:11311
+      - 8765:8765
+      - 11311:11311
     environment:
       - "PYTHONUNBUFFERED=1"
 

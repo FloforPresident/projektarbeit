@@ -22,7 +22,7 @@ def createFaceEncoding(data):
 
     time.sleep(5)
 
-    image_new = face_recognition.load_image_file("/home/controller/face_encoding/image.jpg")
+    image_new = face_recognition.load_image_file("/home/controller/face_encoding/stefan.jpg")
 
     face_encoding = face_recognition.face_encodings(image_new)[0]
 
