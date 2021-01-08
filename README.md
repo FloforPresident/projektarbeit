@@ -2,6 +2,9 @@
 
 ## Backend
 
+Pre Setup:
+  - Docker & Docker Composed auf Rechner installiert
+
 Backend starten:
   1. Persönliche IP Adresse im projektarbeit/backend/.env file anpassen (`ifconfig`) (wird im File-Explorer nicht angezeig)
   2. Befehl im Terminal ausführen
