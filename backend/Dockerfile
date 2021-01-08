@@ -20,9 +20,6 @@ RUN apt-get install ros-kinetic-joy ros-kinetic-teleop-twist-joy -y \
   ros-kinetic-compressed-image-transport ros-kinetic-rqt-image-view -y \
   ros-kinetic-gmapping ros-kinetic-navigation ros-kinetic-interactive-markers -y
 
-RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash"
-RUN apt-get install ros-kinetic-turtlebot3-msgs -y && \
-    apt-get install ros-kinetic-turtlebot3 -y
 
 ADD backend /home
 
@@ -47,6 +44,17 @@ RUN pip3 install -r /home/pip3_requirements.txt
 #    pip install -r /home/pip-requirements.txt
 
 COPY . /app
+
+RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash"
+#RUN apt-get install ros-kinetic-turtlebot3-msgs -y && \
+#    apt-get install ros-kinetic-turtlebot3 -y
+
+RUN apt-get remove ros-kinetic-turtlebot3-msgs && \
+    apt-get remove ros-kinetic-turtlebot3
+RUN cd /home/catkin_ws/src/ && \
+    git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git && \
+    git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
+
 
 RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd /home/catkin_ws; catkin_make'
 RUN echo "source /home/catkin_ws/devel/setup.bash" >> ~/.bashrc
