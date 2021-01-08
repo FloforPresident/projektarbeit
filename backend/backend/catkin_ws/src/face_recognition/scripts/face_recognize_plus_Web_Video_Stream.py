@@ -60,22 +60,10 @@ class image_converter:
 
 ######     Get name, message and face encoding from db    ###################################################################################
 
-
-person_name = ""
-person_embedding = ""
-message = ""
-
-def callback_name(data):
-	person_name = data
-	print(person_name)
-
-def callback_embedding(data):
-	person_embedding = data
-	print(person_embedding)
-
-def callback_message(data):
-	message = data
-	print(message)
+def callback_textdata():
+	person_name = msg.name
+	message = msg.message
+	person_face_encoding = msg.face_encoding[0]
 
 ######     /Get Data    #####################################################################################################################
 
@@ -97,18 +85,14 @@ def talker(tts):
 
 #Load a sample picture and learn how to recognize it
 
-
-
-
-
-
-
+stefan_image = face_recognition.load_image_file("stefan.jpg")
+stefan_face_encoding = face_recognition.face_encodings(stefan_image)[0]
 
 def face_recognition_(cv_image):
 
 
-	#known_face_encoding = [stefan_face_encoding]
-	#known_face_name = ["Stefan"]
+	known_face_encoding = [stefan_face_encoding]
+	known_face_name = ["Stefan"]
 
 	face_locations = []
 	face_encodings = []
@@ -132,7 +116,7 @@ def face_recognition_(cv_image):
 
 		for face_encoding in face_encodings:
 			# See if the face is a match for the known face(s)
-			matches = face_recognition.compare_faces(person_embedding, face_encoding)
+			matches = face_recognition.compare_faces(known_face_encoding, face_encoding)
 			recognised_name = "unkonown"
 
 			# If a match was found in known_face_encodings, just use the first one		
@@ -196,12 +180,9 @@ def face_recognition_(cv_image):
 ######     Main         #####################################################################################################################
 
 if __name__=='__main__':
+#	try:
 		rospy.init_node('face_recognition', anonymous=True)
 		
-		rospy.Subscriber('messageData/name', String, callback_name)
-		rospy.Subscriber('messageData/embedding', String, callback_embedding)
-		rospy.Subscriber('messageData/message', String, callback_message)
-
 		pub = rospy.Publisher('Face_Recognition_Stream', Image, queue_size=10)
 		
 
