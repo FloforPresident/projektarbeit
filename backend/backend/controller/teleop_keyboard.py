@@ -132,7 +132,8 @@ class Teleop:
 
     def publishKey(self, key):
         
-        pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10)
+        pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+        #test: pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10)
         try:
             if key != 'empty':
                 print("Got key:")
@@ -179,13 +180,6 @@ class Teleop:
             
 
             pub.publish(twist)
-
-            #string = '{ linear: {x: ' + str(self.control_linear_vel) + ', y: 0, z: 0}, angular: { x: 0, y: 0, z: ' + str(self.control_angular_vel) + '}}'
-            #subprocess.run(["rostopic","pub", "/cmd_vel", "geometry_msgs/Twist", string])
-
-           
-
-            #rostopic pub /cmd_vel geometry_msgs/Twist '{ linear: {x: 0.05, y: 0, z: 0}, angular: { x: -3.5, y: -3.0, z: 0}}'
 
         except Exception as e:
             print("EXCEPTION:")
