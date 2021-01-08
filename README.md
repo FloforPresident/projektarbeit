@@ -29,7 +29,7 @@ Die wichtigsten Docker Commands:
     $ docker ps                                     // Laufende Container anzeigen lassen
     $ docker inspect {container-name}               // Infos zu bestimmtem Container
     $ docker container kill $(docker ps -q)         // Alle laufenden Container schließen
-    $ docker exec -it {container-name} /bin/bash    // Alle laufenden Container schließen
+    $ docker exec -it {container-name} bash    // ins Docker Terminal
 
 ## App
 
