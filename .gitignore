@@ -1,2 +1,4 @@
 backend/backend/catkin_ws/build/
 backend/backend/catkin_ws/devel/
+
+backend/.env
