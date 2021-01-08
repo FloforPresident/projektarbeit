@@ -6,3 +6,6 @@ backend/.env
 backend/backend/catkin_ws/src/turtlebot3
 backend/backend/catkin_ws/src/turtlebot3_msgs
 backend/backend/catkin_ws/src/turtlebot3_simulations
+
+*.pyc
+*.save
