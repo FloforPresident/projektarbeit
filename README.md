@@ -7,9 +7,10 @@ Pre Setup:
 
 Backend starten:
   1. Persönliche IP Adresse im projektarbeit/backend/.env file anpassen (`ifconfig`) (wird im File-Explorer nicht angezeig)
-  2. Befehl im Terminal ausführen (im Ordner projektarbeit/backend)
+  2. Befehl im Terminal ausführen im projektarbeit/backend Ordner
 
-    $ make start
+	$ cd ~/projektarbeit/backend
+	$ make start
 
 ### Docker Container
 
