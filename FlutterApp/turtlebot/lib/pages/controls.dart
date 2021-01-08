@@ -41,7 +41,7 @@ class _ControlsState extends State<Controls> {
                   child:
                       Mjpeg(
                         isLive: true,
-                        stream:"http://${SocketInfo.hostAdress}${SocketInfo.port}/stream?topic=/Face_Recognition_Stream",
+                        stream:"http://${SocketInfo.hostAdress}${SocketInfo.portVideoStream}/stream?topic=/Face_Recognition_Stream",
                         error: (context,value)
                         {
                           return Center(child: Text("Leider kein Video-Stream gefunden"));

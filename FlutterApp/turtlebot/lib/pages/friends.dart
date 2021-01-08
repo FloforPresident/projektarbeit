@@ -46,6 +46,7 @@ class _FriendState extends State<Friends> {
             widget.controller.setData(snapshot.data);
 
             return SingleChildScrollView(
+
               child: Column(
                 children: [
                   Container(
