@@ -9,7 +9,6 @@ class SocketInfo {
   //insert your current IP in 'hostAdress' and get controller on same IP running
   static String hostAdress = "0.0.0.0";
   static const String port = ':8765';
-  static const String portVideoStream = ':8080';
 
 
 
