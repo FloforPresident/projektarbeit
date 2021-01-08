@@ -30,9 +30,10 @@ RUN echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 RUN echo "export ROS_MASTER_URI=HTTP://0.0.0.0:11311" >> ~/.bashrc
 RUN echo "export ROS_HOSTNAME=0.0.0.0" >> ~/.bashrc
 
+RUN apt-get update
 RUN apt install -y software-properties-common && \
     add-apt-repository ppa:deadsnakes/ppa && \
-    apt-get update && \
+    apt update && \
     apt-get install -y  python3.7 python3.7-dev && \
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 0
 

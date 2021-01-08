@@ -36,7 +36,7 @@ import teleop_keyboard as teleop
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@192.168.178.63:5432/turtlebot_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@db:5432/turtlebot_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -256,7 +256,7 @@ def start_websocket():
 
         await websocket.send(response)
 
-    start_server = websockets.serve(ws_recieve, "", 8765, max_size=1000000000000000, close_timeout=1000) # IP has to be IP of ROS-Computer
+    start_server = websockets.serve(ws_recieve, "0.0.0.0", 8765, max_size=1000000000000000, close_timeout=1000) # IP has to be IP of ROS-Computer
 
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
