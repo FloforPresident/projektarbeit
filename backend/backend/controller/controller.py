@@ -36,7 +36,7 @@ import teleop_keyboard as teleop
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@192.168.178.58:5432/turtlebot_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@192.168.178.63:5432/turtlebot_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
