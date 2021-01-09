@@ -1,7 +1,6 @@
 backend/backend/catkin_ws/build/
 backend/backend/catkin_ws/devel/
 
-backend/.env
 
 backend/backend/catkin_ws/src/turtlebot3
 backend/backend/catkin_ws/src/turtlebot3_msgs
