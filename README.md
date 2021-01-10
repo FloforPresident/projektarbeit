@@ -12,6 +12,9 @@ Backend starten:
 	$ gedit .env
   	
   2. Roscore starten
+  	
+	$ roscore
+	
   3. Turtlebot bringup and setup
   
   	$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
