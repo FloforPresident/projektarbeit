@@ -20,7 +20,7 @@ Backend starten:
 	# NEW TERMINAL - camerastream
 	$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
 	# camera stream
-	$ roslaunch raspicam_node camerav2_1280x960.launch
+	$ roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true
 	
 	# NEW TERMINAL - speaker node
 	$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
