@@ -12,7 +12,35 @@ Backend starten:
 	$ gedit .env
   	
   2. Roscore starten
-  3. Turtlebot bringup
+  3. Turtlebot bringup and setup
+  
+  	$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
+	$ roslaunch turtlebot3_bringup turtlebot3_robot.launch
+	
+	# NEW TERMINAL - camerastream
+	$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
+	# camera stream
+	$ roslaunch raspicam_node camerav2_1280x960.launch
+	
+	# NEW TERMINAL - speaker node
+	$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
+	$ rosrun speaker_node speaker_node.py
+	
+  4. Host-Laptup setup
+  
+	# ON HOSTS COMPUTER
+	# new terminal
+	$ rosrun face_recognition face_recognition
+	# new terminal
+	$ rosrun web_video_server web_video_server
+	# new terminal
+	$ rosrun find_person go_to_person.py
+	
+  5. Map laden
+  	
+	$ cd ~/projektarbeit/backend/backend/catkin_ws/maps
+	$ roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:='/basti_wohnung.yaml' 
+  
   4. Docker-Datenbank starten
 
 	$ cd ~/projektarbeit/backend
