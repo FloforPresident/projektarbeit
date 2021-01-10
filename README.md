@@ -7,10 +7,18 @@ Pre Setup:
 
 Backend starten:
   1. Persönliche IP Adresse im projektarbeit/backend/.env file anpassen (`ifconfig`) (wird im File-Explorer nicht angezeigt)
-  2. Befehl im Terminal ausführen im projektarbeit/backend Ordner
+  2. Roscore starten
+  3. Turtlebot bringup
+  4. Befehl im Terminal ausführen im projektarbeit/backend Ordner
 
 	$ cd ~/projektarbeit/backend
 	$ make start
+  5. Docker-Datenbank starten
+	$ cd ~/projektarbeit/backend/backend/controller
+	$ python3 controller.py
+	
+  6. App starten
+  
 
 ### Docker Container
 
