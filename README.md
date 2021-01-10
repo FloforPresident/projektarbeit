@@ -16,7 +16,7 @@ Backend starten:
   4. Befehl im Terminal ausführen im projektarbeit/backend Ordner
 
 	$ cd ~/projektarbeit/backend
-	$ make start
+	$ sudo make start
 	
   5. Docker-Datenbank starten
   
