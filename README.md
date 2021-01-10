@@ -6,7 +6,7 @@ Pre Setup:
   - Docker & Docker Compose auf Rechner installiert
 
 Backend starten:
-  1. Persönliche IP Adresse im projektarbeit/backend/.env file anpassen (`ifconfig`) (wird im File-Explorer nicht angezeig)
+  1. Persönliche IP Adresse im projektarbeit/backend/.env file anpassen (`ifconfig`) (wird im File-Explorer nicht angezeigt)
   2. Befehl im Terminal ausführen im projektarbeit/backend Ordner
 
 	$ cd ~/projektarbeit/backend
