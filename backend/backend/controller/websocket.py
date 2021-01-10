@@ -6,9 +6,21 @@ import asyncio
 import websockets
 from face_encoding.face_encoding import createFaceEncoding
 
+
+# get env file
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+# set ip
+public_ip = os.getenv("HOST_IP")
+ip = str(public_ip)
+print("your ip is: " + ip)
+
+
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@db:5432/turtlebot_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@'+ip+':5432/turtlebot_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 connected = set()
@@ -101,7 +113,7 @@ async def create_db():
 
 async def main():
     await create_db()
-    ws_server = websockets.serve(ws_handler, '0.0.0.0', 8765)
+    ws_server = websockets.serve(ws_handler, ip, 8765)
     asyncio.ensure_future(ws_server)
 
 

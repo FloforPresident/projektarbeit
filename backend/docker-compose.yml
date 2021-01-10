@@ -1,24 +1,24 @@
 version: "3"
 
 services:
-  backend:
-    command: tail -F anything
-    container_name: 'backend'
-    build:
-#      network: host
-      context: ""
-      dockerfile: Dockerfile
-    volumes:
-      - ./backend:/home/backend
-    links:
-      - db
-    depends_on:
-      - db
-    ports:
-      - 8765:8765
-      - 11311:11311
-    environment:
-      - "PYTHONUNBUFFERED=1"
+  # backend:
+  #   command: tail -F anything
+  #   container_name: 'backend'
+  #   build:
+  #     network: host
+  #     context: ""
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./backend:/home/backend
+  #   links:
+  #     - db
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - 8765:8765
+  #     - 192.168.178.63:11311:11311
+  #   environment:
+  #     - "PYTHONUNBUFFERED=1"
 
   db:
     container_name: 'db'
@@ -27,6 +27,6 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: turtlebot_db
-      POSTGRES_HOST: db
+      POSTGRES_HOST: ${HOST_IP}
     ports:
-      - 5432:5432
+      - ${HOST_IP}:5432:5432
