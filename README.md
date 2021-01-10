@@ -91,20 +91,16 @@ Die wichtigsten Docker Commands:
 
 ### Setup
 
-    $ roscore                       // Ros starten
-    $ catkin_make                   // Im catkin_ws Ordner ausführen um packages zu regisrieren
-    $ rosrun package python-file    // Topic starten
-    $ cd ~/projektarbeit/catkin_ws/ && rm -r build devel && catkin_make
 
 
 ### Camera, Face Recognition, Stream
 
     Turtlebot:
-    $	roslaunch raspicam_node camerav2_1280x960.launch	// Streamt Bild von Raspicam an Topic /raspicam_node/image
+    $ roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true	// Streamt Bild von Raspicam an Topic /raspicam_node/image
 
     Host Laptop:
-    $	rosrun face_recognition face_recognition	// Startet Face Recognition Node, streamt verarbeitetes Bild an Topic /Face_Recognition_Stream 
-    $	rosrun web_video_server web_video_server  	// Streamt sämtliche Image Topics an http://localhost:8080/ - Link für /Face_Recognition_Stream ist in App eingebaut
+    $ rosrun face_recognition face_recognition	// Startet Face Recognition Node, streamt verarbeitetes Bild an Topic /Face_Recognition_Stream 
+    $ rosrun web_video_server web_video_server  	// Streamt sämtliche Image Topics an http://localhost:8080/ - Link für /Face_Recognition_Stream ist in App eingebaut
 
 	
 
