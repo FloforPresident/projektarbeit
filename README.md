@@ -30,7 +30,7 @@ Backend starten:
   
 	# ON HOSTS COMPUTER
 	# new terminal
-	$ rosrun face_recognition face_recognition
+	$ rosrun face_recognition face_recognize_plus_Web_Video_Stream.py
 	# new terminal
 	$ rosrun web_video_server web_video_server
 	# new terminal
