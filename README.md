@@ -13,18 +13,19 @@ Backend starten:
   	
   2. Roscore starten
   3. Turtlebot bringup
-  4. Befehl im Terminal ausführen im projektarbeit/backend Ordner
+  4. Docker-Datenbank starten
 
 	$ cd ~/projektarbeit/backend
 	$ sudo make start
 	
-  5. Docker-Datenbank starten
+  5. Controller starten
   
 	$ cd ~/projektarbeit/backend/backend/controller
 	$ python3 controller.py
 	
   6. App starten
   
+
 
 ### Docker Container
 
