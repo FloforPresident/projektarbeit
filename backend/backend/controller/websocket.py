@@ -7,6 +7,9 @@ import websockets
 from face_encoding.face_encoding import createFaceEncoding
 
 
+#:::::::::::::::::::::::::: STAND 10.01.2021 ::::::::::::::::::::::::::
+
+
 # get env file
 import os
 from dotenv import load_dotenv

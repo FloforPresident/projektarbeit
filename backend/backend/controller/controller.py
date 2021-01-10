@@ -36,6 +36,8 @@ import teleop_keyboard as teleop
 
 app = Flask(__name__)
 
+#:::::::::::::::::::::::::: STAND 10.01.2021 ::::::::::::::::::::::::::
+
 # get env file
 import os
 from dotenv import load_dotenv
