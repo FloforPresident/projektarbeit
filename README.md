@@ -14,6 +14,7 @@ Backend starten:
 	$ cd ~/projektarbeit/backend
 	$ make start
   5. Docker-Datenbank starten
+  
 	$ cd ~/projektarbeit/backend/backend/controller
 	$ python3 controller.py
 	
