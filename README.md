@@ -38,8 +38,7 @@ Backend starten:
 	
   5. Map laden
   	
-	$ cd ~/projektarbeit/backend/backend/catkin_ws/maps
-	$ roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:='/basti_wohnung.yaml' 
+	$ roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:='/{YOUR_HOME_PATH}/projektarbeit/backend/backend/catkin_ws/maps/basti_wohnung.yaml' 
   
   4. Docker-Datenbank starten
 
