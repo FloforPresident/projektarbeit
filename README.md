@@ -41,7 +41,7 @@ Backend starten:
 	
   5. Map laden
   	
-	$ roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:='/{YOUR_HOME_PATH}/projektarbeit/backend/backend/catkin_ws/maps/basti_wohnung.yaml' 
+	$ roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/projektarbeit/backend/backend/catkin_ws/maps/map.yaml 
   
   4. Docker-Datenbank starten
 
@@ -55,6 +55,30 @@ Backend starten:
 	
   6. App starten
   
+  
+## Raum kartieren
+	
+	1. Roscore starten auf Host-PC
+		
+		$roscore
+	
+	2. Turtlebot bringup
+	
+		$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
+		$ roslaunch turtlebot3_bringup turtlebot3_robot.launch
+
+	3. Start gmapping auf Turtlebot
+		
+		$ roslaunch turtlebot3_slam turtlebot3_slam.launch
+		
+	4. Starte Teleop ( auf Host PC oder in App nachdem Controller gestartet wurde )
+	
+	 	$ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+		
+	5. Raum abfahren und im Anschluss Karte abspeichern
+	
+		$ rosrun map_server map_saver -f $HOME/projektarbeit/backend/backend/catkin_ws/maps/
+
 
 
 ### Docker Container
