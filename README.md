@@ -78,7 +78,7 @@ Backend starten:
 		
 5. Raum abfahren und im Anschluss Karte abspeichern
 	
-		$ rosrun map_server map_saver -f $HOME/projektarbeit/backend/backend/catkin_ws/maps/
+		$ rosrun map_server map_saver -f $HOME/projektarbeit/backend/backend/catkin_ws/maps/map
 
 
 
