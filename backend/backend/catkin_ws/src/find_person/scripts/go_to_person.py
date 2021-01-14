@@ -17,11 +17,13 @@ currentX = None
 currentY = None
 
 foundPerson = False
+cancel_script = False
 
 #standard callback if chatter data received
 def callback_action(data):
-	global goalX, goalY, currentX, currentY, foundPerson
+	global goalX, goalY, currentX, currentY, foundPerson, cancel_script
 	try:
+
 		jsonString = data.data
 		dataArray = json.loads(jsonString)
 		pubBase = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
@@ -29,29 +31,14 @@ def callback_action(data):
 		#current time
 		now = rospy.get_rostime()
 
-		#::::: goes to person, publishing to simple goal :::::
-		if dataArray["action"] == "find_person":
-			person = dataArray["name"]
-			x = float(dataArray["x"])
-			y = float(dataArray["y"])
-
-			answer = PoseStamped()
-			answer.header.stamp = now
-			answer.header.frame_id = "map"
-			answer.pose.position.x = x
-			answer.pose.position.y = y
-			answer.pose.position.z = 0
-			answer.pose.orientation.w = 1.0
-
-			print("Gehe ins Buero von: "+person)
-			pubBase.publish(answer)
-
-			#set goal coordinates
-			goalX = x
-			goalY = y
-
 		#::::: stops movement :::::
-		elif dataArray["action"] == "stop":
+		if dataArray["action"] == "stop":
+			if cancel_script == True:
+				print("dont execute script")
+				return
+
+			#stops moving right here
+			cancel_script = True
 
 			if currentX == None or currentY == None:
 				print("robot hasnt moved yet")
@@ -76,33 +63,55 @@ def callback_action(data):
 			goalX = currentX
 			goalY = currentY
 
-		#::::: found person :::::
-		elif dataArray["action"] == "found_person":
-			print("FOUND PERSON!!!")
-
-			foundPerson = True
-
-			answer = PoseStamped()
-			answer.header.stamp = now
-			answer.header.frame_id = "map"
-			answer.pose.position.x = currentX
-			answer.pose.position.y = currentY
-			answer.pose.position.z = 0
-			answer.pose.orientation.w = 1.0
-
-			pubBase.publish(answer)
-			
-			goalX = None
-			goalY = None
-
-			reached_goal()
 		else:
-			rospy.loginfo("no action selected")
+			cancel_script = False 
+			#::::: goes to person, publishing to simple goal :::::
+			if dataArray["action"] == "find_person":
+				person = dataArray["name"]
+				x = float(dataArray["x"])
+				y = float(dataArray["y"])
+
+				answer = PoseStamped()
+				answer.header.stamp = now
+				answer.header.frame_id = "map"
+				answer.pose.position.x = x
+				answer.pose.position.y = y
+				answer.pose.position.z = 0
+				answer.pose.orientation.w = 1.0
+
+				print("Gehe ins Buero von: "+person)
+				pubBase.publish(answer)
+
+				#set goal coordinates
+				goalX = x
+				goalY = y
+
+			#::::: found person :::::
+			elif dataArray["action"] == "found_person":
+				print("FOUND PERSON!!!")
+
+				foundPerson = True
+
+				answer = PoseStamped()
+				answer.header.stamp = now
+				answer.header.frame_id = "map"
+				answer.pose.position.x = currentX
+				answer.pose.position.y = currentY
+				answer.pose.position.z = 0
+				answer.pose.orientation.w = 1.0
+
+				pubBase.publish(answer)
+				
+				goalX = None
+				goalY = None
+
+				reached_goal()
+
 	except:
 		rospy.loginfo("none of my business")
 
 def reached_goal():
-	global foundPerson
+	global foundPerson, cancel_script
 	
 	#foundperson output for debugging
 	print(foundPerson)
@@ -110,12 +119,16 @@ def reached_goal():
 	sleeptime = 15
 	#rotate and go home
 	print("GOOOOOOOAL!!!!")
-	if foundPerson == True:
-		print("Waiting here!")
-		time.sleep(sleeptime)
-		go_home()
+
+	if cancel_script == False:
+		if foundPerson == True:
+			print("Waiting here!")
+			time.sleep(sleeptime)
+			go_home()
+		else:
+			rotate(sleeptime)
 	else:
-		rotate(sleeptime)
+		print("cancel script")
 
 #-----rotate-----
 PI = 3.1415926535897
@@ -219,7 +232,7 @@ def callback_simple_goal(data):
 
 #-----get current location constantaniously-----
 def getLocation(locationData):
-	global goalX, goalY, currentX, currentY
+	global goalX, goalY, currentX, currentY, cancel_script
 	currentX = locationData.feedback.base_position.pose.position.x
 	currentY = locationData.feedback.base_position.pose.position.y
 
@@ -231,7 +244,7 @@ def getLocation(locationData):
 	tolerance = float(0.05)
 
 	#check if goal-coordinates match current-coordinates
-	if goalX != None and goalY != None:
+	if goalX != None and goalY != None and cancel_script == False:
 		if float(format(currentX, '.1f')) <= float(format(goalX, '.1f'))+tolerance and float(format(currentY, '.1f')) <= float(format(goalY, '.1f'))+tolerance and float(format(currentX, '.1f')) >= float(format(goalX, '.1f'))-tolerance and float(format(currentY, '.1f')) >= float(format(goalY, '.1f'))-tolerance:
 			reached_goal()
 

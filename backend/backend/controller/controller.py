@@ -148,7 +148,14 @@ def teleop_talker(key):
     print("Teleop Talker!")
     pub = rospy.Publisher('teleop_chatter', String, queue_size=10)
     rospy.init_node('teleop_talker', anonymous=True)
-    rate = rospy.Rate(10)  # 10hz
+
+    #tell find person node to stop
+    pubStop = rospy.Publisher('chatter', String, queue_size=10)
+    datastring = '{"action": "stop", "name": "nobody"}'
+    dataArray = json.loads(datastring)
+    pubStop.publish(datastring)
+
+    #rate = rospy.Rate(10)  # 10hz
     pub.publish(key)
 
 
