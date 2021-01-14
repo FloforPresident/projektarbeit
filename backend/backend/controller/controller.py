@@ -72,15 +72,12 @@ def action_face_recognition(user, message):
     pub_message = rospy.Publisher('data_message', String, queue_size=1)
 
     pub_name.publish(name)
-
     time.sleep(2)
 
     pub_embedding.publish(embedding)
-
     time.sleep(2)
 
     pub_message.publish(pubMessage)
-
     time.sleep(2)
 
 def action_find_person(name, x, y):
@@ -133,12 +130,15 @@ def launch_node():
 connected = set()
 
 def start_websocket():
+
+    print("Starting websocket")
     print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
     print('<<<<<<<<<<<WELCOME<<<<<<<<<<<<<')
     print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
     
-    print("Starting websocket")
+    #calls this function whenever websocket receives data
     async def ws_recieve(websocket, path):
+
         connected.add(websocket)
         print(websocket)
 
@@ -147,88 +147,96 @@ def start_websocket():
         
         response = ''
 
-        action = data['action']
+        try:
 
-        # USER
-        if action == 'ADD USER':
-            image = data['image']
-            embedding = createFaceEncoding(image)
-            add_user(data['location_id'], data['name'], image, embedding)
-            response = login_user(data['name'])
-        elif action == 'LOGIN USER':
-            response = login_user(data['name'])
-        elif action == 'GET USERS':
-            response = get_users()
+            action = data['action']
 
-        # ROOM
-        elif action == 'ADD ROOM':
-            add_room(data['roboID'], data['name'])
-            response = get_room(data['name'])
-        elif action == 'DELETE ROOM':
-            delete_room(data['id'])
-        elif action == 'UPDATE ROBO':
-            update_robo(data['robo_id'], data['room_id'])
-        elif action == 'GET ROOMS':
-            response = {"rooms": get_rooms(), "robos": get_robos()}
-        elif action == 'SCAN ROOM':
-            # Todo Room Scan logic
-            response = ''
+            # USER
+            if action == 'ADD USER':
+                image = data['image']
+                print("this could take a while. please wait or try again.")
+                embedding = createFaceEncoding(image)
+                add_user(data['location_id'], data['name'], image, embedding)
+                response = login_user(data['name'])
+            elif action == 'LOGIN USER':
+                response = login_user(data['name'])
+            elif action == 'GET USERS':
+                response = get_users()
 
-        # ROBO
-        elif action == 'ADD ROBO':
-            response = add_robo(data['name'], data['ip'])
-        elif action == 'DELETE ROBO':
-            delete_robo(data['id'])
-        elif action == 'GET ROBOS':
-            response = get_robos()
+            # ROOM
+            elif action == 'ADD ROOM':
+                add_room(data['roboID'], data['name'])
+                response = get_room(data['name'])
+            elif action == 'DELETE ROOM':
+                delete_room(data['id'])
+            elif action == 'UPDATE ROBO':
+                update_robo(data['robo_id'], data['room_id'])
+            elif action == 'GET ROOMS':
+                response = {"rooms": get_rooms(), "robos": get_robos()}
+            elif action == 'SCAN ROOM':
+                # Todo Room Scan logic
+                response = ''
 
-        # Friend
-        elif action == 'DELETE FRIEND':
-            delete_user(data['id'])
-        elif action == 'UPDATE FRIEND':
-            update_location(data['user_id'], data['location_id'])
-        elif action == 'GET FRIENDS':
-            response = {"users": get_users(), "locations": get_locations(), "rooms": get_rooms()}
+            # ROBO
+            elif action == 'ADD ROBO':
+                response = add_robo(data['name'], data['ip'])
+            elif action == 'DELETE ROBO':
+                delete_robo(data['id'])
+            elif action == 'GET ROBOS':
+                response = get_robos()
 
-        # LOCATION
-        elif action == 'ADD LOCATION':
-            response = add_location(data['roomID'], data['title'], data['x'], data['y'])
-        elif action == 'DELETE LOCATION':
-            delete_location(data['id'])
-        elif action == 'GET LOCATIONS':
-            response = {"locations": get_locations(), "rooms": get_rooms(), "user": get_user(data['id'])}
+            # Friend
+            elif action == 'DELETE FRIEND':
+                delete_user(data['id'])
+            elif action == 'UPDATE FRIEND':
+                update_location(data['user_id'], data['location_id'])
+            elif action == 'GET FRIENDS':
+                response = {"users": get_users(), "locations": get_locations(), "rooms": get_rooms()}
 
-        # MESSAGE
-        elif action == 'SEND MESSAGE':
+            # LOCATION
+            elif action == 'ADD LOCATION':
+                response = add_location(data['roomID'], data['title'], data['x'], data['y'])
+            elif action == 'DELETE LOCATION':
+                delete_location(data['id'])
+            elif action == 'GET LOCATIONS':
+                response = {"locations": get_locations(), "rooms": get_rooms(), "user": get_user(data['id'])}
 
-            response = send_message(data['from_user'], data['to_user'], data['subject'], data['message'])
-            
-            #send to find_person package
-            action_find_person(response['user'][0], response['x'], response['y'])
+            # MESSAGE
+            elif action == 'SEND MESSAGE':
 
-            #send to face_recognition package
-            action_face_recognition(response['user'], data['message'])
+                response = send_message(data['from_user'], data['to_user'], data['subject'], data['message'])
+                
+                #send to find_person package
+                action_find_person(response['user'][0], response['x'], response['y'])
 
-        # CONTROL
-        elif action == "UP":
-            teleop_talker('w')
-            response = action
-        elif action == "DOWN":
-            teleop_talker('x')
-            response = action
-        elif action == "RIGHT":
-            teleop_talker('d')
-            response = action
-        elif action == "LEFT":
-            teleop_talker('a')
-            response = action
-        elif action == "STOP":
-            teleop_talker('s')
-            response = action
+                #send to face_recognition package
+                action_face_recognition(response['user'], data['message'])
 
-        response = json.dumps(response)
+            # CONTROL
+            elif action == "UP":
+                teleop_talker('w')
+                response = action
+            elif action == "DOWN":
+                teleop_talker('x')
+                response = action
+            elif action == "RIGHT":
+                teleop_talker('d')
+                response = action
+            elif action == "LEFT":
+                teleop_talker('a')
+                response = action
+            elif action == "STOP":
+                teleop_talker('s')
+                response = action
 
-        await websocket.send(response)
+            response = json.dumps(response)
+
+            await websocket.send(response)
+        
+        except:
+            print("an error occured. try sending command again")
+
+
 
     start_server = websockets.serve(ws_recieve, ip, 8765, max_size=1000000000000000, close_timeout=1000) # IP has to be IP of ROS-Computer
 
@@ -272,8 +280,8 @@ def main():
         start_websocket()
         #activeProcesses.add(p_websocket)
 
-    finally:
-        print("...")
+    except:
+        print("something went wrong in main")
 
 
 if __name__ == '__main__':

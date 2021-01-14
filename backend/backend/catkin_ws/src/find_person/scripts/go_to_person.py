@@ -37,6 +37,7 @@ def callback_action(data):
 				print("dont execute script")
 				return
 
+			cancel_move_base()
 			#stops moving right here
 			cancel_script = True
 
@@ -90,22 +91,26 @@ def callback_action(data):
 			elif dataArray["action"] == "found_person":
 				print("FOUND PERSON!!!")
 
-				foundPerson = True
+				if foundPerson == False:
+					foundPerson = True
 
-				answer = PoseStamped()
-				answer.header.stamp = now
-				answer.header.frame_id = "map"
-				answer.pose.position.x = currentX
-				answer.pose.position.y = currentY
-				answer.pose.position.z = 0
-				answer.pose.orientation.w = 1.0
+					answer = PoseStamped()
+					answer.header.stamp = now
+					answer.header.frame_id = "map"
+					answer.pose.position.x = currentX
+					answer.pose.position.y = currentY
+					answer.pose.position.z = 0
+					answer.pose.orientation.w = 1.0
 
-				pubBase.publish(answer)
-				
-				goalX = None
-				goalY = None
+					pubBase.publish(answer)
+					
+					goalX = None
+					goalY = None
 
-				reached_goal()
+					reached_goal()
+				else: 
+					print("already found person")
+					return
 
 	except:
 		rospy.loginfo("none of my business")
@@ -126,7 +131,10 @@ def reached_goal():
 			time.sleep(sleeptime)
 			go_home()
 		else:
-			rotate(sleeptime)
+			time.sleep(sleeptime)
+			go_home()
+			#alternative: rotating to search for person
+			#1rotate(sleeptime)
 	else:
 		print("cancel script")
 
