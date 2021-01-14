@@ -18,9 +18,6 @@ def createFaceEncoding(data):
         file.write(image)
         file.close()
 
-    # cv2.imshow("Fenster", "/home/patrick/projektarbeit/backend/backend/controller/face_encoding/image.jpg")
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
 
 
     time.sleep(5)
@@ -32,6 +29,7 @@ def createFaceEncoding(data):
    
     face_encoding = face_recognition.face_encodings(image_new)[0]
 
+    print(face_encoding)
     
 
     encoding_string = np.array2string(face_encoding, prefix="", suffix="", separator="#")

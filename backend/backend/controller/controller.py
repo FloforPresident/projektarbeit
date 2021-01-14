@@ -48,37 +48,13 @@ public_ip = os.getenv("HOST_IP")
 ip = str(public_ip)
 print("your ip is: " + ip)
 
-
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://admin:admin@'+ip+':5432/turtlebot_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-# def robo_ssh():
-#     host = "192.168.1.124"
-#     port = "22"
-#     username = "pi"
-#     password = "turtlebot"
-#
-#     # command = "cd BringupScripts && ./start_camera.sh"
-#     # command = '/opt/ros/kinetic/bin/roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true'
-#     # command = 'bash --login -c "roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true"'
-#     # command = 'PATH="$PATH;/opt/ros/kinetic/bin/roslaunch" && roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true'
-#     # command = "/sbin/ifconfig"
-#     command = "echo $PATH"
-#
-#     ssh = paramiko.SSHClient()
-#     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-#     ssh.connect(host, port, username, password)
-#     stdin, stdout, stderr = ssh.exec_command(command, timeout=None)
-#     lines = stdout.readlines()
-#     err = stderr.readlines()
-#     print(lines)
-#     print(err)
+#initialize teleop class
+teleopInstance = teleop.Teleop()
 
-
-# chan=ssh.invoke_shell()
-# chan.send('roslaunch raspicam_node camerav1_1280x720.launch enable_raw:=true')
 
 def action_face_recognition(user, message):
     print("face recognition started")
@@ -90,29 +66,19 @@ def action_face_recognition(user, message):
     print("Embedding: " + embedding)
     print("Message" + message)
 
-    rospy.init_node('face_recognition', anonymous=True)
 
     pub_name = rospy.Publisher('data_name', String, queue_size=1)
     pub_embedding = rospy.Publisher('data_embedding', String, queue_size=1)
     pub_message = rospy.Publisher('data_message', String, queue_size=1)
 
-    while pub_name.get_num_connections() == 0:
-        rospy.loginfo("Waiting for  name publisher to connect")
-        rospy.sleep(1)
     pub_name.publish(name)
 
     time.sleep(2)
 
-    while pub_embedding.get_num_connections() == 0:
-        rospy.loginfo("Waiting for embedding publisher to connect")
-        rospy.sleep(1)
     pub_embedding.publish(embedding)
 
     time.sleep(2)
 
-    while pub_message.get_num_connections() == 0:
-        rospy.loginfo("Waiting for message publisher to connect")
-        rospy.sleep(1)
     pub_message.publish(pubMessage)
 
     time.sleep(2)
@@ -123,7 +89,6 @@ def action_find_person(name, x, y):
     dataArray = json.loads(datastring)
 
     pub = rospy.Publisher('chatter', String, queue_size=10)
-    rospy.init_node('print_person', anonymous=False)
     rospy.loginfo("Auf der Suche nach: " + dataArray["name"])
 
     rate = rospy.Rate(1)  # 10hz
@@ -133,21 +98,19 @@ def action_find_person(name, x, y):
         i += 1
         rate.sleep()
 
-teleopInstance = teleop.Teleop()
+
+def action_roscore_start():
+    subprocess.run(["roscore"])
+
 
 
 def action_teleop_start():
     teleopInstance.startTeleop()
     print("Starting teleop....")
 
-def action_roscore_start():
-    subprocess.run(["roscore"])
-
-
 def teleop_talker(key):
     print("Teleop Talker!")
     pub = rospy.Publisher('teleop_chatter', String, queue_size=10)
-    rospy.init_node('teleop_talker', anonymous=True)
 
     #tell find person node to stop
     pubStop = rospy.Publisher('chatter', String, queue_size=10)
@@ -170,7 +133,9 @@ def launch_node():
 connected = set()
 
 def start_websocket():
-
+    print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
+    print('<<<<<<<<<<<WELCOME<<<<<<<<<<<<<')
+    print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
     
     print("Starting websocket")
     async def ws_recieve(websocket, path):
@@ -235,13 +200,14 @@ def start_websocket():
 
         # MESSAGE
         elif action == 'SEND MESSAGE':
+
             response = send_message(data['from_user'], data['to_user'], data['subject'], data['message'])
-            #action_find_person(response['user'][0], response['x'], response['y'])
-            mp_action_find_person = multiprocessing.Process(target=action_find_person, args=[response['user'][0], response['x'], response['y']])
-            mp_action_find_person.start()
-            #action_face_recognition(response['user'], data['message'])
-            mp_action_face_recognition = multiprocessing.Process(target=action_face_recognition, args=[response['user'], data['message']])
-            mp_action_face_recognition.start()
+            
+            #send to find_person package
+            action_find_person(response['user'][0], response['x'], response['y'])
+
+            #send to face_recognition package
+            action_face_recognition(response['user'], data['message'])
 
         # CONTROL
         elif action == "UP":
@@ -261,19 +227,6 @@ def start_websocket():
             response = action
 
         response = json.dumps(response)
-        #print(response)
-
-        # if(action == 'FIND PERSON'):
-        #     action_find_person(data['name'],data['x'], data['y'], data['message'])
-        # #await websocket.send("sucess")
-        # elif(action == 'TELEOP'):
-        #     key = data['key']
-        #     if(key == 'start'):
-        #         action_teleop_start()
-        #     else:
-        #         teleop_talker(key)
-        # else:
-        #     print("unknown action")
 
         await websocket.send(response)
 
@@ -297,11 +250,7 @@ def cleanup_on_exit(signal, frame):
         print("terminated process: " + str(proc))
     exit(0)
 
-
 activeProcesses = set()
-
-def rospy_init_node():
-    rospy.init_node('controller_node', anonymous=False)
 
 def main():
 
@@ -313,30 +262,16 @@ def main():
         # register KeyboardInterrupt handler
         signal.signal(signal.SIGINT, cleanup_on_exit)
 
-        #rospy_init_node()
+        #init_node nur einmal aufrufen hier
+        rospy.init_node('controller_node', anonymous=False)
 
-        #p_roscore = multiprocessing.Process(target=action_roscore_start)
-        #p_roscore.start()
-        #activeProcesses.add(p_roscore)
+        #initialize teleop
+        action_teleop_start()
 
-        # -- launch node process --
-        # p_launchNode = multiprocessing.Process(target=launch_node)
-        # p_launchNode.start()
-        # activeProcesses.add(p_launchNode)
+        #initialize websocket
+        start_websocket()
+        #activeProcesses.add(p_websocket)
 
-        # -- websocket process --
-        p_websocket = multiprocessing.Process(target=start_websocket)
-        p_websocket.start()
-        activeProcesses.add(p_websocket)
-
-        # -- teleop process --
-        p_teleop = multiprocessing.Process(target=action_teleop_start)
-        p_teleop.start()
-
-        
-        # -- robot ssh process --
-        # process3 = multiprocessing.Process(target=robo_ssh)
-    #process3.start()
     finally:
         print("...")
 
@@ -344,6 +279,3 @@ def main():
 if __name__ == '__main__':
     print("start controller")
     main()
-    print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-    print('<<<<<<<<<<<WELCOME<<<<<<<<<<<<<')
-    print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')

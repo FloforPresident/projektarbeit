@@ -85,7 +85,7 @@ class Teleop:
     def listener(self):
         rospy.Subscriber("teleop_chatter", String, self.callback)
         # spin() simply keeps python from exiting until this node is stopped
-        rospy.spin()
+        #rospy.spin()
 
     def vels(self, target_linear_vel, target_angular_vel):
         return "currently:\tlinear vel %s\t angular vel %s " % (self.target_linear_vel,self.target_angular_vel)
@@ -203,7 +203,8 @@ class Teleop:
 
     def startTeleop(self):
         
-        rospy.init_node('turtlebot3_teleop', anonymous=True)
+        print("start teleop_keyboard.py script")
+        #rospy.init_node('turtlebot3_teleop', anonymous=True)
         self.listener()
 
 
