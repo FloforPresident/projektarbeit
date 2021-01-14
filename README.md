@@ -56,6 +56,7 @@ Backend starten:
   6. App starten
   
   
+  
 ## Raum kartieren
 	
 1. Roscore starten auf Host-PC
@@ -81,7 +82,8 @@ Backend starten:
 
 
 
-### Docker Container
+
+## Docker Container
 
 - Controller
     - _python3.8 image_
@@ -100,6 +102,7 @@ Die wichtigsten Docker Commands:
     $ docker inspect {container-name}               // Infos zu bestimmtem Container
     $ docker container kill $(docker ps -q)         // Alle laufenden Container schließen
     $ docker exec -it {container-name} bash    // ins Docker Terminal
+
 
 ## App
 
