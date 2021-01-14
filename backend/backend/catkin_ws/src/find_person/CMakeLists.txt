@@ -53,7 +53,6 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
    FILES
-   person_info.msg
 #   Message2.msg
  )
 
@@ -166,9 +165,8 @@ include_directories(
 	scripts/print_patrick.py
 	scripts/print_johannes.py
 	scripts/go_to_person.py
-  scripts/stop_moving.py
-  scripts/found_person.py
-	scripts/say_name.py
+  	scripts/stop_moving.py
+  	scripts/found_person.py
 	DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
