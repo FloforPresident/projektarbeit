@@ -169,16 +169,18 @@ class Teleop:
             twist = Twist()
 
             self.control_linear_vel = self.makeSimpleProfile(self.control_linear_vel, self.target_linear_vel, (self.LIN_VEL_STEP_SIZE/2.0))
-            twist.linear.x = self.control_linear_vel; twist.linear.y = 0.0; twist.linear.z = 0.0
+            twist.linear.x = self.control_linear_vel
+            twist.linear.y = 0.0
+            twist.linear.z = 0.0
 
             self.control_angular_vel = self.makeSimpleProfile(self.control_angular_vel, self.target_angular_vel, (self.ANG_VEL_STEP_SIZE/2.0))
-            twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = self.control_angular_vel
+            twist.angular.x = 0.0
+            twist.angular.y = 0.0
+            twist.angular.z = self.control_angular_vel
             print(twist)
             
             while pub.get_num_connections() < 1:
                 pass
-            
-
             pub.publish(twist)
 
         except Exception as e:

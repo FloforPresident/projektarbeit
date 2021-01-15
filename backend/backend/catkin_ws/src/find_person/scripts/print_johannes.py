@@ -8,17 +8,12 @@ def print_person():
 	pub = rospy.Publisher('chatter', String, queue_size=10)
 	rospy.init_node('print_person', anonymous=False)
 
-	datastring = '{"action": "find_person", "name": "Johannes", "x": "-3.5", "y": "3.0"}'
+	datastring = '{"action": "find_person", "name": "Johannes", "x": "-0.5", "y": "-0.5"}'
 	dataArray = json.loads(datastring)
 
 	rospy.loginfo("Auf der Suche nach: " + dataArray["name"])
 	
-	rate = rospy.Rate(10) # 10hz
-	i = 0
-	while i < 4:
-		pub.publish(datastring)
-		i += 1
-		rate.sleep()
+	pub.publish(datastring)
 
 
 if __name__ == '__main__':

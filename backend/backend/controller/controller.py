@@ -36,6 +36,8 @@ import teleop_keyboard as teleop
 
 app = Flask(__name__)
 
+teleop_active = False
+
 #:::::::::::::::::::::::::: STAND 10.01.2021 ::::::::::::::::::::::::::
 
 # get env file
@@ -81,6 +83,9 @@ def action_face_recognition(user, message):
     time.sleep(2)
 
 def action_find_person(name, x, y):
+    global teleop_active
+    teleop_active = False
+
     datastring = '{"action": "find_person", "name": "' + name + '", "x": "' + str(x) + '", "y": "' + str(y) + '"}'
     print(datastring)
     dataArray = json.loads(datastring)
@@ -88,12 +93,7 @@ def action_find_person(name, x, y):
     pub = rospy.Publisher('chatter', String, queue_size=10)
     rospy.loginfo("Auf der Suche nach: " + dataArray["name"])
 
-    rate = rospy.Rate(1)  # 10hz
-    i = 0
-    while i < 4:
-        pub.publish(datastring)
-        i += 1
-        rate.sleep()
+    pub.publish(datastring)
 
 
 def action_roscore_start():
@@ -107,16 +107,23 @@ def action_teleop_start():
 
 def teleop_talker(key):
     print("Teleop Talker!")
+    find_person_node_pause()
+
     pub = rospy.Publisher('teleop_chatter', String, queue_size=10)
-
-    #tell find person node to stop
-    pubStop = rospy.Publisher('chatter', String, queue_size=10)
-    datastring = '{"action": "stop", "name": "nobody"}'
-    dataArray = json.loads(datastring)
-    pubStop.publish(datastring)
-
-    #rate = rospy.Rate(10)  # 10hz
     pub.publish(key)
+
+def find_person_node_pause():
+    global teleop_active
+
+    if teleop_active == False:
+        print("set teleop active")
+        #tell find person node to stop
+        pubStop = rospy.Publisher('chatter', String, queue_size=10)
+        datastring = '{"action": "stop", "name": "nobody"}'
+        dataArray = json.loads(datastring)
+        pubStop.publish(datastring)
+
+        teleop_active = True
 
 
 def launch_node():
@@ -226,6 +233,13 @@ def start_websocket():
                 teleop_talker('a')
                 response = action
             elif action == "STOP":
+                #make sure STOP always stops
+                print("----- STOP -----")
+                forceStop = rospy.Publisher('chatter', String, queue_size=10)
+                datastring = '{"action": "stop", "name": "nobody"}'
+                dataArray = json.loads(datastring)
+                forceStop.publish(datastring)
+
                 teleop_talker('s')
                 response = action
 

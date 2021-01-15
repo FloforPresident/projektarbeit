@@ -13,12 +13,7 @@ def print_person():
 
 	rospy.loginfo("Auf der Suche nach: " + dataArray["name"])
 	
-	rate = rospy.Rate(1) # 10hz
-	i = 0
-	while i < 4:
-		pub.publish(datastring)
-		i += 1
-		rate.sleep()
+	pub.publish(datastring)
 
 
 if __name__ == '__main__':
