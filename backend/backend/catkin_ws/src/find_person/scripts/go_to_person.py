@@ -18,11 +18,10 @@ currentX = None
 currentY = None
 
 foundPerson = False
-cancel_script = False
 
-#standard callback if chatter data received
+#--- standard callback if chatter data received ---
 def callback_action(data):
-	global goalX, goalY, currentX, currentY, foundPerson, cancel_script
+	global goalX, goalY, currentX, currentY, foundPerson
 	
 	print("---------- i got a new command ----------")
 	cancel_move_base()
@@ -32,23 +31,10 @@ def callback_action(data):
 		jsonString = data.data
 		dataArray = json.loads(jsonString)
 
-		#current time
-		now = rospy.get_rostime()
-
 		#::::: stops movement :::::
 		if dataArray["action"] == "stop":
-			if cancel_script == True:
-				print("dont execute script")
-				return
-
+			
 			#stops moving right here
-			cancel_script = True
-
-			if currentX == None or currentY == None:
-				print("robot hasnt moved yet")
-				currentX = 0
-				currentY = 0
-
 			print("Stop movement at:")
 			print("X: " + str(currentX))
 			print("Y: " + str(currentY))
@@ -56,11 +42,7 @@ def callback_action(data):
 			# cancel everything
 			cancel_move_base()
 
-			goalX = currentX
-			goalY = currentY
-
 		else:
-			cancel_script = False 
 			#::::: goes to person, publishing to simple goal :::::
 			if dataArray["action"] == "find_person":
 				foundPerson = False
@@ -97,8 +79,9 @@ def callback_action(data):
 	except:
 		rospy.loginfo("none of my business")
 
+
+# reached goal
 def reached_goal():
-	global cancel_script
 	print("+++++ GOAL +++++")
 	cancel_move_base()
 
@@ -106,34 +89,30 @@ def reached_goal():
 	print("waiting")
 	time.sleep(sleeptime)
 
-	if cancel_script == False:
-
-		if checkFoundPerson() == True:
-			print("Person found :)")
-			go_home()
-		else:
-			print("Person not found :(")
-			#alternativ 1: just go home
-			#go_home()
-
-			#alternative 2: rotating to search for person
-			rotate(sleeptime)
-			go_home()
+	if checkFoundPerson() == True:
+		print("Person found :)")
+		go_home()
 	else:
-		print("cancel script")
+		print("Person not found :(")
+		#alternativ 1: just go home
+		#go_home()
 
+		#alternative 2: rotating to search for person
+		rotate(sleeptime)
+		go_home()
+
+
+# checking if robot found person yet
 def checkFoundPerson():
 	global foundPerson
-	#foundperson output for debugging
-	#print("Person found? " + str(foundPerson))
-
+	
 	if foundPerson == True:
 		return True
 	else:
 		return False
 
 
-#-----rotate-----
+# rotate
 PI = 3.1415926535897
 def rotate(sleeptime):
 
@@ -182,8 +161,9 @@ def rotate(sleeptime):
 	#go home after rotating
 	print("Finished rotating")
 		 
-def go_home():
 
+
+def go_home():
 	#hat nun kein Ziel mehr
 	global goalX, goalY, foundPerson
 	goalX = None
@@ -193,6 +173,7 @@ def go_home():
 	goToPosition(0,0)
 	
 
+#stop robot
 def cancel_move_base():
 	print("canceled move base")
 
@@ -221,7 +202,7 @@ def cancel_move_base():
 
 #-----get current location constantaniously-----
 def getLocation(locationData):
-	global goalX, goalY, currentX, currentY, cancel_script
+	global goalX, goalY, currentX, currentY
 	currentX = locationData.feedback.base_position.pose.position.x
 	currentY = locationData.feedback.base_position.pose.position.y
 
@@ -233,14 +214,12 @@ def getLocation(locationData):
 	tolerance = float(0.05)
 
 	#check if goal-coordinates match current-coordinates
-	if goalX != None and goalY != None and cancel_script == False:
+	if goalX != None and goalY != None:
 		if float(format(currentX, '.1f')) <= float(format(goalX, '.1f'))+tolerance and float(format(currentY, '.1f')) <= float(format(goalY, '.1f'))+tolerance and float(format(currentX, '.1f')) >= float(format(goalX, '.1f'))-tolerance and float(format(currentY, '.1f')) >= float(format(goalY, '.1f'))-tolerance:
 			reached_goal()
 
 
-#############
-#############
-#############
+################################################################################
 def goToPosition(x, y):
 	print("Goal X: " + str(x))
 	print("Goal Y: " + str(y))
@@ -264,9 +243,8 @@ def goToPosition(x, y):
 	# else:
 	# 	return client.get_result()
 
-#############
-#############
-#############
+#################################################################################
+
 #-------------------------------------------------------------------------------------------------------------
 	
 def letsGo():

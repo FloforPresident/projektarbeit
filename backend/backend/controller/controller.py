@@ -38,7 +38,7 @@ app = Flask(__name__)
 
 teleop_active = False
 
-#:::::::::::::::::::::::::: STAND 10.01.2021 ::::::::::::::::::::::::::
+#:::::::::::::::::::::::::: STAND 15.01.2021 ::::::::::::::::::::::::::
 
 # get env file
 import os
@@ -58,6 +58,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 teleopInstance = teleop.Teleop()
 
 
+# start roscore - not needed yet
+def action_roscore_start():
+    subprocess.run(["roscore"])
+# launch node - not needed yet
+def launch_node():
+    print("launching node...")
+    subprocess.run(["rosrun", "find_person", "go_to_person.py"])
+
+
+
+
+#send data to face_recognition node
 def action_face_recognition(user, message):
     print("face recognition started")
     name = user[0]
@@ -82,6 +94,8 @@ def action_face_recognition(user, message):
     pub_message.publish(pubMessage)
     time.sleep(2)
 
+
+# send data to find_person node
 def action_find_person(name, x, y):
     global teleop_active
     teleop_active = False
@@ -96,15 +110,12 @@ def action_find_person(name, x, y):
     pub.publish(datastring)
 
 
-def action_roscore_start():
-    subprocess.run(["roscore"])
-
-
-
+# initialize teleop class
 def action_teleop_start():
     teleopInstance.startTeleop()
     print("Starting teleop....")
 
+# send key to teleop_keyboard script
 def teleop_talker(key):
     print("Teleop Talker!")
     find_person_node_pause()
@@ -112,6 +123,7 @@ def teleop_talker(key):
     pub = rospy.Publisher('teleop_chatter', String, queue_size=10)
     pub.publish(key)
 
+# tell find_person node that teleop is active
 def find_person_node_pause():
     global teleop_active
 
@@ -126,11 +138,6 @@ def find_person_node_pause():
         teleop_active = True
 
 
-def launch_node():
-    print("launching node...")
-    subprocess.run(["rosrun", "find_person", "go_to_person.py"])
-
-
 
 ######################### WEBSOCKET ####################################################
 
@@ -143,7 +150,9 @@ def start_websocket():
     print('<<<<<<<<<<<WELCOME<<<<<<<<<<<<<')
     print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
     
-    #calls this function whenever websocket receives data
+    #------------------------------------------------------------
+    #--- calls this function whenever websocket receives data ---
+    #------------------------------------------------------------
     async def ws_recieve(websocket, path):
 
         connected.add(websocket)
@@ -155,7 +164,7 @@ def start_websocket():
         response = ''
 
         try:
-
+            # action tells controller what to do
             action = data['action']
 
             # USER
@@ -219,7 +228,7 @@ def start_websocket():
                 #send to face_recognition package
                 action_face_recognition(response['user'], data['message'])
 
-            # CONTROL
+            # CONTROLS
             elif action == "UP":
                 teleop_talker('w')
                 response = action
@@ -274,6 +283,8 @@ def cleanup_on_exit(signal, frame):
 
 activeProcesses = set()
 
+
+# --- main ---
 def main():
 
     try:
