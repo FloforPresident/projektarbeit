@@ -18,6 +18,8 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 class Rooms extends StatefulWidget {
   final colorTheme = Colors.purple;
   final RoomController controller = new RoomController();
+  final double spaceBetweenIcons = 8.0;
+  final EdgeInsetsGeometry paddingCard = EdgeInsets.fromLTRB(0, 12.0, 0, 8.0);
 
   static List<Room> items = [];
   static List<Robo> roboItems = [];
@@ -34,9 +36,6 @@ class Rooms extends StatefulWidget {
 class _RoomState extends State<Rooms> {
   final WebSocketChannel channel = MyApp.con();
 
-
-
-
   ControllerCustomDropdown dropController = ControllerCustomDropdown<Robo>();
 
   @override
@@ -48,27 +47,25 @@ class _RoomState extends State<Rooms> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value:  SystemUiOverlayStyle(
-          statusBarColor: widget.colorTheme
-      ),
-      child: Column(
-        children: [
-          StreamBuilder(
+    return Column(
+      children: [
+        StreamBuilder(
             stream: channel.stream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-
                 widget.controller.setData(snapshot.data);
 
                 return Column(
                   children: [
                     AnimatedList(
-                    key: widget.controller.key,
+                      key: widget.controller.key,
                       initialItemCount: Rooms.items.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index, animation) {
-                        return widget.controller.buildItem(context, Rooms.items[index], animation, index);
+                        return widget.controller.buildItem(
+                            context, Rooms.items[index], animation, index,
+                            iconsize: widget.spaceBetweenIcons,
+                            paddingCard: widget.paddingCard);
                       },
                     ),
                     Container(
@@ -82,15 +79,14 @@ class _RoomState extends State<Rooms> {
                     )
                   ],
                 );
-              }          else if(snapshot.connectionState == ConnectionState.waiting){
+              } else if (snapshot.connectionState ==
+                  ConnectionState.waiting) {
                 return Text("");
               } else {
                 return IncorrectIP();
               }
-            }
-          ),
-        ],
-      ),
+            }),
+      ],
     );
   }
 
@@ -98,17 +94,14 @@ class _RoomState extends State<Rooms> {
     TextEditingController controller = TextEditingController();
 
     showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius:
-            BorderRadius.all(
-                Radius.circular(10.0))),
-          title: Text("Neuen Raum hinzufügen"),
-          content: Builder(
-            builder: (context) {
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            title: Text("Neuen Raum hinzufügen"),
+            content: Builder(builder: (context) {
               var height = MediaQuery.of(context).size.height;
               var width = MediaQuery.of(context).size.width;
 
@@ -124,40 +117,39 @@ class _RoomState extends State<Rooms> {
                     CustomDropdownLabel(
                       label: Text("Robo:"),
                       child: CustomDropdownMenu<Robo>(
-                        controller: dropController, data: Rooms.roboItems),
+                          controller: dropController, data: Rooms.roboItems),
                     ),
                   ],
                 ),
               );
-            }
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Schließen"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: Text("Hinzufügen"),
-              onPressed: () {
-                if (controller.text.isNotEmpty && dropController.getValue() != null) {
-                  widget.controller.newRoomRoboAlreadyTaken(dropController.getValue());
-                  widget.controller.addItem(dropController.getValue().id, controller.text);
-
-                  // scanMapDialog(context);
+            }),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Schließen"),
+                onPressed: () {
                   Navigator.of(context).pop();
-                }
-                else
-                {
-                  ErrorMessages.noDataEntered(context);
-                }
-              },
-            ),
-          ],
-        );
-      }
-    );
+                },
+              ),
+              FlatButton(
+                child: Text("Hinzufügen"),
+                onPressed: () {
+                  if (controller.text.isNotEmpty &&
+                      dropController.getValue() != null) {
+                    widget.controller
+                        .newRoomRoboAlreadyTaken(dropController.getValue());
+                    widget.controller
+                        .addItem(dropController.getValue().id, controller.text);
+
+                    // scanMapDialog(context);
+                    Navigator.of(context).pop();
+                  } else {
+                    ErrorMessages.noDataEntered(context);
+                  }
+                },
+              ),
+            ],
+          );
+        });
   }
 
   @override
@@ -170,7 +162,7 @@ class _RoomState extends State<Rooms> {
 class RoomController {
   final GlobalKey<AnimatedListState> key = GlobalKey();
 
-  void getData (WebSocketChannel channel) {
+  void getData(WebSocketChannel channel) {
     String data = '{"action": "GET ROOMS"}';
     channel.sink.add(data);
   }
@@ -185,13 +177,12 @@ class RoomController {
     var robos = jsonData['robos'];
 
     for (int i = 0; i < rooms.length; i++) {
-      Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'],
-          rooms[i]['name'], rooms[i]['scanned']);
+      Room r = new Room(rooms[i]['id'], rooms[i]['robo_id'], rooms[i]['name'],
+          rooms[i]['scanned']);
       Rooms.items.add(r);
     }
     for (int i = 0; i < robos.length; i++) {
-      Robo r = new Robo(
-          robos[i]['id'], robos[i]['name'], robos[i]['ip']);
+      Robo r = new Robo(robos[i]['id'], robos[i]['name'], robos[i]['ip']);
       Rooms.roboItems.add(r);
     }
   }
@@ -223,7 +214,8 @@ class RoomController {
         String jsonDataString = json.toString();
         final jsonData = jsonDecode(jsonDataString);
 
-        Rooms.newRoom = new Room(jsonData['id'], jsonData['robo_id'], jsonData['name'], jsonData['scanned']);
+        Rooms.newRoom = new Room(jsonData['id'], jsonData['robo_id'],
+            jsonData['name'], jsonData['scanned']);
 
         int end = Rooms.items.length;
         Rooms.items.add(Rooms.newRoom);
@@ -238,9 +230,8 @@ class RoomController {
         '{"action": "UPDATE ROBO", "room_id": ${room.id}, "robo_id": ${robo.id}}';
     channel.sink.add(data);
 
-    for(int i = 0; i < Rooms.items.length; i++) {
-      if(Rooms.items[i].id == room.id) {
-
+    for (int i = 0; i < Rooms.items.length; i++) {
+      if (Rooms.items[i].id == room.id) {
         room.setValue(robo.id);
         AnimatedListRemovedItemBuilder build = (context, animation) {
           return buildItem(context, Rooms.items[i], animation, i);
@@ -257,33 +248,33 @@ class RoomController {
 
   void startScan() {
     WebSocketChannel channel = MyApp.con();
-    String data =
-        '{"action": "SCAN ROOM", "room_id": ${Rooms.newRoom.id}}';
+    String data = '{"action": "SCAN ROOM", "room_id": ${Rooms.newRoom.id}}';
     channel.sink.add(data);
   }
 
   void newRoomRoboAlreadyTaken(Robo robo) {
-     for(int i = 0; i < Rooms.items.length; i++) {
-       if(Rooms.items[i].roboID == robo.id) {
-         int id;
-         WebSocketChannel channel = MyApp.con();
-         String data = '{"action": "UPDATE ROBO", "room_id": ${Rooms.items[i].id}, "robo_id": $id}';
+    for (int i = 0; i < Rooms.items.length; i++) {
+      if (Rooms.items[i].roboID == robo.id) {
+        int id;
+        WebSocketChannel channel = MyApp.con();
+        String data =
+            '{"action": "UPDATE ROBO", "room_id": ${Rooms.items[i].id}, "robo_id": $id}';
 
-         channel.sink.add(data);
+        channel.sink.add(data);
 
-         Room room = Rooms.items[i];
-         room.setValue(id);
-         AnimatedListRemovedItemBuilder build = (context, animation) {
-           return buildItem(context, Rooms.items[i], animation, i);
-         };
+        Room room = Rooms.items[i];
+        room.setValue(id);
+        AnimatedListRemovedItemBuilder build = (context, animation) {
+          return buildItem(context, Rooms.items[i], animation, i);
+        };
 
-         key.currentState.removeItem(i, build);
-         Rooms.items.remove(Rooms.items[i]);
+        key.currentState.removeItem(i, build);
+        Rooms.items.remove(Rooms.items[i]);
 
-         Rooms.items.add(room);
-         key.currentState.insertItem(i);
-       }
-     }
+        Rooms.items.add(room);
+        key.currentState.insertItem(i);
+      }
+    }
   }
 
   // Remove Shared Preference
@@ -292,11 +283,12 @@ class RoomController {
     prefs.setInt('room_id', null);
   }
 
-
-  Widget buildItem(BuildContext context, Room item, Animation animation, int index) {
+  Widget buildItem(
+      BuildContext context, Room currentRoom, Animation animation, int index,
+      {double iconsize = 8.0, EdgeInsetsGeometry paddingCard}) {
     String roboName = '';
     for (int i = 0; i < Rooms.roboItems.length; i++) {
-      if (item.roboID == Rooms.roboItems[i].id) {
+      if (currentRoom.roboID == Rooms.roboItems[i].id) {
         roboName = Rooms.roboItems[i].name;
       }
     }
@@ -306,47 +298,65 @@ class RoomController {
       child: Card(
         elevation: 2,
         child: ListTile(
-          title: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 3,
-                child: Row(
-                  children: <Widget>[
-                    Text(item.name),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Align(
-                  child: item.scanned ? Icon(Icons.check_box) : Icon(Icons.check_box_outline_blank),
-                  alignment: Alignment.centerRight,
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.create),
-                      onPressed: () {
-                        editItemDialog(context, item);
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () async {
-                        bool delete = await StatusMessages.onDelete(context);
-                        if (delete != null && delete) {
-                          removeItem(item, index);
-                        }
-                      },
-                    )
-                  ],
-                ),
-              ),
-            ],
+          title: Padding(
+            padding: paddingCard,
+            child: Table(
+                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                children: [
+                  TableRow(
+                    children: [
+                      Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(currentRoom.name)),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Container(
+                              padding:
+                                  EdgeInsets.fromLTRB(iconsize, 0, iconsize, 0),
+                              child: currentRoom.scanned
+                                  ? Icon(Icons.check_box)
+                                  : Icon(Icons.check_box_outline_blank),
+                            ),
+                            IconButton(
+                              constraints: BoxConstraints(),
+                              padding:
+                                  EdgeInsets.fromLTRB(iconsize, 0, iconsize, 0),
+                              icon: Icon(Icons.map),
+                              onPressed: () {
+                                RouteGenerator.onTapToFullscreenMap(
+                                    context, currentRoom);
+                              },
+                            ),
+                            IconButton(
+                              padding:
+                                  EdgeInsets.fromLTRB(iconsize, 0, iconsize, 0),
+                              constraints: BoxConstraints(),
+                              icon: Icon(Icons.create),
+                              onPressed: () {
+                                editItemDialog(context, currentRoom);
+                              },
+                            ),
+                            IconButton(
+                              constraints: BoxConstraints(),
+                              padding:
+                                  EdgeInsets.fromLTRB(iconsize, 0, iconsize, 0),
+                              icon: Icon(Icons.delete),
+                              onPressed: () async {
+                                bool delete =
+                                    await StatusMessages.onDelete(context);
+                                if (delete != null && delete) {
+                                  removeItem(currentRoom, index);
+                                }
+                              },
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ]),
           ),
           subtitle: Container(
               margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -365,47 +375,46 @@ class RoomController {
     ControllerCustomDropdown dropController = ControllerCustomDropdown<Robo>();
 
     showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) {
-          return StatefulBuilder(
-              builder: (context, setState) {
-                return SingleChildScrollView(
-                    child: AlertDialog(
-                      title: Text("Update your settings"),
-                      content: Column(
-                        children: <Widget>[
-                          CustomDropdownLabel(
-                            label: Text("Robo:"),
-                            child: CustomDropdownMenu<Robo>(
-                                controller: dropController,
-                                data: Rooms.roboItems),
-                          ),
-                        ],
-                      ),
-                      actions: <Widget>[
-                        FlatButton(
-                          child: Text("Schließen"),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        FlatButton(
-                          child: Text("Update"),
-                          onPressed: () {
-                            if(dropController.getValue() != null) {
-                              newRoomRoboAlreadyTaken(dropController.getValue());
-                              updateItem(room, dropController.getValue());
-                              Navigator.of(context).pop();
-                            }
-                          },
-                        ),
-                      ],
-                    )
-                );
-              }
-          );
-        }
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return SingleChildScrollView(
+              child: AlertDialog(
+                title: Text("Update your settings"),
+                content: Column(
+                  children: <Widget>[
+                    CustomDropdownLabel(
+                      label: Text("Robo:"),
+                      child: CustomDropdownMenu<Robo>(
+                          controller: dropController, data: Rooms.roboItems),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Schließen"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Update"),
+                    onPressed: () {
+                      if (dropController.getValue() != null) {
+                        newRoomRoboAlreadyTaken(dropController.getValue());
+                        updateItem(room, dropController.getValue());
+                        Navigator.of(context).pop();
+                      }
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

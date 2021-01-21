@@ -4,8 +4,9 @@ import 'package:flutter/services.dart';
 class PageFrame extends StatefulWidget {
   final Color colorTheme;
   final Widget page;
+  final EdgeInsets padding;
 
-  PageFrame({@required this.colorTheme,@required this.page});
+  PageFrame({@required this.colorTheme,@required this.page, this.padding = const EdgeInsets.fromLTRB(20, 20, 20, 0)});
 
   @override
   State<StatefulWidget> createState() {
@@ -30,7 +31,7 @@ class _PageFrameState extends State<PageFrame> {
                       colors: [widget.colorTheme, Colors.white])),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+              padding: widget.padding,
               child: widget.page,
             ),
           ],
