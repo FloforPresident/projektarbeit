@@ -63,6 +63,7 @@ class _FriendState extends State<Friends> {
                   Container(
                     margin: EdgeInsets.only(top: 30),
                     child: AnimatedList(
+                      physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       key: widget.controller.key,
                       initialItemCount: Friends.items.length,

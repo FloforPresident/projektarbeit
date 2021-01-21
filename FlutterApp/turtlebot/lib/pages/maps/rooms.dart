@@ -61,6 +61,7 @@ class _RoomState extends State<Rooms> {
                       key: widget.controller.key,
                       initialItemCount: Rooms.items.length,
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index, animation) {
                         return widget.controller.buildItem(
                             context, Rooms.items[index], animation, index,

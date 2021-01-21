@@ -97,6 +97,7 @@ class _LocationsState extends State<Locations> {
                       ),
                     ),
                     AnimatedList(
+                      physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       key: widget.controller.key,

@@ -41,40 +41,43 @@ class _RoboState extends State<Robos> {
           if (snapshot.hasData) {
             widget.controller.setData(snapshot.data);
 
-            return Column(children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  child: Text("Robos",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize:
-                              Theme.of(context).textTheme.headline1.fontSize)),
+            return SingleChildScrollView(
+              child: Column(children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    child: Text("Robos",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize:
+                                Theme.of(context).textTheme.headline1.fontSize)),
+                  ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 30.0),
-                child: AnimatedList(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  key: widget.controller.key,
-                  initialItemCount: Robos.items.length,
-                  itemBuilder: (context, index, animation) {
-                    return widget.controller.buildItem(
-                        context, Robos.items[index], animation, index);
-                  },
+                Container(
+                  margin: EdgeInsets.only(top: 30.0),
+                  child: AnimatedList(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    key: widget.controller.key,
+                    initialItemCount: Robos.items.length,
+                    itemBuilder: (context, index, animation) {
+                      return widget.controller.buildItem(
+                          context, Robos.items[index], animation, index);
+                    },
+                  ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: RaisedButton(
-                  onPressed: () {
-                    addItemDialog(context);
-                  },
-                  child: Text("Hinzufügen"),
-                ),
-              )
-            ]);
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () {
+                      addItemDialog(context);
+                    },
+                    child: Text("Hinzufügen"),
+                  ),
+                )
+              ]),
+            );
           }
           else if(snapshot.connectionState == ConnectionState.waiting){
             return Text("");
