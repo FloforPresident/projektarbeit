@@ -18,18 +18,6 @@ class ActiveLocation extends StatefulWidget {
   static Location activeLocation;
   static Room activeRoom;
   static User user;
-
-  ActiveLocation({Key key}) : super(key: key);
-
-  @override
-  _ActiveLocationState createState() {
-    return _ActiveLocationState();
-  }
-}
-
-class _ActiveLocationState extends State<ActiveLocation> {
-  final channel = MyApp.con();
-
   final colorTheme = Colors.orange;
 
   double _fontsize = 18;
@@ -53,6 +41,17 @@ class _ActiveLocationState extends State<ActiveLocation> {
     return _leftStart;
   }
 
+  ActiveLocation({Key key}) : super(key: key);
+
+  @override
+  _ActiveLocationState createState() {
+    return _ActiveLocationState();
+  }
+}
+
+class _ActiveLocationState extends State<ActiveLocation> {
+  final channel = MyApp.con();
+
   @override
   void initState() {
     super.initState();
@@ -75,7 +74,7 @@ class _ActiveLocationState extends State<ActiveLocation> {
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
-                      color: colorTheme.withOpacity(0),
+                      color: widget.colorTheme.withOpacity(0),
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(color: Colors.grey.withOpacity(0.0), width: 4.0)
                     ),

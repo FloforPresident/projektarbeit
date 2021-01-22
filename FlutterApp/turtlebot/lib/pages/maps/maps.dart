@@ -52,7 +52,7 @@ class _MapsState extends State<Maps> {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Container(
-                          alignment: Alignment.center, child: Text('Rooms')),
+                          alignment: Alignment.center, child: Text('Areas')),
                     ),
                   ),
                   SizedBox(

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
+import 'package:turtlebot/services/alertDialogs/status_messages.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:turtlebot/services/alertDialogs/error_messages.dart';
 import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
@@ -12,25 +13,6 @@ import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
 class Messages extends StatefulWidget {
   final MessageController controller = new MessageController();
   final User selectedUser;
-
-  static List<User> items = [];
-
-  Messages(this.selectedUser, {Key key}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() {
-    return _MessageState();
-  }
-}
-
-class _MessageState extends State<Messages> {
-  final channel = MyApp.con();
-
-  TextEditingController _subject = new TextEditingController();
-  TextEditingController _message = new TextEditingController();
-
-  ControllerCustomDropdown dropController = ControllerCustomDropdown<User>();
-
   final colorTheme = Colors.orange;
 
   double _fontsize = 18;
@@ -54,6 +36,26 @@ class _MessageState extends State<Messages> {
   get leftStart {
     return _leftStart;
   }
+
+
+  static List<User> items = [];
+
+  Messages(this.selectedUser, {Key key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _MessageState();
+  }
+}
+
+class _MessageState extends State<Messages> {
+  final channel = MyApp.con();
+
+  TextEditingController _subject = new TextEditingController();
+  TextEditingController _message = new TextEditingController();
+
+  ControllerCustomDropdown dropController = ControllerCustomDropdown<User>();
+
 
   @override
   void initState() {
@@ -86,7 +88,7 @@ class _MessageState extends State<Messages> {
                 children: [
                   CustomDropdownLabel(
                     label: Text("Empfänger:", style: TextStyle(
-                        color: textColor
+                        color: widget.textColor
                     )),
                     child: CustomDropdownMenu<User>(
                       itemTextStyle: TextStyle(fontSize: Theme.of(context).textTheme.bodyText2.fontSize, color: Colors.black),
@@ -102,20 +104,20 @@ class _MessageState extends State<Messages> {
                       children: <Widget>[
                         Container(
                           child: Text("Betreff:", style: TextStyle(
-                            color: textColor
+                            color: widget.textColor
                           ),),
                         ),
                         Container(
                           width: 130,
                           child: TextFormField(
-                            cursorColor: textColor,
+                            cursorColor: widget.textColor,
                             controller: _subject,
                             maxLines: null,
                             textAlignVertical: TextAlignVertical.bottom,
                             decoration: InputDecoration(
-                              helperStyle: TextStyle(color: textColor),
+                              helperStyle: TextStyle(color: widget.textColor),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: textColor, width: 0.25)
+                                borderSide: BorderSide(color: widget.textColor, width: 0.25)
                               )
                             ),
                             maxLength: 25,
@@ -127,9 +129,9 @@ class _MessageState extends State<Messages> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                        margin: EdgeInsets.fromLTRB(0, topSpace, 0, 0),
+                        margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
                         child: Text("Nachricht: ", style: TextStyle(
-                            color: textColor
+                            color: widget.textColor
                         ))),
                   ),
                   Container(
@@ -138,14 +140,14 @@ class _MessageState extends State<Messages> {
                     maxLines: null,
                     maxLength: 300,
                         decoration: InputDecoration(
-                            helperStyle: TextStyle(color: textColor),
+                            helperStyle: TextStyle(color: widget.textColor),
                             enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: textColor, width: 0.5)
+                                borderSide: BorderSide(color: widget.textColor, width: 0.5)
                             )
                         ),
                   )),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, topSpace, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, widget.topSpace, 0, 0),
                     child: RaisedButton(
                       onPressed: () {
                         if (dropController.getValue() != null &&
@@ -155,7 +157,8 @@ class _MessageState extends State<Messages> {
                               dropController.getValue(),
                               _subject.text,
                               _message.text);
-                          _showAlertDialog();
+                          StatusMessages.sendMessage(context, dropController.getValue(), _subject.text);
+                          widget.controller.resetSubjectMessagesRecipient(_subject, _message, dropController);
                         } else {
                           ErrorMessages.fieldsNotFilled(context);
                         }
@@ -174,26 +177,6 @@ class _MessageState extends State<Messages> {
         });
   }
 
-  void _showAlertDialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: Text('Geklappt!'),
-              content: Text(
-                  'Du hast den Auftrag für ${dropController.getValue().name} gestartet:\n\n${_message.text}'),
-              actions: <Widget>[
-                FlatButton(
-                    onPressed: () {
-                      _subject.text = '';
-                      _message.text = '';
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('Weiter'))
-              ]);
-        });
-  }
-
   @override
   void dispose() {
     channel.sink.close();
@@ -205,6 +188,13 @@ class MessageController {
   void getData(WebSocketChannel channel) {
     String data = '{"action": "GET USERS"}';
     channel.sink.add(data);
+  }
+
+  void resetSubjectMessagesRecipient(TextEditingController subject, TextEditingController message, ControllerCustomDropdown user)
+  {
+    subject.text = "";
+    message.text = "";
+    user.currentIndexValue = 0;
   }
 
   void setData(json) {

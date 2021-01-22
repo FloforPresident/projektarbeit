@@ -2,22 +2,20 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
-import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
-import 'package:turtlebot/frameworks/top_app_bar.dart';
 import 'package:turtlebot/services/alertDialogs/error_messages.dart';
 import 'package:turtlebot/services/alertDialogs/status_messages.dart';
 import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+// ignore: must_be_immutable
 class Rooms extends StatefulWidget {
   final colorTheme = Colors.purple;
-  final RoomController controller = new RoomController();
+  RoomController controller;
   final double spaceBetweenIcons = 8.0;
   final EdgeInsetsGeometry paddingCard = EdgeInsets.fromLTRB(0, 12.0, 0, 8.0);
 
@@ -25,7 +23,10 @@ class Rooms extends StatefulWidget {
   static List<Robo> roboItems = [];
   static Room newRoom;
 
-  Rooms({Key key}) : super(key: key);
+  Rooms({Key key})  : super(key: key)
+  {
+    this.controller = RoomController(this);
+  }
 
   @override
   _RoomState createState() {
@@ -35,8 +36,6 @@ class Rooms extends StatefulWidget {
 
 class _RoomState extends State<Rooms> {
   final WebSocketChannel channel = MyApp.con();
-
-  ControllerCustomDropdown dropController = ControllerCustomDropdown<Robo>();
 
   @override
   void initState() {
@@ -73,7 +72,7 @@ class _RoomState extends State<Rooms> {
                       margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: RaisedButton(
                         onPressed: () {
-                          addItemDialog(context);
+                          widget.controller.addItemDialog(context);
                         },
                         child: Text("Hinzufügen"),
                       ),
@@ -91,67 +90,8 @@ class _RoomState extends State<Rooms> {
     );
   }
 
-  void addItemDialog(BuildContext context) {
-    TextEditingController controller = TextEditingController();
 
-    showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0))),
-            title: Text("Neuen Raum hinzufügen"),
-            content: Builder(builder: (context) {
-              var height = MediaQuery.of(context).size.height;
-              var width = MediaQuery.of(context).size.width;
 
-              return Container(
-                height: height,
-                width: width,
-                child: Column(
-                  children: <Widget>[
-                    TextField(
-                      controller: controller,
-                      decoration: InputDecoration(labelText: "Name"),
-                    ),
-                    CustomDropdownLabel(
-                      label: Text("Robo:"),
-                      child: CustomDropdownMenu<Robo>(
-                          controller: dropController, data: Rooms.roboItems),
-                    ),
-                  ],
-                ),
-              );
-            }),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Schließen"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              FlatButton(
-                child: Text("Hinzufügen"),
-                onPressed: () {
-                  if (controller.text.isNotEmpty &&
-                      dropController.getValue() != null) {
-                    widget.controller
-                        .newRoomRoboAlreadyTaken(dropController.getValue());
-                    widget.controller
-                        .addItem(dropController.getValue().id, controller.text);
-
-                    // scanMapDialog(context);
-                    Navigator.of(context).pop();
-                  } else {
-                    ErrorMessages.noDataEntered(context);
-                  }
-                },
-              ),
-            ],
-          );
-        });
-  }
 
   @override
   void dispose() {
@@ -162,6 +102,9 @@ class _RoomState extends State<Rooms> {
 
 class RoomController {
   final GlobalKey<AnimatedListState> key = GlobalKey();
+  final Rooms connectedWidget;
+
+  RoomController(this.connectedWidget);
 
   void getData(WebSocketChannel channel) {
     String data = '{"action": "GET ROOMS"}';
@@ -197,7 +140,7 @@ class RoomController {
     channel.sink.add(data);
 
     AnimatedListRemovedItemBuilder build = (context, animation) {
-      return buildItem(context, room, animation, index);
+      return buildItem(context, room, animation, index, paddingCard: connectedWidget.paddingCard);
     };
 
     Rooms.items.remove(room);
@@ -235,7 +178,7 @@ class RoomController {
       if (Rooms.items[i].id == room.id) {
         room.setValue(robo.id);
         AnimatedListRemovedItemBuilder build = (context, animation) {
-          return buildItem(context, Rooms.items[i], animation, i);
+          return buildItem(context, Rooms.items[i], animation, i, paddingCard: connectedWidget.paddingCard);
         };
 
         key.currentState.removeItem(i, build);
@@ -286,7 +229,7 @@ class RoomController {
 
   Widget buildItem(
       BuildContext context, Room currentRoom, Animation animation, int index,
-      {double iconsize = 8.0, EdgeInsetsGeometry paddingCard}) {
+      {double iconsize = 8.0, EdgeInsetsGeometry paddingCard = const EdgeInsets.fromLTRB(0, 12.0, 0, 8.0)}) {
     String roboName = '';
     for (int i = 0; i < Rooms.roboItems.length; i++) {
       if (currentRoom.roboID == Rooms.roboItems[i].id) {
@@ -302,6 +245,9 @@ class RoomController {
           title: Padding(
             padding: paddingCard,
             child: Table(
+              columnWidths: {
+                1: IntrinsicColumnWidth(),
+              },
                 defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                 children: [
                   TableRow(
@@ -372,6 +318,75 @@ class RoomController {
     );
   }
 
+  void addItemDialog(BuildContext context) {
+    TextEditingController controller = TextEditingController();
+    ControllerCustomDropdown dropController = ControllerCustomDropdown<Robo>();
+
+
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            title: Text("Neuen Raum hinzufügen"),
+            content: Builder(builder: (context) {
+              var height = MediaQuery
+                  .of(context)
+                  .size
+                  .height;
+              var width = MediaQuery
+                  .of(context)
+                  .size
+                  .width;
+
+              return Container(
+                height: height,
+                width: width,
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      controller: controller,
+                      decoration: InputDecoration(labelText: "Name"),
+                    ),
+                    CustomDropdownLabel(
+                      label: Text("Robo:"),
+                      child: CustomDropdownMenu<Robo>(
+                          controller: dropController, data: Rooms.roboItems),
+                    ),
+                  ],
+                ),
+              );
+            }),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Schließen"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: Text("Hinzufügen"),
+                onPressed: () {
+                  if (controller.text.isNotEmpty &&
+                      dropController.getValue() != null) {
+                    newRoomRoboAlreadyTaken(dropController.getValue());
+                    addItem(dropController
+                        .getValue()
+                        .id, controller.text);
+
+                    // scanMapDialog(context);
+                    Navigator.of(context).pop();
+                  } else {
+                    ErrorMessages.noDataEntered(context);
+                  }
+                },
+              ),
+            ],
+          );
+        });
+  }
   void editItemDialog(BuildContext context, Room room) {
     ControllerCustomDropdown dropController = ControllerCustomDropdown<Robo>();
 

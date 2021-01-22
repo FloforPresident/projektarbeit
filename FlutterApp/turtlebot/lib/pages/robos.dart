@@ -71,7 +71,7 @@ class _RoboState extends State<Robos> {
                   margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: RaisedButton(
                     onPressed: () {
-                      addItemDialog(context);
+                      widget.controller.addItemDialog(context);
                     },
                     child: Text("Hinzufügen"),
                   ),
@@ -102,55 +102,7 @@ class _RoboState extends State<Robos> {
         });
   }
 
-  void addItemDialog(BuildContext context) {
-    TextEditingController _name = TextEditingController();
-    TextEditingController _ip = TextEditingController();
 
-    showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (context) => SingleChildScrollView(
-        child: AlertDialog(
-          title: Text("Neuen Robo hinzufügen"),
-          content: Column(
-            children: <Widget>[
-              TextField(
-                controller: _name,
-                decoration: InputDecoration(labelText: "Name"),
-                maxLines: null,
-                maxLength: 20,
-              ),
-              TextField(
-                controller: _ip,
-                decoration: InputDecoration(labelText: "IP-Addresse"),
-                maxLines: null,
-                maxLength: 20,
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Schließen"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: Text("Hinzufügen"),
-              onPressed: () {
-                if (_name.text.isNotEmpty && _ip.text.isNotEmpty) {
-                  widget.controller.addItem(_name.text, _ip.text);
-                  Navigator.of(context).pop();
-                } else {
-                  ErrorMessages.noDataEntered(context);
-                }
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   void dispose() {
@@ -246,6 +198,56 @@ class RoboController {
               ],
             ),
           ]),
+        ),
+      ),
+    );
+  }
+
+  void addItemDialog(BuildContext context) {
+    TextEditingController _name = TextEditingController();
+    TextEditingController _ip = TextEditingController();
+
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) => SingleChildScrollView(
+        child: AlertDialog(
+          title: Text("Neuen Robo hinzufügen"),
+          content: Column(
+            children: <Widget>[
+              TextField(
+                controller: _name,
+                decoration: InputDecoration(labelText: "Name"),
+                maxLines: null,
+                maxLength: 20,
+              ),
+              TextField(
+                controller: _ip,
+                decoration: InputDecoration(labelText: "IP-Addresse"),
+                maxLines: null,
+                maxLength: 20,
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Schließen"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text("Hinzufügen"),
+              onPressed: () {
+                if (_name.text.isNotEmpty && _ip.text.isNotEmpty) {
+                  addItem(_name.text, _ip.text);
+                  Navigator.of(context).pop();
+                } else {
+                  ErrorMessages.noDataEntered(context);
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

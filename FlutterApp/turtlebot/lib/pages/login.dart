@@ -13,20 +13,21 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:turtlebot/services/socke_info.dart';
 
 class Login extends StatefulWidget {
-  final LoginController controller = new LoginController();
+  LoginController controller;
 
   static List<Room> roomItems = [];
   static List<Location> locationItems = [];
   static Color colorTheme = Colors.blueGrey;
   Color secondaryTheme = Colors.white;
-  ControllerCustomDropdown roomDropController =
-  ControllerCustomDropdown<Room>();
-  ControllerCustomDropdown locationDropController =
-  ControllerCustomDropdown<Location>();
   GlobalKey<StateCustomDropdownMenu> locationWidgetKey = GlobalKey<StateCustomDropdownMenu>();
-  int currentvalueRoom = null;
+  int currentvalueRoom;
+  TextEditingController name = new TextEditingController();
+  TextEditingController ip = new TextEditingController();
 
-  Login({Key key}) : super(key: key);
+  Login({Key key}) : super(key: key)
+  {
+    this.controller = LoginController(this);
+  }
 
   @override
   _LoginState createState() {
@@ -38,21 +39,6 @@ class _LoginState extends State<Login> {
   double _leftStart = 40;
   double _rightEnd = 40;
 
-  TextEditingController _name = new TextEditingController();
-  TextEditingController _ip = new TextEditingController();
-
-
-  // Camera stuff
-  File imageFile;
-
-  void _openCamera() async {
-    var picture = await ImagePicker().getImage(
-      source: ImageSource.camera,
-    );
-    this.setState(() {
-      imageFile = File(picture.path);
-    });
-  }
 
   @override
   void initState() {
@@ -111,7 +97,7 @@ class _LoginState extends State<Login> {
                     padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
                     child: TextField(
                       style: TextStyle(),
-                      controller: _name,
+                      controller: widget.name,
                       decoration: InputDecoration(
                         enabledBorder:
                             UnderlineInputBorder(borderSide: BorderSide()),
@@ -125,7 +111,7 @@ class _LoginState extends State<Login> {
                     padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
                     child: TextField(
                       style: TextStyle(),
-                      controller: _ip,
+                      controller: widget.ip,
                       decoration: InputDecoration(
                         enabledBorder:
                             UnderlineInputBorder(borderSide: BorderSide()),
@@ -144,10 +130,10 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   onPressed: () async {
-                    if (_name.text.isNotEmpty && _ip.text.isNotEmpty) {
-                      SocketInfo.setHostAdress(_ip.text);
+                    if (widget.name.text.isNotEmpty && widget.ip.text.isNotEmpty) {
+                      SocketInfo.setHostAdress(widget.ip.text);
                       widget.controller.getData();
-                      widget.controller.loginUser(context, _name.text);
+                      widget.controller.loginUser(context, widget.name.text);
                     } else {
                       ErrorMessages.noDataEntered(context);
                     }
@@ -162,10 +148,10 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   onPressed: () {
-                    if (_ip.text.isNotEmpty) {
-                      SocketInfo.setHostAdress(_ip.text);
+                    if (widget.ip.text.isNotEmpty) {
+                      SocketInfo.setHostAdress(widget.ip.text);
                       widget.controller.getData();
-                      signupDialog(context);
+                      widget.controller.signupDialog(context);
                     } else {
                       ErrorMessages.noIpAdress(context);
                     }
@@ -179,200 +165,30 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void signupDialog(BuildContext context) {
-    showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
-        title: Text("Registrieren"),
-        content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-          var width = MediaQuery.of(context).size.width;
+  void resetState()
+  {
+    setState(() {
 
-          return Container(
-            child: TextField(
-              decoration: InputDecoration(labelText: "Name"),
-              controller: _name,
-              maxLines: null,
-              maxLength: 20,
-            ),
-          );
-        }),
-        actions: <Widget>[
-          FlatButton(
-            child: Text("Schließen",
-                style: TextStyle(color: widget.secondaryTheme)),
-            color: Colors.grey,
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          FlatButton(
-            child:
-                Text("Weiter", style: TextStyle(color: widget.secondaryTheme)),
-            color: Colors.blueGrey,
-            onPressed: () {
-              if (_name.text.isNotEmpty) {
-                pictureDialog(context);
-              } else {
-                ErrorMessages.noDataEntered(context);
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  void pictureDialog(BuildContext context) {
-    bool _uploadedImage = true;
-
-    showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
-        title: Text("Registrieren"),
-        content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-          var width = MediaQuery.of(context).size.width;
-
-          return Container(
-            height: height,
-            width: width,
-            child: Column(
-              children: <Widget>[
-                Text(
-                    "Wir brauchen ein frontales Bild von dir, damit die Roboter dich automatisch wiedererkennen"),
-                Container(
-                  margin: EdgeInsets.all(15),
-                  child: RaisedButton(
-                    child: Text("Kamera"),
-                    color: Login.colorTheme,
-                    textColor: Colors.white,
-                    onPressed: () {
-                      _openCamera();
-                    },
-                  ),
-                ),
-                // imageFile != null ? Image.file(imageFile, width: 400, height: 400): Text(''),
-              ],
-            ),
-          );
-        }),
-        actions: <Widget>[
-          FlatButton(
-            child: Text("Schließen",
-                style: TextStyle(color: widget.secondaryTheme)),
-            color: Colors.grey,
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          FlatButton(
-            child:
-                Text("Weiter", style: TextStyle(color: widget.secondaryTheme)),
-            color: Colors.blueGrey,
-            onPressed: () {
-              if (imageFile != null) {
-                editItemDialog(context);
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  void editItemDialog(BuildContext context) {
-    showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) {
-          List<Location> selectedLocations = [];
-          return StatefulBuilder(builder: (context, setState) {
-            return AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              title: Text("Registrieren"),
-              content: Builder(builder: (context) {
-                var height = MediaQuery.of(context).size.height;
-                var width = MediaQuery.of(context).size.width;
-
-                return Container(
-                  height: height,
-                  width: width,
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                          "Hier kannst du den Raum und deinen Platz auswählen, in dem man dich in der Regel findet.\n\nDiese Einstellung kannst du auch später nochmal aktualisieren oder einen neuen Platz hinzufügen."),
-                      CustomDropdownLabel(
-                        label: Text("Raum:"),
-                        child: CustomDropdownMenu<Room>(
-                            onChanged: (value) {
-                              List<Location> buffer = [];
-                              for (int i = 0;
-                                  i < Login.locationItems.length;
-                                  i++) {
-                                if (Login.locationItems[i].roomId ==
-                                    widget.roomDropController.getValue().id) {
-                                  buffer.add(Login.locationItems[i]);
-                                }
-                              }
-                              setState(() {
-                                selectedLocations = [];
-                                selectedLocations.addAll(buffer);
-                                widget.currentvalueRoom = value;
-                                });
-                            },
-                            startValueId: widget.currentvalueRoom,
-                            controller: widget.roomDropController,
-                            data: Login.roomItems),
-                      ),
-                      CustomDropdownLabel(
-                        label: Text("Platz"),
-                        child: CustomDropdownMenu<Location>(
-                            controller: widget.locationDropController,
-                            data: selectedLocations),
-                      ),
-                    ],
-                  ),
-                );
-              }),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text("Schließen",
-                      style: TextStyle(color: widget.secondaryTheme)),
-                  color: Colors.grey,
-                  onPressed: () {
-                    RouteGenerator.onTapToLogin(context);
-                  },
-                ),
-                FlatButton(
-                  child: Text("Registrieren",
-                      style: TextStyle(color: widget.secondaryTheme)),
-                  color: Colors.blueGrey,
-                  onPressed: () async {
-                    if (widget.locationDropController.getValue() != null) {
-                      widget.controller.addUser(context, _name.text,
-                          widget.locationDropController.getValue().id, imageFile);
-                    } else {
-                      widget.controller
-                          .addUser(context, _name.text, null, imageFile);
-                    }
-                  },
-                ),
-              ],
-            );
-          });
-        });
+    });
   }
 }
 
 class LoginController {
+
+  final Login connectedWidget;
+
+  LoginController(this.connectedWidget);
+
+  // Camera stuff
+  File imageFile;
+
+  void _openCamera() async {
+    var picture = await ImagePicker().getImage(
+      source: ImageSource.camera,
+    );
+    imageFile = File(picture.path);
+  }
+
   void getData() {
     Login.locationItems = [];
     Login.roomItems = [];
@@ -471,5 +287,203 @@ class LoginController {
         new User(jsonData['id'], jsonData['location_id'], jsonData['name']);
 
     RouteGenerator.onTapToHome(context, sessionUser: sessionUser);
+  }
+
+  void signupDialog(BuildContext context) {
+
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        title: Text("Registrieren"),
+        content: Builder(builder: (context) {
+          var height = MediaQuery.of(context).size.height;
+          var width = MediaQuery.of(context).size.width;
+
+          return Container(
+            child: TextField(
+              decoration: InputDecoration(labelText: "Name"),
+              controller: connectedWidget.name,
+              maxLines: null,
+              maxLength: 20,
+            ),
+          );
+        }),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Schließen",
+                style: TextStyle(color: connectedWidget.secondaryTheme)),
+            color: Colors.grey,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          FlatButton(
+            child:
+            Text("Weiter", style: TextStyle(color: connectedWidget.secondaryTheme)),
+            color: Colors.blueGrey,
+            onPressed: () {
+              if (connectedWidget.name.text.isNotEmpty) {
+                pictureDialog(context);
+              } else {
+                ErrorMessages.noDataEntered(context);
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  void pictureDialog(BuildContext context) {
+    bool _uploadedImage = true;
+
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        title: Text("Registrieren"),
+        content: Builder(builder: (context) {
+          var height = MediaQuery.of(context).size.height;
+          var width = MediaQuery.of(context).size.width;
+
+          return Container(
+            height: height,
+            width: width,
+            child: Column(
+              children: <Widget>[
+                Text(
+                    "Wir brauchen ein frontales Bild von dir, damit die Roboter dich automatisch wiedererkennen"),
+                Container(
+                  margin: EdgeInsets.all(15),
+                  child: RaisedButton(
+                    child: Text("Kamera"),
+                    color: Login.colorTheme,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      _openCamera();
+                    },
+                  ),
+                ),
+                // imageFile != null ? Image.file(imageFile, width: 400, height: 400): Text(''),
+              ],
+            ),
+          );
+        }),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Schließen",
+                style: TextStyle(color: connectedWidget.secondaryTheme)),
+            color: Colors.grey,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          FlatButton(
+            child:
+            Text("Weiter", style: TextStyle(color: connectedWidget.secondaryTheme)),
+            color: Colors.blueGrey,
+            onPressed: () {
+              if (imageFile != null) {
+                editItemDialog(context);
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  void editItemDialog(BuildContext context) {
+
+    ControllerCustomDropdown roomDropController =
+    ControllerCustomDropdown<Room>();
+    ControllerCustomDropdown locationDropController =
+    ControllerCustomDropdown<Location>();
+
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          List<Location> selectedLocations = [];
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              title: Text("Registrieren"),
+              content: Builder(builder: (context) {
+                var height = MediaQuery.of(context).size.height;
+                var width = MediaQuery.of(context).size.width;
+
+                return Container(
+                  height: height,
+                  width: width,
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                          "Hier kannst du den Raum und deinen Platz auswählen, in dem man dich in der Regel findet.\n\nDiese Einstellung kannst du auch später nochmal aktualisieren oder einen neuen Platz hinzufügen."),
+                      CustomDropdownLabel(
+                        label: Text("Raum:"),
+                        child: CustomDropdownMenu<Room>(
+                            onChanged: (value) {
+                              List<Location> buffer = [];
+                              for (int i = 0;
+                              i < Login.locationItems.length;
+                              i++) {
+                                if (Login.locationItems[i].roomId ==
+                                    roomDropController.getValue().id) {
+                                  buffer.add(Login.locationItems[i]);
+                                }
+                              }
+                              setState(() {
+                                selectedLocations = [];
+                                selectedLocations.addAll(buffer);
+                                connectedWidget.currentvalueRoom = value;
+                              });
+                            },
+                            startValueId: connectedWidget.currentvalueRoom,
+                            controller: roomDropController,
+                            data: Login.roomItems),
+                      ),
+                      CustomDropdownLabel(
+                        label: Text("Platz"),
+                        child: CustomDropdownMenu<Location>(
+                            controller: locationDropController,
+                            data: selectedLocations),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Schließen",
+                      style: TextStyle(color: connectedWidget.secondaryTheme)),
+                  color: Colors.grey,
+                  onPressed: () {
+                    RouteGenerator.onTapToLogin(context);
+                  },
+                ),
+                FlatButton(
+                  child: Text("Registrieren",
+                      style: TextStyle(color: connectedWidget.secondaryTheme)),
+                  color: Colors.blueGrey,
+                  onPressed: () async {
+                    if (locationDropController.getValue() != null) {
+                      addUser(context, connectedWidget.name.text,
+                          locationDropController.getValue().id, imageFile);
+                    } else {
+                      addUser(context, connectedWidget.name.text, null, imageFile);
+                    }
+                  },
+                ),
+              ],
+            );
+          });
+        });
   }
 }

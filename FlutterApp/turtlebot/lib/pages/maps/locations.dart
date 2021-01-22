@@ -111,7 +111,7 @@ class _LocationsState extends State<Locations> {
                       margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: RaisedButton(
                         onPressed: () {
-                          addItemDialog(context, dropController.getValue());
+                          widget.controller.addItemDialog(context, dropController.getValue());
                         },
                         child: Text("Hinzufügen"),
                       ),
@@ -128,62 +128,6 @@ class _LocationsState extends State<Locations> {
     );
   }
 
-  void addItemDialog(BuildContext context, Room room) {
-    TextEditingController titleController = TextEditingController();
-    TextEditingController xController = TextEditingController();
-    TextEditingController yController = TextEditingController();
-
-    String roomString = room.name;
-
-    showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (context) => SingleChildScrollView(
-        child: AlertDialog(
-          title: Text("Neuen Platz in $roomString hinzufügen"),
-          content: Column(
-            children: <Widget>[
-              TextField(
-                controller: titleController,
-                decoration: InputDecoration(labelText: "Name"),
-              ),
-              TextField(
-                controller: xController,
-                decoration: InputDecoration(labelText: "X-Koordinate"),
-              ),
-              TextField(
-                controller: yController,
-                decoration: InputDecoration(labelText: "Y-Koordinate"),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Schließen"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: Text("Hinzufügen"),
-              onPressed: () {
-                if (titleController.text.isNotEmpty &&
-                    xController.text.isNotEmpty &&
-                    yController.text.isNotEmpty) {
-                  widget.controller.addItem(
-                      room.id,
-                      titleController.text,
-                      double.parse(xController.text),
-                      double.parse(yController.text));
-                  }
-                  Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   void dispose() {
@@ -334,6 +278,63 @@ class LocationController {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  void addItemDialog(BuildContext context, Room room) {
+    TextEditingController titleController = TextEditingController();
+    TextEditingController xController = TextEditingController();
+    TextEditingController yController = TextEditingController();
+
+    String roomString = room.name;
+
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) => SingleChildScrollView(
+        child: AlertDialog(
+          title: Text("Neuen Platz in $roomString hinzufügen"),
+          content: Column(
+            children: <Widget>[
+              TextField(
+                controller: titleController,
+                decoration: InputDecoration(labelText: "Name"),
+              ),
+              TextField(
+                controller: xController,
+                decoration: InputDecoration(labelText: "X-Koordinate"),
+              ),
+              TextField(
+                controller: yController,
+                decoration: InputDecoration(labelText: "Y-Koordinate"),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Schließen"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text("Hinzufügen"),
+              onPressed: () {
+                if (titleController.text.isNotEmpty &&
+                    xController.text.isNotEmpty &&
+                    yController.text.isNotEmpty) {
+                  addItem(
+                      room.id,
+                      titleController.text,
+                      double.parse(xController.text),
+                      double.parse(yController.text));
+                }
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
         ),
       ),
     );

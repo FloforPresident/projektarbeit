@@ -2,25 +2,27 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
-import 'package:turtlebot/frameworks/top_app_bar_logout.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/pages/home/messages.dart';
 import 'package:turtlebot/services/alertDialogs/status_messages.dart';
-import 'package:turtlebot/services/routing.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Friends extends StatefulWidget {
-  final FriendController controller = new FriendController();
+  FriendController controller;
   static List<User> items = [];
   static List<Location> locationItems = [];
   static List<Room> roomItems = [];
   static final colorTheme = Colors.red;
+  int currentvalueRoom = null;
 
-  Friends({Key key}) : super(key: key);
+
+  Friends({Key key}) : super(key: key)
+  {
+    this.controller = FriendController(this);
+  }
 
   @override
   _FriendState createState() {
@@ -112,11 +114,16 @@ class _FriendState extends State<Friends> {
 
 class FriendController {
   final GlobalKey<AnimatedListState> key = GlobalKey();
+  final Friends connectedWidget;
+
+
 
   ControllerCustomDropdown roomDropController =
       ControllerCustomDropdown<Room>();
   ControllerCustomDropdown locationDropController =
       ControllerCustomDropdown<Location>();
+
+  FriendController(this.connectedWidget);
 
   void getData(WebSocketChannel channel) {
     String data = '{"action": "GET FRIENDS"}';
@@ -306,8 +313,10 @@ class FriendController {
                             setState(() {
                               selectedLocations = [];
                               selectedLocations.addAll(buffer);
+                              connectedWidget.currentvalueRoom = value;
                             });
                           },
+                          startValueId: connectedWidget.currentvalueRoom,
                           controller: roomDropController,
                           data: Friends.roomItems),
                     ),
