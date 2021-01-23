@@ -19,13 +19,13 @@ class Login extends StatefulWidget {
   static List<Location> locationItems = [];
   static Color colorTheme = Colors.blueGrey;
   Color secondaryTheme = Colors.white;
-  GlobalKey<StateCustomDropdownMenu> locationWidgetKey = GlobalKey<StateCustomDropdownMenu>();
+  GlobalKey<StateCustomDropdownMenu> locationWidgetKey =
+      GlobalKey<StateCustomDropdownMenu>();
   int currentvalueRoom;
   TextEditingController name = new TextEditingController();
   TextEditingController ip = new TextEditingController();
 
-  Login({Key key}) : super(key: key)
-  {
+  Login({Key key}) : super(key: key) {
     this.controller = LoginController(this);
   }
 
@@ -38,7 +38,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   double _leftStart = 40;
   double _rightEnd = 40;
-
 
   @override
   void initState() {
@@ -55,8 +54,7 @@ class _LoginState extends State<Login> {
         }
       },
       child: WillPopScope(
-        onWillPop: ()
-        {
+        onWillPop: () {
           return StatusMessages.exitApp(context);
         },
         child: Scaffold(
@@ -130,7 +128,8 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   onPressed: () async {
-                    if (widget.name.text.isNotEmpty && widget.ip.text.isNotEmpty) {
+                    if (widget.name.text.isNotEmpty &&
+                        widget.ip.text.isNotEmpty) {
                       SocketInfo.setHostAdress(widget.ip.text);
                       widget.controller.getData();
                       widget.controller.loginUser(context, widget.name.text);
@@ -165,16 +164,12 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void resetState()
-  {
-    setState(() {
-
-    });
+  void resetState() {
+    setState(() {});
   }
 }
 
 class LoginController {
-
   final Login connectedWidget;
 
   LoginController(this.connectedWidget);
@@ -230,25 +225,24 @@ class LoginController {
       String data =
           '{"action": "ADD USER", "name": "$name", "location_id": $locationID, "image": "$base64Image"}';
       channel.sink.add(data);
-      channel.stream.listen((json) async {
-        if (json != '') {
-          String jsonDataString = json.toString();
+      channel.stream.listen(
+          (json) async {
+            if (json != '') {
+              String jsonDataString = json.toString();
 
-          loginHelper(context, jsonDataString);
-        } else {
-          RouteGenerator.onTapToLogin(context);
-        }
-      },
+              loginHelper(context, jsonDataString);
+            } else {
+              RouteGenerator.onTapToLogin(context);
+            }
+          },
           cancelOnError: false,
-      onError: (Object e) {
-        ErrorMessages.wrongIpAdress(context);
-      });
-    }
-    catch (exception) {
+          onError: (Object e) {
+            ErrorMessages.wrongIpAdress(context);
+          });
+    } catch (exception) {
       ErrorMessages.wrongIpAdress(context);
     }
   }
-
 
   void loginUser(BuildContext context, String name) {
     WebSocketChannel channel = MyApp.con();
@@ -260,15 +254,11 @@ class LoginController {
           if (json != '') {
             String jsonDataString = json.toString();
 
-            try
-            {
+            try {
               loginHelper(context, jsonDataString);
+            } catch (exception) {
+              ErrorMessages.wrongUserName(context);
             }
-            catch (exception)
-          {
-            ErrorMessages.wrongUserName(context);
-          }
-
           } else {
             RouteGenerator.onTapToLogin(context);
           }
@@ -290,7 +280,6 @@ class LoginController {
   }
 
   void signupDialog(BuildContext context) {
-
     showDialog(
       barrierDismissible: true,
       context: context,
@@ -321,8 +310,8 @@ class LoginController {
             },
           ),
           FlatButton(
-            child:
-            Text("Weiter", style: TextStyle(color: connectedWidget.secondaryTheme)),
+            child: Text("Weiter",
+                style: TextStyle(color: connectedWidget.secondaryTheme)),
             color: Colors.blueGrey,
             onPressed: () {
               if (connectedWidget.name.text.isNotEmpty) {
@@ -384,8 +373,8 @@ class LoginController {
             },
           ),
           FlatButton(
-            child:
-            Text("Weiter", style: TextStyle(color: connectedWidget.secondaryTheme)),
+            child: Text("Weiter",
+                style: TextStyle(color: connectedWidget.secondaryTheme)),
             color: Colors.blueGrey,
             onPressed: () {
               if (imageFile != null) {
@@ -399,18 +388,18 @@ class LoginController {
   }
 
   void editItemDialog(BuildContext context) {
-
     ControllerCustomDropdown roomDropController =
-    ControllerCustomDropdown<Room>();
+        ControllerCustomDropdown<Room>();
     ControllerCustomDropdown locationDropController =
-    ControllerCustomDropdown<Location>();
+        ControllerCustomDropdown<Location>();
 
     showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) {
-          List<Location> selectedLocations = [];
-          return StatefulBuilder(builder: (context, setState) {
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        List<Location> selectedLocations = [];
+        return StatefulBuilder(
+          builder: (context, setState) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -432,8 +421,8 @@ class LoginController {
                             onChanged: (value) {
                               List<Location> buffer = [];
                               for (int i = 0;
-                              i < Login.locationItems.length;
-                              i++) {
+                                  i < Login.locationItems.length;
+                                  i++) {
                                 if (Login.locationItems[i].roomId ==
                                     roomDropController.getValue().id) {
                                   buffer.add(Login.locationItems[i]);
@@ -477,13 +466,16 @@ class LoginController {
                       addUser(context, connectedWidget.name.text,
                           locationDropController.getValue().id, imageFile);
                     } else {
-                      addUser(context, connectedWidget.name.text, null, imageFile);
+                      addUser(
+                          context, connectedWidget.name.text, null, imageFile);
                     }
                   },
                 ),
               ],
             );
-          });
-        });
+          },
+        );
+      },
+    );
   }
 }
