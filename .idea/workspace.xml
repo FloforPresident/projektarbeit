@@ -26,15 +26,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- fixed bug where in friends when you change location the first dropdown menu is empty&#10;&#10;- put all dialogs into the controller&#10;&#10;- put all layout variables in StatefulWidget not in the state&#10;&#10;- set up that table in rooms.dart the icons have the space they need to spread&#10;&#10;-changed name of Maps to Areas">
+    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- furhter deleted unused files&#10;&#10;- Updated Flutter Doku">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DokumentationApp/FlutterDokuApp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DokumentationApp/test" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/archive/pages/login.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/archive/socket_model/socket_model.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/bottom_nav_bar.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DokumentationApp/FlutterDokuApp.md" beforeDir="false" afterPath="$PROJECT_DIR$/DokumentationApp/FlutterDokuApp.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,7 +307,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611236835325</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="- furhter deleted unused files&#10;&#10;- Updated Flutter Doku">
+      <created>1611410924236</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1611410924237</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,7 +355,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Push Johannes IP" />
     <MESSAGE value="IP-Änderung auf Flo" />
     <MESSAGE value=".decode angefügt, controller-minimal.py IP auf Flo geändert" />
     <MESSAGE value="Started adding current location" />
@@ -379,7 +379,8 @@
     <MESSAGE value="- deleted onchanged StatusMessage as own class is now status_messages.dart" />
     <MESSAGE value="- added page to display map &#10;&#10;- added TestBild.jpg" />
     <MESSAGE value="- made List scrollable again" />
-    <option name="LAST_COMMIT_MESSAGE" value="- made List scrollable again" />
+    <MESSAGE value="- furhter deleted unused files&#10;&#10;- Updated Flutter Doku" />
+    <option name="LAST_COMMIT_MESSAGE" value="- furhter deleted unused files&#10;&#10;- Updated Flutter Doku" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1296" y="224" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609737630588">
@@ -510,11 +511,11 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1828" y="92" width="1736" height="896" key="VCS.FileHistoryDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1610981097107" />
-    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2" timestamp="1611335136138">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state x="318" y="260" key="Vcs.Push.Dialog.v2" timestamp="1611410926547">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1611335136138" />
-    <state x="318" y="260" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609433489245" />
+    <state x="318" y="260" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1611410926547" />
     <state x="2318" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609173701930" />
     <state width="968" height="548" key="XDebugger.FullValuePopup" timestamp="1611334755886">
       <screen x="-1920" y="0" width="1920" height="1080" />
