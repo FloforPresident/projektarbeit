@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         'ws://' + SocketInfo.hostAdress + SocketInfo.port);
   }
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -76,6 +77,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  int _selectedIndex = 0;
+
   initState() {
     super.initState();
 
@@ -113,20 +116,6 @@ class _HomeState extends State<Home> {
       MyApp.name = widget.sessionUser.name;
     });
   }
-
-  Future<Null> logout() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('id', null);
-    prefs.setString('name', null);
-
-    setState(() {
-      MyApp.id = null;
-      MyApp.name = null;
-    });
-  }
-
-  int _selectedIndex = 0;
-
 
   Widget choosePageAndColor(int Index) {
     List<Widget> pages = [HomeScreen(), Maps(), Robos(), Friends(), Controls()];

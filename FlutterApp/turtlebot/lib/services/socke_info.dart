@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:turtlebot/services/alertDialogs/error_messages.dart';
 
 class SocketInfo {
 

@@ -26,9 +26,18 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- furhter deleted unused files&#10;&#10;- Updated Flutter Doku">
+    <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- edited DokuApp">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DokumentationApp/FlutterDokuApp.md" beforeDir="false" afterPath="$PROJECT_DIR$/DokumentationApp/FlutterDokuApp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/frameworks/custom_dataTable.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/frameworks/custom_dropdown_menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/frameworks/custom_dropdown_menu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/frameworks/top_app_bar.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/frameworks/top_app_bar_logout.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/controls.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/controls.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/maps.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/maps.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/services/socke_info.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,7 +323,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611410924237</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="- edited DokuApp">
+      <created>1611411254127</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1611411254127</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,7 +371,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="IP-Änderung auf Flo" />
     <MESSAGE value=".decode angefügt, controller-minimal.py IP auf Flo geändert" />
     <MESSAGE value="Started adding current location" />
     <MESSAGE value="added IntelliJ files" />
@@ -380,14 +395,16 @@
     <MESSAGE value="- added page to display map &#10;&#10;- added TestBild.jpg" />
     <MESSAGE value="- made List scrollable again" />
     <MESSAGE value="- furhter deleted unused files&#10;&#10;- Updated Flutter Doku" />
-    <option name="LAST_COMMIT_MESSAGE" value="- furhter deleted unused files&#10;&#10;- Updated Flutter Doku" />
+    <MESSAGE value="- edited DokuApp" />
+    <option name="LAST_COMMIT_MESSAGE" value="- edited DokuApp" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1296" y="224" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609737630588">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state x="499" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1613239262426">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="-1296" y="224" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1609737630588" />
     <state x="499" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1609421824200" />
+    <state x="499" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1613239262426" />
     <state x="-1715" y="167" width="1336" height="664" key="AVDManager" timestamp="1609693124733">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
@@ -511,11 +528,11 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1828" y="92" width="1736" height="896" key="VCS.FileHistoryDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1610981097107" />
-    <state x="318" y="260" key="Vcs.Push.Dialog.v2" timestamp="1611410926547">
+    <state x="318" y="260" key="Vcs.Push.Dialog.v2" timestamp="1611411260698">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1611335136138" />
-    <state x="318" y="260" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1611410926547" />
+    <state x="318" y="260" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1611411260698" />
     <state x="2318" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609173701930" />
     <state width="968" height="548" key="XDebugger.FullValuePopup" timestamp="1611334755886">
       <screen x="-1920" y="0" width="1920" height="1080" />
@@ -532,16 +549,18 @@
     <state x="93" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1609171021517" />
     <state x="2036" y="116" width="1688" height="848" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609178090970" />
     <state x="93" y="93" width="1351" height="679" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1609266883104" />
-    <state x="-1408" y="326" width="636" height="534" key="find.popup" timestamp="1611249915695">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state x="410" y="261" width="568" height="534" key="find.popup" timestamp="1613239254681">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="-1408" y="326" width="636" height="534" key="find.popup/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1611249915695" />
-    <state x="409" y="305" key="git4idea.merge.GitPullDialog" timestamp="1611402151905">
+    <state x="410" y="261" width="568" height="534" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1613239254681" />
+    <state x="409" y="305" key="git4idea.merge.GitPullDialog" timestamp="1613238058951">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="-1409" y="381" key="git4idea.merge.GitPullDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1611236862462" />
     <state x="409" y="305" key="git4idea.merge.GitPullDialog/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1611402151905" />
     <state x="2431" y="381" key="git4idea.merge.GitPullDialog/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609149696913" />
+    <state x="409" y="305" key="git4idea.merge.GitPullDialog/0.0.1536.864@0.0.1536.864" timestamp="1613238058951" />
     <state x="498" y="188" width="672" height="543" key="search.everywhere.popup" timestamp="1611403247178">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -561,11 +580,6 @@
           <url>file://$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/login.dart</url>
           <line>213</line>
           <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/FlutterApp/turtlebot/lib/frameworks/custom_dropdown_menu.dart</url>
-          <line>67</line>
-          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

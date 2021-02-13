@@ -62,13 +62,6 @@ class StateCustomDropdownMenu extends State<CustomDropdownMenu> {
           }),
     );
   }
-
-  rebuildState()
-  {
-    setState(() {
-
-    });
-  }
 }
 
 class ControllerCustomDropdown<T extends DatabaseObject> {
