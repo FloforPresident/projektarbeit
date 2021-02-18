@@ -1,0 +1,1 @@
+gnome-terminal --tab -- /bin/sh -c 'python3.8 controller.py; exec bash'

@@ -1,0 +1,1 @@
+gnome-terminal --tab -- /bin/sh -c 'roscore'

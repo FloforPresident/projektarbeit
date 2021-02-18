@@ -1,0 +1,1 @@
+gnome-terminal --tab -- /bin/sh -c 'rosrun web_video_server web_video_server'

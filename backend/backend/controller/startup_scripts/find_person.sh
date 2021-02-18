@@ -1,0 +1,1 @@
+gnome-terminal --tab -- /bin/sh -c 'rosrun find_person go_to_person.py'

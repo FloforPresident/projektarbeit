@@ -1,0 +1,1 @@
+gnome-terminal -- /bin/sh -c 'cd ~/projektarbeit/backend; sudo make start; exec bash'
