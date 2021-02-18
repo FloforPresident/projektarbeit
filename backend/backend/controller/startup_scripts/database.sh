@@ -1,1 +1,1 @@
-gnome-terminal -- /bin/sh -c 'cd ~/projektarbeit/backend; sudo make start; exec bash'
+gnome-terminal -- /bin/sh -c 'echo "------ DATABASE ------\n";cd ~/projektarbeit/backend; sudo make start; exec bash'

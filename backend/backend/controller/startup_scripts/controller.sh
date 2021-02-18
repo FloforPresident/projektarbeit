@@ -1,1 +1,1 @@
-gnome-terminal --tab -- /bin/sh -c 'python3.8 controller.py; exec bash'
+gnome-terminal --tab -- /bin/sh -c 'echo "------ CONTROLLER ------\n";python3.8 controller.py; exec bash'

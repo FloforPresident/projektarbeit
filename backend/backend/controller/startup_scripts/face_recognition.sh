@@ -1,1 +1,1 @@
-gnome-terminal --tab -- /bin/sh -c 'rosrun face_recognition face_recognize_plus_Web_Video_Stream.py'
+gnome-terminal --tab -- /bin/sh -c 'echo "------ FACE RECOGNITION ------\n";rosrun face_recognition face_recognize_plus_Web_Video_Stream.py'

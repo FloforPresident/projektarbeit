@@ -1,1 +1,1 @@
-gnome-terminal --tab -- /bin/sh -c 'roscore'
+gnome-terminal --tab -- /bin/sh -c 'echo "------ ROSCORE ------\n";roscore'
