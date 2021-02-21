@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/loading_info.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
@@ -170,7 +171,7 @@ class _MessageState extends State<Messages> {
               ),
             );
           }          else if(snapshot.connectionState == ConnectionState.waiting){
-            return Text("");
+            return LoadingInfo();
           } else {
             return IncorrectIP(padding: EdgeInsets.all(0));
           }

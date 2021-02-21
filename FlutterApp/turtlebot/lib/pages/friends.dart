@@ -9,6 +9,8 @@ import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/pages/home/messages.dart';
 import 'package:turtlebot/services/alertDialogs/status_messages.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:turtlebot/frameworks/loading_info.dart';
+
 
 class Friends extends StatefulWidget {
   FriendController controller;
@@ -80,7 +82,7 @@ class _FriendState extends State<Friends> {
             );
           }
           else if(snapshot.connectionState == ConnectionState.waiting){
-            return Text("");
+            return LoadingInfo();
           }
           else {
             return Column(
