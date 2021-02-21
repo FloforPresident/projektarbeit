@@ -96,25 +96,20 @@ class _HomeState extends State<Home> {
     final String userName = prefs.getString('name');
 
     if (userID != null && SocketInfo.hostAdress != "0.0.0.0") {
-      setState(() {
         MyApp.id = userID;
         MyApp.name = userName;
-      });
     } else {
       RouteGenerator.onTapToLogin(context);
     }
   }
 
-  // Shared Preference, will be activated by hitting the raised button in the Login page
   Future<Null> login() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('id', widget.sessionUser.id);
     prefs.setString('name', widget.sessionUser.name);
+    MyApp.id = widget.sessionUser.id;
+    MyApp.name = widget.sessionUser.name;
 
-    setState(() {
-      MyApp.id = widget.sessionUser.id;
-      MyApp.name = widget.sessionUser.name;
-    });
   }
 
   Widget choosePageAndColor(int Index) {

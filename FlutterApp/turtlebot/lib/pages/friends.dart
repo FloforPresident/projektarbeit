@@ -298,7 +298,7 @@ class FriendController {
                 content: Column(
                   children: <Widget>[
                     CustomDropdownLabel(
-                      label: Text("Raum"),
+                      label: Text("Area"),
                       child: CustomDropdownMenu<Room>(
                           onChanged: (value) {
                             List<Location> buffer = [];

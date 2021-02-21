@@ -24,6 +24,8 @@ class Login extends StatefulWidget {
   int currentvalueRoom;
   TextEditingController name = new TextEditingController();
   TextEditingController ip = new TextEditingController();
+  double leftStart = 40;
+  double rightEnd = 40;
 
   Login({Key key}) : super(key: key) {
     this.controller = LoginController(this);
@@ -36,8 +38,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  double _leftStart = 40;
-  double _rightEnd = 40;
+
 
   @override
   void initState() {
@@ -92,7 +93,7 @@ class _LoginState extends State<Login> {
                   child: Icon(Icons.adb, color: Colors.white, size: 60),
                 ),
                 Container(
-                    padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
+                    padding: EdgeInsets.fromLTRB(widget.leftStart, 20, widget.rightEnd, 0),
                     child: TextField(
                       style: TextStyle(),
                       controller: widget.name,
@@ -106,7 +107,7 @@ class _LoginState extends State<Login> {
                       maxLines: null,
                     )),
                 Container(
-                    padding: EdgeInsets.fromLTRB(_leftStart, 20, _rightEnd, 0),
+                    padding: EdgeInsets.fromLTRB(widget.leftStart, 20, widget.rightEnd, 0),
                     child: TextField(
                       style: TextStyle(),
                       controller: widget.ip,
@@ -149,7 +150,6 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     if (widget.ip.text.isNotEmpty) {
                       SocketInfo.setHostAdress(widget.ip.text);
-                      widget.controller.getData();
                       widget.controller.signupDialog(context);
                     } else {
                       ErrorMessages.noIpAdress(context);
@@ -414,9 +414,9 @@ class LoginController {
                   child: Column(
                     children: <Widget>[
                       Text(
-                          "Hier kannst du den Raum und deinen Platz auswählen, in dem man dich in der Regel findet.\n\nDiese Einstellung kannst du auch später nochmal aktualisieren oder einen neuen Platz hinzufügen."),
+                          "Hier kannst du die Area und deine Location auswählen, in dem man dich in der Regel findet.\n\nDiese Einstellung kannst du auch später nochmal aktualisieren oder einen neuen Platz hinzufügen."),
                       CustomDropdownLabel(
-                        label: Text("Raum:"),
+                        label: Text("Area:"),
                         child: CustomDropdownMenu<Room>(
                             onChanged: (value) {
                               List<Location> buffer = [];

@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               {
                                 SocketInfo.setHostAdress(widget.ipController.text);
                                 RouteGenerator.onTapToHome(context);
-                                StatusMessages.hostAdressChanged(context);
+
                               }
                             else
                               {

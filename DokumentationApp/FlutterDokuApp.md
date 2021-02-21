@@ -7,12 +7,12 @@
 
 Format: ![Alt Text](url)
 
-# 1. Flutter_Apk
+# 1.0 Flutter_Apk
 
 Hier befindet sich die App zum installieren und eine Kurzanleitung zum Installieren.
 
 
-# 2. turlebot
+# 2.0 turlebot
 
 Hier befindet sich der Programmcode der App
 
@@ -62,8 +62,10 @@ Dieser enthält die einzelnen Seiten mit Controller, Widget und dem Layout.
 In main.dart wird die App gestartet. Hier befindet sich die Navigation durch die Seiten und der Verbindungsaufbau mit dem Websocket des ROS-Laptops
 
 Im Klassennamen befinden sich die statischen Werte, wie Layoutwerte. Im State<Klassennamen> befindet 
-sich das eigentliche Layout des Widgets. Im Controller befindet sich die Logik der Seite, mit Logik zur 
-Nachrichten Versendung mit dem Websocket. Außerdem befinden sich hier auch seitenspezifische AlertDialogs.
+sich das eigentliche Layout des Widgets. 
+Im Controller befindet sich die Logik der Seite, mit Logik zur Nachrichten Versendung mit dem Websocket. 
+Mehr zu Websockets in Listenpunkt 3.0.
+Außerdem befinden sich hier auch seitenspezifische AlertDialogs.
         
 ![Aufbau Pages](https://github.com/FloforPresident/projektarbeit/blob/master/DokumentationApp/PageStructure.png)
 
@@ -74,11 +76,18 @@ Format: ![Alt Text](url)
 active_location.dart, home.dart und messages.dart bilden die erste Seite nachdem Login.
 Vorsicht, Home.dart enthält die Klasse HomeScreen, home befindet sich in main.dart.
 
-## 2.3.3.2 Maps Ordner
+# 2.3.3.2 Main.dart
 
-Hier bilden locations.dart, maps.dart und rooms.dart eine Seite
+Das Dart-File beinhaltet zwei Klassen, MyApp und Home.
 
+MyApp enhält die Initialiserung der App mit MyApp.build. Hier wird die Routenfunktionen festgelegt
+und die StartRoute. Routenfunktion RouteGenerator.RouteHome.
 
+Hier befindet sich die main-Funktion, mit con() wird eine Verbindung zum Websocket Server aufgebaut,
+hier passiert auch der Login (genau Erklärung Listenpunkt 5.0) 
+
+Home enthält die BottomNavigationBar die unser UI für das switchen zwischen unserer Seiten ist 
+und den allgemeinen Rahmen für unsere Seiten.
 
 ## 2.3.4 Ordner Services
         
@@ -88,7 +97,110 @@ Das Routing, die Daten zur Festlegung der IP-Adresse des ROS-Laptops
 ## 2.4 File pupspec.yaml
     
 Hier befinden sich die zusätzlich verwendeten Packages unter "dependencies"
-        
+
+
+## 3.0 Websocket
+
+Die Verwendung des Websockets, funktioniert über eine Verbindung zum Websocket Server
+zu finden in main.dart Klasse MyApp. Außerdem befindet sich in socke_info.dart die Informationen
+zur WebsocketServer IP und dem Port und die Logik die Werte zu setzen und zu initialisieren.
+
+In jedem Widget der die Verbindung benötigt wird dieser im State abgefragt.
+
+Über getData im jeweiligen Controller werden die Daten aus dem Server abgefragt.
+
+Über das Widget StreamBuilder in den Pages, wird überprüft ob Daten angekommen sind und bei Erfolg diese angezeigt,
+mit der entsprechend zu Grude liegenden Logik.
+
+https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html
+
+Außerdem wird bei nicht Erfolg eine Meldung angezeigt das keine Daten übertragen wurden.
+
+Mit addData und channel.sink.add(data) werden Daten an den Websocket Server übertragen.
+
+Hier die offizielle Flutter Doku zu Websockets:
+https://flutter.dev/docs/cookbook/networking/web-sockets 
+
+Der Websocket im serverseitigen ROS-Laptop funktioniert über Python
+
+## 4.0 AnimatedLists
+
+Animierte dynamische Listen:
+
+Bitte die allgemeine Handhabung der offiziellen Flutter Doku entnehmen.
+
+Wichtige Hinweise:
+
+Damit die Seiten richtig scrollen muss physiscs: NeverScrollableScrollPhysics() gesetzt sein.
+Ansonsten wird wenn auch ein SingleChildScrollView Widget verwendet diese nicht miteinander 
+funktioniert und die Listen nicht mitscrollen.
+
+Bei Änderung der Listdaten müssen immer der State der AnimatedList geändert werden. 
+Bei uns wird dies über key.currentState und dann .insertItem oder .removeItem erreicht.
+Für die übergebene Daten die eine Liste sind list.items.add or .remove(item)
+
+Hier die offizielle Flutter Doku zu AnimatedList:
+https://api.flutter.dev/flutter/widgets/AnimatedList-class.html
+
+## 5.0 Login
+
+Der Login erstreckt sich über login.dart und über main.dart in der Klasse Home.
+
+Initiale Seite ist hier Home aus main.dart. In dieser wird abgeprüft ob der User bereits 
+eingeloggt ist in _HomeState::initState(). 
+
+Falls der User zuvor von der Login.dart Seite gekommen ist und einen Nutzer erstellt hat
+ist sessionUser befüllt und Home::login() wird ausgeführt ansonsten Home::autoLogin().
+
+### Home::login():
+In  wird die beiden SharedPrefrences(Doku am Ende des Listenpunkts) abgefragt "id" und "name". 
+Sind diese gegeben und die IP-Adresse zum WebsocketServer gesetzt, dann werden die Attribute 
+MyApp.id und MyApp.name gesetzt. Anschließend wird die build Methode von Home aufgerufen, die prüft ob 
+MyApp.id gesetzt ist und falls ja baut den HomeScreen zusammen.
+
+### Home::autoLogin():
+Falls autoLogin ausgewählt wird weil kein sessionUser vorhanden ist,
+dann werden die SharedPrefrences "id" und "name" abgefragt.
+Falls id null ist und zuvor keine WebsocketServer IP(SocketInfo.hostAdress) angegeben wurde, wird auf die Login.dart Seite 
+weitergeleitet.
+Wenn "id" und die WebSocketServer Adresse vorhanden ist wird auch wie in login() die HomeScreen Seite gebaut.
+
+Weiterleitung zu login.dart:
+
+### Raised Button "Anmelden":
+Überprüft ob Ip-Adresse und Name gesetzt wurde. Falls Nein, Fehlermeldung "nicht alle Felder ausgefüllt".
+Ansonsten wird die WebsocketServer IP gesetzt, und über Login::loginUser der neue User am WebsocketServer angmeldet. Falls die Daten falsch sind,
+wird nicht weitergegangen und eine Fehlermeldung geworfen. Falls der Name stimmt wird an Login::loginHelper weitergeleitet.
+Login::loginHelper setzt den SessionUser und leitet weiter an main.dart und die Klass Home. Anschließend weiter mit Home::login(). 
+
+### Raised Button "Registrierung":
+Bei Registrierung wird geprüft ob die WebSocketServer IP gesetzt wurde, falls nein kommt eine Fehlermeldung.
+Fall Ja wird Login::signupDialog geöffnet. Dieser fragt einen UserNamen ab. Anschließend wird auf den Login::pictureDialog 
+weitergeleitet. Dieser speichert ein Bild des Nutzers ab. Daraufhin wird an Login::editItemDialog 
+weitergeleitet. Dieser gibt die Möglichkeit den Raum und die Location des neuen Users bei Bedarf 
+zu setzen. Anschließend wird Login::addUser aufgerufen. Dieser speichert den neuen User in die Datenbank 
+und leitet wieder zu Login::loginHelper weiter. Login::loginHelper speichert den User als sessionUser und
+leitet weiter an main.dart Home. Anschließend weiter mit Home::login().
+
+SharedPrefrences offizielle Doku:
+https://flutter.dev/docs/cookbook/persistence/key-value
+
+## 6.0 BottomNavigationBar
+
+Die Logik hierfür befindet sich in der Datei main.dart und in der Klasse Home.
+In Home::build wird zuerst abgefragt ob ein User gesetzt ist falls nein wird Home::autoLogin() ausgeführt.
+Falls ein User angemeldet ist wird der _selectedIndex in HomeState ausgelesen und die Funktion
+_HomeState::choosePageAndColour aufgerufen und dementsprechend die richtige Seite aufgerufen.
+Falls ein anderer Reiter in der BottomNavigationBar ausgewählt wird, läd sich die Seite neu
+und _selectedIndex wird auf den Index des geklickten Icons geändert.
+
+Somit muss wenn die Reihenfolge der Icons in der BottomNavigationBar geändert wird,
+die Reihenfholge in ChoosePageAndColor auch geändert werden!!
+
+
+
+
+ 
     
     
     

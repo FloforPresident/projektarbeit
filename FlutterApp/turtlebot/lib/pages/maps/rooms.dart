@@ -330,7 +330,7 @@ class RoomController {
           return AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0))),
-            title: Text("Neuen Raum hinzufügen"),
+            title: Text("Neue Area hinzufügen"),
             content: Builder(builder: (context) {
               var height = MediaQuery
                   .of(context)
