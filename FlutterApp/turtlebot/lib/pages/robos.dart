@@ -71,7 +71,9 @@ class _RoboState extends State<Robos> {
                   margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: RaisedButton(
                     onPressed: () {
-                      widget.controller.addItemDialog(context);
+                      StatusMessages.optionCurrentlyDisabled(context);
+                      //Funktionalität geblockt ToDo
+                      // widget.controller.addItemDialog(context);
                     },
                     child: Text("Hinzufügen"),
                   ),
@@ -238,6 +240,7 @@ class RoboController {
             ),
             FlatButton(
               child: Text("Hinzufügen"),
+
               onPressed: () {
                 if (_name.text.isNotEmpty && _ip.text.isNotEmpty) {
                   addItem(_name.text, _ip.text);

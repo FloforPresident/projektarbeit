@@ -81,4 +81,24 @@ class StatusMessages {
       ],
     );
   }
+
+  static void optionCurrentlyDisabled(BuildContext context) {
+    return BasicAlertDialog.basicAlertDialog(
+      context: context,
+      content: [
+        Text("Diese Funktion ist leider aktuell außer Betrieb. Der Controller im ROS-Laptop ist leider noch nicht soweit. "
+            "Sobald er das ist, kann diese Meldung entfernt werden und die dahinterliegende Logik wieder aktiviert werden"
+            " Die Funktionalität im Quellcode ist so gekennzeichnet //Funktionalität geblockt ToDo")
+      ],
+      title: Text("Option nicht einsetzbar"),
+      actions: <Widget>[
+        FlatButton(
+            child: Text("Zurück"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            })
+      ],
+    );
+  }
+
 }

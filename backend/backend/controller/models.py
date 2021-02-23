@@ -79,6 +79,11 @@ def get_robos():
         robos.append(i.to_dict())
     return robos
 
+def get_robo(name):
+    robo = Robo.query.filter_by(name=name).first()
+    if robo:
+        return robo.to_dict()
+    return ''
 
 # ROOM
 
@@ -164,6 +169,21 @@ def send_message(from_user, to_user, subject, message):
     data = {"user": [user.name, user.embedding], "x":location.x, "y":location.y}
     return data
 
+# Funktionalität geblockt
+
+def checkIfDefaultRoboAndMapSet():
+    if defaultRoboMissing():
+        add_robo("DefaultRobo","setInRos")
+    if defaultMapMissing():
+        add_room(None,"DefaultMap")
+
+def defaultRoboMissing():
+    return get_robo("DefaultRobo") == ''
+
+def defaultMapMissing():
+    return get_room("DefaultMap") == ''
+
+# Funktionalität geblockt
 
 #################################
 # MODELS

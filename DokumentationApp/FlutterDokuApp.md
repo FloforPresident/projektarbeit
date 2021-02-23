@@ -42,18 +42,24 @@ also aktueller Wert und Index wird im ControllerCustomDropdown festgehalten.
 
 Widget das in den Pages eingebaut und zu sehen ist, wenn der WebSocket keine Verbindung aufbauen konnte.
 
-## 2.3.1.3 Logout
+## 2.3.1.3 LoadingInfo
+
+Dies wird angezeigt wenn die Anfrage an dem Websocket länger dauert als erwartet. 
+Wenn das zusehen ist meist keine Verbindung zum Websocket Server möglich.
+Vermutlich falsche Ip-Adresse oder Websocket noch nicht eingeschalten.
+
+## 2.3.1.4 Logout
 
 Diese Klasse kann überall eingebaut werden um einen Logout bei Funktionaufruf zu erzeugen
 
-## 2.3.1.4 PageFrame
+## 2.3.1.5 PageFrame
 
 Beinhaltet den Rahmen für alle Seiten, es ermöglicht eine farbliche Anpassung der Taskbar,
 den Farbverlauf unter die eigentliche Seite zu legen und den Rand zu bestimmen.
         
 ## 2.3.2 Ordner Objects
         
-Dieser enthält Datentypen die den jeweiligen Tabellen in der Datenbank repräsentieren
+Dieser enthält Datentypen die die jeweiligen Tabellen in der Datenbank repräsentieren
         
 ## 2.3.3 Ordner pages
         
@@ -103,14 +109,14 @@ Hier befinden sich die zusätzlich verwendeten Packages unter "dependencies"
 
 Die Verwendung des Websockets, funktioniert über eine Verbindung zum Websocket Server
 zu finden in main.dart Klasse MyApp. Außerdem befindet sich in socke_info.dart die Informationen
-zur WebsocketServer IP und dem Port und die Logik die Werte zu setzen und zu initialisieren.
+zur WebsocketServer IP, dem Port und die Logik um Werte zu setzen und zu initialisieren.
 
 In jedem Widget der die Verbindung benötigt wird dieser im State abgefragt.
 
 Über getData im jeweiligen Controller werden die Daten aus dem Server abgefragt.
 
-Über das Widget StreamBuilder in den Pages, wird überprüft ob Daten angekommen sind und bei Erfolg diese angezeigt,
-mit der entsprechend zu Grude liegenden Logik.
+Über das Widget StreamBuilder in den Pages, wird überprüft ob Daten angekommen sind und bei Erfolg
+nach der entsprechenden Logik angezeigt.
 
 https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html
 
@@ -121,7 +127,7 @@ Mit addData und channel.sink.add(data) werden Daten an den Websocket Server übe
 Hier die offizielle Flutter Doku zu Websockets:
 https://flutter.dev/docs/cookbook/networking/web-sockets 
 
-Der Websocket im serverseitigen ROS-Laptop funktioniert über Python
+Der Websocket im serverseitigen ROS-Laptop funktioniert über Python.
 
 ## 4.0 AnimatedLists
 
@@ -135,16 +141,22 @@ Damit die Seiten richtig scrollen muss physiscs: NeverScrollableScrollPhysics() 
 Ansonsten wird wenn auch ein SingleChildScrollView Widget verwendet diese nicht miteinander 
 funktioniert und die Listen nicht mitscrollen.
 
-Bei Änderung der Listdaten müssen immer der State der AnimatedList geändert werden. 
+Bei Änderung der Listdaten müssen immer der State der AnimatedList und die zu Beginn übergebenen Daten geändert werden. (siehe Flutter Doku) 
 Bei uns wird dies über key.currentState und dann .insertItem oder .removeItem erreicht.
-Für die übergebene Daten die eine Liste sind list.items.add or .remove(item)
+Für die übergebene Daten in Form einer Liste wird list.items.add oder .remove(item) verwendet.
 
 Hier die offizielle Flutter Doku zu AnimatedList:
 https://api.flutter.dev/flutter/widgets/AnimatedList-class.html
 
 ## 5.0 Login
 
-Der Login erstreckt sich über login.dart und über main.dart in der Klasse Home.
+Allgemeiner Hinweis:
+
+Wenn man sich versucht auf der Login-Seite anzumeleden und es kommt keine Benachrichtigung,
+entweder User nicht vorhanden oder eine sonstige Benachrichtigung, dann ist vermutlich die IP-Adresse falsch.
+Nach 1-2 Minuten kommt eine Meldung kein WebSocket-Server vorhanden, aber das wie gesagt dauert.
+
+Der Login erstreckt sich über login.dart und über main.dart in der Klasse Home. (sieh Grafik unten)
 
 Initiale Seite ist hier Home aus main.dart. In dieser wird abgeprüft ob der User bereits 
 eingeloggt ist in _HomeState::initState(). 
@@ -185,6 +197,10 @@ leitet weiter an main.dart Home. Anschließend weiter mit Home::login().
 SharedPrefrences offizielle Doku:
 https://flutter.dev/docs/cookbook/persistence/key-value
 
+
+![LoginAblauf](https://github.com/FloforPresident/projektarbeit/blob/master/DokumentationApp/Basic_Activity_ Diagram.png)
+
+
 ## 6.0 BottomNavigationBar
 
 Die Logik hierfür befindet sich in der Datei main.dart und in der Klasse Home.
@@ -196,6 +212,37 @@ und _selectedIndex wird auf den Index des geklickten Icons geändert.
 
 Somit muss wenn die Reihenfolge der Icons in der BottomNavigationBar geändert wird,
 die Reihenfholge in ChoosePageAndColor auch geändert werden!!
+
+
+## 7.0 Funktionalität geblockt
+
+Da wir erst nicht mehr geschafft haben eine freie Roboterwahl und eine freie Raumwahl im Controller und über die Datenbank 
+zu implementieren sind einige Funktionalitäten in der App auskommentiert. Diese werden mit dem Stichwort "Funktionalität geblockt" betitelt im Quellcode.
+Falls diese Funktionalitäten noch umgesetzt wird kann die hierfür eingesetzte Statusmeldung wieder entfernt werden,
+und die Logik auskommentiert werden. Also einfach in Flutter dieses Stichwort "Funktionalität geblockt" suchen dann findet ihr die Beiträge.
+
+Hier die Änderungen nochmal aufgelistet:
+
+FlutterApp/turtlebot/lib/pages/maps/rooms.dart/_RoomState/build()/RaisedButton
+
+FlutterApp/turtlebot/lib/pages/robos.dart/_RoboState/build()/RaisedButton
+
+Bei oberen Beiden einfach die auskommentierte Funktion wieder einfügen
+
+Bei dem Darunter checkIfDefaultRoboAndMapSet() und auch die Verwendung in models.py
+Sowie defaultRoboMissing() und defaultMapMissing()
+
+backend/backend/controller/models.py 
+
+
+## 8.0 Aktuelle Funktionalität
+
+
+Die aktuelle Funktionalität funktioniert so, es wird eine standard Karte und ein standard Roboter ausgewählt.
+Wenn eine Nachricht versendet wird, wird immer die standard Karte und der standard Roboter ausgewählt.
+Locations können erstellt werden und auch neue User über Login angelegt werden. Ebenfalls kann die aktuelle Position ausgewählt werden.
+Die Karte kann geändert werden wenn am Lagerort der Karte diese mit einer anderen ausgetauscht wird.
+Dann müssen aber alle Locations gelöscht werden da die Werte vermutlich nur in dieser Map Sinn ergeben.
 
 
 

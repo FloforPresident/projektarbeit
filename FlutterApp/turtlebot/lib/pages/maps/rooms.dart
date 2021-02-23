@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turtlebot/frameworks/custom_dropdown_menu.dart';
 import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
+import 'package:turtlebot/frameworks/loading_info.dart';
 import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
 import 'package:turtlebot/services/alertDialogs/error_messages.dart';
@@ -72,7 +73,9 @@ class _RoomState extends State<Rooms> {
                       margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: RaisedButton(
                         onPressed: () {
-                          widget.controller.addItemDialog(context);
+                          StatusMessages.optionCurrentlyDisabled(context);
+                          //Funktionalität geblockt ToDo
+                          // widget.controller.addItemDialog(context);
                         },
                         child: Text("Hinzufügen"),
                       ),
@@ -81,7 +84,7 @@ class _RoomState extends State<Rooms> {
                 );
               } else if (snapshot.connectionState ==
                   ConnectionState.waiting) {
-                return Text("");
+                return LoadingInfo();
               } else {
                 return IncorrectIP();
               }
