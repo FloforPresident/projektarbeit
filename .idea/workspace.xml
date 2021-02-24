@@ -27,15 +27,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37983f79-02a0-4e27-89b5-20d3119d1745" name="Default Changelist" comment="- AppDoku weitergeführt&#10;&#10;- Alle Refrenzen von &quot;Raum&quot; auf &quot;Area&quot; geändert&#10;&#10;- unnötige setStates entfernt&#10;&#10;- in login.dart aus State Layoutwerte in Login transferriert&#10;&#10;- StatusMessage.hostAdressChanged entfernt, da mit aktueller Version nicht umsetzbar">
-      <change afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/frameworks/loading_info.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/friends.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/friends.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/messages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/home/messages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/locations.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/maps/locations.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/lib/pages/robos.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FlutterApp/turtlebot/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/FlutterApp/turtlebot/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DokumentationApp/Basic_Activity_ Diagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/DokumentationApp/Basic_Activity_Diagram.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="johannes_dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -544,10 +537,10 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1828" y="92" width="1736" height="896" key="VCS.FileHistoryDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1610981097107" />
-    <state x="318" y="260" key="Vcs.Push.Dialog.v2" timestamp="1613923384926">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2" timestamp="1614185215182">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1611335136138" />
+    <state x="-1522" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1614185215182" />
     <state x="318" y="260" key="Vcs.Push.Dialog.v2/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1613923384926" />
     <state x="2318" y="325" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1609173701930" />
     <state x="318" y="260" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1613240452216" />
