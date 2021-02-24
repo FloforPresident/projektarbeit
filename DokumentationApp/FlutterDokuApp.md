@@ -198,7 +198,7 @@ SharedPrefrences offizielle Doku:
 https://flutter.dev/docs/cookbook/persistence/key-value
 
 
-![LoginAblauf](https://github.com/FloforPresident/projektarbeit/blob/master/DokumentationApp/Basic_Activity_ Diagram.png)
+![LoginAblauf](https://github.com/FloforPresident/projektarbeit/blob/master/DokumentationApp/Basic_Activity_Diagram.png)
 
 
 ## 6.0 BottomNavigationBar
@@ -229,10 +229,14 @@ FlutterApp/turtlebot/lib/pages/robos.dart/_RoboState/build()/RaisedButton
 
 Bei oberen Beiden einfach die auskommentierte Funktion wieder einfügen
 
-Bei dem Darunter checkIfDefaultRoboAndMapSet() und auch die Verwendung in models.py
+Bei dem Darunter checkIfDefaultRoboAndMapSet() löschen
 Sowie defaultRoboMissing() und defaultMapMissing()
 
 backend/backend/controller/models.py 
+
+Sowie die Verwendung hier backend/backend/controller/controller.py in main()
+
+
 
 
 ## 8.0 Aktuelle Funktionalität
