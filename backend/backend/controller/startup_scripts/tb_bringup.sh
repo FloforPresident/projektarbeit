@@ -1,0 +1,1 @@
+gnome-terminal --tab -- /bin/sh -c 'echo "------ TURTLEBOT BRINGUP ------\n";ssh -t turtlebot "~/BringupScripts/tb_bringup.sh"; exec bash'

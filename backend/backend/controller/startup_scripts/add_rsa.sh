@@ -1,0 +1,1 @@
+gnome-terminal -- /bin/sh -c 'echo "------ ADD RSA ------\n";cp ~/projektarbeit/turtlebot_rsa ~/.ssh; ssh-add; exec bash'
