@@ -292,6 +292,9 @@ def main():
         # initalize Database
         db.create_all()
 
+        # setAndCheckDefaultValueForRoomAndRobo
+        checkIfDefaultRoboAndMapSet()
+
         # register KeyboardInterrupt handler
         signal.signal(signal.SIGINT, cleanup_on_exit)
 
