@@ -1,0 +1,1 @@
+gnome-terminal --tab -- /bin/sh -c 'echo "------ TELEOP ------\n";roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch; exec bash'

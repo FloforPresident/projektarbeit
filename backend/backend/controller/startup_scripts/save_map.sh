@@ -1,0 +1,1 @@
+gnome-terminal --tab -- /bin/sh -c 'echo "------ SAVE MAP ------\n";rosrun map_server map_saver -f $HOME/projektarbeit/backend/backend/catkin_ws/maps/map; exec bash'

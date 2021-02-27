@@ -1,0 +1,1 @@
+gnome-terminal --tab -- /bin/sh -c 'echo "------ TURTLEBOT CAMERASTREAM ------\n";ssh -t turtlebot "~/BringupScripts/tb_camerastream.sh"; exec bash'

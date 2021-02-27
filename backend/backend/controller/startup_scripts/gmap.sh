@@ -1,0 +1,1 @@
+gnome-terminal --tab -- /bin/sh -c 'echo "------ GMAPPING ------\n";roslaunch turtlebot3_slam turtlebot3_slam.launch; exec bash'
