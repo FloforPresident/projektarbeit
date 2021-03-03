@@ -9,3 +9,5 @@ backend/backend/catkin_ws/src/turtlebot3_simulations
 
 *.pyc
 *.save
+
+*.DS_Store
