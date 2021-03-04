@@ -12,8 +12,7 @@ Features:
 
 # python imports
 import json
-import subprocess
-import multiprocessing
+
 # import paramiko
 import sys
 import signal
@@ -38,8 +37,6 @@ app = Flask(__name__)
 
 teleop_active = False
 
-#:::::::::::::::::::::::::: STAND 15.01.2021 ::::::::::::::::::::::::::
-
 # get env file
 import os
 from dotenv import load_dotenv
@@ -56,18 +53,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #initialize teleop class
 teleopInstance = teleop.Teleop()
-
-
-# start roscore - not needed yet
-def action_roscore_start():
-    subprocess.run(["roscore"])
-# launch node - not needed yet
-def launch_node():
-    print("launching node...")
-    subprocess.run(["rosrun", "find_person", "go_to_person.py"])
-
-
-
 
 #send data to face_recognition node
 def action_face_recognition(user, message):
@@ -281,8 +266,6 @@ def cleanup_on_exit(signal, frame):
         print("terminated process: " + str(proc))
     exit(0)
 
-activeProcesses = set()
-
 
 # --- main ---
 def main():
@@ -308,8 +291,9 @@ def main():
         start_websocket()
         #activeProcesses.add(p_websocket)
 
-    except:
-        print("something went wrong in main")
+    except Exception as e:
+        print("Something went wrong in main")
+        print(e)
 
 
 if __name__ == '__main__':

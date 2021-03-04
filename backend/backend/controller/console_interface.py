@@ -141,7 +141,6 @@ def profileMap():
 
 
 def main():
-    #----------------------- Profil auswählen -------------------------
     try:
         print("# ---------------CHOOSE PROFILE---------------")
         print(f"# 0: {str_exit}")
