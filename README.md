@@ -54,6 +54,14 @@ Backend starten:
 	$ python3 controller.py
 	
   6. App starten
+
+Alternative: Verwendung des Konsolen-Interfaces (ersetzt Schritt 2 bis 5)
+
+  $ python3 console_interface.
+  
+Profil 1 "General Bringup" auswählen und nacheinander die Commands ausführen
+
+
   
   
   
@@ -81,6 +89,12 @@ Backend starten:
 		$ rosrun map_server map_saver -f $HOME/projektarbeit/backend/backend/catkin_ws/maps/map
 		
 6. X und Y Koordinaten aus RViz herauslesen für spätere Zuweisung zu Personen
+
+Alternative: Verwendung des Konsolen-Interfaces  
+
+  $ python3 console_interface.py
+
+Profil 2 "Create Map" auswählen und nacheinander die Commands ausführen
 
 
 
@@ -130,18 +144,3 @@ Die wichtigsten Docker Commands:
     Host Laptop:
     $	rosrun face_recognition face_recognition	// Startet Face Recognition Node, streamt verarbeitetes Bild an Topic /Face_Recognition_Stream 
     $	rosrun web_video_server web_video_server  	// Streamt sämtliche Image Topics an http://localhost:8080/ - Link für /Face_Recognition_Stream ist in App eingebaut
-
-	
-
-
-## GIT
-
-    $ git status                    // Show local file changes
-    $ git commit -a                 // Only commit tracked files
-    $ git add .                     // Stage tracked and untracked files
-    $ git commit -m '(message)'     // Commit message -> If applied, this commit will...
-    $ git push                      // Push local commits
-    $ git pull                      // Pull remote commits
-    $ git checkout -b branch        // Create and Switch to branch
-    $ git checkout branch           // Switch to branch
-    $ git reset --soft HEAD~1       // Rollback not already pushed commit if you havent pulled before committing
