@@ -57,7 +57,7 @@ Backend starten:
 
 ### Alternative: Verwendung des Konsolen-Interfaces (ersetzt Schritt 2 bis 5)
 
-	$ python3 console_interface.
+	$ python3 console_interface.py
   
 Profil 1 "General Bringup" auswählen und nacheinander die Commands ausführen
 
