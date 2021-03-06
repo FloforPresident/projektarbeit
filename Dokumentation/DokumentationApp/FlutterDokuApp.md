@@ -3,7 +3,7 @@
 
 ## Flutter Files
 
-![App Struktur](https://github.com/FloforPresident/projektarbeit/blob/master/DokumentationApp/TurlebotAppStruktur.png)
+![App Struktur](https://github.com/FloforPresident/projektarbeit/blob/master/Dokumentation/DokumentationApp/TurlebotAppStruktur.png)
 
 Format: ![Alt Text](url)
 
@@ -73,7 +73,7 @@ Im Controller befindet sich die Logik der Seite, mit Logik zur Nachrichten Verse
 Mehr zu Websockets in Listenpunkt 3.0.
 Außerdem befinden sich hier auch seitenspezifische AlertDialogs.
         
-![Aufbau Pages](https://github.com/FloforPresident/projektarbeit/blob/master/DokumentationApp/PageStructure.png)
+![Aufbau Pages](https://github.com/FloforPresident/projektarbeit/blob/master/Dokumentation/DokumentationApp/PageStructure.png)
 
 Format: ![Alt Text](url)
 
@@ -198,7 +198,7 @@ SharedPrefrences offizielle Doku:
 https://flutter.dev/docs/cookbook/persistence/key-value
 
 
-![LoginAblauf](https://github.com/FloforPresident/projektarbeit/blob/master/DokumentationApp/Basic_Activity_Diagram.png)
+![LoginAblauf](https://github.com/FloforPresident/projektarbeit/blob/master/Dokumentation/DokumentationApp/Basic_Activity_Diagram.png)
 
 
 ## 6.0 BottomNavigationBar
