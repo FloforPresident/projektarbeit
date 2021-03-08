@@ -95,8 +95,10 @@ apt-get update
 apt install -y software-properties-common
 add-apt-repository ppa:deadsnakes/ppa
 apt update 
-apt-get install -y  python3.8 python3.8-dev python3.8-distutils
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 0
+apt-get install -y  python3.8 python3.8-dev python3.8-distutils python3.8-gdbm
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 0 
+
+apt-get install libjpeg62 libjpeg62-dev
 
 # Pip
 echo "======================================================="
