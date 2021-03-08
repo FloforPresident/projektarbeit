@@ -108,6 +108,7 @@ echo "======================================================="
 apt-get update
 apt-get install -y python-pip 
 python3.8 -m easy_install pip
+apt-get install -y python3-pip
 
 # Pip packages
 cd ../..
