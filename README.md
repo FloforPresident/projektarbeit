@@ -55,7 +55,9 @@ Backend starten:
 	
   6. App starten
 
-### Alternative: Verwendung des Konsolen-Interfaces (ersetzt Schritt 2 bis 5)
+
+
+## Alternative: Verwendung des Konsolen-Interfaces (ersetzt Schritt 2 bis 5)
 
 	$ python3 console_interface.py
   
