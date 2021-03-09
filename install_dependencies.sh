@@ -20,7 +20,7 @@ echo "==================PYTHON==============================="
 echo "======================================================="
 apt-get update
 apt install -y software-properties-common
-add-apt-repository ppa:deadsnakes/ppa
+add-apt-repository -y ppa:deadsnakes/ppa
 apt update 
 apt-get install -y  python3.8 python3.8-dev python3.8-distutils python3.8-gdbm
 update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 0 
@@ -32,13 +32,11 @@ echo "======================================================="
 apt-get update
 apt-get install -y python-pip 
 apt-get install -y python3-pip
-apt-get remove -y python3-pip
-python3.8 -m easy_install pip
 
 # Pip packages
 cd projektarbeit/backend
-pip3 install -r pip3_requirements.txt
-pip install -r pip-requirements.txt
+python3 -m pip install -r pip3_requirements.txt
+python -m pip install -r pip-requirements.txt
 
 # Docker
 echo "======================================================="
