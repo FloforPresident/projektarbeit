@@ -100,6 +100,13 @@ update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 0
 
 apt-get install libjpeg62 libjpeg62-dev
 
+# OpenCV
+echo "======================================================="
+echo "==================OpenCV==============================="
+echo "======================================================="
+apt-get install python-opencv
+apt-get install python-cv-bridge
+
 # Pip
 echo "======================================================="
 echo "=====================PIP==============================="
