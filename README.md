@@ -90,7 +90,9 @@ Profil 1 "General Bringup" auswählen und nacheinander die Commands ausführen
 		
 6. X und Y Koordinaten aus RViz herauslesen für spätere Zuweisung zu Personen
 
-### Alternative: Verwendung des Konsolen-Interfaces  
+
+
+## Alternative: Verwendung des Konsolen-Interfaces  
 
  	$ python3 console_interface.py
 
