@@ -37,8 +37,8 @@ python3.8 -m easy_install pip
 
 # Pip packages
 cd projektarbeit/backend
-pip3 install pip3_requirements.txt
-pip install pip-requirements.txt
+pip3 install -r pip3_requirements.txt
+pip install -r pip-requirements.txt
 
 # Docker
 echo "======================================================="
