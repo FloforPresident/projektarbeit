@@ -82,7 +82,7 @@ source ~/.bashrc
 
 # bashrc setup
 echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
-echo "export ROS_MASTER_URI=HTTP://0.0.0.0:11311" >> ~/.bashrc
+echo "export ROS_MASTER_URI=http://0.0.0.0:11311" >> ~/.bashrc
 echo "export ROS_HOSTNAME=0.0.0.0" >> ~/.bashrc
 
 
