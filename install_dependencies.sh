@@ -32,13 +32,10 @@ echo "======================================================="
 apt-get update
 cd projektarbeit/backend
 apt-get install -y python-pip 
-pip install -r pip-requirements.txt
 
 apt-get install -y python3-pip
 apt remove python3-pip
 python3.8 -m easy_install pip
-python3.8 -m pip install -r pip3_requirements.txt
-
 
 # Docker
 echo "======================================================="
@@ -115,3 +112,9 @@ source ~/.bashrc
 echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 echo "export ROS_MASTER_URI=http://0.0.0.0:11311" >> ~/.bashrc
 echo "export ROS_HOSTNAME=0.0.0.0" >> ~/.bashrc
+
+echo "======================================================="
+echo "==================Pip Packages========================="
+echo "======================================================="
+pip install -r pip-requirements.txt
+python3.8 -m pip install -r pip3_requirements.txt
