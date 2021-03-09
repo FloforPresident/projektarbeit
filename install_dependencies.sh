@@ -14,6 +14,41 @@ apt-get upgrade -y
 apt install git -y
 git clone https://github.com/FloforPresident/projektarbeit.git
 
+# Python
+echo "======================================================="
+echo "==================PYTHON==============================="
+echo "======================================================="
+
+apt-get update
+apt install -y software-properties-common
+add-apt-repository ppa:deadsnakes/ppa
+apt update 
+apt-get install -y  python3.8 python3.8-dev python3.8-distutils python3.8-gdbm
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 0 
+
+apt-get install -y libjpeg62 libjpeg62-dev
+
+# OpenCV
+echo "======================================================="
+echo "==================OpenCV==============================="
+echo "======================================================="
+apt-get install -y python-opencv python-cv-bridge 
+
+# Pip
+echo "======================================================="
+echo "=====================PIP==============================="
+echo "======================================================="
+
+apt-get update
+apt-get install -y python-pip 
+python3.8 -m easy_install pip
+# apt-get install -y python3-pip
+
+# Pip packages
+cd projektarbeit/backend
+python3 -m pip install pip3_requirements.txt
+python -m pip install pip-requirements.txt
+
 # Docker
 echo "======================================================="
 echo "==================Docker==============================="
@@ -66,7 +101,7 @@ apt-get remove ros-kinetic-dynamixel-sdk
 apt-get remove ros-kinetic-turtlebot3-msgs
 apt-get remove ros-kinetic-turtlebot3
 
-cd projektarbeit/backend/backend/catkin_ws/src/
+cd backend/catkin_ws/src/
 git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git
 git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
 git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
@@ -84,40 +119,3 @@ source ~/.bashrc
 echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 echo "export ROS_MASTER_URI=http://0.0.0.0:11311" >> ~/.bashrc
 echo "export ROS_HOSTNAME=0.0.0.0" >> ~/.bashrc
-
-
-# Python
-echo "======================================================="
-echo "==================PYTHON==============================="
-echo "======================================================="
-
-apt-get update
-apt install -y software-properties-common
-add-apt-repository ppa:deadsnakes/ppa
-apt update 
-apt-get install -y  python3.8 python3.8-dev python3.8-distutils python3.8-gdbm
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 0 
-
-apt-get install libjpeg62 libjpeg62-dev
-
-# OpenCV
-echo "======================================================="
-echo "==================OpenCV==============================="
-echo "======================================================="
-apt-get install python-opencv
-apt-get install python-cv-bridge
-
-# Pip
-echo "======================================================="
-echo "=====================PIP==============================="
-echo "======================================================="
-
-apt-get update
-apt-get install -y python-pip 
-python3.8 -m easy_install pip
-apt-get install -y python3-pip
-
-# Pip packages
-cd ../..
-pip3 install -r pip3_requirements.txt
-pip install -r pip-requirements.txt
