@@ -18,7 +18,6 @@ git clone https://github.com/FloforPresident/projektarbeit.git
 echo "======================================================="
 echo "==================PYTHON==============================="
 echo "======================================================="
-
 apt-get update
 apt install -y software-properties-common
 add-apt-repository ppa:deadsnakes/ppa
@@ -26,28 +25,20 @@ apt update
 apt-get install -y  python3.8 python3.8-dev python3.8-distutils python3.8-gdbm
 update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 0 
 
-apt-get install -y libjpeg62 libjpeg62-dev
-
-# OpenCV
-echo "======================================================="
-echo "==================OpenCV==============================="
-echo "======================================================="
-apt-get install -y python-opencv python-cv-bridge 
-
 # Pip
 echo "======================================================="
 echo "=====================PIP==============================="
 echo "======================================================="
-
 apt-get update
 apt-get install -y python-pip 
+apt-get install -y python3-pip
+apt-get remove -y python3-pip
 python3.8 -m easy_install pip
-# apt-get install -y python3-pip
 
 # Pip packages
 cd projektarbeit/backend
-python3 -m pip install pip3_requirements.txt
-python -m pip install pip-requirements.txt
+pip3 install pip3_requirements.txt
+pip install pip-requirements.txt
 
 # Docker
 echo "======================================================="
@@ -71,11 +62,17 @@ apt-get install docker-ce docker-ce-cli containerd.io -y
 curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
+# General Packages
+echo "======================================================="
+echo "==================General Packages====================="
+echo "======================================================="
+apt-get install -y python-opencv python-cv-bridge 
+apt-get install -y libjpeg62 libjpeg62-dev
+
 # ROS 1
 echo "======================================================="
 echo "==================ROS=================================="
 echo "======================================================="
-
 wget https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_tools/master/install_ros_kinetic.sh
 chmod 755 ./install_ros_kinetic.sh 
 bash ./install_ros_kinetic.sh -y
@@ -96,7 +93,6 @@ apt-get install ros-kinetic-joy ros-kinetic-teleop-twist-joy -y \
 echo "======================================================="
 echo "==================Turtlebot============================"
 echo "======================================================="
-
 apt-get remove ros-kinetic-dynamixel-sdk
 apt-get remove ros-kinetic-turtlebot3-msgs
 apt-get remove ros-kinetic-turtlebot3
@@ -106,10 +102,10 @@ git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git
 git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
 git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
 cd ..
+
 echo "======================================================="
 echo "==================Catkin Make=========================="
 echo "======================================================="
-echo $PWD
 source /opt/ros/kinetic/setup.bash
 catkin_make
 echo "source $PWD/devel/setup.bash" >> ~/.bashrc
