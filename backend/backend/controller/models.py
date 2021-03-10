@@ -1,8 +1,10 @@
 from datetime import datetime
 import base64
+import os
 from controller import *
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
+from PIL import Image
 
 db = SQLAlchemy(app)
 
@@ -117,6 +119,13 @@ def get_rooms():
     for i in Room.query.order_by(Room.id).all():
         rooms.append(i.to_dict())
     return rooms
+
+def get_room_map_png_in_base64():
+    Image.open(r"../catkin_ws/maps/map.pgm","r").save("../catkin_ws/maps/map.png")
+    map_png = open("../catkin_ws/maps/map.png", mode="br")
+    base64Encoded = base64.standard_b64encode(map_png.read())
+    utf8encoded = base64Encoded.decode("utf-8")
+    return utf8encoded
 
 
 # LOCATION

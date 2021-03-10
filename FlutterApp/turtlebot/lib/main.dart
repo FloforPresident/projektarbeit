@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
   static String name;
 
   static IOWebSocketChannel con() {
-    // SocketInfo.setHostAdress();
     return new IOWebSocketChannel.connect(
         'ws://' + SocketInfo.hostAdress + SocketInfo.port);
   }

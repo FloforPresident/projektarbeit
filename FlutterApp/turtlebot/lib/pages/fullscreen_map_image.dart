@@ -1,11 +1,27 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:turtlebot/frameworks/incorrect_ip_adress.dart';
 import 'package:turtlebot/frameworks/page_frame.dart';
+import 'package:turtlebot/main.dart';
 import 'package:turtlebot/objects/data_base_objects.dart';
+import 'package:web_socket_channel/io.dart';
 
 class FullScreenMapImage extends StatelessWidget {
   final Room room;
+  final IOWebSocketChannel channel = MyApp.con();
 
-  FullScreenMapImage({this.room});
+
+  FullScreenMapImage({@required this.room})
+  {
+    get_map_base64();
+  }
+
+  void get_map_base64()  {
+     String data =
+         '{"action": "GET ROOM PICTURE"}';
+    channel.sink.add(data);
+  }
 
   Widget build(BuildContext context) {
     return PageFrame(
@@ -26,12 +42,39 @@ class FullScreenMapImage extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        body: Container(
-          child: Image.asset(
-            'images/TestBild.jpg',
-          ),
+        body: StreamBuilder(
+          stream: channel.stream,
+          builder: (context, snapshot)
+            {
+              if(snapshot.hasData)
+                {
+                  if(snapshot.data == "\"\"")
+                    {
+                      return Container(
+                        child: Text("Keine Daten von Websocket erhalten"),
+                      );
+                    }
+                  return  Container(
+                    child: Image.memory(base64Decode(receiveBase64ImageString(snapshot.data))),
+
+                  );
+                }
+              else if(snapshot.connectionState == ConnectionState.waiting)
+                return CircularProgressIndicator();
+              else
+                {
+                  return IncorrectIP();
+                }
+            }
+
         ),
       ),
     );
+  }
+
+  String receiveBase64ImageString(String snapshotData)
+  {
+    var json = jsonDecode(snapshotData);
+    return json["picture_base64"];
   }
 }

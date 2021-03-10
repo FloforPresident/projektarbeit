@@ -25,7 +25,8 @@ class RouteGenerator {
         }
       case RouteFullScreenImage:
         {
-          return MaterialPageRoute(builder: (_) => FullScreenMapImage(room: settings.arguments,));
+          Map args = settings.arguments;
+          return MaterialPageRoute(builder: (_) => FullScreenMapImage(room:  args["room"]));
         }
       default:
         throw Exception('Invalid route: ${settings.name}');
@@ -45,6 +46,6 @@ class RouteGenerator {
 
   static onTapToFullscreenMap(BuildContext context, Room room) {
 
-    Navigator.pushNamed(context, RouteGenerator.RouteFullScreenImage, arguments: room );
+    Navigator.pushNamed(context, RouteGenerator.RouteFullScreenImage, arguments: {"room": room} );
   }
 }
