@@ -177,6 +177,8 @@ def start_websocket():
             elif action == 'SCAN ROOM':
                 # Todo Room Scan logic
                 response = ''
+            elif action == 'GET ROOM PICTURE':
+                response = {"picture_base64":"{}".format(get_room_map_png_in_base64())}
 
             # ROBO
             elif action == 'ADD ROBO':
