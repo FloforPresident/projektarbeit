@@ -134,5 +134,5 @@ echo "======================================================="
 echo "==================Pip Packages========================="
 echo "======================================================="
 cd ../..
-pip install -r pip-requirements.txt
+python2.7 -m pip install -r pip-requirements.txt
 python3.8 -m pip install -r pip3_requirements.txt
