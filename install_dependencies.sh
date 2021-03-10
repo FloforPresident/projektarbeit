@@ -120,8 +120,12 @@ echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 echo "export ROS_MASTER_URI=http://$ip:11311" >> ~/.bashrc
 echo "export ROS_HOSTNAME=$ip" >> ~/.bashrc
 
+# .env file for database
+echo "HOST_IP=$ip" >> ~/projektarbeit/backend/.env
+
 echo "======================================================="
 echo "Added ROS_MASTER_URI and ROS_HOSTNAME with IP $ip to bashrc"
+echo "Added HOST-IP $ip to .env file"
 echo "======================================================="
 
 source /opt/ros/kinetic/setup.bash
