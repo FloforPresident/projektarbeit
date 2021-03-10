@@ -10,10 +10,6 @@ echo "========================================================"
 apt-get update
 apt-get upgrade -y
 
-# Clone Project
-apt install git -y
-git clone https://github.com/FloforPresident/projektarbeit.git
-
 # Python
 echo "======================================================="
 echo "==================PYTHON==============================="
@@ -23,18 +19,18 @@ apt install -y software-properties-common
 add-apt-repository -y ppa:deadsnakes/ppa
 apt update 
 apt-get install -y  python3.8 python3.8-dev python3.8-distutils python3.8-gdbm
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 0 
+echo "alias python3=python3.8" >> ~/.bashrc
 
 # Pip
 echo "======================================================="
 echo "=====================PIP==============================="
 echo "======================================================="
 apt-get update
-cd projektarbeit/backend
+cd backend
 apt-get install -y python-pip 
 
 apt-get install -y python3-pip
-apt remove python3-pip
+apt remove -y python3-pip
 python3.8 -m easy_install pip
 
 # Docker
@@ -108,13 +104,35 @@ catkin_make
 echo "source $PWD/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
+# read IP Adress from eth0 or from enp0s3 in case of a Virtual Machine
+ip="$(ifconfig | grep -A 1 'eth0' | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1)"
+if [ -z "$ip" ]; then
+	ip="$(ifconfig | grep -A 1 'enp0s3' | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1)"
+	if [ -z "$ip" ]; then
+		echo "Couldn't find IP Adress"
+		ip="0.0.0.0"
+	fi
+fi
+
+
 # bashrc setup
 echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
-echo "export ROS_MASTER_URI=http://0.0.0.0:11311" >> ~/.bashrc
-echo "export ROS_HOSTNAME=0.0.0.0" >> ~/.bashrc
+echo "export ROS_MASTER_URI=http://$ip:11311" >> ~/.bashrc
+echo "export ROS_HOSTNAME=$ip" >> ~/.bashrc
+
+echo "======================================================="
+echo "Added ROS_MASTER_URI and ROS_HOSTNAME with IP $ip to bashrc"
+echo "======================================================="
+
+source /opt/ros/kinetic/setup.bash
+source ~/.bashrc
+
+echo ""
+echo ""
 
 echo "======================================================="
 echo "==================Pip Packages========================="
 echo "======================================================="
+cd ../..
 pip install -r pip-requirements.txt
 python3.8 -m pip install -r pip3_requirements.txt
