@@ -155,7 +155,7 @@ def start_websocket():
             # USER
             if action == 'ADD USER':
                 image = data['image']
-                print("this could take a while. please wait or try again.")
+                print("This could take a while, please wait...")
                 embedding = createFaceEncoding(image)
                 add_user(data['location_id'], data['name'], image, embedding)
                 response = login_user(data['name'])
@@ -243,8 +243,11 @@ def start_websocket():
 
             await websocket.send(response)
         
-        except:
-            print("an error occured. try sending command again")
+        except IndexError:
+            print("No Face detected! Try taking a new picture.")
+        except Exception as e:
+            print("An error occured! Try sending command again.")
+            print(e)
 
 
 
