@@ -18,7 +18,7 @@ str_controller = "Controller"
 str_faceRecognition = "Face Recognition"
 str_webVideoServer = "Web Video Server"
 str_findPerson = "Find Person"
-str_addRsaKey = "Add RSA private Key / Set Turtlebot IP"
+str_setTurtlebotIP = "Set Turtlebot IP"
 str_tbBringup = "Turtlebot Bringup"
 str_tbCamerastream = "Turtlebot Camerastream"
 str_tbSpeakernode = "Turtlebot Speakernode"
@@ -31,7 +31,7 @@ def profileGeneral():
     try:
         print("# ---------------COMMANDS---------------")
         print(f"# 0: {str_exit}")
-        print(f"# 1: {str_addRsaKey}")
+        print(f"# 1: {str_setTurtlebotIP}")
         print(f"# 2: {str_roscore}")
         print(f"# 3: {str_dbContainer}")
         print(f"# 4: {str_controller}")
@@ -54,7 +54,10 @@ def profileGeneral():
             if(user_input == 0):
                 return
             if(user_input == 1):
-                os.system('sh startup_scripts/add_rsa.sh')
+                turtlebotip = input("Set Turtlebot IP: ")
+                f = open("turtlebotip.txt", "w")
+                f.write(turtlebotip)
+                f.close()
             elif(user_input == 2):
                 os.system('sh startup_scripts/roscore.sh')
                 print(f"\nStarted {str_roscore}")
@@ -97,7 +100,7 @@ def profileMap():
     try:
         print("# ---------------COMMANDS---------------")
         print(f"# 0: {str_exit}")
-        print(f"# 1: {str_addRsaKey}")
+        print(f"# 1: {str_setTurtlebotIP}")
         print(f"# 2: {str_roscore}")
         print(f"# 3: {str_tbBringup}")
         print(f"# 4: {str_gmap}")
@@ -116,7 +119,10 @@ def profileMap():
             if(user_input == 0):
                 return
             elif(user_input == 1):
-                os.system('sh startup_scripts/add_rsa.sh')
+                turtlebotip = input("Set Turtlebot IP: ")
+                f = open("turtlebotip.txt", "w")
+                f.write(turtlebotip)
+                f.close()
             elif(user_input == 2):
                 os.system('sh startup_scripts/roscore.sh')
                 print(f"\nStarted {str_roscore}")
