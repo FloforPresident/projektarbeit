@@ -9,25 +9,23 @@ import time
 
 def createFaceEncoding(data):
 
-    #with open("/home/projektarbeit/backend/backend/face_encoding/stefan.jpg", "rb") as file:
-    #    data = base64.b64encode(file.read())
-
+    # Gets picture as base64 data
     image = base64.b64decode(data)
 
+    # overwrites image.jpg with taken picture
     with open("./face_encoding/image.jpg", "wb") as file:
         file.write(image)
         file.close()
 
-
-
-    time.sleep(5)
-
-    #erkennt auf image.jpg kein Gesicht, deshalb wird stefan.jpg verwendet
+    time.sleep(3)
+    
+    
     image_new = face_recognition.load_image_file("./face_encoding/image.jpg")
 
+    # Recognise face in image.jpg and create encoding
     face_encoding = face_recognition.face_encodings(image_new)[0]
 
-
+    # Creates String of face_encoding for storage in db
     encoding_string = np.array2string(face_encoding, prefix="", suffix="", separator="#")
     encoding_string = encoding_string.strip('[')
     encoding_string = encoding_string.strip(']')
