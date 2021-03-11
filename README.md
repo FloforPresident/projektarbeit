@@ -1,150 +1,130 @@
-# Projektarbeit
+# Projektarbeit Turtlebot Setup
 
-## Backend
+## Prerequisites
+- VirtualBox VM (min 3GB Ram + 15GB Speicher)
+- Ubuntu 16.04 Xenial (https://releases.ubuntu.com/16.04.7/ubuntu-16.04.7-desktop-amd64.iso)
+- VM Netzwerk Einstellungen auf Netzwerkbrücke statt NAT
 
-Pre Setup:
-  - Docker & Docker Compose auf Rechner installiert
-
-Backend starten:
-  1. Persönliche IP Adresse im projektarbeit/backend/.env file anpassen (`ifconfig`) (wird im File-Explorer nicht angezeigt)
-  
-  	$ cd ~/projektarbeit/backend
-	$ gedit .env
-  	
-  2. Roscore starten
-  	
-	$ roscore
-	
-  3. Turtlebot bringup and setup
-  
-  	$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
-	$ roslaunch turtlebot3_bringup turtlebot3_robot.launch
-	
-	# NEW TERMINAL - camerastream
-	$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
-	# camera stream
-	$ roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true
-	
-	# NEW TERMINAL - speaker node
-	$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
-	$ rosrun speaker_node speaker_node.py
-	
-  4. Host-Laptup setup
-  
-	# ON HOSTS COMPUTER
-	# new terminal
-	$ rosrun face_recognition face_recognize_plus_Web_Video_Stream.py
-	# new terminal
-	$ rosrun web_video_server web_video_server
-	# new terminal
-	$ rosrun find_person go_to_person.py
-	
-  5. Map laden
-  	
-	$ roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/projektarbeit/backend/backend/catkin_ws/maps/map.yaml 
-  
-  4. Docker-Datenbank starten
-
-	$ cd ~/projektarbeit/backend
-	$ sudo make start
-	
-  5. Controller starten
-  
-	$ cd ~/projektarbeit/backend/backend/controller
-	$ python3 controller.py
-	
-  6. App starten
+## Installation
+### 1. Git installieren
 
 
+    $ sudo apt-get install git
 
-## Alternative: Verwendung des Konsolen-Interfaces (ersetzt Schritt 2 bis 5)
-
-	$ python3 console_interface.py
-  
-Profil 1 "General Bringup" auswählen und nacheinander die Commands ausführen
+### 2. Git Repository Klonen
 
 
-  
-  
-  
-## Raum kartieren
-	
-1. Roscore starten auf Host-PC
-		
-		$roscore
-	
-2. Turtlebot bringup
-	
-		$ ssh pi@{IP_ADDRESSS_TURTLEBOT}
-		$ roslaunch turtlebot3_bringup turtlebot3_robot.launch
+    $ git clone https://github.com/FloforPresident/projektarbeit.git
 
-3. Start gmapping auf Turtlebot
-		
-		$ roslaunch turtlebot3_slam turtlebot3_slam.launch
-		
-4. Starte Teleop ( auf Host PC oder in App nachdem Controller gestartet wurde )
-	
-		$ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
-		
-5. Raum abfahren und im Anschluss Karte abspeichern
-	
-		$ rosrun map_server map_saver -f $HOME/projektarbeit/backend/backend/catkin_ws/maps/map
-		
-6. X und Y Koordinaten aus RViz herauslesen für spätere Zuweisung zu Personen
+### 3. Dependencies Installieren (nur als Root ausführbar)
+    - Während Installation muss einmal bestätigt werden
 
 
+    $ cd projektarbeit
+    $ sudo -s
+    $ ./install-dependencies.sh
+ 
+### 4. Nach fertiger Installation (ca. 60 Minuten) Terminal schließen und neues öffnen
+### 5. Turtlebot starten
+   5.1. Turtlebot mit Bildschirm verbinden, starten (pw = _turtlebot_) \
+   5.2. Mit Netzwerk verbinden und IP-Adresse auslesen (`ifconfig`)
+### 6. Packages und Nodes ausführen:
 
-## Alternative: Verwendung des Konsolen-Interfaces  
+6.1. **Create Map** um Raum zu kartieren (Punkte nacheinander ausführen)
+   
+       $ cd backend/backend/controller
+       $ sudo -s
+       $ python3 console_interface.py
 
- 	$ python3 console_interface.py
+- Nummern eingeben um zu starten (+ alternativ Befehl ohne console-interface)
+1. Roscore starten 
+   
+    `roscore`
+2. Turtlebot Bringup (Mit SSH Verbindung zum turtlebot)
+   
+    `ssh pi@{IP_ADDRESSS_TURTLEBOT}` \
+    `roslaunch turtlebot3_bringup turtlebot3_robot.launch` 
+   
+3. Start Gmapping
+   
+   `roslaunch turtlebot3_slam turtlebot3_slam.launch`
 
-Profil 2 "Create Map" auswählen und nacheinander die Commands ausführen
+4. Start Teleop ( auf Host PC oder in App nachdem Controller gestartet wurde )
 
+   `roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch`
 
+5. Save Map (muss zwingend _map.pgm_ heißen)
 
+   `rosrun map_server map_saver -f $HOME/projektarbeit/backend/backend/catkin_ws/maps/map`
 
-## Docker Container
-
-- Controller
-    - _python3.8 image_
-    - Schnittstelle zwischen App, Datenbank und ROS
-- Datenbank
-    - _postgress image_
-    - Postgress Datenbank, zugriff mit O/M Mapper SQlAlchemy aus controller
-- Ros  
-    - _ubuntu 16.04 image_ 
-    - Vollständige Ubuntu installation mit allen Ros Konfigurationen
-
-
-Die wichtigsten Docker Commands:
-
-    $ docker ps                                     // Laufende Container anzeigen lassen
-    $ docker inspect {container-name}               // Infos zu bestimmtem Container
-    $ docker container kill $(docker ps -q)         // Alle laufenden Container schließen
-    $ docker exec -it {container-name} bash    // ins Docker Terminal
-
-
-## App
-
-### Setup:
-
-- Installiertes Flutter SDK
-- Android / IOS Emulator
-- Android Studio / IntelliJ
-- Laufender Controller im selben Netzwerk
-
-
-## ROS
-
-### Setup
+=> X und Y Koordinaten aus RViz herauslesen für spätere Zuweisung zu Personen
 
     
+6.2. **General Bringup** Um gesamtes Projekt zu starten (Punkte ausführen und anweisungen folgen)
 
-### Camera, Face Recognition, Stream
+    $ cd backend/backend/controller
+    $ sudo -s
+    $ python3 console_interface.py
 
-    Turtlebot:
-    $	roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true	// Streamt Bild von Raspicam an Topic /raspicam_node/image
+1. add RSA Private Key / set Turtlebot ID
+2. Roscore starten 
+   
+    `roscore`
+3. Database Container (in _/projektarbeit/backend_)
+    
+    `make start`
+    
+4. Controller Starten (in _/projektarbeit/backend/backend/controller_)
 
-    Host Laptop:
-    $	rosrun face_recognition face_recognition	// Startet Face Recognition Node, streamt verarbeitetes Bild an Topic /Face_Recognition_Stream 
-    $	rosrun web_video_server web_video_server  	// Streamt sämtliche Image Topics an http://localhost:8080/ - Link für /Face_Recognition_Stream ist in App eingebaut
+    `python3 controller.py`
+
+5. Face Recognition
+
+   `rosrun face_recognition face_recognize_plus_Web_Video_Stream.py`
+
+6. Web Video Server
+
+    `rosrun web_video_server web_video_server`
+
+7. Find Person
+
+    `rosrun find_person go_to_person.py`
+
+8. TurtleBot Bringup
+
+   `ssh pi@{IP_ADDRESSS_TURTLEBOT}` \
+   `roslaunch turtlebot3_bringup turtlebot3_robot.launch`
+
+9. Turtlebot Kamera Stream
+   
+   `ssh pi@{IP_ADDRESSS_TURTLEBOT}` \
+   `roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true`
+
+10. Turtlebot Speaker
+    
+    `ssh pi@{IP_ADDRESSS_TURTLEBOT}` \
+    `rosrun speaker_node speaker_node.py`
+
+11. Map laden
+   
+    `roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/projektarbeit/backend/backend/catkin_ws/maps/map.yaml` 
+
+
+### 7. App Installieren (Andoid)
+
+Flutter App - APK Datei downloaden und installieren (_/projektarbeit/FlutterApp/Flutter_Apk/app-release.apk_) \
+
+
+## Dateistruktur & Management
+
+- Projektmanagement wurde auf **Trello** erledigt
+  
+
+- **Dokumentation**: Selbsterklärend
+- **Backend**: Enthält Grundsätzlichen Projektcode 
+    - ROS spezifisches in _projektarbeit/backend/backend/catkin_ws_
+    - Controller spezifisches in _projektarbeit/backend/backend/controller_ 
+- **FlutterApp**: App spezifisches, Apk und Flutter App code
+
+
+

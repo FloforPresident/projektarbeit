@@ -8,4 +8,4 @@ Host turtlebot $turtlebotip
 END
 
 
-gnome-terminal -- /bin/sh -c 'echo "------ ADD RSA / SET TURTLEBOT IP ------\n";cp ~/projektarbeit/turtlebot_rsa ~/.ssh; ssh-add; exec bash'
+gnome-terminal -- /bin/sh -c 'echo "------ ADD RSA / SET TURTLEBOT IP ------\n";cp turtlebot_rsa ~/.ssh; ssh-add ~/.ssh/turtlebot_rsa; exec bash'

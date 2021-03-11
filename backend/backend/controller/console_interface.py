@@ -18,7 +18,7 @@ str_controller = "Controller"
 str_faceRecognition = "Face Recognition"
 str_webVideoServer = "Web Video Server"
 str_findPerson = "Find Person"
-str_addRsaKey = "Add RSA private Key / Set Turtlebot IP"
+str_setTurtlebotIP = "Set Turtlebot IP"
 str_tbBringup = "Turtlebot Bringup"
 str_tbCamerastream = "Turtlebot Camerastream"
 str_tbSpeakernode = "Turtlebot Speakernode"
@@ -31,7 +31,7 @@ def profileGeneral():
     try:
         print("# ---------------COMMANDS---------------")
         print(f"# 0: {str_exit}")
-        print(f"# 1: {str_addRsaKey}")
+        print(f"# 1: {str_setTurtlebotIP}")
         print(f"# 2: {str_roscore}")
         print(f"# 3: {str_dbContainer}")
         print(f"# 4: {str_controller}")
@@ -54,8 +54,11 @@ def profileGeneral():
             if(user_input == 0):
                 return
             if(user_input == 1):
-                os.system('sh startup_scripts/add_rsa.sh')
-            if(user_input == 2):
+                turtlebotip = input("Set Turtlebot IP: ")
+                f = open("turtlebotip.txt", "w")
+                f.write(turtlebotip)
+                f.close()
+            elif(user_input == 2):
                 os.system('sh startup_scripts/roscore.sh')
                 print(f"\nStarted {str_roscore}")
             elif(user_input == 3):
@@ -97,11 +100,12 @@ def profileMap():
     try:
         print("# ---------------COMMANDS---------------")
         print(f"# 0: {str_exit}")
-        print(f"# 1: {str_roscore}")
-        print(f"# 2: {str_tbBringup}")
-        print(f"# 3: {str_gmap}")
-        print(f"# 4: {str_teleop}")
-        print(f"# 5: {str_saveMap}")
+        print(f"# 1: {str_setTurtlebotIP}")
+        print(f"# 2: {str_roscore}")
+        print(f"# 3: {str_tbBringup}")
+        print(f"# 4: {str_gmap}")
+        print(f"# 5: {str_teleop}")
+        print(f"# 6: {str_saveMap}")
 
 
         print(f"# --------------------------------------")
@@ -114,19 +118,24 @@ def profileMap():
             user_input = int(user_input)
             if(user_input == 0):
                 return
-            if(user_input == 1):
+            elif(user_input == 1):
+                turtlebotip = input("Set Turtlebot IP: ")
+                f = open("turtlebotip.txt", "w")
+                f.write(turtlebotip)
+                f.close()
+            elif(user_input == 2):
                 os.system('sh startup_scripts/roscore.sh')
                 print(f"\nStarted {str_roscore}")
-            if(user_input == 2):
+            elif(user_input == 3):
                 os.system('sh startup_scripts/tb_bringup.sh')
                 print(f"\nStarted {str_tbBringup}")
-            elif(user_input == 3):
+            elif(user_input == 4):
                 os.system('sh startup_scripts/gmap.sh')
                 print(f"\nStarted {str_gmap}")
-            elif(user_input == 4):
+            elif(user_input == 5):
                 os.system('sh startup_scripts/teleop.sh')
                 print(f"\nStarted {str_teleop}")
-            elif(user_input == 5):
+            elif(user_input == 6):
                 os.system('sh startup_scripts/save_map.sh')
                 print(f"\nStarted {str_saveMap}")
             else:

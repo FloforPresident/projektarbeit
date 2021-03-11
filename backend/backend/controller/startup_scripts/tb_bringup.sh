@@ -1,1 +1,4 @@
-gnome-terminal --tab -- /bin/sh -c 'echo "------ TURTLEBOT BRINGUP ------\n";ssh -t turtlebot "~/BringupScripts/tb_bringup.sh"; exec bash'
+gnome-terminal --tab -- /bin/sh -c 'echo Turtlebot Bringup started;turtlebotip=`cat turtlebotip.txt`;sshpass -p 'turtlebot' ssh pi@$turtlebotip "roslaunch turtlebot3_bringup turtlebot3_robot.launch"'
+
+
+

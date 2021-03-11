@@ -65,7 +65,6 @@ def action_face_recognition(user, message):
     print("Embedding: " + embedding)
     print("Message" + message)
 
-
     pub_name = rospy.Publisher('data_name', String, queue_size=1)
     pub_embedding = rospy.Publisher('data_embedding', String, queue_size=1)
     pub_message = rospy.Publisher('data_message', String, queue_size=1)
@@ -155,7 +154,7 @@ def start_websocket():
             # USER
             if action == 'ADD USER':
                 image = data['image']
-                print("this could take a while. please wait or try again.")
+                print("This could take a while, please wait...")
                 embedding = createFaceEncoding(image)
                 add_user(data['location_id'], data['name'], image, embedding)
                 response = login_user(data['name'])
@@ -243,10 +242,11 @@ def start_websocket():
 
             await websocket.send(response)
         
-        except:
-            print("an error occured. try sending command again")
-
-
+        except IndexError:
+            print("No Face detected! Try taking a new picture.")
+        except Exception as e:
+            print("An error occured! Try sending command again.")
+            print(e)
 
     start_server = websockets.serve(ws_recieve, ip, 8765, max_size=1000000000000000, close_timeout=1000) # IP has to be IP of ROS-Computer
 
