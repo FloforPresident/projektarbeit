@@ -27,7 +27,8 @@
 ### 4. Nach fertiger Installation (ca. 60 Minuten) Terminal schließen und neues öffnen
 ### 5. Turtlebot starten
    5.1. Turtlebot mit Bildschirm verbinden, starten (pw = _turtlebot_) \
-   5.2. Mit Netzwerk verbinden und IP-Adresse auslesen (`ifconfig`)
+   5.2. Mit Netzwerk verbinden und IP-Adresse auslesen (`ifconfig`) \
+   5.3  Einmalig `ssh pi@$turtlebotip` auf ROS Laptop um SSH Verbindung zu erlauben. Terminal kann danach wieder geschlossen werden
 ### 6. Packages und Nodes ausführen:
 
 6.1. **Create Map** um Raum zu kartieren (Punkte nacheinander ausführen)
