@@ -216,9 +216,9 @@ die Reihenfholge in ChoosePageAndColor auch geändert werden!!
 
 ## 7.0 Funktionalität geblockt
 
-Da wir erst nicht mehr geschafft haben eine freie Roboterwahl und eine freie Raumwahl im Controller und über die Datenbank 
+Da wir es nicht mehr geschafft haben eine freie Roboterwahl und eine freie Raumwahl im Controller und über die Datenbank 
 zu implementieren sind einige Funktionalitäten in der App auskommentiert. Diese werden mit dem Stichwort "Funktionalität geblockt" betitelt im Quellcode.
-Falls diese Funktionalitäten noch umgesetzt wird kann die hierfür eingesetzte Statusmeldung wieder entfernt werden,
+Falls diese Funktionalitäten noch umgesetzt werden kann die hierfür eingesetzte Statusmeldung wieder entfernt werden,
 und die Logik auskommentiert werden. Also einfach in Flutter dieses Stichwort "Funktionalität geblockt" suchen dann findet ihr die Beiträge.
 
 Hier die Änderungen nochmal aufgelistet:
