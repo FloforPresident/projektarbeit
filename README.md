@@ -17,7 +17,7 @@
     $ git clone https://github.com/FloforPresident/projektarbeit.git
 
 ### 3. Dependencies Installieren (nur als Root ausführbar)
-    - Während Installation muss einmal bestätigt werden
+    - Während Installation muss einmal mit Enter bestätigt werden
 
 
     $ cd projektarbeit
@@ -37,23 +37,25 @@
        $ python3 console_interface.py
 
 - Nummern eingeben um zu starten (+ alternativ Befehl ohne console-interface)
-1. Roscore starten 
+
+1. Set Turtlebot ID
+2. Roscore starten 
    
     `roscore`
-2. Turtlebot Bringup (Mit SSH Verbindung zum turtlebot)
+3. Turtlebot Bringup (Mit SSH Verbindung zum turtlebot)
    
     `ssh pi@{IP_ADDRESSS_TURTLEBOT}` \
     `roslaunch turtlebot3_bringup turtlebot3_robot.launch` 
    
-3. Start Gmapping
+4. Start Gmapping
    
    `roslaunch turtlebot3_slam turtlebot3_slam.launch`
 
-4. Start Teleop ( auf Host PC oder in App nachdem Controller gestartet wurde )
+5. Start Teleop ( auf Host PC oder in App nachdem Controller gestartet wurde )
 
    `roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch`
 
-5. Save Map (muss zwingend _map.pgm_ heißen)
+6. Save Map (muss zwingend _map.pgm_ heißen)
 
    `rosrun map_server map_saver -f $HOME/projektarbeit/backend/backend/catkin_ws/maps/map`
 
@@ -66,7 +68,7 @@
     $ sudo -s
     $ python3 console_interface.py
 
-1. add RSA Private Key / set Turtlebot ID
+1. Set Turtlebot ID
 2. Roscore starten 
    
     `roscore`
