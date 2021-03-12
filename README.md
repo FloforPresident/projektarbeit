@@ -28,10 +28,10 @@
 ### 5. Turtlebot starten
    5.1 Turtlebot mit Bildschirm verbinden, starten (pw = _turtlebot_) \
    5.2 Mit Netzwerk verbinden und IP-Adresse auslesen (`ifconfig`) \
-   5.3 ROS Variablen anpassen: 
-        `sudo nano ~/.bashrc`:
-            ROS_MASTER_URI = http://$RosLaptopIP:11311
-            ROS_HOSTNAME = $turtlebotIP
+   5.3 ROS Variablen anpassen: \
+        `sudo nano ~/.bashrc`: \
+            ROS_MASTER_URI = http://$RosLaptopIP:11311 \
+            ROS_HOSTNAME = $turtlebotIP \
    5.4  Einmalig `ssh pi@$turtlebotip` auf ROS Laptop um SSH Verbindung zu erlauben. Terminal kann danach wieder geschlossen werden
 ### 6. Packages und Nodes ausführen:
 
