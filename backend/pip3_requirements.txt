@@ -4,7 +4,7 @@ websockets==8.1
 psycopg2-binary==2.8.6
 SQLAlchemy-serializer==1.3.4
 face-recognition==1.3.0
-PyYAML==5.3.1
+PyYAML==5.4
 rospkg==1.2.9
 defusedxml==0.6.0
 Pillow==8.1.2
